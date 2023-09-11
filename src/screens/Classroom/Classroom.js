@@ -7,15 +7,13 @@ import Alert from "@material-ui/lab/Alert";
 
 import Select from "react-select";
 
-import { BoxBig, BoxDiscriptionClassroom } from "../../components/Boxes";
+import { BoxBig } from "../../components/Boxes";
 import List from "../../components/List";
 
 // Styles
 import { Fab, useMediaQuery } from "@material-ui/core";
 import AddIcon from "@material-ui/icons/Add";
-import { useContext } from "react";
 import { Link } from "react-router-dom";
-import { StageContext } from "../../containers/Classroom/context/context";
 import { getYearClassRoom, yearClassroom } from "../../services/auth";
 import styleBase from "../../styles";
 import styles from "./styles";
@@ -31,15 +29,13 @@ const theme = createTheme({
 const useStyles = makeStyles(theme => styles);
 
 
-const Classroom = () => {
+const Classroom = ({classroom}) => {
 
-  const { classrooms: stages } = useContext(StageContext)
 
   const matches = useMediaQuery('(max-width:600px)')
 
   const classes = useStyles();
 
-  if (!stages) return null;
 
   const currentYear = new Date().getFullYear();
 
@@ -53,20 +49,21 @@ const Classroom = () => {
   const year_classrrom = [{ year: "Todos", id: 11 }, ...yearArray];
 
   const stage = () => {
-    return stages?.map((stage, index) => {
+    return classroom?.map((item, index) => {
+      console.log(item)
       return (
         <Grid key={index} item md={4} sm={3} xs={12}>
-          {stage ? <BoxBig
-            link={`turmas/${stage.id}`}
-            title={stage?.name}
+          {item ? <BoxBig
+            link={`turmas/${item.id}`}
+            title={item.object.name}
             addCursor={true}
             textRight=""
           >
-            <BoxDiscriptionClassroom
-              title={`Ano: ${stage?.school_year}`}
-              pre_registration={stage?.student_pre_identification}
-              registrationConfirmed={`${stage?.student_pre_identification.length}`}
-            />
+            {/* <BoxDiscriptionClassroom
+              title={`Ano: ${item?.school_year}`}
+              pre_registration={item?.student_pre_identification}
+              registrationConfirmed={`${item?.student_pre_identification.length}`}
+            /> */}
           </BoxBig>
           : null}
         </Grid>

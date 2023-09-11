@@ -15,28 +15,16 @@ const useStyles = makeStyles(styles);
 const Sidebar = ({isSidebar}) => {
   let history = useHistory();
   const matches = useMediaQuery('(max-width:600px)')
+
   const navItems = [
-    // {
-    //   to: "/",
-    //   name: "Início",
-    //   exact: true,
-    //   IconActive: <IconHouseActive />,
-    //   Icon: <IconHouse />
-    // },
+  
     {
-      to: "/cronograma",
-      name: "Cronograma",
+      to: "/escolas",
+      name: "Escolas",
       exact: false,
       IconActive: <img src={cronogramaBlueSvg} alt=""></img>,
       Icon: <img src={cronogramaGraySvg} alt=""></img>
     },
-    // {
-    //   to: "/escolas",
-    //   name: "Escolas",
-    //   exact: false,
-    //   IconActive: <IconSchoolActive />,
-    //   Icon: <IconSchool />
-    // },
     {
       to: "/turmas",
       name: "Turmas",
@@ -65,7 +53,7 @@ const Sidebar = ({isSidebar}) => {
               <span className={`iconInactive ${classes.floatLeft}`}>
                 {Icon}
               </span>
-              <span className={`iconActive ${classes.floatLeft}`}>
+              <span className={`iconActive ${classes.floatLeft}`} >
                 {IconActive}
               </span>
               <span className={classes.span}>{name}</span>

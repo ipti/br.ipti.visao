@@ -16,6 +16,7 @@ import Select from "react-select";
 import { useFetchRequestSchoolList } from "../../query/registration";
 import { getIdSchool, idSchool, isAuthenticated } from "../../services/auth";
 import styleBase from "../../styles";
+import fetchSchool from "../../controller/School/fetchSchools";
 
 
 const customStyles = {
@@ -89,13 +90,20 @@ const Header = ({ setIsSidebar, isSidebar }) => {
 
   };
 
-  const { data: schoolRequest, isLoading } = useFetchRequestSchoolList();
-
   useEffect(() => {
-    if (schoolRequest) {
-      setSchool(schoolRequest)
-    }
-  }, [schoolRequest])
+    fetchSchool()
+    .then((testDataList) => {
+        setSchool(testDataList)
+        console.log(testDataList)
+    })
+    .catch((err) => {
+        // Trate erros, se ocorrerem
+        console.error(err)
+    })
+  }, [])
+  
+  console.log(school)
+
 
   return (
     <AppBar classes={{ root: classes.root }} position="static">
@@ -114,21 +122,21 @@ const Header = ({ setIsSidebar, isSidebar }) => {
         <h2 className={classes.title}>Matrícula</h2>
         <>
 
-          {!isLoading ? <Grid item xs={3}> <Select
+          {school ? <Grid item xs={3}> <Select
             styles={customStyles}
             className="basic-single"
             placeholder="Selecione a Escola"
             options={school}
-            loadingMessage={isLoading ? "Carregando..." : null}
             onChange={selectedOption => {
-              idSchool(selectedOption.inep_id);
+              console.log(selectedOption)
+              idSchool(selectedOption.id);
               history.push("/")
               window.location.reload()
 
             }}
-            defaultValue={schoolRequest.find(x => x.inep_id === getIdSchool())}
-            getOptionValue={opt => opt.inep_id}
-            getOptionLabel={opt => opt.inep_id + " - " + opt.name}
+            defaultValue={school.find(x => x.id === getIdSchool())}
+            getOptionValue={opt => opt.id}
+            getOptionLabel={opt => opt.object.name}
           />  </Grid> : <div style={{ margin: "auto" }}><CircularProgress /></div>}
 
 

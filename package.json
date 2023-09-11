@@ -20,6 +20,7 @@
     "axios": "^0.19.0",
     "date-fns": "^2.11.0",
     "dayjs": "^1.11.7",
+    "firebase": "^10.3.1",
     "formik": "^2.1.1",
     "moment": "^2.24.0",
     "primereact": "^9.6.2",

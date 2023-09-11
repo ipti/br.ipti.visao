@@ -1,50 +1,33 @@
-import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
-import ImgSchool from "../../assets/images/school-icon.png";
+import React from "react";
 import { Link } from "react-router-dom";
+import ImgSchool from "../../assets/images/school-icon.png";
+import { Row } from "../../styles/style";
 import styles from "./styles";
-import { Clear } from "@material-ui/icons";
 const useStyles = makeStyles(styles);
 
 const BoxBig = props => {
-  const { children, title, subtitle, textRight, link } = props;
+  const { children, textRight, link } = props;
   const classes = useStyles();
 
   const headWithImage = () => (
-    <div>
+    <Row id="space-between">
+      <span className={`${classes.textRight}`}>
+        {textRight}
+      </span>
       <img
         src={ImgSchool}
         className={classes.iconHouse}
         alt="Icone da escola"
       />
-      <span className={`${classes.floatRight} ${classes.textRight}`}>
-        {textRight}
-      </span>
-    </div>
+    </Row>
   );
 
-  const headWithoutImage = () => (
-    <div className={classes.boxWithoutImage}>
-      {!textRight && (
-        <>
-          <div className={classes.title} title={title}>{title}</div>
-          <div className={classes.title} title={subtitle}>{subtitle}</div>
-        </>
-      )}
-      {textRight && (
-        <>
-          <span className={classes.title}>{title}</span>
-          
-          <Clear className={`${classes.floatRight} ${classes.iconDelete}`} onClick={() => props.deleteSchedule(props.id)} />
-        </>
-      )}
-    </div>
-  );
 
   const contentBox = () => {
     return (
       <>
-        <div>{title ? headWithoutImage() : headWithImage()}</div>
+        <div>{headWithImage()}</div>
         <div>{children}</div>
       </>
     );

@@ -5,20 +5,22 @@ import NotFoundPage from "./components/Layouts/NotFoundPage";
 import CircularLoading from "./components/Loading/CircularLoading";
 import { Classroom, ClassroomForm } from "./containers/Classroom";
 import CreateClassroom from "./containers/Classroom/AddClassroom";
+import FormOphthalmological from "./containers/Classroom/Registration/FormOphthalmological/FormOphthalmological";
 import Login from "./containers/Login";
 import Register from "./containers/Register";
 import FormRegistration from "./containers/Registration/FormRegistration/FormRegistration";
 import ReMatricula from "./containers/Registration/ReMatricula";
 import { isAuthenticated } from "./services/auth";
-import FormOphthalmological from "./containers/Classroom/Registration/FormOphthalmological/FormOphthalmological";
 
 //const Home = lazy(() => import("./containers/Home"));
-const Schedule = lazy(() => import("./containers/Schedule/Schedule"));
-const ScheduleForm = lazy(() => import("./containers/Schedule/ScheduleForm"));
 
 const School = lazy(() => import("./containers/School/School"));
 const SchoolClassrooms = lazy(() =>
   import("./containers/School/SchoolClassrooms")
+);
+
+const SchoolCreate = lazy(() =>
+  import("./containers/School/SchoolCreate")
 );
 
 
@@ -52,20 +54,10 @@ const Routes = () => (
       <Route path="/register" exact component={Register} />
       <Route path="/matricula" exact component={FormRegistration} />
       <Route path="/matricula/:id" exact component={ReMatricula} />
-      <PrivateRoute exact path="/" component={Schedule} />
-      <PrivateRoute exact path="/cronograma" component={Schedule} />
-      <PrivateRoute
-        exact
-        path="/cronograma/adicionar"
-        component={ScheduleForm}
-      />
-      <PrivateRoute
-        exact
-        path="/cronograma/editar/:id"
-        component={ScheduleForm}
-      />
+      <PrivateRoute exact path="/" component={School} />
       <PrivateRoute exact path="/escolas" component={School} />
       <PrivateRoute exact path="/escolas/:id" component={SchoolClassrooms} />
+      <PrivateRoute exact path="/criar/escolas" component={SchoolCreate} />
 
       <PrivateRoute exact path="/turmas" component={Classroom} />
 
@@ -74,6 +66,7 @@ const Routes = () => (
         path="/turmas/:id/matricula/:idRegistration"
         component={RegistrationClassroom}
       />
+
       <PrivateRoute
         exact
         path="/turmas/:id/matricula/:idRegistration/form"

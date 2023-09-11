@@ -93,7 +93,19 @@ const useStyles = {
   },
   cursor: {
     cursor: "pointer"
-  }
+  },
+  addStage: {
+    position: "fixed",
+    right: 20,
+    bottom: 20
+  },
+  formControl: {
+    width: "80%",
+    marginBottom: 60,
+    "& label": {
+      marginBottom: 10
+    }
+  },
 };
 
 export default useStyles;

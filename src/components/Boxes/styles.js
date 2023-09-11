@@ -18,10 +18,8 @@ const useStyles = {
   textRight: {
     backgroundColor: styleBase.colors.colorsBaseProductNormal,
     color: styleBase.colors.white,
-    padding: "0px 15px",
+    padding: "5px 15px",
     borderRadius: "50px",
-    float: "left",
-    marginLeft: "auto"
   },
   iconDelete: {
     cursor: "pointer",
@@ -29,7 +27,8 @@ const useStyles = {
   iconHouse: {
     marginTop: "-5px",
     width: "40px",
-    height: "30px"
+    height: "30px",
+    marginLeft: "auto"
   },
   addCursor: {
     cursor: "pointer"

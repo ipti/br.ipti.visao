@@ -10,7 +10,6 @@ import Swal from "sweetalert2";
 import image from "../../assets/images/Atenção-img.png";
 import IconActive from "../../assets/images/activeRegistration.svg";
 import IconNotActive from "../../assets/images/notactiveRegistration.svg";
-import { ControllerClassroomForm } from "../../controller/classroom/ClassroomForm";
 import styled from "../../styles";
 import styles from "./styles";
 
@@ -20,7 +19,6 @@ const BoxRegistration = props => {
   const { name, link, unavailable, md, sm, xs, student_fk, id } = props;
 
 
-  const { requestDeletePreRegistrationMutation } = ControllerClassroomForm();
 
   const classes = useStyles();
   const history = useHistory();
@@ -52,7 +50,7 @@ const BoxRegistration = props => {
         cancelButtonText: `<div style="color:black" >Cancelar</div>`
       }).then((result) => {
         if (result.isConfirmed) {
-          requestDeletePreRegistrationMutation.mutate(id)
+          // requestDeletePreRegistrationMutation.mutate(id)
         }
       })
     }
