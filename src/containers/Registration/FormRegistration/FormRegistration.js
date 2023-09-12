@@ -1,6 +1,6 @@
 import React from "react";
-import RegistrationContextProvider from "../Context/context";
 import Home from "./Home";
+import RegistrationContextProvider from "../../../context/Registration/context";
 
 const FormRegistration = () => {
     return(

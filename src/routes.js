@@ -9,7 +9,6 @@ import FormOphthalmological from "./containers/Classroom/Registration/FormOphtha
 import Login from "./containers/Login";
 import Register from "./containers/Register";
 import FormRegistration from "./containers/Registration/FormRegistration/FormRegistration";
-import ReMatricula from "./containers/Registration/ReMatricula";
 import { isAuthenticated } from "./services/auth";
 
 //const Home = lazy(() => import("./containers/Home"));
@@ -53,7 +52,6 @@ const Routes = () => (
       <Route path="/login" exact component={Login} />
       <Route path="/register" exact component={Register} />
       <Route path="/matricula" exact component={FormRegistration} />
-      <Route path="/matricula/:id" exact component={ReMatricula} />
       <PrivateRoute exact path="/" component={School} />
       <PrivateRoute exact path="/escolas" component={School} />
       <PrivateRoute exact path="/escolas/:id" component={SchoolClassrooms} />

@@ -13,10 +13,9 @@ import AccountCircle from "@material-ui/icons/AccountCircle";
 import { CircularProgress } from "@mui/material";
 import { useHistory } from "react-router-dom";
 import Select from "react-select";
-import { useFetchRequestSchoolList } from "../../query/registration";
+import fetchSchool from "../../controller/School/fetchSchools";
 import { getIdSchool, idSchool, isAuthenticated } from "../../services/auth";
 import styleBase from "../../styles";
-import fetchSchool from "../../controller/School/fetchSchools";
 
 
 const customStyles = {

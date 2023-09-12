@@ -1,8 +1,5 @@
 import React from "react";
-import { useParams } from "react-router";
 import Loading from "../../components/Loading/CircularLoading";
-import { useFetchRequestSchool } from "../../query/school";
-import { SchoolClassroom } from "../../screens/School";
 
 const Home = props => {
  

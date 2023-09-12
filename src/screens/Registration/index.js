@@ -1,5 +1,19 @@
-import Start from "./Start";
-import Finish from "./Finish";
-import Registration from "./Registration";
+import { Grid } from "@mui/material";
+import  React, { useContext } from "react";
+import { RegistrationContext } from "../../context/Registration/context";
+import StepOne from "./StepOne";
 
-export { Start, Finish, Registration };
+const Registration = () => {
+
+    const { step } = useContext(RegistrationContext);
+  
+    return (
+      <Grid item xs={12}>
+        {step === 0 ? <StepOne /> : null}
+      </Grid>
+    );
+  }
+  
+  
+  
+  export default Registration;

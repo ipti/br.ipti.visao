@@ -12,12 +12,15 @@ import { ButtonPurple } from "../../components/Buttons";
 import TagImage from "../../assets/images/taglogin.svg"
 
 import styles from "./styles";
+import handleLogin from "../../controller/login/auth";
+
+import { useHistory } from "react-router";
 
 const useStyles = makeStyles(styles);
 
 const Login = props => {
   const classes = useStyles();
-  let isValid = props.isValid;
+  const history = useHistory()
 
   return (
     <Grid className={classes.root}>
@@ -39,7 +42,7 @@ const Login = props => {
         {/* <div className={classes.marginMobile} /> */}
         <Formik
           initialValues={props.initialValues}
-          onSubmit={props.onSubmit}
+          onSubmit={(values) => {handleLogin(values.email, values.password, history)}}
           validationSchema={props.validationSchema}
           validateOnChange={false}
         >
@@ -55,10 +58,10 @@ const Login = props => {
                 >
                   <Grid item xs={12}>
                     <TextField
-                      name="username"
+                      name="email"
                       onChange={props.handleChange}
                       variant="outlined"
-                      placeholder="Usuário"
+                      placeholder="Email"
                       InputProps={{
                         startAdornment: (
                           <InputAdornment position="start">
@@ -68,7 +71,7 @@ const Login = props => {
                       }}
                     />
                     <div className={classes.formFieldError}>
-                      {props.errors.username}
+                      {props.errors.email}
                     </div>
                   </Grid>
                 </Grid>
@@ -101,7 +104,7 @@ const Login = props => {
                     </div>
                   </Grid>
                 </Grid>
-                {
+                {/* {
                   !isValid ? <Grid
                     className={`${classes.boxError} ${classes.textCenter}`}
                     item
@@ -112,7 +115,7 @@ const Login = props => {
                       {!isValid ? "Usuário ou senha inválido" : ""}
                     </div>
                   </Grid> : null
-                }
+                } */}
                 <Grid
                   container
                   direction="row"

@@ -1,21 +1,21 @@
 import React, { useContext } from "react";
 
 // Material UI
-import { FormControl, FormControlLabel, FormHelperText, FormLabel, Grid, MenuItem, Radio, RadioGroup, Select, TextField } from "@material-ui/core";
+import { FormControl, FormControlLabel, FormHelperText, FormLabel, Grid, Radio, RadioGroup, TextField } from "@material-ui/core";
 
 import { makeStyles, withStyles } from "@material-ui/core/styles";
 
 // Components
-import { ButtonPurple } from "../../components/Buttons";
 
 // Third party
 import { Form, Formik } from "formik";
 import * as Yup from "yup";
 
 // Styles
-import styleBase from "../../styles";
-import styles from "./styles";
-import { RegistrationContext } from "../../containers/Registration/Context/context";
+import { RegistrationContext } from "../../../context/Registration/context";
+import styleBase from "../../../styles";
+import styles from "../styles";
+import { ButtonPurple } from "../../../components/Buttons";
 
 const useStyles = makeStyles(styles);
 
@@ -29,8 +29,11 @@ const PurpleRadio = withStyles({
 })(props => <Radio color="default" {...props} />);
 
 
-const StepThree = props => {
+const StepOne = () => {
   const classes = useStyles();
+
+  const { next,dataValues } = useContext(RegistrationContext);
+
 
   const validationSchema = Yup.object().shape({
     name: Yup.string().required("Campo obrigatório!").min(10, 'minimo de 10 caracteres'),
@@ -38,12 +41,11 @@ const StepThree = props => {
     deficiency: Yup.boolean().required("Campo obrigatório!"),
   });
 
-  const {setIsOfLegalAge, isOfLegalAge} = useContext(RegistrationContext)
  
   const initialValues = {
-    name: props?.values?.name ?? '',
-    color_race: props?.values?.color_race ?? '',
-    deficiency: props?.values?.deficiency ?? "",
+    name: dataValues?.name ?? '',
+    color_race: dataValues?.color_race ?? '',
+    deficiency:dataValues?.deficiency ?? "",
   };
 
 
@@ -51,7 +53,7 @@ const StepThree = props => {
     <>
       <Formik
         initialValues={initialValues}
-        onSubmit={values => props.next(4 , values)}
+        onSubmit={values => next(4 , values)}
         validationSchema={validationSchema}
         validateOnChange={false}
         enableReinitialize
@@ -104,38 +106,6 @@ const StepThree = props => {
                   <FormControl
                     component="fieldset"
                     className={classes.formControl}
-                    error={errorList.color_race}
-                  >
-                    <FormLabel>Cor/Raça *</FormLabel>
-                    <Select
-                      variant="outlined"
-                      name="color_race"
-                      value={values.color_race}
-                      className={classes.textField}
-                      onChange={handleChange}
-                    >
-                      <MenuItem value={0}>Não Declarada</MenuItem>
-                      <MenuItem value={1}>Branca</MenuItem>
-                      <MenuItem value={2}>Preta</MenuItem>
-                      <MenuItem value={3}>Parda</MenuItem>
-                      <MenuItem value={4}>Amarela</MenuItem>
-                      <MenuItem value={5}>Indígena</MenuItem>
-                    </Select>
-                    <FormHelperText>{errorList.color_race}</FormHelperText>
-                  </FormControl>
-                </Grid>
-              </Grid>
-              <Grid
-                className={`${classes.contentMain}`}
-                container
-                direction="row"
-                justifyContent="center"
-                alignItems="center"
-              >
-                <Grid item xs={12}>
-                  <FormControl
-                    component="fieldset"
-                    className={classes.formControl}
                     error={errorList.deficiency}
                   >
                     <FormLabel component="legend">Possui Deficiência? *</FormLabel>
@@ -163,43 +133,6 @@ const StepThree = props => {
                 </Grid>
               </Grid>
               <Grid
-                className={`${classes.contentMain}`}
-                container
-                direction="row"
-                justifyContent="center"
-                alignItems="center"
-              >
-                <Grid item xs={12}>
-                  <FormControl
-                    component="fieldset"
-                    className={classes.formControl}
-                    error={errorList.sex}
-                  >
-                    <FormLabel component="legend">Você tem 18 anos ou mais? *</FormLabel>
-                    <RadioGroup
-                      value={isOfLegalAge}
-                      name="is_of_legal_age"
-                      onChange={e => setIsOfLegalAge(e.target.value)}
-                      row
-                    >
-                      <FormControlLabel
-                        value={'2'}
-                        name="is_of_legal_age"
-                        control={<PurpleRadio />}
-                        label="Sim, tenho 18 anos ou mais"
-                      />
-                      <FormControlLabel
-                        value={'1'}
-                        name="is_of_legal_age"
-                        control={<PurpleRadio />}
-                        label="Não, ainda não completei 18 anos"
-                      />
-                    </RadioGroup>
-                    <FormHelperText>{errorList.sex}</FormHelperText>
-                  </FormControl>
-                </Grid>
-              </Grid>
-              <Grid
                 className={`${classes.marginTop} ${classes.marginButtom}`}
                 justifyContent="center"
                 alignItems="center"
@@ -223,4 +156,4 @@ const StepThree = props => {
   );
 };
 
-export default StepThree;
+export default StepOne;

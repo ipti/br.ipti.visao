@@ -3,12 +3,10 @@ import React from "react";
 import { Link } from "react-router-dom";
 import Tagna from "../../assets/images/tagná-img.png";
 import styles from "./styles";
-import { useFetchRequestSchoolList } from "../../query/registration";
 
 const useStyles = makeStyles(styles);
 
 const SignUp = () => {
-    const { data } = useFetchRequestSchoolList();
     const classes = useStyles();
     return (
         <div className="row align-items--center">

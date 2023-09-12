@@ -18,7 +18,6 @@ import SchoolIcon from "../../assets/images/house-icon.png";
 import MaleIcon from "../../assets/images/male-icon.png";
 
 // Styles
-import { useFetchRequestStagevsmodalitySchool } from "../../query/school";
 import styles from "./styles";
 
 const useStyles = makeStyles(styles);
@@ -32,9 +31,7 @@ const Home = ({ school }) => {
   //   history.push(link);
   // };
 
-  const { data } = useFetchRequestStagevsmodalitySchool({id: id});
 
-  if(!data) return null
 
 
   const dependence = {
@@ -45,8 +42,8 @@ const Home = ({ school }) => {
   };
 
 
-  const classrooms = data
-    ? data.map((stage, index) => (
+  const classrooms = true
+    ? [].map((stage, index) => (
      
       
       <Grid key={index} item md={4} sm={4} xs={12}>
