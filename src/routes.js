@@ -56,7 +56,6 @@ const Routes = () => (
       <PrivateRoute exact path="/escolas" component={School} />
       <PrivateRoute exact path="/escolas/:id" component={SchoolClassrooms} />
       <PrivateRoute exact path="/criar/escolas" component={SchoolCreate} />
-
       <PrivateRoute exact path="/turmas" component={Classroom} />
 
       <PrivateRoute
@@ -70,9 +69,7 @@ const Routes = () => (
         path="/turmas/:id/matricula/:idRegistration/form"
         component={FormOphthalmological}
       />
-
       <PrivateRoute exact path="/turmas/:id" component={ClassroomForm} />
-
       <PrivateRoute
         exact
         path="/turmas/:id/matricula/:idRegistration"

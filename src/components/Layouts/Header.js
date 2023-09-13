@@ -101,9 +101,6 @@ const Header = ({ setIsSidebar, isSidebar }) => {
     })
   }, [])
   
-  console.log(school)
-
-
   return (
     <AppBar classes={{ root: classes.root }} position="static">
       <Toolbar className={classes.tooBar} disableGutters>

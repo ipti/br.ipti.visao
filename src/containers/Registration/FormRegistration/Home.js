@@ -58,7 +58,6 @@ const Home = props => {
       ) : (
         <>
           {wizard()}
-          {alert()}
         </>
       )}
     </>
