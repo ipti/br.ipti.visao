@@ -1,18 +1,30 @@
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
-import Loading from "../../../components/Loading/CircularLoading";
+import fetchOneRegistration from "../../../controller/registration/fetchOneRegistration";
 import { RegistrationConfirmed } from "../../../screens/Classroom";
-import api from "../../../services/api";
 
 const Registration = props => {
 
-  const [state, setState] = useState([]);
-  const [loadStates, setLoadStatesF] = useState(true)
 
+  
+  const { idRegistration } = useParams()
 
+  const [student, setStudent] = useState([])
 
+  useEffect(() => {
+    fetchOneRegistration(idRegistration)
+      .then((testDataList) => {
+        setStudent(testDataList)
+        console.log(testDataList)
+      })
+      .catch((err) => {
+        // Trate erros, se ocorrerem
+        console.error(err)
+      })
+  }, [idRegistration])
 
-  const { id, idRegistration } = useParams()
+  console.log(student)
+
 
   // const { registration, answer } = StageRegistrationState()
 
@@ -43,35 +55,11 @@ const Registration = props => {
     // requestEditPreRegistrationMutation.mutate({ id: id, data: body })
   }
 
-  useEffect(() => {
-    if (loadStates) {
-      (async () => {
-        const res = await api.get("/student-pre-identify/edcenso-uf", {
-          params: {
-            include: {
-              edcenso_city: true
-            }
-          }
-        })
-        setState(res.data)
-        // setLoadStates(false)
-      })();
-    }
-  },)
-
   return (
     <>
         <>
           <RegistrationConfirmed
-            // registration={registration}
-            // answer={answer}
-            classroom={id}
-            handleRefusePreIdentification={handleRefusePreIdentification}
-            handleSubmit={handleSubmit}
-            state={state}
-            loadingIcon={props.loading}
-            handleEditPreRegistration={handleEditPreRegistration}
-            // classrooms={classrooms}
+            student={student}
           />
         </>
     </>

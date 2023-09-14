@@ -39,7 +39,7 @@ const Home = ({ data }) => {
 
     return schoolList.map((school, index) => (
       <Grid key={index} className={classes.box} item md={4} sm={3} xs={12}>
-        <BoxBig link={`escolas/${school.id}`} textRight="Ativa">
+        <BoxBig textRight="Ativa">
           <p title={school.object.name} className={classes.name}>
             {school.object.name}
           </p>

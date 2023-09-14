@@ -13,6 +13,7 @@ import List from "../../components/List";
 // Styles
 import { ArrowBack } from "@material-ui/icons";
 import { useHistory } from "react-router";
+import { Padding } from "../../styles/style";
 
 const Create = props => {
 
@@ -25,7 +26,7 @@ const Create = props => {
 
 
   const registrations = () => {
-    const registrationList = data?.student_pre_identification ?? [];
+    const registrationList = data ?? [];
 
 
     return registrationList.map((registration, index) => {
@@ -33,10 +34,9 @@ const Create = props => {
         <BoxRegistration
           link={`${baseLink}/${registration?.id}`}
           key={index}
-          name={registration?.name}
+          name={registration?.object.name}
           sex={registration?.sex}
           id={registration?.id}
-          student_fk={registration?.student_fk}
           md={4}
           sm={4}
           unavailable={registration?.unavailable}
@@ -49,7 +49,8 @@ const Create = props => {
     <>
       <ArrowBack onClick={() => { history.goBack() }} style={{ cursor: "pointer" }} />
         <h1>{data && data.name}</h1>
-        <h3>Candidatos</h3>
+        <h2>Alunos</h2>
+        <Padding padding="16px"/>
       <Grid container direction="row" spacing={4}>
         <List items={registrations()}>
           <Grid item xs={12}>

@@ -1,20 +1,20 @@
 import { collection, getDocs } from "@firebase/firestore"
 import { firestore } from "../../config/firebase"
 
-
-
-const fetchClassroom = async () => {
-    const ref = collection(firestore, "classroom");
+const fetchRegistration = async () => {
+    const ref = collection(firestore, "student");
 
     try {
         const querySnapshot = await getDocs(ref);
         const testDataList = [];
 
         querySnapshot.forEach((doc) => {
+
             const data = {
                 id: doc.id,
                 object: doc.data()
             }
+
             testDataList.push(data)
         })
 
@@ -26,9 +26,4 @@ const fetchClassroom = async () => {
 }
 
 
-export default fetchClassroom;
-
-
-
-
-
+export default fetchRegistration;

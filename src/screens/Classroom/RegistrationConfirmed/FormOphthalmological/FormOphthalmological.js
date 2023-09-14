@@ -11,7 +11,17 @@ const useStyles = makeStyles(styles);
 const FormOphthalmologicalPage = () => {
     const classes = useStyles();
 
-    const { initialValues } = useContext(FormOphthalmologicalContext);
+    // const { initialValues } = useContext(FormOphthalmologicalContext);
+
+    const initialValues = {
+        febre: "",
+        convucao: "",
+        alergiaColirio: "",
+        doençasNoCoração: "",
+        pupilometro: "",
+        olhoDireito: "",
+        olhoEsquerdo: ""
+    }
 
     return (
         <Formik initialValues={initialValues}>

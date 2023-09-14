@@ -98,7 +98,7 @@ const StepTwo = () => {
         <>
             <Formik
                 initialValues={initialValues}
-                onSubmit={values => onSubmit(values + dataValues)}
+                onSubmit={values => onSubmit(values)}
                 // validationSchema={validationSchema}
                 validateOnChange={false}
                 enableReinitialize

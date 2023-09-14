@@ -3,6 +3,7 @@ import Classroom from "../../screens/Classroom/Classroom";
 import { useState } from "react";
 import { useEffect } from "react";
 import fetchClassroom from "../../controller/classroom/fetchClassroom";
+import { getIdSchool } from "../../services/auth";
 
 const Home = props => {
 
@@ -10,19 +11,20 @@ const Home = props => {
 
   useEffect(() => {
     fetchClassroom()
-    .then((testDataList) => {
-      setClassroom(testDataList)
+      .then((testDataList) => {
+        const classroomSchool = testDataList.filter(props => props.object.school_fk === getIdSchool())
+        setClassroom(classroomSchool)
         console.log(testDataList)
-    })
-    .catch((err) => {
+      })
+      .catch((err) => {
         // Trate erros, se ocorrerem
         console.error(err)
-    })
+      })
   }, [])
 
   return (
     <>
-          <Classroom classroom={classroom} />
+      <Classroom classroom={classroom} />
     </ >
   );
 };

@@ -7,7 +7,7 @@ import Alert from "@material-ui/lab/Alert";
 
 import Select from "react-select";
 
-import { BoxBig } from "../../components/Boxes";
+import { BoxBig, BoxDiscriptionClassroom } from "../../components/Boxes";
 import List from "../../components/List";
 
 // Styles
@@ -29,7 +29,7 @@ const theme = createTheme({
 const useStyles = makeStyles(theme => styles);
 
 
-const Classroom = ({classroom}) => {
+const Classroom = ({ classroom }) => {
 
 
   const matches = useMediaQuery('(max-width:600px)')
@@ -57,15 +57,13 @@ const Classroom = ({classroom}) => {
             link={`turmas/${item.id}`}
             title={item.object.name}
             addCursor={true}
-            textRight=""
+            textRight="Ativa"
           >
-            {/* <BoxDiscriptionClassroom
-              title={`Ano: ${item?.school_year}`}
-              pre_registration={item?.student_pre_identification}
-              registrationConfirmed={`${item?.student_pre_identification.length}`}
-            /> */}
+            <p title={item.object.name} className={classes.name}>
+              {item.object.name}
+            </p>
           </BoxBig>
-          : null}
+            : null}
         </Grid>
       );
     });

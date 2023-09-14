@@ -22,6 +22,7 @@ import { useRef } from "react";
 import MaskCep from "../../../components/Mask/maskcep";
 import MaskPhone from "../../../components/Mask/maskphone";
 import MaskCpf from "../../../components/Mask/maskcpf";
+import TabsRegister from "./TabBar";
 
 const useStyles = makeStyles(styles);
 
@@ -49,10 +50,7 @@ const Home = props => {
 
 
 
-  const body = !student.student_fk ? {
-    classroom: student?.classroom_fk,
-    year: student?.classroom.school_year
-  } : { student_fk: student.student_fk, classroom: student?.classroom_fk };
+
 
   const Sexo = [
     {
@@ -75,38 +73,38 @@ const Home = props => {
   ];
 
 
-  const getSex = () => {
-    return Sexo.find(props => props.id === student?.sex)
-  }
+  // const getSex = () => {
+  //   return Sexo.find(props => props.id === student?.sex)
+  // }
 
-  const getColor_race = () => {
-    return color.find(props => props.id === student?.color_race)
-  }
+  // const getColor_race = () => {
+  //   return color.find(props => props.id === student?.color_race)
+  // }
 
-  const getClassroom = () => {
-    return classrooms?.find(props => props.id === student?.classroom_fk)
-  }
+  // const getClassroom = () => {
+  //   return classrooms?.find(props => props.id === student?.classroom_fk)
+  // }
 
-  const initialValue = {
-    name: student.name ?? "",
-    sex: getSex(),
-    birthday: student?.birthday,
-    cpf: student?.cpf ?? "Sem CPF",
-    color_race: getColor_race(),
-    deficiency: student?.deficiency ? { name: "Sim", id: true } : { name: "Não", id: false },
-    responsable_name: student?.responsable_name,
-    responsable_cpf: student?.responsable_cpf,
-    responsable_telephone: student?.responsable_telephone,
-    address: student?.address,
-    neighborhood: student?.neighborhood,
-    complement: student?.complement,
-    number: student?.number,
-    cep: student?.cep,
-    zone: student?.zone === 1 ? { id: 1, name: "Rural" } : { id: 2, name: "Urbana" },
-    edcenso_uf: student.edcenso_uf ?? null,
-    edcenso_city: student.edcenso_city ?? null,
-    classroom_fk: classrooms ? getClassroom() : student.classroom_fk
-  }
+  // const initialValue = {
+  //   name: student.name ?? "",
+  //   sex: getSex(),
+  //   birthday: student?.birthday,
+  //   cpf: student?.cpf ?? "Sem CPF",
+  //   color_race: getColor_race(),
+  //   deficiency: student?.deficiency ? { name: "Sim", id: true } : { name: "Não", id: false },
+  //   responsable_name: student?.responsable_name,
+  //   responsable_cpf: student?.responsable_cpf,
+  //   responsable_telephone: student?.responsable_telephone,
+  //   address: student?.address,
+  //   neighborhood: student?.neighborhood,
+  //   complement: student?.complement,
+  //   number: student?.number,
+  //   cep: student?.cep,
+  //   zone: student?.zone === 1 ? { id: 1, name: "Rural" } : { id: 2, name: "Urbana" },
+  //   edcenso_uf: student.edcenso_uf ?? null,
+  //   edcenso_city: student.edcenso_city ?? null,
+  //   classroom_fk: classrooms ? getClassroom() : student.classroom_fk
+  // }
 
 
   const handleStatesCity = (selectedOption, setFieldValue) => {
@@ -118,15 +116,15 @@ const Home = props => {
   return (
     <>
       <ArrowBack onChange={() => { history.goBack() }} style={{ cursor: "pointer" }} />
-      <h1>{student && student.classroom.name}</h1>
+      {/* <h1>{student && student.classroom.name}</h1> */}
       <Grid className={classes.boxTitlePagination} container direction="row">
-        <h2>Matrículas</h2>
+        <h2>Dados do aluno</h2>
       </Grid>
-      {edit ? <>
+      <TabsRegister />
+      {/* {edit ? <>
         {!student?.unavailable ? <Grid item style={{ width: "100%" }} md={3}>
           <ButtonPurple
             className="t-button-primary"
-            onClick={() => handleSubmit(body)}
             type="button"
             title="Confirmar Matricula"
           />
@@ -335,7 +333,7 @@ const Home = props => {
             </Form>
           )
         }}
-      </Formik> : null}
+      </Formik> : null} */}
       <Grid
         className={classes.boxButtons}
         container
