@@ -25,10 +25,8 @@ const Form = props => {
   useEffect(() => {
     fetchRegistration()
       .then((testDataList) => {
-        console.log(testDataList)
         const student = testDataList.filter(props => props.object.classroom_fk === id)
         setStudents(student)
-        console.log(student)
       })
       .catch((err) => {
         // Trate erros, se ocorrerem

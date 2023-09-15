@@ -1,18 +1,17 @@
-import React from "react";
-import { createContext } from "react";
-import FormOphthalmologicalState from "./state";
+import React, { createContext } from "react";
+import FormRegistrationState from "./state";
 
-export const FormOphthalmologicalContext = createContext({});
+export const FormRegistrationContext = createContext({});
 
-const FormOphthalmologicaltProvider = ({ children }) => {
+const FormRegistrationProvider = ({ children }) => {
 
-    const {initialValues} = FormOphthalmologicalState()
-    
+    const { initialValues, oneRegistration } = FormRegistrationState()
+
     return (
-        <FormOphthalmologicalContext.Provider value={{ initialValues }}>
+        <FormRegistrationContext.Provider value={{ initialValues, oneRegistration }}>
             {children}
-        </FormOphthalmologicalContext.Provider>
+        </FormRegistrationContext.Provider>
     )
 }
 
-export default FormOphthalmologicaltProvider;
+export default FormRegistrationProvider;

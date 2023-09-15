@@ -35,7 +35,6 @@ const Home = ({ data }) => {
   const schools = () => {
     const schoolList = data ?? [];
 
-    console.log(schoolList)
 
     return schoolList.map((school, index) => (
       <Grid key={index} className={classes.box} item md={4} sm={3} xs={12}>

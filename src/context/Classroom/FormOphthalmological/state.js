@@ -1,5 +1,14 @@
+import { useEffect } from "react"
+import fetchOneRegistration from "../../../controller/registration/fetchOneRegistration"
+import { useState } from "react"
+import { useParams } from "react-router-dom";
 
-const FormOphthalmologicalState = () => {  
+
+const FormRegistrationState = () => {  
+
+    const { idRegistration } = useParams()
+
+    const [oneRegistration, setOneRegistration] = useState()
 
     const initialValues = {
         febre: "",
@@ -11,9 +20,23 @@ const FormOphthalmologicalState = () => {
         olhoEsquerdo: ""
     }
 
+
+    useEffect(() => {
+        fetchOneRegistration(idRegistration)
+          .then((testDataList) => {
+            setOneRegistration(testDataList)
+                setOneRegistration(testDataList)
+          })
+          .catch((err) => {
+            // Trate erros, se ocorrerem
+            console.error(err)
+          })
+      }, [idRegistration])
+    
+
     return{
-        initialValues
+        initialValues, oneRegistration
     }
 }
 
-export default FormOphthalmologicalState;
+export default FormRegistrationState;

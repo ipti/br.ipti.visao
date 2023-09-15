@@ -1,30 +1,28 @@
-import React from "react";
-import Classroom from "../../screens/Classroom/Classroom";
-import { useState } from "react";
-import { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import fetchClassroom from "../../controller/classroom/fetchClassroom";
-import { getIdSchool } from "../../services/auth";
+import Classroom from "../../screens/Classroom/Classroom";
 
 const Home = props => {
 
   const [classroom, setClassroom] = useState([])
 
+  const [idSchool, setIdSchool] = useState()
+
   useEffect(() => {
     fetchClassroom()
       .then((testDataList) => {
-        const classroomSchool = testDataList.filter(props => props.object.school_fk === getIdSchool())
+        const classroomSchool = testDataList.filter(props => props.object.school_fk === idSchool)
         setClassroom(classroomSchool)
-        console.log(testDataList)
       })
       .catch((err) => {
         // Trate erros, se ocorrerem
         console.error(err)
       })
-  }, [])
+  }, [idSchool])
 
   return (
     <>
-      <Classroom classroom={classroom} />
+      <Classroom classroom={classroom} setIdSchool={setIdSchool} idSchool={idSchool} />
     </ >
   );
 };

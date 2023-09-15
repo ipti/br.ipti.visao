@@ -1,7 +1,6 @@
 import React from "react";
 
 // Router
-import { useParams } from "react-router-dom";
 
 // Material UI
 import Grid from "@material-ui/core/Grid";
@@ -25,7 +24,6 @@ const useStyles = makeStyles(styles);
 const Home = ({ school }) => {
   const classes = useStyles();
   //let history = useHistory();
-  const { id } = useParams()
 
   // const handleLink = link => {
   //   history.push(link);

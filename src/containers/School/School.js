@@ -12,7 +12,6 @@ const Home = props => {
     fetchSchool()
     .then((testDataList) => {
         setSchool(testDataList)
-        console.log(testDataList)
     })
     .catch((err) => {
         // Trate erros, se ocorrerem

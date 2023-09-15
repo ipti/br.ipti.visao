@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 
 // Material UI
 import Grid from "@material-ui/core/Grid";
@@ -7,15 +7,16 @@ import Alert from "@material-ui/lab/Alert";
 
 import Select from "react-select";
 
-import { BoxBig, BoxDiscriptionClassroom } from "../../components/Boxes";
+import { BoxBig } from "../../components/Boxes";
 import List from "../../components/List";
 
 // Styles
 import { Fab, useMediaQuery } from "@material-ui/core";
 import AddIcon from "@material-ui/icons/Add";
 import { Link } from "react-router-dom";
-import { getYearClassRoom, yearClassroom } from "../../services/auth";
+import fetchSchool from "../../controller/School/fetchSchools";
 import styleBase from "../../styles";
+import { Padding } from "../../styles/style";
 import styles from "./styles";
 
 const theme = createTheme({
@@ -29,28 +30,34 @@ const theme = createTheme({
 const useStyles = makeStyles(theme => styles);
 
 
-const Classroom = ({ classroom }) => {
+const Classroom = ({ classroom, setIdSchool, idSchool }) => {
+  const [school, setSchool] = useState([])
+
 
 
   const matches = useMediaQuery('(max-width:600px)')
 
+
   const classes = useStyles();
 
+  useEffect(() => {
+    fetchSchool()
+      .then((testDataList) => {
+        setSchool(testDataList)
+        if (testDataList[0]) {
+          setIdSchool(testDataList[0].id)
+        }
+      })
+      .catch((err) => {
+        // Trate erros, se ocorrerem
+        console.error(err)
+      })
+  }, [setIdSchool])
 
-  const currentYear = new Date().getFullYear();
 
-  const numYears = 10;
-
-  const yearArray = Array.from({ length: numYears }, (v, i) => ({
-    year: currentYear - i,
-    id: i
-  }));
-
-  const year_classrrom = [{ year: "Todos", id: 11 }, ...yearArray];
 
   const stage = () => {
     return classroom?.map((item, index) => {
-      console.log(item)
       return (
         <Grid key={index} item md={4} sm={3} xs={12}>
           {item ? <BoxBig
@@ -79,23 +86,19 @@ const Classroom = ({ classroom }) => {
           </div>
           <div className={`${classes.spaceBetween}`}>
             <div style={{ width: matches ? "80%" : '50%' }}>
+              <label>Escolha uma escola</label>
+              <Padding />
               <Select
                 className="basic-single"
                 classNamePrefix="select"
-                placeholder="Digite o ano"
-                options={year_classrrom}
-                defaultValue={getYearClassRoom()}
+                placeholder="Digite uma escola"
+                options={school}
+                defaultValue={idSchool}
                 onChange={selectedOption => {
-                  if (selectedOption.year === 'Todos') {
-                    yearClassroom('');
-                    window.location.reload()
-                  } else {
-                    yearClassroom(selectedOption.year)
-                    window.location.reload()
-                  }
+                  setIdSchool(selectedOption.id)
                 }}
-                getOptionValue={opt => opt.year}
-                getOptionLabel={opt => opt.year}
+                getOptionValue={opt => opt.id}
+                getOptionLabel={opt => opt.object.name}
               />
             </div>
           </div>

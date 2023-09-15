@@ -19,6 +19,7 @@ const fetchOneRegistration = async (id) => {
             testDataList.push(data)
         })
 
+
         return testDataList.find(props => props.id === id)
     } catch (err) {
         console.error("Erro ao buscar dados:", err)

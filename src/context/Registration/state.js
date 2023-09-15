@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { useHistory } from "react-router";
 import handleSubmitStudent from "../../controller/registration/createRegistration";
 
@@ -40,7 +40,6 @@ export const RegistrationState = () => {
 
     setDataValues(data);
 
-    console.log(data)
     const parseBool = value =>
       ['true', 'false'].includes(value) ? value === true : null
     handleSubmitStudent({

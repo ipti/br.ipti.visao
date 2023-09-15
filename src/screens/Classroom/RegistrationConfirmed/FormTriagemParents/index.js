@@ -14,10 +14,11 @@ import { Form, Formik } from "formik";
 
 // Styles
 import { Checkbox, FormGroup } from "@mui/material";
-import { ButtonPurple } from "../../../components/Buttons";
-import { RegistrationContext } from "../../../context/Registration/context";
-import styleBase from "../../../styles";
-import styles from "../styles";
+import styles from "../../../../styles";
+
+import { FormRegistrationContext } from "../../../../context/Classroom/FormOphthalmological/context";
+import styleBase from "../../../../styles";
+import { Padding } from "../../../../styles/style";
 
 const useStyles = makeStyles(styles);
 
@@ -33,55 +34,56 @@ const PurpleRadio = withStyles({
 
 
 
-const StepTwo = () => {
+const FormTriagemParents = () => {
     const classes = useStyles();
 
-    const { onSubmit, dataValues } = useContext(RegistrationContext);
+    const { oneRegistration} = useContext(FormRegistrationContext);
+    
 
     const initialValues = {
         filhossintomas: {
-            dificuldadeQuadro: dataValues?.filhossintomas?.dificuldadeQuadro ?? false,
-            dificuldadeLivro: dataValues?.filhossintomas?.dificuldadeLivro ?? false,
-            olhoTortoConstante: dataValues?.filhossintomas?.olhoTortoConstante ?? false,
-            olhoTortoMomentos: dataValues?.filhossintomas?.olhoTortoMomentos ?? false,
-            rostoApertaOlhos: dataValues?.filhossintomas?.rostoApertaOlhos ?? false,
-            tremorOlhos: dataValues?.filhossintomas?.tremorOlhos ?? false,
-            manchaBrancaPupila: dataValues?.filhossintomas?.manchaBrancaPupila ?? false,
-            nenhumaOpcao: dataValues?.filhossintomas?.nenhumaOpcao ?? false,
+            dificuldadeQuadro: oneRegistration?.object.filhossintomas?.dificuldadeQuadro ?? false,
+            dificuldadeLivro: oneRegistration?.object.filhossintomas?.dificuldadeLivro ?? false,
+            olhoTortoConstante: oneRegistration?.object.filhossintomas?.olhoTortoConstante ?? false,
+            olhoTortoMomentos: oneRegistration?.object.filhossintomas?.olhoTortoMomentos ?? false,
+            rostoApertaOlhos: oneRegistration?.object.filhossintomas?.rostoApertaOlhos ?? false,
+            tremorOlhos: oneRegistration?.object.filhossintomas?.tremorOlhos ?? false,
+            manchaBrancaPupila: oneRegistration?.object.filhossintomas?.manchaBrancaPupila ?? false,
+            nenhumaOpcao: oneRegistration?.object.filhossintomas?.nenhumaOpcao ?? false,
         },
-        filhoOculos: dataValues?.filhoOculos ?? '',
+        filhoOculos: oneRegistration?.object.filhoOculos ?? '',
         doencasNosOlhos: {
-            olhoPreguicoso: dataValues?.doencasNosOlhos?.olhoPreguicoso ?? false,
-            olhoTorto: dataValues?.doencasNosOlhos?.olhoTorto ?? false,
-            catarataInfancia: dataValues?.doencasNosOlhos?.catarataInfancia ?? false,
-            glaucomaCongenito: dataValues?.doencasNosOlhos?.glaucomaCongenito ?? false,
-            tumorOlhos: dataValues?.doencasNosOlhos?.tumorOlhos ?? false,
-            ceratoconeTransplante: dataValues?.doencasNosOlhos?.ceratoconeTransplante ?? false,
-            palpebraCaida: dataValues?.doencasNosOlhos?.palpebraCaida ?? false,
-            nenhumaOpcao: dataValues?.doencasNosOlhos?.nenhumaOpcao ?? false,
+            olhoPreguicoso: oneRegistration?.object.doencasNosOlhos?.olhoPreguicoso ?? false,
+            olhoTorto: oneRegistration?.object.doencasNosOlhos?.olhoTorto ?? false,
+            catarataInfancia: oneRegistration?.object.doencasNosOlhos?.catarataInfancia ?? false,
+            glaucomaCongenito: oneRegistration?.object.doencasNosOlhos?.glaucomaCongenito ?? false,
+            tumorOlhos: oneRegistration?.object.doencasNosOlhos?.tumorOlhos ?? false,
+            ceratoconeTransplante: oneRegistration?.object.doencasNosOlhos?.ceratoconeTransplante ?? false,
+            palpebraCaida: oneRegistration?.object.doencasNosOlhos?.palpebraCaida ?? false,
+            nenhumaOpcao: oneRegistration?.object.doencasNosOlhos?.nenhumaOpcao ?? false,
         },
         doencas: {
-            prematuridade: dataValues?.doencas?.prematuridade ?? false,
-            sindromeDown: dataValues?.doencas?.sindromeDown ?? false,
-            paralisiaTumorCerebral: dataValues?.doencas?.paralisiaTumorCerebral ?? false,
-            outrasSindromesGeneticas: dataValues?.doencas?.outrasSindromesGeneticas ?? false,
-            diabetes: dataValues?.doencas?.diabetes ?? false,
-            artriteArtrose: dataValues?.doencas?.artriteArtrose ?? false,
-            alergiasCorticoides: dataValues?.doencas?.alergiasCorticoides ?? false,
-            nenhumaOpcao: dataValues?.doencas?.nenhumaOpcao ?? false,
+            prematuridade: oneRegistration?.object.doencas?.prematuridade ?? false,
+            sindromeDown: oneRegistration?.object.doencas?.sindromeDown ?? false,
+            paralisiaTumorCerebral: oneRegistration?.object.doencas?.paralisiaTumorCerebral ?? false,
+            outrasSindromesGeneticas: oneRegistration?.object.doencas?.outrasSindromesGeneticas ?? false,
+            diabetes: oneRegistration?.object.doencas?.diabetes ?? false,
+            artriteArtrose: oneRegistration?.object.doencas?.artriteArtrose ?? false,
+            alergiasCorticoides: oneRegistration?.object.doencas?.alergiasCorticoides ?? false,
+            nenhumaOpcao: oneRegistration?.object.doencas?.nenhumaOpcao ?? false,
         },
         doencasFamiliares: {
-            miopiaAmbosPais: dataValues?.doencasFamiliares?.miopiaAmbosPais ?? false,
-            miopiaUmPai: dataValues?.doencasFamiliares?.miopiaUmPai ?? false,
-            hipermetropiaAstigmatismo: dataValues?.doencasFamiliares?.hipermetropiaAstigmatismo ?? false,
-            estrabismo: dataValues?.doencasFamiliares?.estrabismo ?? false,
-            catarataGlaucoma: dataValues?.doencasFamiliares?.catarataGlaucoma ?? false,
-            olhoPreguicoso: dataValues?.doencasFamiliares?.olhoPreguicoso ?? false,
-            tumorOlho: dataValues?.doencasFamiliares?.tumorOlho ?? false,
-            nenhumaOpcao: dataValues?.doencasFamiliares?.nenhumaOpcao ?? false,
+            miopiaAmbosPais: oneRegistration?.object.doencasFamiliares?.miopiaAmbosPais ?? false,
+            miopiaUmPai: oneRegistration?.object.doencasFamiliares?.miopiaUmPai ?? false,
+            hipermetropiaAstigmatismo: oneRegistration?.object.doencasFamiliares?.hipermetropiaAstigmatismo ?? false,
+            estrabismo: oneRegistration?.object.doencasFamiliares?.estrabismo ?? false,
+            catarataGlaucoma: oneRegistration?.object.doencasFamiliares?.catarataGlaucoma ?? false,
+            olhoPreguicoso: oneRegistration?.object.doencasFamiliares?.olhoPreguicoso ?? false,
+            tumorOlho: oneRegistration?.object.doencasFamiliares?.tumorOlho ?? false,
+            nenhumaOpcao: oneRegistration?.object.doencasFamiliares?.nenhumaOpcao ?? false,
         },
-        horasUsoAparelhosEletronicos: dataValues?.horasUsoAparelhosEletronicos ?? "",
-        horasAtividadesAoArLivre: dataValues?.horasAtividadesAoArLivre ?? "",
+        horasUsoAparelhosEletronicos: oneRegistration?.object.horasUsoAparelhosEletronicos ?? "",
+        horasAtividadesAoArLivre: oneRegistration?.object.horasAtividadesAoArLivre ?? "",
     };
 
 
@@ -89,7 +91,7 @@ const StepTwo = () => {
         <>
             <Formik
                 initialValues={initialValues}
-                onSubmit={values => onSubmit(values)}
+                // onSubmit={values => onSubmit(values)}
                 // validationSchema={validationSchema}
                 validateOnChange={false}
                 enableReinitialize
@@ -118,6 +120,7 @@ const StepTwo = () => {
                                     <FormControlLabel control={<Checkbox name="filhossintomas.nenhumaOpcao" onChange={handleChange} value={values.filhossintomas.nenhumaOpcao} />} label="Nenhuma das opções" />
                                 </FormGroup>
                             </Grid>
+                            <Padding padding="16px"/>
                             <Grid
                                 className={`${classes.contentMain}`}
                                 container
@@ -194,6 +197,7 @@ const StepTwo = () => {
                                     <FormControlLabel control={<Checkbox />} label="Nenhuma das opções" />
                                 </FormGroup>
                             </Grid>
+                            <Padding />
                             <Grid
                                 className={`${classes.contentMain}`}
                                 container
@@ -210,7 +214,7 @@ const StepTwo = () => {
                                         <FormLabel component="legend">Quantas horas por dia seu filho usa aparelhos eletrônicos (tablet,
                                             Computador, celular)? *</FormLabel>
                                         <RadioGroup
-                                            value={values.horasUsoAparelhosEletronicos}
+                                            value={values.horasUsoAparelhosEletronicos.toString()}
                                             name="horasUsoAparelhosEletronicos"
                                             onChange={handleChange}
                                             row
@@ -265,7 +269,7 @@ const StepTwo = () => {
                                     >
                                         <FormLabel component="legend">Quantas horas por dia seu filho passa em atividades ao ar livre, recreativas ou por Esporte? *</FormLabel>
                                         <RadioGroup
-                                            value={values.horasAtividadesAoArLivre}
+                                            value={values.horasAtividadesAoArLivre.toString()}
                                             name="horasAtividadesAoArLivre"
                                             onChange={handleChange}
                                             row
@@ -299,22 +303,6 @@ const StepTwo = () => {
                                     </FormControl>
                                 </Grid>
                             </Grid>
-                            <Grid
-                                className={`${classes.marginTop} ${classes.marginButtom}`}
-                                justifyContent="center"
-                                alignItems="center"
-                                container
-                                direction="row"
-                            >
-                                <Grid item xs={6}>
-                                    <ButtonPurple
-                                        onClick={handleSubmit}
-                                        type="submit"
-                                        title="Finalizar"
-                                        className="t-button-primary"
-                                    />
-                                </Grid>
-                            </Grid>
                         </Form>
                     );
                 }}
@@ -323,4 +311,4 @@ const StepTwo = () => {
     );
 };
 
-export default StepTwo;
+export default FormTriagemParents;

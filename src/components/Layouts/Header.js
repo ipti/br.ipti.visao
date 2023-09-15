@@ -1,7 +1,7 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 
 
-import { Grid, useMediaQuery } from "@material-ui/core";
+import { useMediaQuery } from "@material-ui/core";
 import AppBar from "@material-ui/core/AppBar";
 import IconButton from "@material-ui/core/IconButton";
 import Menu from "@material-ui/core/Menu";
@@ -10,30 +10,13 @@ import Toolbar from "@material-ui/core/Toolbar";
 import { makeStyles } from "@material-ui/core/styles";
 import { MenuTwoTone } from "@material-ui/icons";
 import AccountCircle from "@material-ui/icons/AccountCircle";
-import { CircularProgress } from "@mui/material";
 import { useHistory } from "react-router-dom";
-import Select from "react-select";
-import fetchSchool from "../../controller/School/fetchSchools";
-import { getIdSchool, idSchool, isAuthenticated } from "../../services/auth";
+import { isAuthenticated } from "../../services/auth";
 import styleBase from "../../styles";
 
 
-const customStyles = {
-  control: base => ({
-    ...base,
-    height: "40px",
-    minHeight: "40px",
-    color: "black",
-    fontFamily: "Roboto, Helvetica, Arial, sans-serif"
-  }),
-  menu: base => ({
-    ...base,
-    color: "black",
-    fontFamily: "Roboto, Helvetica, Arial, sans-serif"
-  })
-};
 
-
+ 
 const useStyles = makeStyles({
   root: {
     flexGrow: 1,
@@ -67,7 +50,6 @@ const useStyles = makeStyles({
 });
 
 const Header = ({ setIsSidebar, isSidebar }) => {
-  const [school, setSchool] = useState([])
   const classes = useStyles();
   let history = useHistory();
   const [anchorEl, setAnchorEl] = React.useState(null);
@@ -89,18 +71,7 @@ const Header = ({ setIsSidebar, isSidebar }) => {
 
   };
 
-  useEffect(() => {
-    fetchSchool()
-    .then((testDataList) => {
-        setSchool(testDataList)
-        console.log(testDataList)
-    })
-    .catch((err) => {
-        // Trate erros, se ocorrerem
-        console.error(err)
-    })
-  }, [])
-  
+
   return (
     <AppBar classes={{ root: classes.root }} position="static">
       <Toolbar className={classes.tooBar} disableGutters>
@@ -117,26 +88,6 @@ const Header = ({ setIsSidebar, isSidebar }) => {
           style={{ color: 'black', marginLeft: '10px' }} /> : null}
         <h2 className={classes.title}>Matrícula</h2>
         <>
-
-          {school ? <Grid item xs={3}> <Select
-            styles={customStyles}
-            className="basic-single"
-            placeholder="Selecione a Escola"
-            options={school}
-            onChange={selectedOption => {
-              console.log(selectedOption)
-              idSchool(selectedOption.id);
-              history.push("/")
-              window.location.reload()
-
-            }}
-            defaultValue={school.find(x => x.id === getIdSchool())}
-            getOptionValue={opt => opt.id}
-            getOptionLabel={opt => opt.object.name}
-          />  </Grid> : <div style={{ margin: "auto" }}><CircularProgress /></div>}
-
-
-
           {isAuthenticated() && (
             <>
               <IconButton

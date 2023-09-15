@@ -5,6 +5,9 @@ import Tab from '@mui/material/Tab';
 import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
 import FormOphthalmologicalPage from '../FormOphthalmological/FormOphthalmological';
+import FormPerson from '../FormPerson';
+import FormConsulta from '../FormConsulta';
+import FormTriagemParents from '../FormTriagemParents';
 
 function CustomTabPanel(props) {
   const { children, value, index, ...other } = props;
@@ -51,18 +54,22 @@ export default function TabsRegister() {
       <Box sx={{ borderBottom: 1, borderColor: 'divider' }}>
         <Tabs value={value} onChange={handleChange} aria-label="basic tabs example">
           <Tab label="Aluno" {...a11yProps(0)} />
-          <Tab label="Triagem" {...a11yProps(1)} />
-          <Tab label="Consulta" {...a11yProps(2)} />
+          <Tab label="Triagem Pais" {...a11yProps(1)} />
+          <Tab label="Triagem" {...a11yProps(2)} />
+          <Tab label="Consulta" {...a11yProps(3)} />
         </Tabs>
       </Box>
       <CustomTabPanel value={value} index={0}>
-        Item One
+        <FormPerson />
       </CustomTabPanel>
       <CustomTabPanel value={value} index={1}>
-      <FormOphthalmologicalPage />
+        < FormTriagemParents />
       </CustomTabPanel>
       <CustomTabPanel value={value} index={2}>
-        Item Three
+        <FormOphthalmologicalPage />
+      </CustomTabPanel>
+      <CustomTabPanel value={value} index={3}>
+        <FormConsulta />
       </CustomTabPanel>
     </Box>
   );
