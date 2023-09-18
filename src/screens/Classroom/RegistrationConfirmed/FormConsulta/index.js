@@ -157,36 +157,6 @@ const FormConsulta = () => {
                             <p className={classes.label}>Observações dos óculos</p>
                             <TextField className={classes.inputStudent} name="name" onChange={handleChange} variant="outlined" />
                         </Grid>
-                        <Grid item style={{ width: "100%" }} md={12}>
-                            <p className={classes.label}>No teste de cover</p>
-                            <RadioGroup
-                            // value={value}
-                            // onChange={handleChange}
-                            >
-                                <FormControlLabel control={<Radio />} label="Sim" />
-                                <FormControlLabel control={<Radio />} label="Não" />
-                            </RadioGroup>
-                        </Grid>
-                        <Grid item style={{ width: "100%" }} md={12}>
-                            <p className={classes.label}>No teste do movimento ocular</p>
-                            <RadioGroup
-                            // value={value}
-                            // onChange={handleChange}
-                            >
-                                <FormControlLabel control={<Radio />} label="Sim" />
-                                <FormControlLabel control={<Radio />} label="Não" />
-                            </RadioGroup>
-                        </Grid>
-                        <Grid item style={{ width: "100%" }} md={12}>
-                            <p className={classes.label}>No teste da mancha branca</p>
-                            <RadioGroup
-                            // value={value}
-                            // onChange={handleChange}
-                            >
-                                <FormControlLabel control={<Radio />} label="Sim" />
-                                <FormControlLabel control={<Radio />} label="Não" />
-                            </RadioGroup>
-                        </Grid>
                     </Form>
                 )
             }}

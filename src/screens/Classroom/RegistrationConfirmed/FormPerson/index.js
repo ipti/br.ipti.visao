@@ -11,7 +11,7 @@ import styles from "../../../../styles";
 import { useContext } from "react";
 import { FormRegistrationContext } from "../../../../context/Classroom/FormOphthalmological/context";
 import styleBase from "../../../../styles";
-import { Column } from "../../../../styles/style";
+import { Column, Padding } from "../../../../styles/style";
 
 
 const useStyles = makeStyles(styles);
@@ -26,30 +26,29 @@ const PurpleRadio = withStyles({
 })(props => <Radio color="default" {...props} />);
 
 const FormPerson = () => {
+    
     const classes = useStyles();
 
-    const [edit, ] = useState(true)
+    const [edit,] = useState(true)
 
     const inputRef = useRef(null);
 
-    const { oneRegistration } = useContext(FormRegistrationContext)
+    const { initialValues } = useContext(FormRegistrationContext)
 
-    const initialValue = {
-        name: oneRegistration ? oneRegistration.object.name : "",
-        cpf: oneRegistration ? oneRegistration.object.cpf : "",
-        sex: oneRegistration ? oneRegistration.object.sex : "",
-        birthday: oneRegistration ? oneRegistration.object.birthday : ""
-    }
 
 
     return (
         <>
             <Formik
-                initialValues={initialValue}
+                initialValues={initialValues}
+                
                 onSubmit={values => {
                     // handleEditPreRegistration(student.id, values); setEdit(!edit) 
                 }}>
-                {({ errors, values, touched, handleChange, handleSubmit, setFieldValue }) => {
+                {({ values, handleChange, handleSubmit, setFieldValue }) => {
+
+                    console.log(values);
+
                     return (
                         <Form onSubmit={handleSubmit}>
                             <h2> Dados básicos </h2>
@@ -69,6 +68,7 @@ const FormPerson = () => {
                                     alignItems="center"
                                 >
                                     <Grid item xs={12}>
+                                        <Padding padding="8px" />
                                         <FormControl
                                             component="fieldset"
                                             className={classes.formControl}

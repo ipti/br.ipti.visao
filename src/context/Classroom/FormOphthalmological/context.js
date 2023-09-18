@@ -5,10 +5,10 @@ export const FormRegistrationContext = createContext({});
 
 const FormRegistrationProvider = ({ children }) => {
 
-    const { initialValues, oneRegistration } = FormRegistrationState()
+    const { initialValues, oneRegistration, updateInitialValues } = FormRegistrationState()
 
     return (
-        <FormRegistrationContext.Provider value={{ initialValues, oneRegistration }}>
+        <FormRegistrationContext.Provider value={{ initialValues, oneRegistration, updateInitialValues }}>
             {children}
         </FormRegistrationContext.Provider>
     )

@@ -37,55 +37,13 @@ const PurpleRadio = withStyles({
 const FormTriagemParents = () => {
     const classes = useStyles();
 
-    const { oneRegistration} = useContext(FormRegistrationContext);
-    
+    const { oneRegistration, initialValues, updateInitialValues } = useContext(FormRegistrationContext);
 
-    const initialValues = {
-        filhossintomas: {
-            dificuldadeQuadro: oneRegistration?.object.filhossintomas?.dificuldadeQuadro ?? false,
-            dificuldadeLivro: oneRegistration?.object.filhossintomas?.dificuldadeLivro ?? false,
-            olhoTortoConstante: oneRegistration?.object.filhossintomas?.olhoTortoConstante ?? false,
-            olhoTortoMomentos: oneRegistration?.object.filhossintomas?.olhoTortoMomentos ?? false,
-            rostoApertaOlhos: oneRegistration?.object.filhossintomas?.rostoApertaOlhos ?? false,
-            tremorOlhos: oneRegistration?.object.filhossintomas?.tremorOlhos ?? false,
-            manchaBrancaPupila: oneRegistration?.object.filhossintomas?.manchaBrancaPupila ?? false,
-            nenhumaOpcao: oneRegistration?.object.filhossintomas?.nenhumaOpcao ?? false,
-        },
-        filhoOculos: oneRegistration?.object.filhoOculos ?? '',
-        doencasNosOlhos: {
-            olhoPreguicoso: oneRegistration?.object.doencasNosOlhos?.olhoPreguicoso ?? false,
-            olhoTorto: oneRegistration?.object.doencasNosOlhos?.olhoTorto ?? false,
-            catarataInfancia: oneRegistration?.object.doencasNosOlhos?.catarataInfancia ?? false,
-            glaucomaCongenito: oneRegistration?.object.doencasNosOlhos?.glaucomaCongenito ?? false,
-            tumorOlhos: oneRegistration?.object.doencasNosOlhos?.tumorOlhos ?? false,
-            ceratoconeTransplante: oneRegistration?.object.doencasNosOlhos?.ceratoconeTransplante ?? false,
-            palpebraCaida: oneRegistration?.object.doencasNosOlhos?.palpebraCaida ?? false,
-            nenhumaOpcao: oneRegistration?.object.doencasNosOlhos?.nenhumaOpcao ?? false,
-        },
-        doencas: {
-            prematuridade: oneRegistration?.object.doencas?.prematuridade ?? false,
-            sindromeDown: oneRegistration?.object.doencas?.sindromeDown ?? false,
-            paralisiaTumorCerebral: oneRegistration?.object.doencas?.paralisiaTumorCerebral ?? false,
-            outrasSindromesGeneticas: oneRegistration?.object.doencas?.outrasSindromesGeneticas ?? false,
-            diabetes: oneRegistration?.object.doencas?.diabetes ?? false,
-            artriteArtrose: oneRegistration?.object.doencas?.artriteArtrose ?? false,
-            alergiasCorticoides: oneRegistration?.object.doencas?.alergiasCorticoides ?? false,
-            nenhumaOpcao: oneRegistration?.object.doencas?.nenhumaOpcao ?? false,
-        },
-        doencasFamiliares: {
-            miopiaAmbosPais: oneRegistration?.object.doencasFamiliares?.miopiaAmbosPais ?? false,
-            miopiaUmPai: oneRegistration?.object.doencasFamiliares?.miopiaUmPai ?? false,
-            hipermetropiaAstigmatismo: oneRegistration?.object.doencasFamiliares?.hipermetropiaAstigmatismo ?? false,
-            estrabismo: oneRegistration?.object.doencasFamiliares?.estrabismo ?? false,
-            catarataGlaucoma: oneRegistration?.object.doencasFamiliares?.catarataGlaucoma ?? false,
-            olhoPreguicoso: oneRegistration?.object.doencasFamiliares?.olhoPreguicoso ?? false,
-            tumorOlho: oneRegistration?.object.doencasFamiliares?.tumorOlho ?? false,
-            nenhumaOpcao: oneRegistration?.object.doencasFamiliares?.nenhumaOpcao ?? false,
-        },
-        horasUsoAparelhosEletronicos: oneRegistration?.object.horasUsoAparelhosEletronicos ?? "",
-        horasAtividadesAoArLivre: oneRegistration?.object.horasAtividadesAoArLivre ?? "",
-    };
 
+
+    console.log(initialValues)
+
+    console.log(oneRegistration)
 
     return (
         <>
@@ -105,22 +63,24 @@ const FormTriagemParents = () => {
                         deficiency: touched.deficiency && errors.deficiency
                     };
 
+                    console.log(values.doencas.diabetes)
+
                     return (
                         <Form>
                             <Grid item style={{ width: "100%" }} md={12}>
                                 <p className={classes.label}>Seu filho tem algum sintoma na visão ou nos olhos?</p>
                                 <FormGroup>
-                                    <FormControlLabel control={<Checkbox name="filhossintomas.dificuldadeQuadro" onChange={handleChange} value={values.filhossintomas.dificuldadeQuadro} />} label="Dificuldade para ver o quadro/lousa" />
-                                    <FormControlLabel control={<Checkbox name="filhossintomas.dificuldadeLivro" onChange={handleChange} value={values.filhossintomas.dificuldadeLivro} />} label="Dificuldade para ler o livro/caderno" />
-                                    <FormControlLabel control={<Checkbox name="filhossintomas.olhoTortoConstante" onChange={handleChange} value={values.filhossintomas.olhoTortoConstante} />} label="Olho torto constante" />
-                                    <FormControlLabel control={<Checkbox name="filhossintomas.olhoTortoMomentos" onChange={handleChange} value={values.filhossintomas.olhoTortoMomentos} />} label="Olho torto em alguns momentos" />
-                                    <FormControlLabel control={<Checkbox name="filhossintomas.rostoApertaOlhos" onChange={handleChange} value={values.filhossintomas.rostoApertaOlhos} />} label="Vira o rosto ou aperta os olhos para ver melhor" />
-                                    <FormControlLabel control={<Checkbox name="filhossintomas.tremorOlhos" onChange={handleChange} value={values.filhossintomas.tremorOlhos} />} label="Tremor dos olhos involuntário (nistagmo)" />
-                                    <FormControlLabel control={<Checkbox name="filhossintomas.manchaBrancaPupila" onChange={handleChange} value={values.filhossintomas.manchaBrancaPupila} />} label="Mancha branca na pupila" />
-                                    <FormControlLabel control={<Checkbox name="filhossintomas.nenhumaOpcao" onChange={handleChange} value={values.filhossintomas.nenhumaOpcao} />} label="Nenhuma das opções" />
+                                    <FormControlLabel control={<Checkbox name="filhossintomas.dificuldadeQuadro" defaultChecked={values.filhossintomas.dificuldadeQuadro} onChange={(e) => {handleChange(e); updateInitialValues("filhossintomas.dificuldadeQuadro", e.target.value)}} value={values.filhossintomas.dificuldadeQuadro} />} label="Dificuldade para ver o quadro/lousa" />
+                                    <FormControlLabel control={<Checkbox name="filhossintomas.dificuldadeLivro" onChange={handleChange} defaultChecked={values.filhossintomas.dificuldadeLivro} value={values.filhossintomas.dificuldadeLivro} />} label="Dificuldade para ler o livro/caderno" />
+                                    <FormControlLabel control={<Checkbox name="filhossintomas.olhoTortoConstante" onChange={handleChange} defaultChecked={values.filhossintomas.olhoTortoConstante} value={values.filhossintomas.olhoTortoConstante} />} label="Olho torto constante" />
+                                    <FormControlLabel control={<Checkbox name="filhossintomas.olhoTortoMomentos" onChange={handleChange} defaultChecked={values.filhossintomas.olhoTortoMomentos} value={values.filhossintomas.olhoTortoMomentos} />} label="Olho torto em alguns momentos" />
+                                    <FormControlLabel control={<Checkbox name="filhossintomas.rostoApertaOlhos" onChange={handleChange} defaultChecked={values.filhossintomas.rostoApertaOlhos} value={values.filhossintomas.rostoApertaOlhos} />} label="Vira o rosto ou aperta os olhos para ver melhor" />
+                                    <FormControlLabel control={<Checkbox name="filhossintomas.tremorOlhos" onChange={handleChange} defaultChecked={values.filhossintomas.tremorOlhos} value={values.filhossintomas.tremorOlhos} />} label="Tremor dos olhos involuntário (nistagmo)" />
+                                    <FormControlLabel control={<Checkbox name="filhossintomas.manchaBrancaPupila" onChange={handleChange} defaultChecked={values.filhossintomas.manchaBrancaPupila} value={values.filhossintomas.manchaBrancaPupila} />} label="Mancha branca na pupila" />
+                                    <FormControlLabel control={<Checkbox name="filhossintomas.nenhumaOpcao" onChange={handleChange} defaultChecked={values.filhossintomas.nenhumaOpcao} value={values.filhossintomas.nenhumaOpcao} />} label="Nenhuma das opções" />
                                 </FormGroup>
                             </Grid>
-                            <Padding padding="16px"/>
+                            <Padding padding="16px" />
                             <Grid
                                 className={`${classes.contentMain}`}
                                 container
@@ -139,7 +99,7 @@ const FormTriagemParents = () => {
                                             value={values.filhoOculos}
                                             name="filhoOculos"
                                             onChange={handleChange}
-                                            row
+                                            column
                                         >
                                             <FormControlLabel
                                                 value={true}
@@ -161,40 +121,40 @@ const FormTriagemParents = () => {
                             <Grid item style={{ width: "100%" }} md={12}>
                                 <p className={classes.label}>Seu filho tem ou teve alguma dessas doenças nos olhos?</p>
                                 <FormGroup>
-                                    <FormControlLabel control={<Checkbox name="doencasNosOlhos.olhoPreguicoso" onChange={handleChange} value={values.doencasNosOlhos.olhoPreguicoso} />} label="Olho preguiçoso (ambliopia) ou não enxerga bem com um dos olhos" />
-                                    <FormControlLabel control={<Checkbox name="doencasNosOlhos.olhoTorto" onChange={handleChange} value={values.doencasNosOlhos.olhoTorto} />} label="Olho torto (estrabismo)" />
-                                    <FormControlLabel control={<Checkbox name="doencasNosOlhos.catarataInfancia" onChange={handleChange} value={values.doencasNosOlhos.catarataInfancia} />} label=" Catarata na infância" />
-                                    <FormControlLabel control={<Checkbox name="doencasNosOlhos.glaucomaCongenito" onChange={handleChange} value={values.doencasNosOlhos.glaucomaCongenito} />} label=" Glaucoma congênito" />
-                                    <FormControlLabel control={<Checkbox name="doencasNosOlhos.tumorOlhos" onChange={handleChange} value={values.doencasNosOlhos.tumorOlhos} />} label="Tumor nos olhos (RETINOBLASTOMA)" />
-                                    <FormControlLabel control={<Checkbox name="doencasNosOlhos.ceratoconeTransplante" onChange={handleChange} value={values.doencasNosOlhos.ceratoconeTransplante} />} label="Ceratocone ou transplante de córnea" />
-                                    <FormControlLabel control={<Checkbox name="doencasNosOlhos.palpebraCaida" onChange={handleChange} value={values.doencasNosOlhos.palpebraCaida} />} label="Pálpebra caída (ptose pálpebral)" />
-                                    <FormControlLabel control={<Checkbox name="doencasNosOlhos.nenhumaOpcao" onChange={handleChange} value={values.doencasNosOlhos.nenhumaOpcao} />} label="Nenhuma das opções" />
+                                    <FormControlLabel control={<Checkbox name="doencasNosOlhos.olhoPreguicoso" onChange={handleChange} defaultChecked={values.doencasNosOlhos.olhoPreguicoso} value={values.doencasNosOlhos.olhoPreguicoso} />} label="Olho preguiçoso (ambliopia) ou não enxerga bem com um dos olhos" />
+                                    <FormControlLabel control={<Checkbox name="doencasNosOlhos.olhoTorto" onChange={handleChange} defaultChecked={values.doencasNosOlhos.olhoTorto} value={values.doencasNosOlhos.olhoTorto} />} label="Olho torto (estrabismo)" />
+                                    <FormControlLabel control={<Checkbox name="doencasNosOlhos.catarataInfancia" onChange={handleChange} defaultChecked={values.doencasNosOlhos.catarataInfancia} value={values.doencasNosOlhos.catarataInfancia} />} label=" Catarata na infância" />
+                                    <FormControlLabel control={<Checkbox name="doencasNosOlhos.glaucomaCongenito" onChange={handleChange} defaultChecked={values.doencasNosOlhos.glaucomaCongenito} value={values.doencasNosOlhos.glaucomaCongenito} />} label=" Glaucoma congênito" />
+                                    <FormControlLabel control={<Checkbox name="doencasNosOlhos.tumorOlhos" onChange={handleChange} defaultChecked={values.doencasNosOlhos.tumorOlhos} value={values.doencasNosOlhos.tumorOlhos} />} label="Tumor nos olhos (RETINOBLASTOMA)" />
+                                    <FormControlLabel control={<Checkbox name="doencasNosOlhos.ceratoconeTransplante" onChange={handleChange} defaultChecked={values.doencasNosOlhos.ceratoconeTransplante} value={values.doencasNosOlhos.ceratoconeTransplante} />} label="Ceratocone ou transplante de córnea" />
+                                    <FormControlLabel control={<Checkbox name="doencasNosOlhos.palpebraCaida" onChange={handleChange} defaultChecked={values.doencasNosOlhos.palpebraCaida} value={values.doencasNosOlhos.palpebraCaida} />} label="Pálpebra caída (ptose pálpebral)" />
+                                    <FormControlLabel control={<Checkbox name="doencasNosOlhos.nenhumaOpcao" onChange={handleChange} defaultChecked={values.doencasNosOlhos.nenhumaOpcao} value={values.doencasNosOlhos.nenhumaOpcao} />} label="Nenhuma das opções" />
                                 </FormGroup>
                             </Grid>
                             <Grid item style={{ width: "100%" }} md={12}>
                                 <p className={classes.label}>Seu filho tem ou teve alguma dessas doenças ?</p>
                                 <FormGroup>
-                                    <FormControlLabel control={<Checkbox name="doencasNosOlhos.prematuridade" onChange={handleChange} value={values.doencas.prematuridade} />} label="Prematuridade (menos de 32 semanas - 7 meses)" />
-                                    <FormControlLabel control={<Checkbox name="doencasNosOlhos.sindromeDown" onChange={handleChange} value={values.doencas.sindromeDown} />} label="Síndrome de Down" />
-                                    <FormControlLabel control={<Checkbox name="doencasNosOlhos.paralisiaTumorCerebral" onChange={handleChange} value={values.doencas.paralisiaTumorCerebral} />} label="Paralisia ou tumor cerebral" />
-                                    <FormControlLabel control={<Checkbox name="doencasNosOlhos.outrasSindromesGeneticas" onChange={handleChange} value={values.doencas.outrasSindromesGeneticas} />} label="Outras síndromes genéticas" />
-                                    <FormControlLabel control={<Checkbox name="doencasNosOlhos.diabetes" onChange={handleChange} value={values.doencas.diabetes} />} label="Diabetes" />
-                                    <FormControlLabel control={<Checkbox name="doencasNosOlhos.artriteArtrose" onChange={handleChange} value={values.doencas.artriteArtrose} />} label="Artrite ou Artrose" />
-                                    <FormControlLabel control={<Checkbox name="doencasNosOlhos.alergiasCorticoides" onChange={handleChange} value={values.doencas.alergiasCorticoides} />} label=" Alergias ou uso prolongado de corticoides" />
-                                    <FormControlLabel control={<Checkbox name="doencasNosOlhos.nenhumaOpcao" onChange={handleChange} value={values.doencas.nenhumaOpcao} />} label="Nenhuma das opções" />
+                                    <FormControlLabel control={<Checkbox name="doencas.prematuridade" onChange={handleChange} defaultChecked={values.doencas.prematuridade} value={values.doencas.prematuridade} />} label="Prematuridade (menos de 32 semanas - 7 meses)" />
+                                    <FormControlLabel control={<Checkbox name="doencas.sindromeDown" onChange={handleChange} defaultChecked={values.doencas.sindromeDown} value={values.doencas.sindromeDown} />} label="Síndrome de Down" />
+                                    <FormControlLabel control={<Checkbox name="doencas.paralisiaTumorCerebral" onChange={handleChange} defaultChecked={values.doencas.paralisiaTumorCerebral} value={values.doencas.paralisiaTumorCerebral} />} label="Paralisia ou tumor cerebral" />
+                                    <FormControlLabel control={<Checkbox name="doencas.outrasSindromesGeneticas" onChange={handleChange} defaultChecked={values.doencas.outrasSindromesGeneticas} value={values.doencas.outrasSindromesGeneticas} />} label="Outras síndromes genéticas" />
+                                    <FormControlLabel control={<Checkbox name="doencas.diabetes" onChange={handleChange} defaultChecked={values.doencas.diabetes} value={values.doencas.diabetes} />} label="Diabetes" />
+                                    <FormControlLabel control={<Checkbox name="doencas.artriteArtrose" onChange={handleChange} defaultChecked={values.doencas.artriteArtrose} value={values.doencas.artriteArtrose} />} label="Artrite ou Artrose" />
+                                    <FormControlLabel control={<Checkbox name="doencas.alergiasCorticoides" onChange={handleChange} defaultChecked={values.doencas.alergiasCorticoides} value={values.doencas.alergiasCorticoides} />} label=" Alergias ou uso prolongado de corticoides" />
+                                    <FormControlLabel control={<Checkbox name="doencas.nenhumaOpcao" onChange={handleChange} defaultChecked={values.doencas.nenhumaOpcao} value={values.doencas.nenhumaOpcao} />} label="Nenhuma das opções" />
                                 </FormGroup>
                             </Grid>
                             <Grid item style={{ width: "100%" }} md={12}>
                                 <p className={classes.label}>Vocês (pai ou mãe ou irmos), avós ou tios de primeiro grau tem ou tiveram algumas dessas doenças? ?</p>
                                 <FormGroup>
-                                    <FormControlLabel control={<Checkbox />} label="Pai e mãe (os dois) com miopia acima de 3 graus" />
-                                    <FormControlLabel control={<Checkbox />} label="Pai ou mãe (um dos dois) com miopia acima de 5 graus" />
-                                    <FormControlLabel control={<Checkbox />} label="Alta hipermetropia ou alto astigmatismo" />
-                                    <FormControlLabel control={<Checkbox />} label="Estrabismo (olho torto)" />
-                                    <FormControlLabel control={<Checkbox />} label="Catarata na infância ou Glaucoma congênito" />
-                                    <FormControlLabel control={<Checkbox />} label="Olho preguiçoso (ambliopia)" />
-                                    <FormControlLabel control={<Checkbox />} label="Tumor no olho (RETINOBLASTOMA)" />
-                                    <FormControlLabel control={<Checkbox />} label="Nenhuma das opções" />
+                                    <FormControlLabel control={<Checkbox />} name="doencasFamiliares.miopiaUmPai" defaultChecked={values.doencasFamiliares.miopiaUmPai} value={values.doencasFamiliares.miopiaUmPai} label="Pai e mãe (os dois) com miopia acima de 3 graus" />
+                                    <FormControlLabel control={<Checkbox />} name="doencasFamiliares.miopiaAmbosPais" defaultChecked={values.doencasFamiliares.miopiaAmbosPais} value={values.doencasFamiliares.miopiaAmbosPais} label="Pai ou mãe (um dos dois) com miopia acima de 5 graus" />
+                                    <FormControlLabel control={<Checkbox />} name="doencasFamiliares.hipermetropiaAstigmatismo" defaultChecked={values.doencasFamiliares.hipermetropiaAstigmatismo} value={values.doencasFamiliares.hipermetropiaAstigmatismo} label="Alta hipermetropia ou alto astigmatismo" />
+                                    <FormControlLabel control={<Checkbox />} name="doencasFamiliares.estrabismo" defaultChecked={values.doencasFamiliares.estrabismo} value={values.doencasFamiliares.estrabismo} label="Estrabismo (olho torto)" />
+                                    <FormControlLabel control={<Checkbox />} name="doencasFamiliares.catarataGlaucoma" defaultChecked={values.doencasFamiliares.catarataGlaucoma} value={values.doencasFamiliares.catarataGlaucoma} label="Catarata na infância ou Glaucoma congênito" />
+                                    <FormControlLabel control={<Checkbox />} name="doencasFamiliares.olhoPreguicoso" defaultChecked={values.doencasFamiliares.olhoPreguicoso} value={values.doencasFamiliares.olhoPreguicoso} label="Olho preguiçoso (ambliopia)" />
+                                    <FormControlLabel control={<Checkbox />} name="doencasFamiliares.tumorOlho" defaultChecked={values.doencasFamiliares.tumorOlho} value={values.doencasFamiliares.tumorOlho} label="Tumor no olho (RETINOBLASTOMA)" />
+                                    <FormControlLabel control={<Checkbox />} name="doencasFamiliares.nenhumaOpcao}" defaultChecked={values.doencasFamiliares.nenhumaOpcao} value={values.doencasFamiliares.nenhumaOpcao} label="Nenhuma das opções" />
                                 </FormGroup>
                             </Grid>
                             <Padding />
@@ -217,7 +177,7 @@ const FormTriagemParents = () => {
                                             value={values.horasUsoAparelhosEletronicos.toString()}
                                             name="horasUsoAparelhosEletronicos"
                                             onChange={handleChange}
-                                            row
+                                            column
                                         >
                                             <FormControlLabel
                                                 value={'1'}
@@ -272,7 +232,7 @@ const FormTriagemParents = () => {
                                             value={values.horasAtividadesAoArLivre.toString()}
                                             name="horasAtividadesAoArLivre"
                                             onChange={handleChange}
-                                            row
+                                            column
                                         >
                                             <FormControlLabel
                                                 value={'1'}

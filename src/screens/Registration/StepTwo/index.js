@@ -184,14 +184,14 @@ const StepTwo = () => {
                             <Grid item style={{ width: "100%" }} md={12}>
                                 <p className={classes.label}>Vocês (pai ou mãe ou irmos), avós ou tios de primeiro grau tem ou tiveram algumas dessas doenças? ?</p>
                                 <FormGroup>
-                                    <FormControlLabel control={<Checkbox />} label="Pai e mãe (os dois) com miopia acima de 3 graus" />
-                                    <FormControlLabel control={<Checkbox />} label="Pai ou mãe (um dos dois) com miopia acima de 5 graus" />
-                                    <FormControlLabel control={<Checkbox />} label="Alta hipermetropia ou alto astigmatismo" />
-                                    <FormControlLabel control={<Checkbox />} label="Estrabismo (olho torto)" />
-                                    <FormControlLabel control={<Checkbox />} label="Catarata na infância ou Glaucoma congênito" />
-                                    <FormControlLabel control={<Checkbox />} label="Olho preguiçoso (ambliopia)" />
-                                    <FormControlLabel control={<Checkbox />} label="Tumor no olho (RETINOBLASTOMA)" />
-                                    <FormControlLabel control={<Checkbox />} label="Nenhuma das opções" />
+                                    <FormControlLabel control={<Checkbox />} name="doencasFamiliares.miopiaUmPai" defaultChecked={values.doencasFamiliares.miopiaUmPai} value={values.doencasFamiliares.miopiaUmPai} label="Pai e mãe (os dois) com miopia acima de 3 graus" />
+                                    <FormControlLabel control={<Checkbox />} name="doencasFamiliares.miopiaAmbosPais" defaultChecked={values.doencasFamiliares.miopiaAmbosPais} value={values.doencasFamiliares.miopiaAmbosPais} label="Pai ou mãe (um dos dois) com miopia acima de 5 graus" />
+                                    <FormControlLabel control={<Checkbox />} name="doencasFamiliares.hipermetropiaAstigmatismo" defaultChecked={values.doencasFamiliares.hipermetropiaAstigmatismo} value={values.doencasFamiliares.hipermetropiaAstigmatismo} label="Alta hipermetropia ou alto astigmatismo" />
+                                    <FormControlLabel control={<Checkbox />} name="doencasFamiliares.estrabismo" defaultChecked={values.doencasFamiliares.estrabismo} value={values.doencasFamiliares.estrabismo} label="Estrabismo (olho torto)" />
+                                    <FormControlLabel control={<Checkbox />} name="doencasFamiliares.catarataGlaucoma" defaultChecked={values.doencasFamiliares.catarataGlaucoma} value={values.doencasFamiliares.catarataGlaucoma} label="Catarata na infância ou Glaucoma congênito" />
+                                    <FormControlLabel control={<Checkbox />} name="doencasFamiliares.olhoPreguicoso" defaultChecked={values.doencasFamiliares.olhoPreguicoso} value={values.doencasFamiliares.olhoPreguicoso} label="Olho preguiçoso (ambliopia)" />
+                                    <FormControlLabel control={<Checkbox />} name="doencasFamiliares.tumorOlho" defaultChecked={values.doencasFamiliares.tumorOlho} value={values.doencasFamiliares.tumorOlho} label="Tumor no olho (RETINOBLASTOMA)" />
+                                    <FormControlLabel control={<Checkbox />} name="doencasFamiliares.nenhumaOpcao}" defaultChecked={values.doencasFamiliares.nenhumaOpcao} value={values.doencasFamiliares.nenhumaOpcao} label="Nenhuma das opções" />
                                 </FormGroup>
                             </Grid>
                             <Grid
