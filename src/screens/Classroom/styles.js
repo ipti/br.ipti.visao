@@ -42,8 +42,10 @@ const useStyles = {
     float: "right"
   },
   label: {
-    color: styleBase.colors.grayClear,
-    margin: 0
+    color: "#000",
+    fontWeight: "700",
+    margin: "16px 0",
+    fontSize: 24
   },
   iconStudent: {
     borderRadius: "6px",

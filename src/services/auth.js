@@ -11,7 +11,7 @@ export const logout = () => {
   localStorage.removeItem("token");
 };
 
-export const idSchool = id => {
+export const idSchoolLocal = id => {
   localStorage.setItem("id-school", id)
 }
 

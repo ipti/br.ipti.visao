@@ -15,6 +15,12 @@ import {
 import { QueryClientProvider } from "react-query";
 import queryClient from "./services/query";
 
+//theme
+import "primereact/resources/themes/lara-light-indigo/theme.css";     
+    
+//core
+import "primereact/resources/primereact.min.css";                                       
+        
 
 
 const theme = createTheme({

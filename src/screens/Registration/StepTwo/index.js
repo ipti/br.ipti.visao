@@ -139,13 +139,13 @@ const StepTwo = () => {
                                             row
                                         >
                                             <FormControlLabel
-                                                value={true}
+                                                value={"1"}
                                                 name="filhoOculos"
                                                 control={<PurpleRadio />}
                                                 label="Sim"
                                             />
                                             <FormControlLabel
-                                                value={false}
+                                                value={"0"}
                                                 name="filhoOculos"
                                                 control={<PurpleRadio />}
                                                 label="Não"

@@ -18,6 +18,7 @@ import fetchSchool from "../../controller/School/fetchSchools";
 import styleBase from "../../styles";
 import { Padding } from "../../styles/style";
 import styles from "./styles";
+import { idSchoolLocal } from "../../services/auth";
 
 const theme = createTheme({
   palette: {
@@ -46,10 +47,10 @@ const Classroom = ({ classroom, setIdSchool, idSchool }) => {
         setSchool(testDataList)
         if (testDataList[0]) {
           setIdSchool(testDataList[0].id)
+          idSchoolLocal(testDataList[0].id)
         }
       })
       .catch((err) => {
-        // Trate erros, se ocorrerem
         console.error(err)
       })
   }, [setIdSchool])
@@ -96,6 +97,7 @@ const Classroom = ({ classroom, setIdSchool, idSchool }) => {
                 defaultValue={idSchool}
                 onChange={selectedOption => {
                   setIdSchool(selectedOption.id)
+                  idSchoolLocal(selectedOption.id)
                 }}
                 getOptionValue={opt => opt.id}
                 getOptionLabel={opt => opt.object.name}

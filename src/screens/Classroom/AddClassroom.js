@@ -21,6 +21,7 @@ import { ButtonPurple } from "../../components/Buttons";
 import handleSubmitClassroom from "../../controller/classroom/createClassroom";
 import styles from "./styles";
 import { getIdSchool } from "../../services/auth";
+import { ArrowBack } from "@material-ui/icons";
 
 
 const useStyles = makeStyles(theme => styles);
@@ -31,7 +32,7 @@ const Create = () => {
   const classes = useStyles();
 
   const history = useHistory()
- 
+
 
   const validationSchema = Yup.object().shape({
     name: Yup.string()
@@ -39,7 +40,7 @@ const Create = () => {
       .required("Campo obrigatório!"),
   });
 
-  const initialValue =  {
+  const initialValue = {
     name: "",
     year: 2023,
     school_fk: getIdSchool()
@@ -47,7 +48,9 @@ const Create = () => {
 
   return (
     <>
+      <ArrowBack onClick={() => { history.goBack() }} style={{ cursor: "pointer" }} />
       <Grid container direction="row">
+
         <Grid
           className={classes.boxTitlePagination}
           item
@@ -108,11 +111,11 @@ const Create = () => {
                   style={{ marginTop: '30px' }}
                 >
                   <Grid item md={2} sm={2}>
-                      <ButtonPurple
-                        className="t-button-primary"
-                        type="submit"
-                        title={"Salvar"}
-                      />
+                    <ButtonPurple
+                      className="t-button-primary"
+                      type="submit"
+                      title={"Salvar"}
+                    />
                   </Grid>
                 </Grid>
               </MuiPickersUtilsProvider>

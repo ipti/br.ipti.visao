@@ -16,6 +16,7 @@ import { useContext } from "react";
 import { FormRegistrationContext } from "../../../context/Classroom/FormOphthalmological/context";
 import { Column, Padding, Row } from "../../../styles/style";
 import { CircularProgress } from "@material-ui/core";
+import { Form, Formik } from "formik";
 
 const useStyles = makeStyles(styles);
 
@@ -24,30 +25,44 @@ const Home = props => {
 
   const history = useHistory()
 
-  const { oneRegistration } = useContext(FormRegistrationContext)
+  const { oneRegistration, handleUpdate, initialValues, points } = useContext(FormRegistrationContext)
 
   return (
     <>
-      <ArrowBack onChange={() => { history.goBack() }} style={{ cursor: "pointer" }} />
+      <ArrowBack onClick={() => { history.goBack() }} style={{ cursor: "pointer" }} />
       <Grid className={classes.boxTitlePagination} container direction="row">
         <h2>Dados do aluno</h2>
       </Grid>
-      <Grid item style={{ width: "100%" }} md={3}>
-        <ButtonPurple
-          className="t-button-primary"
-          type="button"
-          title="Salvar"
-        />
-      </Grid>
-      <Padding padding="16px" />
-      {oneRegistration ? <TabsRegister /> :
+      {oneRegistration ? <Formik
+        initialValues={initialValues}
+        onSubmit={values => {
+          handleUpdate(values)
+        }}>
+        {({ values, handleChange, handleSubmit, setFieldValue }) => {
+
+          return (
+            <Form onSubmit={handleSubmit}>
+
+            <h1>Pontos somados: {points()}</h1>
+            <h4>{points() < 5 ? "Prioridade minima" : points() >= 5 ? "Prioridade média" : "" }</h4>
+              <Grid item style={{ width: "100%" }} md={3}>
+                <ButtonPurple
+                  className="t-button-primary"
+                  title="Salvar"
+                />
+              </Grid>
+              <Padding padding="16px" />
+              <TabsRegister values={values} handleChange={handleChange} />
+
+            </Form>)
+        }}
+      </Formik> :
         <Column id="center">
           <Row id="center">
             <CircularProgress />
           </Row>
         </Column>
       }
-
     </>
   );
 };

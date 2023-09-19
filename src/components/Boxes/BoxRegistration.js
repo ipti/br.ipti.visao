@@ -28,8 +28,6 @@ const BoxRegistration = props => {
     history.push(link)
 
 
-    history.push(link)
-
   }
 
   const deletePreRegistration = (e, id) => {

@@ -1,15 +1,12 @@
 import { makeStyles, withStyles } from "@material-ui/core/styles";
-import { Form, Formik } from "formik";
 import React from "react";
 
 import { Grid } from "@material-ui/core";
-import { FormControl, FormControlLabel, FormLabel, Radio, RadioGroup, TextField } from "@mui/material";
-import { useRef, useState } from "react";
+import { FormControl, FormControlLabel, Radio, RadioGroup, TextField } from "@mui/material";
+import { useRef } from "react";
 import MaskCpf from "../../../../components/Mask/maskcpf";
 import styles from "../../../../styles";
 
-import { useContext } from "react";
-import { FormRegistrationContext } from "../../../../context/Classroom/FormOphthalmological/context";
 import styleBase from "../../../../styles";
 import { Column, Padding } from "../../../../styles/style";
 
@@ -25,101 +22,80 @@ const PurpleRadio = withStyles({
     checked: {}
 })(props => <Radio color="default" {...props} />);
 
-const FormPerson = () => {
-    
-    const classes = useStyles();
+const FormPerson = ({ values, handleChange }) => {
 
-    const [edit,] = useState(true)
+    const classes = useStyles();
 
     const inputRef = useRef(null);
 
-    const { initialValues } = useContext(FormRegistrationContext)
-
-
-
     return (
         <>
-            <Formik
-                initialValues={initialValues}
-                
-                onSubmit={values => {
-                    // handleEditPreRegistration(student.id, values); setEdit(!edit) 
-                }}>
-                {({ values, handleChange, handleSubmit, setFieldValue }) => {
 
-                    console.log(values);
+            <h2> Dados básicos </h2>
+            <Grid container>
+                <Column>
+                    <p className={classes.label}>Name</p>
+                    <TextField
+                        className={classes.inputStudent}
+                        value={values.name}
+                        name="name" onChange={handleChange} variant="outlined" />
+                </Column>
+                <Grid
+                    className={`${classes.contentMain}`}
+                    container
+                    direction="row"
+                    justifyContent="center"
+                    alignItems="center"
+                >
+                    <Grid item xs={12}>
+                        <Padding padding="8px" />
+                        <FormControl
+                            component="fieldset"
+                            className={classes.formControl}
+                        // error={errorList.sex}
+                        >
+                            <p className={classes.label}>Sexo *</p>
+                            <RadioGroup
+                                value={values.sex}
+                                name="sex"
+                                onChange={handleChange}
+                                row
+                            >
+                                <FormControlLabel
+                                    value={'2'}
+                                    name="sex"
+                                    control={<PurpleRadio />}
+                                    label="Feminino"
+                                />
+                                <FormControlLabel
+                                    value={'1'}
+                                    name="sex"
+                                    control={<PurpleRadio />}
+                                    label="Masculino"
+                                />
+                            </RadioGroup>
+                        </FormControl>
+                    </Grid>
+                </Grid>
+                <Grid item style={{ width: "100%" }} md={12}>
+                    <p className={classes.label}>Data de Nascimento</p>
+                    <TextField className={classes.inputStudent} name="birthday" onChange={handleChange}
+                        value={values.birthday}
+                        variant="outlined" />
+                </Grid>
+                <Grid item style={{ width: "100%" }} md={12}>
+                    <p className={classes.label}>CPF</p>
+                    <TextField className={classes.inputStudent} InputProps={{
+                        inputComponent: MaskCpf,
+                        value: values.cpf,
+                        inputRef: inputRef,
+                        onChange: handleChange,
+                    }} name="cpf" onChange={handleChange}
+                        value={values.cpf}
+                        variant="outlined" />
+                </Grid>
+            </Grid>
 
-                    return (
-                        <Form onSubmit={handleSubmit}>
-                            <h2> Dados básicos </h2>
-                            <Grid container>
-                                <Column>
-                                    <p className={classes.label}>Name</p>
-                                    <TextField
-                                        className={classes.inputStudent}
-                                        value={values.name}
-                                        name="name" onChange={handleChange} variant="outlined" disabled={edit} />
-                                </Column>
-                                <Grid
-                                    className={`${classes.contentMain}`}
-                                    container
-                                    direction="row"
-                                    justifyContent="center"
-                                    alignItems="center"
-                                >
-                                    <Grid item xs={12}>
-                                        <Padding padding="8px" />
-                                        <FormControl
-                                            component="fieldset"
-                                            className={classes.formControl}
-                                        // error={errorList.sex}
-                                        >
-                                            <FormLabel component="legend">Sexo *</FormLabel>
-                                            <RadioGroup
-                                                value={values.sex}
-                                                name="sex"
-                                                onChange={handleChange}
-                                                row
-                                            >
-                                                <FormControlLabel
-                                                    value={'2'}
-                                                    name="sex"
-                                                    control={<PurpleRadio />}
-                                                    label="Feminino"
-                                                />
-                                                <FormControlLabel
-                                                    value={'1'}
-                                                    name="sex"
-                                                    control={<PurpleRadio />}
-                                                    label="Masculino"
-                                                />
-                                            </RadioGroup>
-                                        </FormControl>
-                                    </Grid>
-                                </Grid>
-                                <Grid item style={{ width: "100%" }} md={12}>
-                                    <p className={classes.label}>Data de Nascimento</p>
-                                    <TextField className={classes.inputStudent} name="birthday" onChange={handleChange}
-                                        value={values.birthday}
-                                        variant="outlined" disabled={edit} />
-                                </Grid>
-                                <Grid item style={{ width: "100%" }} md={12}>
-                                    <p className={classes.label}>CPF</p>
-                                    <TextField className={classes.inputStudent} InputProps={{
-                                        inputComponent: MaskCpf,
-                                        value: values.cpf,
-                                        inputRef: inputRef,
-                                        onChange: handleChange,
-                                    }} name="cpf" onChange={handleChange}
-                                        value={values.cpf}
-                                        variant="outlined" disabled={edit} />
-                                </Grid>
-                            </Grid>
-
-                        </Form>
-                    )
-                }}
-            </Formik>
         </>
     )
 }

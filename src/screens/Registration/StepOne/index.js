@@ -72,6 +72,10 @@ const StepOne = () => {
       id: 3,
       name: "Noite"
     },
+    {
+      id: 4,
+      name: "Integral"
+    },
   ]
 
 
@@ -110,6 +114,9 @@ const StepOne = () => {
     birthday: Yup.string().required("Campo obrigatório!"),
     sex: Yup.string().required("Campo obrigatório!"),
     cpf: Yup.string().required("Campo obrigatório!"),
+    school_fk: Yup.string().required("Campo obrigatório!"),
+    classroom_fk: Yup.string().required("Campo obrigatório!"),
+    turno: Yup.string().required("Campo obrigatório!"),
   });
 
 
@@ -140,8 +147,8 @@ const StepOne = () => {
             birthday: touched.birthday && errors.birthday,
             sex: touched.sex && errors.sex,
             cpf: touched.cpf && errors.cpf,
-            school: touched.school && errors.school,
-            classroom: touched.classroom && errors.classroom,
+            school_fk: touched.school && errors.school,
+            classroom_fk: touched.classroom && errors.classroom,
             turno: touched.turno && errors.turno
           };
 
@@ -274,6 +281,7 @@ const StepOne = () => {
                 <FormControl
                   component="fieldset"
                   className={classes.formControl}
+                  error={errorList.school_fk}
                 >
                   <FormLabel style={{ display: 'flex', flexDirection: 'row', justifyContent: "start", marginBottom: "24px" }} >Escola *</FormLabel>
                   <Select
@@ -291,11 +299,13 @@ const StepOne = () => {
                     getOptionLabel={opt => opt.object.name}
                   />
                 </FormControl>
+                <FormHelperText>{errorList.school_fk}</FormHelperText>
               </Grid>
               <Grid item xs={12}>
                 <FormControl
                   component="fieldset"
                   className={classes.formControl}
+                  error={errorList.classroom_fk}
                 >
                   <FormLabel style={{ display: 'flex', flexDirection: 'row', justifyContent: "start", marginBottom: "24px" }} >Turma *</FormLabel>
                   <Select
@@ -312,12 +322,14 @@ const StepOne = () => {
                     getOptionLabel={opt => opt.object.name}
                   />
                 </FormControl>
+                  <FormHelperText>{errorList.classroom_fk}</FormHelperText>
               </Grid>
 
               <Grid item xs={12}>
                 <FormControl
                   component="fieldset"
                   className={classes.formControl}
+                  error={errorList.turno}
                 >
                   <FormLabel style={{ display: 'flex', flexDirection: 'row', justifyContent: "start", marginBottom: "24px" }} >Turno *</FormLabel>
                   <Select
@@ -334,6 +346,7 @@ const StepOne = () => {
                     getOptionLabel={opt => opt.name}
                   />
                 </FormControl>
+                <FormHelperText>{errorList.turno}</FormHelperText>
               </Grid>
               <Grid
                 className={`${classes.marginTop} ${classes.marginButtom}`}
