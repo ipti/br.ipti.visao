@@ -15,10 +15,10 @@ import { Fab, useMediaQuery } from "@material-ui/core";
 import AddIcon from "@material-ui/icons/Add";
 import { Link } from "react-router-dom";
 import fetchSchool from "../../controller/School/fetchSchools";
+import { idSchoolLocal } from "../../services/auth";
 import styleBase from "../../styles";
 import { Padding } from "../../styles/style";
 import styles from "./styles";
-import { idSchoolLocal } from "../../services/auth";
 
 const theme = createTheme({
   palette: {
@@ -34,7 +34,7 @@ const useStyles = makeStyles(theme => styles);
 const Classroom = ({ classroom, setIdSchool, idSchool }) => {
   const [school, setSchool] = useState([])
 
-
+ 
 
   const matches = useMediaQuery('(max-width:600px)')
 
@@ -85,6 +85,7 @@ const Classroom = ({ classroom, setIdSchool, idSchool }) => {
             <h1 className={`${classes.title} ${classes.floatLeft}`}>Turmas </h1>
             {/* <p style={{marginLeft: 'auto'}}> Será valido o último ano escolar para cada estagio</p> */}
           </div>
+         
           <div className={`${classes.spaceBetween}`}>
             <div style={{ width: matches ? "80%" : '50%' }}>
               <label>Escolha uma escola</label>

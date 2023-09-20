@@ -82,9 +82,8 @@ const Login = props => {
                   alignItems="center"
                   className={classes.containerMain}
                 >
-                  <Grid item xs={12} className="t-field-text">
+                  <Grid item xs={12}>
                     <TextField
-                      className="t-field-text"
                       name="password"
                       onChange={props.handleChange}
                       variant="outlined"

@@ -10,7 +10,7 @@ import { makeStyles, withStyles } from "@material-ui/core/styles";
 // Third party
 import { Form, Formik } from "formik";
 
-
+import * as Yup from "yup";
 
 // Styles
 import { Checkbox, FormGroup } from "@mui/material";
@@ -84,13 +84,21 @@ const StepTwo = () => {
         horasAtividadesAoArLivre: dataValues?.horasAtividadesAoArLivre ?? "",
     };
 
+    const schema = Yup.object().shape({
+        filhoOculos: Yup.string().required(),
+        horasUsoAparelhosEletronicos: Yup.string().required(),
+        horasAtividadesAoArLivre: Yup.string().required(),
+      });
+
+
+
 
     return (
         <>
             <Formik
                 initialValues={initialValues}
                 onSubmit={values => onSubmit(values)}
-                // validationSchema={validationSchema}
+                validationSchema={schema}
                 validateOnChange={false}
                 enableReinitialize
             >
@@ -98,13 +106,13 @@ const StepTwo = () => {
 
 
                     const errorList = {
-                        name: touched.name && errors.name,
-                        color_race: touched.color_race && errors.color_race,
-                        deficiency: touched.deficiency && errors.deficiency
+                        filhoOculos: touched.filhoOculos && errors.filhoOculos,
+                        horasUsoAparelhosEletronicos: touched.horasUsoAparelhosEletronicos && errors.horasUsoAparelhosEletronicos,
+                        horasAtividadesAoArLivre: touched.horasAtividadesAoArLivre && errors.horasAtividadesAoArLivre
                     };
 
                     return (
-                        <Form>
+                        <Form onSubmit={handleSubmit}>
                             <Grid item style={{ width: "100%" }} md={12}>
                                 <p className={classes.label}>Seu filho tem algum sintoma na visão ou nos olhos?</p>
                                 <FormGroup>
@@ -213,7 +221,7 @@ const StepTwo = () => {
                                             value={values.horasUsoAparelhosEletronicos}
                                             name="horasUsoAparelhosEletronicos"
                                             onChange={handleChange}
-                                            row
+                                            column
                                         >
                                             <FormControlLabel
                                                 value={'1'}
@@ -246,7 +254,7 @@ const StepTwo = () => {
                                                 label="Acima de 8 horas por dia"
                                             />
                                         </RadioGroup>
-                                        <FormHelperText>{errorList.sex}</FormHelperText>
+                                        <FormHelperText>{errorList.horasUsoAparelhosEletronicos}</FormHelperText>
                                     </FormControl>
                                 </Grid>
                             </Grid>
@@ -268,7 +276,7 @@ const StepTwo = () => {
                                             value={values.horasAtividadesAoArLivre}
                                             name="horasAtividadesAoArLivre"
                                             onChange={handleChange}
-                                            row
+                                            column
                                         >
                                             <FormControlLabel
                                                 value={'1'}
@@ -295,7 +303,7 @@ const StepTwo = () => {
                                                 label=" Acima de 2 horas"
                                             />
                                         </RadioGroup>
-                                        <FormHelperText>{errorList.sex}</FormHelperText>
+                                        <FormHelperText>{errorList.horasAtividadesAoArLivre}</FormHelperText>
                                     </FormControl>
                                 </Grid>
                             </Grid>
@@ -308,7 +316,6 @@ const StepTwo = () => {
                             >
                                 <Grid item xs={6}>
                                     <ButtonPurple
-                                        onClick={handleSubmit}
                                         type="submit"
                                         title="Finalizar"
                                         className="t-button-primary"
