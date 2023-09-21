@@ -80,7 +80,8 @@ const FormRegistrationState = () => {
     },
     horasUsoAparelhosEletronicos: oneRegistration?.object.horasUsoAparelhosEletronicos ?? "",
     horasAtividadesAoArLivre: oneRegistration?.object.horasAtividadesAoArLivre ?? "",
-    acuidadeTriagem: oneRegistration?.object.acuidadeTriagem ?? "",
+    acuidadeTriagemDireito: oneRegistration?.object.acuidadeTriagemDireito ?? "",
+    acuidadeTriagemEsquerdo: oneRegistration?.object.acuidadeTriagemEsquerdo ?? "",
     testCover: oneRegistration?.object.testCover ?? "",
     testMovimentoOcular: oneRegistration?.object.testMovimentoOcular ?? "",
     testManchaBranca: oneRegistration?.object.testManchaBranca ?? ""
@@ -157,16 +158,30 @@ const FormRegistrationState = () => {
         count++;
       }
       if (
-        oneRegistration.object.acuidadeTriagem === "1" ||
-        oneRegistration.object.acuidadeTriagem === "2" ||
-        oneRegistration.object.acuidadeTriagem === "3" ||
-        oneRegistration.object.acuidadeTriagem === "4" ||
-        oneRegistration.object.acuidadeTriagem === "5" ||
-        oneRegistration.object.acuidadeTriagem === "6" ||
-        oneRegistration.object.acuidadeTriagem === "7" ||
-        oneRegistration.object.acuidadeTriagem === "8" ||
-        oneRegistration.object.acuidadeTriagem === "9" ||
-        oneRegistration.object.acuidadeTriagem === "10"
+        oneRegistration.object.acuidadeTriagemEsquerdo === "1" ||
+        oneRegistration.object.acuidadeTriagemEsquerdo === "2" ||
+        oneRegistration.object.acuidadeTriagemEsquerdo === "3" ||
+        oneRegistration.object.acuidadeTriagemEsquerdo === "4" ||
+        oneRegistration.object.acuidadeTriagemEsquerdo === "5" ||
+        oneRegistration.object.acuidadeTriagemEsquerdo === "6" ||
+        oneRegistration.object.acuidadeTriagemEsquerdo === "7" ||
+        oneRegistration.object.acuidadeTriagemEsquerdo === "8" ||
+        oneRegistration.object.acuidadeTriagemEsquerdo === "9" ||
+        oneRegistration.object.acuidadeTriagemEsquerdo === "10"
+      ) {
+        count++;
+      }
+      if (
+        oneRegistration.object.acuidadeTriagemDireito === "1" ||
+        oneRegistration.object.acuidadeTriagemDireito === "2" ||
+        oneRegistration.object.acuidadeTriagemDireito === "3" ||
+        oneRegistration.object.acuidadeTriagemDireito === "4" ||
+        oneRegistration.object.acuidadeTriagemDireito === "5" ||
+        oneRegistration.object.acuidadeTriagemDireito === "6" ||
+        oneRegistration.object.acuidadeTriagemDireito === "7" ||
+        oneRegistration.object.acuidadeTriagemDireito === "8" ||
+        oneRegistration.object.acuidadeTriagemDireito === "9" ||
+        oneRegistration.object.acuidadeTriagemDireito === "10"
       ) {
         count++;
       }

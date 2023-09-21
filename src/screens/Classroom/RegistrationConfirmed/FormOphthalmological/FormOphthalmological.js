@@ -13,10 +13,30 @@ const FormOphthalmologicalPage = ({ values, handleChange }) => {
     return (
         <>
             <Grid item style={{ width: "100%" }} md={12}>
-                <p className={classes.label}>Acuidade visual corrigida?</p>
+                <p className={classes.label}>Acuidade visual corrigida olho esquerdo?</p>
                 <RadioGroup
-                    value={values.acuidadeTriagem}
-                    name="acuidadeTriagem"
+                    value={values.acuidadeTriagemEsquerdo}
+                    name="acuidadeTriagemEsquerdo"
+                    onChange={handleChange}
+                >
+                    <FormControlLabel control={<Radio />} value={"1"} label="20/200" />
+                    <FormControlLabel control={<Radio />} value={"2"} label="20/100" />
+                    <FormControlLabel control={<Radio />} value={"3"} label="20/80" />
+                    <FormControlLabel control={<Radio />} value={"4"} label="20/70" />
+                    <FormControlLabel control={<Radio />} value={"5"} label="20/60" />
+                    <FormControlLabel control={<Radio />} value={"6"} label="20/50" />
+                    <FormControlLabel control={<Radio />} value={"7"} label="20/40" />
+                    <FormControlLabel control={<Radio />} value={"8"} label="20/30" />
+                    <FormControlLabel control={<Radio />} value={"9"} label="20/25" />
+                    <FormControlLabel control={<Radio />} value={"10"} label="20/20" />
+                    <FormControlLabel control={<Radio />} value={"nenhum"} label="Nenhuma das opções" />
+                </RadioGroup>
+            </Grid>
+            <Grid item style={{ width: "100%" }} md={12}>
+                <p className={classes.label}>Acuidade visual corrigida olho direito?</p>
+                <RadioGroup
+                    value={values.acuidadeTriagemDireito}
+                    name="acuidadeTriagemDireito"
                     onChange={handleChange}
                 >
                     <FormControlLabel control={<Radio />} value={"1"} label="20/200" />
@@ -40,8 +60,8 @@ const FormOphthalmologicalPage = ({ values, handleChange }) => {
                     name="testCover"
                 >
                     <Column>
-                        <FormControlLabel control={<Radio />} value={"1"} label="Sim" />
-                        <FormControlLabel control={<Radio />} value={"2"} label="Não" />
+                        <FormControlLabel control={<Radio />} value={"1"} label="Alterado" />
+                        <FormControlLabel control={<Radio />} value={"2"} label="Não Alterado" />
                     </Column>
                 </RadioGroup>
             </Grid>
@@ -52,8 +72,8 @@ const FormOphthalmologicalPage = ({ values, handleChange }) => {
                     onChange={handleChange}
                     name="testMovimentoOcular"
                 >
-                    <FormControlLabel control={<Radio />} value={"1"} label="Sim" />
-                    <FormControlLabel control={<Radio />} value={"2"} label="Não" />
+                    <FormControlLabel control={<Radio />} value={"1"} label="Alterado" />
+                    <FormControlLabel control={<Radio />} value={"2"} label="Não Alterado" />
                 </RadioGroup>
             </Grid>
             <Grid item style={{ width: "100%" }} md={12}>
@@ -63,8 +83,8 @@ const FormOphthalmologicalPage = ({ values, handleChange }) => {
                     name="testManchaBranca"
                     onChange={handleChange}
                 >
-                    <FormControlLabel control={<Radio />} value={"1"} label="Sim" />
-                    <FormControlLabel control={<Radio />} value={"2"} label="Não" />
+                    <FormControlLabel control={<Radio />} value={"1"} label="Alterado" />
+                    <FormControlLabel control={<Radio />} value={"2"} label="Não Alterado" />
                 </RadioGroup>
             </Grid>
         </>
