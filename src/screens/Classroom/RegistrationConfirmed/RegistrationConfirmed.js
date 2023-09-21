@@ -42,18 +42,17 @@ const Home = props => {
 
           return (
             <Form onSubmit={handleSubmit}>
-
-            <h1>Pontos somados: {points()}</h1>
-            <h4>{points() < 5 ? "Prioridade minima" : points() >= 5 ? "Prioridade média" : "" }</h4>
+              <h1>Pontos somados: {points()}</h1>
+              <h4>{points() < 5 ? "Prioridade minima" : points() >= 5 ? "Prioridade média" : ""}</h4>
               <Grid item style={{ width: "100%" }} md={3}>
                 <ButtonPurple
                   className="t-button-primary"
                   title="Salvar"
+                  type="submit"
                 />
               </Grid>
               <Padding padding="16px" />
               <TabsRegister values={values} handleChange={handleChange} />
-
             </Form>)
         }}
       </Formik> :
