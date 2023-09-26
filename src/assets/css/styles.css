@@ -55,15 +55,20 @@ body {
   width: 100%;
   border: none;
   padding: 10.5px;
+  background-color: #0077B6;
+
+  :hover {
+    background-color: #00B4D8;
+  }
 }
 
 
-.row{
+.row {
   width: 100%;
 }
 
 
-  /* input[type="text"],
+/* input[type="text"],
   input[type="password"],
   input[type="datetime"],
   input[type="datetime-local"],
@@ -89,5 +94,3 @@ body {
     -o-transition: border linear .2s, box-shadow linear .2s;
     transition: border linear .2s, box-shadow linear .2s;
   } */
-
- 

@@ -6,17 +6,18 @@ import AppBar from "@material-ui/core/AppBar";
 import IconButton from "@material-ui/core/IconButton";
 import Menu from "@material-ui/core/Menu";
 import MenuItem from "@material-ui/core/MenuItem";
-import Toolbar from "@material-ui/core/Toolbar";
 import { makeStyles } from "@material-ui/core/styles";
 import { MenuTwoTone } from "@material-ui/icons";
 import AccountCircle from "@material-ui/icons/AccountCircle";
 import { useHistory } from "react-router-dom";
+import logo from "../../assets/images/logo.png";
 import { isAuthenticated } from "../../services/auth";
 import styleBase from "../../styles";
+import { Column, Row } from "../../styles/style";
 
 
 
- 
+
 const useStyles = makeStyles({
   root: {
     flexGrow: 1,
@@ -74,55 +75,57 @@ const Header = ({ setIsSidebar, isSidebar }) => {
 
   return (
     <AppBar classes={{ root: classes.root }} position="static">
-      <Toolbar className={classes.tooBar} disableGutters>
-        {matches ? <MenuTwoTone onClick={
-          () => {
-            if (isSidebar) {
-              setIsSidebar(false)
-            } else {
-              setIsSidebar(true)
+      <Column>
+        <Row>
+          {matches ? <MenuTwoTone onClick={
+            () => {
+              if (isSidebar) {
+                setIsSidebar(false)
+              } else {
+                setIsSidebar(true)
+              }
             }
           }
-        }
-
-          style={{ color: 'black', marginLeft: '10px' }} /> : null}
-        <h2 className={classes.title}>Matrícula</h2>
-        <>
-          {isAuthenticated() && (
-            <>
-              <IconButton
-                aria-label="account of current user"
-                aria-controls="menu-appbar"
-                aria-haspopup="true"
-                onClick={handleMenu}
-                fontSize="large"
-                className={classes.accountButton}
-              >
-                <AccountCircle />
-              </IconButton>
-              <Menu
-                id="menu-appbar"
-                anchorEl={anchorEl}
-                anchorOrigin={{
-                  vertical: "top",
-                  horizontal: "left"
-                }}
-                keepMounted
-                transformOrigin={{
-                  vertical: "top",
-                  horizontal: "left"
-                }}
-                open={open}
-                onClose={handleClose}
-              >
-                <MenuItem value="sair" onClick={handleLogout}>Sair</MenuItem>
-              </Menu>
-            </>
-          )}
-        </>
-
-
-      </Toolbar>
+            style={{ color: 'black', marginLeft: '10px' }} /> : null}
+          <Column id="center" >
+            <img style={{ width: "15%", padding: "4px 16px" }} alt="" src={logo} />
+          </Column>
+          <>
+            {isAuthenticated() && (
+              <>
+                <IconButton
+                  aria-label="account of current user"
+                  aria-controls="menu-appbar"
+                  aria-haspopup="true"
+                  onClick={handleMenu}
+                  fontSize="large"
+                  style={{ marginLeft: "auto" }}
+                  className={classes.accountButton}
+                >
+                  <AccountCircle />
+                </IconButton>
+                <Menu
+                  id="menu-appbar"
+                  anchorEl={anchorEl}
+                  anchorOrigin={{
+                    vertical: "top",
+                    horizontal: "left"
+                  }}
+                  keepMounted
+                  transformOrigin={{
+                    vertical: "top",
+                    horizontal: "left"
+                  }}
+                  open={open}
+                  onClose={handleClose}
+                >
+                  <MenuItem value="sair" onClick={handleLogout}>Sair</MenuItem>
+                </Menu>
+              </>
+            )}
+          </>
+        </Row>
+      </Column>
     </AppBar>
   );
 };
