@@ -3,18 +3,19 @@ import styleBase from "../../styles";
 
 const useStyles = {
     contentLeft: {
-        width: "100%",
-        height: "100%",
+        height: "100vh",
+        width: "100vw",
         fontSize: styleBase.typography.font.small,
         color: styleBase.colors.white,
         background: `url(${Background})`,
+        backgroundSize: "cover",
         backgroundRepeat: "norepeat",
         display: "flex",
         position: "fixed"
     },
     divBlue: {
-        background: "linear-gradient(0deg, #3F45EA, #3F45EA)",
-        opacity: 0.94,
+        opacity: "0.5",
+        background: `var(--0077B6, ${styleBase.colors.colorsBaseProductNormalHover})`,
         position: "absolute",
         height: "100%",
         width: "100%",
@@ -25,8 +26,11 @@ const useStyles = {
         flexDirection: "column",
         justifyContent: "center",
         alignItems: "center",
-        height: "100%",
-        position: "relative", zIndex: "100"
+        borderRadius: "43px",
+        margin: "auto",
+        width: "40%",
+        backgroundColor: "white",
+        height: "80%", zIndex: "100"
     },
     divImage: {
         display: "flex",
@@ -38,7 +42,8 @@ const useStyles = {
         width: "90%",
     },
     resetPassword: {
-        color: styleBase.colors.white,
+        color: styleBase.colors.colorsBaseProductNormalHover,
+        textDecoration: "none",
         zIndex: "100",
         fontSize: styleBase.typography.font.small,
         fontFamily: styleBase.typography.types.inter,
@@ -47,117 +52,59 @@ const useStyles = {
         marginRight: 20,
         display: "flex",
         flexDirection: "column",
-        justifyContent: "start",
-        position: "absolute",
-        alignItems: "end",
+        justifyContent: "end",
+        alignItems: "center",
         width: "98%"
     },
     buttonLogin: {
         borderStyle: "solid",
         border: "1px",
         borderRadius: "25px",
+        textDecoration: "none",
         padding: "10px",
         fontFamily: styleBase.typography.types.regular,
     },
     textTitle: {
-        fontFamily: styleBase.typography.types.regular,
-        color: styleBase.colors.white,
-        fontSize: styleBase.typography.font.large,
+        color: "var(--00B4D8, #00B4D8)",
+        textAlign: "center",
+        fontfamily: "Poppins",
+        fontSize: "36.164px",
+        fontstyle: "normal",
+        fontWeight: "800",
+        margin: "0",
+        padding: "0",
+        lineheight: "101.5 %"
     },
     boxRegister: {
         marginTop: 30
     },
     link: {
         fontFamily: styleBase.typography.types.bold,
-        color: styleBase.colors.white,
+        backgroundColor: styleBase.colors.white,
+        color: styleBase.colors.colorsBaseProductNormalHover,
         textDecoration: "none",
         marginLeft: 5
     },
     linkRegister: {
         marginTop: 30,
-        backgroundColor: styleBase.colors.white,
+        backgroundColor: styleBase.colors.colorsBaseProductNormal,
         border: "none",
         borderRadius: "5px",
-        color: styleBase.colors.colorsBaseProductNormal,
+        color: styleBase.colors.white,
         fontSize: styleBase.typography.font.small,
         fontFamily: styleBase.typography.types.bold,
         padding: "10px 20px",
         textDecoration: "none"
     },
-    "@media(max-width: 1300px)": {
-        resetPassword: {
-            display: "flex",
-            flexDirection: "column",
-            justifyContent: "start",
-            fontSize: 14,
-            position: "absolute",
-            alignItems: "end",
-            width: "98%"
-        },
-    },
-    "@media(max-width: 740px)": {
-        divImage: {
-            width: "100%",
-            position: "relative"
-        },
-        textTitle: {
-            fontFamily: styleBase.typography.types.regular,
-            color: styleBase.colors.white,
-            fontSize: 25,
-        },
-    },
-    "@media(max-width: 639px)": {
-        resetPassword: {
-            display: "flex",
-            flexDirection: "row",
-            justifyContent: "center",
-            alignItems: "end",
-            background: "linear-gradient(180deg, rgba(71, 77, 232, 0) 0%, #474DE8 100%)",
-            padding: "20px 0px",
-            height: "200px",
-            position: "relative",
-            width: "100%"
-        },
-        divImage: {
-            height: "100%",
-            marginTop: "auto",
-            position: "absolute",
-        },
-        imgTagna: {
-            width: "460px",
-        },
-        textTitle: {
-            fontFamily: styleBase.typography.types.normal,
-            fontWeight: "500",
-            color: styleBase.colors.white,
-            fontSize: 42,
-            textAlign: "center"
-        },
+    "@media(max-width: 900px)": {
         formSignUp: {
-            justifyContent: "start",
-            marginTop: "25vh",
+            width: "80%",
+            height: "60%",
+            flexDirection: "space-between"
         },
-        "@media(max-height: 700px)": {
-            formSignUp: {
-                marginTop: "10vh",
-            }
-        },
-    },
+    }
 
-    "@media(max-width: 1020px)": {
-        divImage: {
-            width: "70%"
-        },
-        textTitle: {
-            fontFamily: styleBase.typography.types.regular,
-            color: styleBase.colors.white,
-            fontSize: 25,
-        },
-        imageLoginStyle: {
-            width: "100%",
-            marginLeft: "20%"
-        },
-    },
+
 };
 
 export default useStyles;

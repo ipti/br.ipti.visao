@@ -9,18 +9,21 @@ import React from "react";
 import { Link } from "react-router-dom";
 
 import { ButtonPurple } from "../../components/Buttons";
-import TagImage from "../../assets/images/taglogin.svg"
 
-import styles from "./styles";
 import handleLogin from "../../controller/login/auth";
+import styles from "./styles";
 
 import { useHistory } from "react-router";
+import { Padding, Row } from "../../styles/style";
+
+import logo from "../../assets/images/logo.png";
+
 
 const useStyles = makeStyles(styles);
 
 const Login = props => {
   const classes = useStyles();
-  const history = useHistory()
+  const history = useHistory();
 
   return (
     <Grid className={classes.root}>
@@ -30,19 +33,24 @@ const Login = props => {
         <div className={classes.topBar} style={{ backgroundColor: "#66D654" }} />
         <div className={classes.topBar} style={{ backgroundColor: "#EADA48" }} />
       </div>
-      <img className={classes.margin} src={TagImage} alt=""></img>
+      {/* <img className={classes.margin} src={TagImage} alt=""></img> */}
       <Grid className={classes.divLogin} >
         {/* <div className={classes.marginMobile20} /> */}
         <Grid>
           <Grid>
-            <p className={classes.titleLogin}>Matricula Online </p>
-            <p className={classes.subTitleLogin}>Entre com as suas credenciais </p>
+            <Row id="center">
+              <img style={{ width: "256px", padding: "8px 16px" }} alt="" src={logo} />
+            </Row>
+            <h1 className={classes.textTitle}>
+              Bem-Vindo (a)
+            </h1>
           </Grid>
         </Grid>
+        <Padding padding="8px" />
         {/* <div className={classes.marginMobile} /> */}
         <Formik
           initialValues={props.initialValues}
-          onSubmit={(values) => {handleLogin(values.email, values.password, history)}}
+          onSubmit={(values) => { handleLogin(values.email, values.password, history) }}
           validationSchema={props.validationSchema}
           validateOnChange={false}
         >

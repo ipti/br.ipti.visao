@@ -25,6 +25,15 @@ const useStyles = {
   inputStudent: {
     width: "100%"
   },
+  priority: {
+    borderRadius: "16px",
+    backgroundColor: styleBase.colors.colorsBaseProductNormal,
+    color: styleBase.colors.white,
+    display: "flex",
+    flexDirection: "row",
+    width: "156px",
+    justifyContent: "center"
+  },
   marginTop: {
     marginTop: "20px"
   },
@@ -88,7 +97,7 @@ const useStyles = {
   },
   boxButtons: {
     marginTop: 100,
-    justifyContent: 'start' 
+    justifyContent: 'start'
   },
   spaceBetween: {
     display: 'flex',

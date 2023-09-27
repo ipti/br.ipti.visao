@@ -24,6 +24,17 @@ const useStyles = {
     width: "100%",
     position: "relative"
   },
+  textTitle: {
+    color: "var(--00B4D8, #00B4D8)",
+    textAlign: "center",
+    fontfamily: "Poppins",
+    fontSize: "36.164px",
+    fontstyle: "normal",
+    fontWeight: "800",
+    margin: "0",
+    padding: "0",
+    lineheight: "101.5 %"
+},
   margin: {
     margin: "20px",
     position: "absolute"

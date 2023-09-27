@@ -3,7 +3,6 @@ import React from "react";
 
 import { useMediaQuery } from "@material-ui/core";
 import AppBar from "@material-ui/core/AppBar";
-import IconButton from "@material-ui/core/IconButton";
 import Menu from "@material-ui/core/Menu";
 import MenuItem from "@material-ui/core/MenuItem";
 import { makeStyles } from "@material-ui/core/styles";
@@ -77,33 +76,32 @@ const Header = ({ setIsSidebar, isSidebar }) => {
     <AppBar classes={{ root: classes.root }} position="static">
       <Column>
         <Row>
-          {matches ? <MenuTwoTone onClick={
-            () => {
-              if (isSidebar) {
-                setIsSidebar(false)
-              } else {
-                setIsSidebar(true)
+          {matches ? <Column id="center">
+            <MenuTwoTone onClick={
+              () => {
+                if (isSidebar) {
+                  setIsSidebar(false)
+                } else {
+                  setIsSidebar(true)
+                }
               }
             }
-          }
-            style={{ color: 'black', marginLeft: '10px' }} /> : null}
-          <Column id="center" >
-            <img style={{ width: "15%", padding: "4px 16px" }} alt="" src={logo} />
+              style={{ color: 'black', marginLeft: '10px' }} /></Column> : null}
+          <Column id="center">
+            <img style={{ width: matches ? "128px" : "168px", padding: "8px 16px" }} alt="" src={logo} />
           </Column>
           <>
             {isAuthenticated() && (
               <>
-                <IconButton
-                  aria-label="account of current user"
-                  aria-controls="menu-appbar"
-                  aria-haspopup="true"
+                <Column
+                  id="center"
+
                   onClick={handleMenu}
-                  fontSize="large"
                   style={{ marginLeft: "auto" }}
                   className={classes.accountButton}
                 >
-                  <AccountCircle />
-                </IconButton>
+                  <AccountCircle style={{ fontSize: "2.5rem", marginRight: "10px", cursor: "pointer" }} />
+                </Column>
                 <Menu
                   id="menu-appbar"
                   anchorEl={anchorEl}

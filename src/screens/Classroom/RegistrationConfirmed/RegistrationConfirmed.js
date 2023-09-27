@@ -8,15 +8,15 @@ import { makeStyles } from "@material-ui/core/styles";
 import { ButtonPurple } from "../../../components/Buttons";
 
 // Styles
+import { CircularProgress } from "@material-ui/core";
 import { ArrowBack } from "@material-ui/icons";
-import { useHistory } from "react-router";
-import styles from "../styles";
-import TabsRegister from "./TabBar";
+import { Form, Formik } from "formik";
 import { useContext } from "react";
+import { useHistory } from "react-router";
 import { FormRegistrationContext } from "../../../context/Classroom/FormOphthalmological/context";
 import { Column, Padding, Row } from "../../../styles/style";
-import { CircularProgress } from "@material-ui/core";
-import { Form, Formik } from "formik";
+import styles from "../styles";
+import TabsRegister from "./TabBar";
 
 const useStyles = makeStyles(styles);
 
@@ -33,17 +33,20 @@ const Home = props => {
       <Grid className={classes.boxTitlePagination} container direction="row">
         <h2>Dados do aluno</h2>
       </Grid>
+      <h1 style={{ margin: 0, padding: 0 }}>Pontos somados: {points()}</h1>
+      <Padding />
+      <div className={classes.priority}>
+        <h4 style={{padding: "8px", margin: "0"}}>{points() < 5 ? "Prioridade minima" : points() >= 5 ? "Prioridade média" : ""}</h4>
+      </div>
+      <Padding padding="16px" />
       {oneRegistration ? <Formik
         initialValues={initialValues}
         onSubmit={values => {
           handleUpdate(values)
         }}>
-        {({ values, handleChange, handleSubmit, setFieldValue }) => {
-
+        {({ values, handleChange, handleSubmit }) => {
           return (
             <Form onSubmit={handleSubmit}>
-              <h1>Pontos somados: {points()}</h1>
-              <h4>{points() < 5 ? "Prioridade minima" : points() >= 5 ? "Prioridade média" : ""}</h4>
               <Grid item style={{ width: "100%" }} md={3}>
                 <ButtonPurple
                   className="t-button-primary"
@@ -53,7 +56,8 @@ const Home = props => {
               </Grid>
               <Padding padding="16px" />
               <TabsRegister values={values} handleChange={handleChange} />
-            </Form>)
+            </Form>
+          )
         }}
       </Formik> :
         <Column id="center">

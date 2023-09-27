@@ -56,7 +56,7 @@ const useStyles = {
   },
   span: {
     marginLeft: 10,
-    margin: "auto"
+    margin: "auto",
   },
   activeLink: {
     color: styleBase.colors.gray,
