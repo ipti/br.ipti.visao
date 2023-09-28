@@ -1,5 +1,7 @@
 import Background from "../../assets/images/background-signup.png";
 import styleBase from "../../styles";
+import LoginLups from "../../assets/images/lupasBackground.png";
+
 
 const useStyles = {
     contentLeft: {
@@ -15,11 +17,19 @@ const useStyles = {
     },
     divBlue: {
         opacity: "0.5",
-        background: `var(--0077B6, ${styleBase.colors.colorsBaseProductNormalHover})`,
+        background: `var(--0077B6, ${styleBase.colors.colorsBaseProductNormal})`,
         position: "absolute",
         height: "100%",
         width: "100%",
         zIndex: 0
+    },
+    divLupas: {
+        opacity: "0.5",
+        background: `url(${LoginLups})`,
+        position: "absolute",
+        height: "100%",
+        width: "100%",
+        zIndex: 1
     },
     formSignUp: {
         display: "flex",

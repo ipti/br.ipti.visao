@@ -9,7 +9,7 @@ import { makeStyles } from "@material-ui/core/styles";
 import { MenuTwoTone } from "@material-ui/icons";
 import AccountCircle from "@material-ui/icons/AccountCircle";
 import { useHistory } from "react-router-dom";
-import logo from "../../assets/images/logo.png";
+import logo from "../../assets/images/logo.svg";
 import { isAuthenticated } from "../../services/auth";
 import styleBase from "../../styles";
 import { Column, Row } from "../../styles/style";

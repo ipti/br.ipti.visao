@@ -56,12 +56,28 @@ body {
   border: none;
   padding: 10.5px;
   background-color: #0077B6;
-
-  :hover {
-    background-color: #00B4D8;
-  }
 }
 
+.t-button-primary:hover {
+  background-color: #00517B;
+}
+
+root {
+  --primary-color: #0077B6;
+  /* Substitua esta cor pelo seu azul desejado */
+}
+
+
+.p-tabview .p-tabview-nav .p-tabview-ink-bar {
+  background: #0077B6;
+}
+
+.p-tabview .p-tabview-nav li.p-highlight .p-tabview-nav-link{
+  background-color: #0077B6;
+  background: #ffffff;
+  border-color: #0077B6;
+  color: #0077B6
+}
 
 .row {
   width: 100%;

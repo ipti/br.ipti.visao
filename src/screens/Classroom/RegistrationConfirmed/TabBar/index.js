@@ -10,6 +10,7 @@ export default function TabsRegister({ values, handleChange }) {
     <div className="card">
       <TabView>
         <TabPanel pt={{
+          inkbar: {style: {backgroundColor: "black"}},
           header: {style: {border: "transparent"}}
         }} header="Aluno">
           <FormPerson values={values} handleChange={handleChange} />

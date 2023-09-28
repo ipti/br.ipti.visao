@@ -1,7 +1,7 @@
 import { makeStyles } from "@material-ui/core/styles";
 import React from "react";
 import { Link } from "react-router-dom";
-import logo from "../../assets/images/logo.png";
+import logo from "../../assets/images/logo.svg";
 import styles from "./styles";
 import { Column, Row } from "../../styles/style";
 import { useMediaQuery } from "@mui/material";
@@ -17,6 +17,8 @@ const SignUp = () => {
             <div className={classes.contentLeft}>
                 <div className={`row ${classes.box}`} >
                     <div className={classes.divBlue} />
+                    <div className={classes.divLupas} />
+
                     {/* <div className={classes.divImage}>
                         <img className={classes.imgTagna} src={Tagna} alt="" />
                     </div> */}
@@ -36,14 +38,14 @@ const SignUp = () => {
                                 <div className={classes.boxRegister}>
                                     <div>
                                         <Link className={classes.linkRegister} to="/matricula">
-                                            Iniciar Matrícula
+                                            Iniciar Triagem
                                         </Link>
                                     </div>
                                 </div>
                             </div>
                             <div
                                 className={`${classes.resetPassword} ${classes.textCenter}`}
-                                style={{marginTop: "50px"}}
+                                style={{ marginTop: "50px" }}
                             >
                                 <Link to="/login" className={`${classes.buttonLogin}`}>
                                     Faça o seu Login

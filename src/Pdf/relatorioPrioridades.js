@@ -9,6 +9,8 @@ import fetchRegistration from '../controller/registration/fetchRegistration';
 import { getIdSchool } from '../services/auth';
 import { Column, Padding, Row } from '../styles/style';
 import { Table, TableData, TableHeader, TableWrapper } from './style';
+import logo from "../assets/images/logo.svg";
+
 
 
 
@@ -173,27 +175,32 @@ const MyDocument = () => {
         const ano = agora.getFullYear();
         const hora = agora.getHours().toString().padStart(2, '0');
         const minutos = agora.getMinutes().toString().padStart(2, '0');
-      
+
         return `${dia}/${mes}/${ano} - ${hora}:${minutos}h`;
-      }
+    }
 
     return (
         <div style={{ width: "100%" }}>
 
 
             <Padding padding="32px 16px">
-                <button style={{ padding: "8px", cursor: "pointer" }} onClick={generatePDF}><Row><SaveAlt /><h3 style={{padding: "0 4px", margin: 0, color: "#000"}}>Gerar PDF</h3></Row></button>
+                <button style={{ padding: "8px", cursor: "pointer" }} onClick={generatePDF}><Row><SaveAlt /><h3 style={{ padding: "0 4px", margin: 0, color: "#000" }}>Gerar PDF</h3></Row></button>
             </Padding>
             <div ref={contentRef}>
                 <Padding padding="16px">
+                    <Column id="center">
+                        <Row id="center">
+                            <img style={{ width: "256px", padding: "8px 16px" }} alt="" src={logo} />
+                        </Row>
+                    </Column>
                     <Column>
                         <Row id='space-between'>
                             <Column>
-                                <h3 style={{padding: "0 4px", margin: 0, color: "#000"}}>Escola: {school?.object.name}</h3>
+                                <h1 style={{ padding: "0 4px", margin: 0, color: "#000" }}>Escola: {school?.object.name}</h1>
                                 <Padding />
-                                <h3 style={{padding: "0 4px", margin: 0, color: "#000"}}>Turma: {classroom?.object.name}</h3>
+                                <h1 style={{ padding: "0 4px", margin: 0, color: "#000" }}>Turma: {classroom?.object.name}</h1>
                                 <Padding />
-                                <h3 style={{padding: "0 4px", margin: 0, color: "#000"}}>Data de Emissão: {formatarDataHora()}</h3>
+                                <h1 style={{ padding: "0 4px", margin: 0, color: "#000" }}>Data de Emissão: {formatarDataHora()}</h1>
                             </Column>
                         </Row>
                     </Column>

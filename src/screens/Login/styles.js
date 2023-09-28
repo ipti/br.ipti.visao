@@ -1,28 +1,48 @@
-import LoginImg from "../../assets/images/faded-logo.png";
+import LoginImg from "../../assets/images/background-signup.png";
+
+import LoginLups from "../../assets/images/lupasBackground.png";
 import styleBase from "../../styles";
 
 const useStyles = {
-  root: {
-    "& .MuiTextField-root": {
-      width: "100%",
-      marginBottom: "10px"
-    },
-    width: "100%",
-    height: "100%",
-    fontFamily: styleBase.typography.types.light,
+
+  contentLeft: {
+    height: "100vh",
+    width: "100vw",
+    fontSize: styleBase.typography.font.small,
+    color: styleBase.colors.white,
     background: `url(${LoginImg})`,
-    backgroundRepeat: "no-repeat",
-    backgroundPosition: 'right top',
-    position: "fixed"
+    backgroundSize: "cover",
+    backgroundRepeat: "norepeat",
+    display: "flex",
+    // position: "fixed"
+
   },
-  divLogin:{
+  divBlue: {
+    opacity: "0.5",
+    background: `var(--0077B6, ${styleBase.colors.colorsBaseProductNormal})`,
+    position: "absolute",
+    height: "100%",
+    width: "100%",
+    zIndex: 0
+  },
+  divLupas: {
+    opacity: "0.5",
+    background: `url(${LoginLups})`,
+    position: "absolute",
+    height: "100%",
+    width: "100%",
+    zIndex: 1
+  },
+  divLogin: {
     display: "flex",
     flexDirection: "column",
     justifyContent: "center",
-    alignItems:"center",
-    height: "100%",
-    width: "100%",
-    position: "relative"
+    alignItems: "center",
+    borderRadius: "43px",
+    margin: "auto",
+    width: "40%",
+    backgroundColor: "white",
+    height: "auto", zIndex: "100"
   },
   textTitle: {
     color: "var(--00B4D8, #00B4D8)",
@@ -34,7 +54,7 @@ const useStyles = {
     margin: "0",
     padding: "0",
     lineheight: "101.5 %"
-},
+  },
   margin: {
     margin: "20px",
     position: "absolute"
@@ -50,7 +70,8 @@ const useStyles = {
     height: "4px"
   },
   divInpus: {
-    width: "30%",
+
+    width: "80%",
   },
   titleLogin: {
     textAlign: "center",
@@ -68,7 +89,7 @@ const useStyles = {
     lineHeight: "21px",
     fontFamily: styleBase.typography.types.inter,
     color: styleBase.colors.colorsBaseInkLight,
-    
+
   },
   imageLogin: {
     marginBottom: 20,
@@ -100,7 +121,7 @@ const useStyles = {
   colorIcon: {
     color: styleBase.colors.grayClear
   },
-  containerMain: {width: "100%" },
+  containerMain: { width: "100%" },
   titleBig: {
     fontSize: styleBase.typography.font.extraLarge,
     fontFamily: styleBase.typography.types.regular
@@ -111,7 +132,7 @@ const useStyles = {
     marginTop: 30,
     marginBottom: 30,
     width: "100%",
-   
+
   },
   boxLeft: {
     position: "absolute",
@@ -176,6 +197,9 @@ const useStyles = {
     },
     divtagna: {
       display: "none"
+    },
+    divLogin: {
+      width: "90%",
     },
     marginTopContentLeft: {
       margin: "15px 20px",

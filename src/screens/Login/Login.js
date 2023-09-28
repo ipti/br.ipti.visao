@@ -16,7 +16,7 @@ import styles from "./styles";
 import { useHistory } from "react-router";
 import { Padding, Row } from "../../styles/style";
 
-import logo from "../../assets/images/logo.png";
+import logo from "../../assets/images/logo.svg";
 
 
 const useStyles = makeStyles(styles);
@@ -26,50 +26,41 @@ const Login = props => {
   const history = useHistory();
 
   return (
-    <Grid className={classes.root}>
-      <div style={{ display: "flex", flexDirection: "row" }}>
-        <div className={classes.topBar} style={{ backgroundColor: "#667DF4" }} />
-        <div className={classes.topBar} style={{ backgroundColor: "#F45A5A" }} />
-        <div className={classes.topBar} style={{ backgroundColor: "#66D654" }} />
-        <div className={classes.topBar} style={{ backgroundColor: "#EADA48" }} />
-      </div>
-      {/* <img className={classes.margin} src={TagImage} alt=""></img> */}
-      <Grid className={classes.divLogin} >
-        {/* <div className={classes.marginMobile20} /> */}
-        <Grid>
+    <div className="row align-items--center">
+      <div className={classes.contentLeft}>
+        <div className={classes.divBlue} />
+        <div className={classes.divLupas} />
+
+        {/* <img className={classes.margin} src={TagImage} alt=""></img> */}
+        <Grid className={classes.divLogin} >
           <Grid>
-            <Row id="center">
-              <img style={{ width: "256px", padding: "8px 16px" }} alt="" src={logo} />
-            </Row>
-            <h1 className={classes.textTitle}>
-              Bem-Vindo (a)
-            </h1>
+            <Grid>
+              <Padding />
+              <Row id="center">
+                <img style={{ width: "256px", padding: "8px 16px" }} alt="" src={logo} />
+              </Row>
+              <h1 className={classes.textTitle}>
+                Bem-Vindo (a)
+              </h1>
+            </Grid>
           </Grid>
-        </Grid>
-        <Padding padding="8px" />
-        {/* <div className={classes.marginMobile} /> */}
-        <Formik
-          initialValues={props.initialValues}
-          onSubmit={(values) => { handleLogin(values.email, values.password, history) }}
-          validationSchema={props.validationSchema}
-          validateOnChange={false}
-        >
-          {props => {
-            return (
-              <Form className={classes.divInpus}>
-                <Grid
-                  container
-                  direction="row"
-                  justifyContent="center"
-                  alignItems="center"
-                // className={classes.containerMain}
-                >
-                  <Grid item xs={12}>
+          <Padding padding="16px" />
+          <Formik
+            initialValues={props.initialValues}
+            onSubmit={(values) => { handleLogin(values.email, values.password, history) }}
+            validationSchema={props.validationSchema}
+            validateOnChange={false}
+          >
+            {props => {
+              return (
+                <Form className={classes.divInpus}>
+                  <div>
                     <TextField
                       name="email"
                       onChange={props.handleChange}
                       variant="outlined"
                       placeholder="Email"
+                      style={{ width: "100%" }}
                       InputProps={{
                         startAdornment: (
                           <InputAdornment position="start">
@@ -81,22 +72,15 @@ const Login = props => {
                     <div className={classes.formFieldError}>
                       {props.errors.email}
                     </div>
-                  </Grid>
-                </Grid>
-                <Grid
-                  container
-                  direction="row"
-                  justifyContent="center"
-                  alignItems="center"
-                  className={classes.containerMain}
-                >
-                  <Grid item xs={12}>
+                  </div>
+                  <div>
                     <TextField
                       name="password"
                       onChange={props.handleChange}
                       variant="outlined"
                       type="password"
                       placeholder="Senha"
+                      style={{ width: "100%" }}
                       InputProps={{
                         startAdornment: (
                           <InputAdornment position="start">
@@ -109,55 +93,44 @@ const Login = props => {
                     <div className={classes.formFieldError}>
                       {props.errors.password}
                     </div>
-                  </Grid>
-                </Grid>
-                {/* {
-                  !isValid ? <Grid
-                    className={`${classes.boxError} ${classes.textCenter}`}
-                    item
-                    md={12}
-                    sm={12}
-                  >
-                    <div>
-                      {!isValid ? "Usuário ou senha inválido" : ""}
-                    </div>
-                  </Grid> : null
-                } */}
-                <Grid
-                  container
-                  direction="row"
-                  justifyContent="center"
-                  alignItems="center"
-                  className={classes.containerMain}
-                >
-                  <Grid item xs={12}>
-                    <ButtonPurple
-                      className={"t-button-primary"}
-                      onClick={props.handleSubmit}
-                      type="submit"
-                      title="Entrar"
-                    />
-                  </Grid>
-                </Grid>
-                <Grid container direction="row">
+                  </div>
+
                   <Grid
-                    className={`${classes.resetPassword} ${classes.textCenter}`}
-                    item
-                    md={12}
-                    sm={12}
+                    container
+                    direction="row"
+                    justifyContent="center"
+                    alignItems="center"
+                    className={classes.containerMain}
                   >
-                    Faça a sua matricula
-                    <Link className={classes.link} to="/register">
-                      clique aqui
-                    </Link>
+                    <Grid item xs={12}>
+                      <ButtonPurple
+                        className={"t-button-primary"}
+                        onClick={props.handleSubmit}
+                        type="submit"
+                        title="Entrar"
+                      />
+                    </Grid>
                   </Grid>
-                </Grid>
-              </Form>
-            );
-          }}
-        </Formik>
-      </Grid>
-    </Grid>
+                  <Grid container direction="row">
+                    <Grid
+                      className={`${classes.resetPassword} ${classes.textCenter}`}
+                      item
+                      md={12}
+                      sm={12}
+                    >
+                      Faça a sua matricula
+                      <Link className={classes.link} to="/register">
+                        clique aqui
+                      </Link>
+                    </Grid>
+                  </Grid>
+                </Form>
+              );
+            }}
+          </Formik>
+        </Grid>
+      </div>
+    </div>
 
   );
 };
