@@ -40,7 +40,7 @@ const useStyles = {
         margin: "auto",
         width: "40%",
         backgroundColor: "white",
-        height: "80%", zIndex: "100"
+        height: "auto", zIndex: "100"
     },
     divImage: {
         display: "flex",
@@ -86,7 +86,7 @@ const useStyles = {
         lineheight: "101.5 %"
     },
     boxRegister: {
-        marginTop: 30
+        marginTop: 64
     },
     link: {
         fontFamily: styleBase.typography.types.bold,
@@ -109,7 +109,7 @@ const useStyles = {
     "@media(max-width: 900px)": {
         formSignUp: {
             width: "80%",
-            height: "60%",
+            
             flexDirection: "space-between"
         },
     }

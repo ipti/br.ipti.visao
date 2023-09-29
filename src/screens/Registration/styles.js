@@ -1,5 +1,5 @@
 import styleBase from "../../styles";
-import LoginImg from "../../assets/images/faded-logo.png";
+import LoginImg from "../../assets/images/lupaLogo.svg";
 const useStyles = {
   backgroundForm: {
     minWidth: "100%",

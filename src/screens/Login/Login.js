@@ -73,6 +73,7 @@ const Login = props => {
                       {props.errors.email}
                     </div>
                   </div>
+                  <Padding />
                   <div>
                     <TextField
                       name="password"
@@ -94,7 +95,7 @@ const Login = props => {
                       {props.errors.password}
                     </div>
                   </div>
-
+                  <Padding />
                   <Grid
                     container
                     direction="row"

@@ -71,7 +71,7 @@ const useStyles = {
   },
   divInpus: {
 
-    width: "80%",
+    width: "70%",
   },
   titleLogin: {
     textAlign: "center",
@@ -179,7 +179,7 @@ const useStyles = {
       marginBottom: 40
     },
     divInpus: {
-      width: "90%"
+      width: "80%"
     },
     marginMobile20: {
       margin: "20px"

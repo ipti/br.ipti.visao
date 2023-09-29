@@ -8,7 +8,7 @@ import Routes from "./routes";
 import styleBase from "./styles";
 import "./assets/css/styles.css";
 
-// import './assets/css/theme.css';
+import './assets/css/theme.css';
         
 
 import {
@@ -19,7 +19,7 @@ import { QueryClientProvider } from "react-query";
 import queryClient from "./services/query";
 
 //theme
-import "primereact/resources/themes/lara-light-indigo/theme.css";     
+// import "primereact/resources/themes/lara-light-indigo/theme.css";     
     
 //core
 import "primereact/resources/primereact.min.css";                                       
