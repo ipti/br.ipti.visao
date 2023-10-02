@@ -139,7 +139,6 @@ const FormRegistrationState = () => {
         count++;
       }
       if (
-        oneRegistration.object.horasUsoAparelhosEletronicos === 3 ||
         oneRegistration.object.horasUsoAparelhosEletronicos === 4 ||
         oneRegistration.object.horasUsoAparelhosEletronicos === 5
       ) {
@@ -164,12 +163,19 @@ const FormRegistrationState = () => {
         oneRegistration.object.acuidadeTriagemEsquerdo === "4" ||
         oneRegistration.object.acuidadeTriagemEsquerdo === "5" ||
         oneRegistration.object.acuidadeTriagemEsquerdo === "6" ||
-        oneRegistration.object.acuidadeTriagemEsquerdo === "7" ||
-        oneRegistration.object.acuidadeTriagemEsquerdo === "8" ||
-        oneRegistration.object.acuidadeTriagemEsquerdo === "9" ||
-        oneRegistration.object.acuidadeTriagemEsquerdo === "10"
+        oneRegistration.object.acuidadeTriagemEsquerdo === "7"
       ) {
-        count++;
+        count = count + 5;
+      }
+      if (
+        oneRegistration.object.acuidadeTriagemEsquerdo === "8" 
+      ) {
+        count = count + 2;
+      }
+      if (
+        oneRegistration.object.acuidadeTriagemEsquerdo === "nenhum"
+      ) {
+        count = count + 2;
       }
       if (
         oneRegistration.object.acuidadeTriagemDireito === "1" ||
@@ -178,12 +184,19 @@ const FormRegistrationState = () => {
         oneRegistration.object.acuidadeTriagemDireito === "4" ||
         oneRegistration.object.acuidadeTriagemDireito === "5" ||
         oneRegistration.object.acuidadeTriagemDireito === "6" ||
-        oneRegistration.object.acuidadeTriagemDireito === "7" ||
-        oneRegistration.object.acuidadeTriagemDireito === "8" ||
-        oneRegistration.object.acuidadeTriagemDireito === "9" ||
-        oneRegistration.object.acuidadeTriagemDireito === "10"
+        oneRegistration.object.acuidadeTriagemDireito === "7"
       ) {
-        count++;
+        count = count + 5;
+      }
+      if (
+        oneRegistration.object.acuidadeTriagemDireito === "8" 
+      ) {
+        count = count + 2;
+      }
+      if (
+        oneRegistration.object.acuidadeTriagemDireito === "nenhum"
+      ) {
+        count = count + 2;
       }
     }
 

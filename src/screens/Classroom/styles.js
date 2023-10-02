@@ -9,6 +9,15 @@ const useStyles = {
     fontFamily: styleBase.typography.types.inter,
     fontWeight: "unset"
   },
+  name: {
+    color: styleBase.colors.gray,
+    marginTop: 30,
+    marginBottom: 0,
+    fontSize: styleBase.typography.font.small,
+    whiteSpace: 'nowrap',
+    overflow: 'hidden',
+    textOverflow: 'ellipsis'
+  },
   boxTitlePagination: {
     marginBottom: 20
   },

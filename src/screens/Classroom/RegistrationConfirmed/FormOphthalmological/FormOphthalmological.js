@@ -13,7 +13,7 @@ const FormOphthalmologicalPage = ({ values, handleChange }) => {
     return (
         <>
             <Grid item style={{ width: "100%" }} md={12}>
-                <p className={classes.label}>Acuidade visual corrigida olho direito?</p>
+                <p className={classes.label}>Acuidade visual olho direito (sem óculos) ?</p>
                 <RadioGroup
                     value={values.acuidadeTriagemDireito}
                     name="acuidadeTriagemDireito"
@@ -33,7 +33,7 @@ const FormOphthalmologicalPage = ({ values, handleChange }) => {
                 </RadioGroup>
             </Grid>
             <Grid item style={{ width: "100%" }} md={12}>
-                <p className={classes.label}>Acuidade visual corrigida olho esquerdo?</p>
+                <p className={classes.label}>Acuidade visual olho esquerdo (sem óculos) ?</p>
                 <RadioGroup
                     value={values.acuidadeTriagemEsquerdo}
                     name="acuidadeTriagemEsquerdo"
@@ -54,7 +54,7 @@ const FormOphthalmologicalPage = ({ values, handleChange }) => {
             </Grid>
 
             <Grid item style={{ width: "100%" }} md={12}>
-                <p className={classes.label}>No teste de cover</p>
+                <p className={classes.label}>Teste de Cover para longe</p>
                 <RadioGroup
                     value={values.testCover}
                     onChange={handleChange}
@@ -67,7 +67,7 @@ const FormOphthalmologicalPage = ({ values, handleChange }) => {
                 </RadioGroup>
             </Grid>
             <Grid item style={{ width: "100%" }} md={12}>
-                <p className={classes.label}>No teste do movimento ocular</p>
+                <p className={classes.label}>NTeste de movimento binocular</p>
                 <RadioGroup
                     value={values.testMovimentoOcular}
                     onChange={handleChange}
@@ -78,7 +78,7 @@ const FormOphthalmologicalPage = ({ values, handleChange }) => {
                 </RadioGroup>
             </Grid>
             <Grid item style={{ width: "100%" }} md={12}>
-                <p className={classes.label}>No teste da mancha branca</p>
+                <p className={classes.label}>Teste mancha branca na pupila</p>
                 <RadioGroup
                     value={values.testManchaBranca}
                     name="testManchaBranca"

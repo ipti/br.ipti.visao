@@ -39,6 +39,8 @@ const MyDocument = () => {
 
     const { id } = useParams()
 
+
+
     const points = (oneRegistration) => {
         var count = 0;
 
@@ -90,7 +92,6 @@ const MyDocument = () => {
                 count++;
             }
             if (
-                oneRegistration.object.horasUsoAparelhosEletronicos === 3 ||
                 oneRegistration.object.horasUsoAparelhosEletronicos === 4 ||
                 oneRegistration.object.horasUsoAparelhosEletronicos === 5
             ) {
@@ -109,18 +110,46 @@ const MyDocument = () => {
                 count++;
             }
             if (
-                oneRegistration.object.acuidadeTriagem === "1" ||
-                oneRegistration.object.acuidadeTriagem === "2" ||
-                oneRegistration.object.acuidadeTriagem === "3" ||
-                oneRegistration.object.acuidadeTriagem === "4" ||
-                oneRegistration.object.acuidadeTriagem === "5" ||
-                oneRegistration.object.acuidadeTriagem === "6" ||
-                oneRegistration.object.acuidadeTriagem === "7" ||
-                oneRegistration.object.acuidadeTriagem === "8" ||
-                oneRegistration.object.acuidadeTriagem === "9" ||
-                oneRegistration.object.acuidadeTriagem === "10"
+                oneRegistration.object.acuidadeTriagemEsquerdo === "1" ||
+                oneRegistration.object.acuidadeTriagemEsquerdo === "2" ||
+                oneRegistration.object.acuidadeTriagemEsquerdo === "3" ||
+                oneRegistration.object.acuidadeTriagemEsquerdo === "4" ||
+                oneRegistration.object.acuidadeTriagemEsquerdo === "5" ||
+                oneRegistration.object.acuidadeTriagemEsquerdo === "6" ||
+                oneRegistration.object.acuidadeTriagemEsquerdo === "7"
             ) {
-                count++;
+                count = count + 5;
+            }
+            if (
+                oneRegistration.object.acuidadeTriagemEsquerdo === "8"
+            ) {
+                count = count + 2;
+            }
+            if (
+                oneRegistration.object.acuidadeTriagemEsquerdo === "nenhum"
+            ) {
+                count = count + 2;
+            }
+            if (
+                oneRegistration.object.acuidadeTriagemDireito === "1" ||
+                oneRegistration.object.acuidadeTriagemDireito === "2" ||
+                oneRegistration.object.acuidadeTriagemDireito === "3" ||
+                oneRegistration.object.acuidadeTriagemDireito === "4" ||
+                oneRegistration.object.acuidadeTriagemDireito === "5" ||
+                oneRegistration.object.acuidadeTriagemDireito === "6" ||
+                oneRegistration.object.acuidadeTriagemDireito === "7"
+            ) {
+                count = count + 5;
+            }
+            if (
+                oneRegistration.object.acuidadeTriagemDireito === "8"
+            ) {
+                count = count + 2;
+            }
+            if (
+                oneRegistration.object.acuidadeTriagemDireito === "nenhum"
+            ) {
+                count = count + 2;
             }
         }
 
@@ -227,7 +256,7 @@ const MyDocument = () => {
                                             <tr key={index}>
                                                 <TableData>{item.student.object.name}</TableData>
                                                 <TableData>{item.points}</TableData>
-                                                <TableData>{item.points < 5 ? "Prioridade minima" : item.points >= 5 ? "Prioridade média" : ""}</TableData>
+                                                <TableData>{item.points < 5 ? "Prioridade minima" : (item.points >= 5 && item.points < 9) ? "Prioridade média" : item.points >=  10 ? "Prioridade máxima":  ""}</TableData>
                                             </tr>
                                         )
                                     })}

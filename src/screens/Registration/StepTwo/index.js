@@ -88,7 +88,7 @@ const StepTwo = () => {
         filhoOculos: Yup.string().required(),
         horasUsoAparelhosEletronicos: Yup.string().required(),
         horasAtividadesAoArLivre: Yup.string().required(),
-      });
+    });
 
 
 
@@ -185,12 +185,13 @@ const StepTwo = () => {
                                     <FormControlLabel control={<Checkbox name="doencasNosOlhos.outrasSindromesGeneticas" onChange={handleChange} value={values.doencas.outrasSindromesGeneticas} />} label="Outras síndromes genéticas" />
                                     <FormControlLabel control={<Checkbox name="doencasNosOlhos.diabetes" onChange={handleChange} value={values.doencas.diabetes} />} label="Diabetes" />
                                     <FormControlLabel control={<Checkbox name="doencasNosOlhos.artriteArtrose" onChange={handleChange} value={values.doencas.artriteArtrose} />} label="Artrite ou Artrose" />
-                                    <FormControlLabel control={<Checkbox name="doencasNosOlhos.alergiasCorticoides" onChange={handleChange} value={values.doencas.alergiasCorticoides} />} label=" Alergias ou uso prolongado de corticoides" />
+                                    <FormControlLabel control={<Checkbox name="doencasNosOlhos.alergiasCorticoides" onChange={handleChange} value={values.doencas.alergiasCorticoides} />} label=" Alergias e uso prolongado de corticoides" />
                                     <FormControlLabel control={<Checkbox name="doencasNosOlhos.nenhumaOpcao" onChange={handleChange} value={values.doencas.nenhumaOpcao} />} label="Nenhuma das opções" />
                                 </FormGroup>
                             </Grid>
                             <Grid item style={{ width: "100%" }} md={12}>
-                                <p className={classes.label}>Vocês (pai ou mãe ou irmos), avós ou tios de primeiro grau tem ou tiveram algumas dessas doenças? ?</p>
+                                <p className={classes.label}>Vocês (pai, mãe, irmãos, avós ou tios de primeiro grau) têm ou tiveram alguma dessas doenças?
+                                    </p>
                                 <FormGroup>
                                     <FormControlLabel control={<Checkbox />} name="doencasFamiliares.miopiaUmPai" defaultChecked={values.doencasFamiliares.miopiaUmPai} value={values.doencasFamiliares.miopiaUmPai} label="Pai e mãe (os dois) com miopia acima de 3 graus" />
                                     <FormControlLabel control={<Checkbox />} name="doencasFamiliares.miopiaAmbosPais" defaultChecked={values.doencasFamiliares.miopiaAmbosPais} value={values.doencasFamiliares.miopiaAmbosPais} label="Pai ou mãe (um dos dois) com miopia acima de 5 graus" />
@@ -271,7 +272,7 @@ const StepTwo = () => {
                                         className={classes.formControl}
                                         error={errorList.horasAtividadesAoArLivre}
                                     >
-                                        <FormLabel component="legend">Quantas horas por dia seu filho passa em atividades ao ar livre, recreativas ou por Esporte? *</FormLabel>
+                                        <FormLabel component="legend">Quantas horas por dia seu filho passa em atividades ao ar livre, para diversão ou por esporte? *</FormLabel>
                                         <RadioGroup
                                             value={values.horasAtividadesAoArLivre}
                                             name="horasAtividadesAoArLivre"

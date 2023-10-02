@@ -6,7 +6,7 @@ const useStyles = {
     borderRadius: "8px",
     borderColor: styleBase.colors.colorsBaseInkLight,
     padding: "20px",
-    width: "88%",
+    width: "100%",
     textDecoration: "none"
   },
   floatLeft: {
@@ -18,7 +18,7 @@ const useStyles = {
   textRight: {
     backgroundColor: styleBase.colors.colorsBaseProductNormal,
     color: styleBase.colors.white,
-    padding: "5px 15px",
+    padding: "8px 16px",
     borderRadius: "50px",
   },
   iconDelete: {
@@ -26,8 +26,8 @@ const useStyles = {
   },
   iconHouse: {
     marginTop: "-5px",
-    width: "40px",
-    height: "30px",
+    width: "60px",
+    height: "40px",
     marginLeft: "auto"
   },
   addCursor: {

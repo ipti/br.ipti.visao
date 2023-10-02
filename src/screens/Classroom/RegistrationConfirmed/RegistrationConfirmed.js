@@ -7,6 +7,8 @@ import { makeStyles } from "@material-ui/core/styles";
 // Components
 import { ButtonPurple } from "../../../components/Buttons";
 
+import stylesBase from "../../../styles";
+
 // Styles
 import { CircularProgress } from "@material-ui/core";
 import { ArrowBack } from "@material-ui/icons";
@@ -35,8 +37,12 @@ const Home = props => {
       </Grid>
       <h1 style={{ margin: 0, padding: 0 }}>Pontos somados: {points()}</h1>
       <Padding />
-      <div className={classes.priority}>
-        <h4 style={{padding: "8px", margin: "0"}}>{points() < 5 ? "Prioridade minima" : points() >= 5 ? "Prioridade média" : ""}</h4>
+      <div className={classes.priority} style={{
+        background: points() < 5 ? stylesBase.colors.green : (points() >= 5 && points() < 9) ? stylesBase.colors.yellow : points() >= 10 ? stylesBase.colors.red : ""
+      }}>
+        <h4 style={{ padding: "8px", margin: "0" }}>{
+          points() < 5 ? "Prioridade minima" : (points() >= 5 && points() < 9) ? "Prioridade média" : points() >= 10 ? "Prioridade máxima" : ""
+        }</h4>
       </div>
       <Padding padding="16px" />
       {oneRegistration ? <Formik

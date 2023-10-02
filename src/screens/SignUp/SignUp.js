@@ -1,10 +1,10 @@
 import { makeStyles } from "@material-ui/core/styles";
+import { useMediaQuery } from "@mui/material";
 import React from "react";
 import { Link } from "react-router-dom";
 import logo from "../../assets/images/logo.svg";
+import { Column, Padding, Row } from "../../styles/style";
 import styles from "./styles";
-import { Column, Row } from "../../styles/style";
-import { useMediaQuery } from "@mui/material";
 
 const useStyles = makeStyles(styles);
 
@@ -18,16 +18,15 @@ const SignUp = () => {
                 <div className={`row ${classes.box}`} >
                     <div className={classes.divBlue} />
                     <div className={classes.divLupas} />
-
                     {/* <div className={classes.divImage}>
                         <img className={classes.imgTagna} src={Tagna} alt="" />
                     </div> */}
-                    <div
-                        className={classes.formSignUp}
-                    >
+                    <div className={classes.formSignUp}>
                         <Column>
                             <div className={classes.textTitle}>
+
                                 <Column id="center">
+                                    <Padding padding="8px" />
                                     <Row id="center">
                                         <img style={{ width: matches ? "200px" : "256px", padding: "8px 16px" }} alt="" src={logo} />
                                     </Row>
@@ -45,7 +44,6 @@ const SignUp = () => {
                             </div>
                             <div
                                 className={`${classes.resetPassword} ${classes.textCenter}`}
-                                style={{ marginTop: "50px" }}
                             >
                                 <Link to="/login" className={`${classes.buttonLogin}`}>
                                     Faça o seu Login
@@ -56,16 +54,6 @@ const SignUp = () => {
                             </div>
                         </Column>
                     </div>
-                    {/* <div
-                        className={`${classes.resetPassword} ${classes.textCenter}`}
-                        >
-                        <div className={`${classes.buttonLogin}`}>
-                        Faça o seu Login
-                        <Link className={classes.link} to="/login">
-                        clique aqui
-                        </Link>
-                        </div> 
-                    </div> */}
                 </div>
             </div>
         </div>

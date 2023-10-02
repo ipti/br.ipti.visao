@@ -86,7 +86,7 @@ const useStyles = {
         lineheight: "101.5 %"
     },
     boxRegister: {
-        marginTop: 64
+        marginTop: 16
     },
     link: {
         fontFamily: styleBase.typography.types.bold,
@@ -108,8 +108,7 @@ const useStyles = {
     },
     "@media(max-width: 900px)": {
         formSignUp: {
-            width: "80%",
-            
+            width: "90%",
             flexDirection: "space-between"
         },
     }

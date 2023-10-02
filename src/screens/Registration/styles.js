@@ -1,5 +1,5 @@
 import styleBase from "../../styles";
-import LoginImg from "../../assets/images/lupaLogo.svg";
+import LoginImg from "../../assets/images/backgroundLupa.svg";
 const useStyles = {
   backgroundForm: {
     minWidth: "100%",
@@ -39,12 +39,12 @@ const useStyles = {
     width: "50%"
   },
   imgTag: {
-    width: "5%",
+    width: "128px",
     margin: "20px",
     position: "relative"
   },
   backButton: {
-    width: "2%",
+    width: "32px",
     marginLeft: "20px",
     position: "relative",
     cursor: "pointer"

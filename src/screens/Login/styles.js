@@ -39,6 +39,7 @@ const useStyles = {
     justifyContent: "center",
     alignItems: "center",
     borderRadius: "43px",
+    boxShadow: "2px 4px 24px 0px rgba(0, 0, 0, 0.25)",
     margin: "auto",
     width: "40%",
     backgroundColor: "white",

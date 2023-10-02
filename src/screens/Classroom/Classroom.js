@@ -65,7 +65,7 @@ const Classroom = ({ classroom, setIdSchool, idSchool }) => {
             link={`turmas/${item.id}`}
             title={item.object.name}
             addCursor={true}
-            textRight="Ativa"
+            textRight="Turma"
           >
             <p title={item.object.name} className={classes.name}>
               {item.object.name}

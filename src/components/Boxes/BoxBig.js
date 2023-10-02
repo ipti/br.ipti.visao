@@ -1,7 +1,7 @@
 import { makeStyles } from "@material-ui/core/styles";
 import React from "react";
 import { Link } from "react-router-dom";
-import ImgSchool from "../../assets/images/school-icon.png";
+import ImgSchool from "../../assets/images/IconSchool.svg";
 import { Row } from "../../styles/style";
 import styles from "./styles";
 const useStyles = makeStyles(styles);

@@ -10,13 +10,14 @@ import Swal from "sweetalert2";
 import image from "../../assets/images/Atenção-img.png";
 import IconActive from "../../assets/images/activeRegistration.svg";
 import IconNotActive from "../../assets/images/notactiveRegistration.svg";
+import IconClasMedia from "../../assets/images/iconClasMedia.svg"
 import styled from "../../styles";
 import styles from "./styles";
 
 const useStyles = makeStyles(styles);
 
 const BoxRegistration = props => {
-  const { name, link, unavailable, md, sm, xs, student_fk, id } = props;
+  const { name, link, md, sm, xs, student_fk, id, points } = props;
 
 
 
@@ -62,7 +63,7 @@ const BoxRegistration = props => {
           <Clear onClick={e => deletePreRegistration(e, id)} style={{ cursor: 'pointer' }} />
         </div>
         <div className={classes.iconStudent}>
-          <img src={unavailable ? IconActive : IconNotActive} alt="Icone de aluno" />
+          <img src={points < 5 ? IconActive : (points >= 5 && points < 9) ? IconClasMedia : points >= 10 ? IconNotActive : ""} alt="Icone de aluno" />
           <div title={name} style={{ margin: "auto 10px" }} className={`${classes.title}`}>
             {name}
           </div>
