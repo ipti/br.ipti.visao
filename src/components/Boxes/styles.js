@@ -16,7 +16,7 @@ const useStyles = {
     float: "right"
   },
   textRight: {
-    backgroundColor: styleBase.colors.colorsBaseProductNormal,
+    backgroundColor: styleBase.colors.colorsBaseProductNormalHover,
     color: styleBase.colors.white,
     padding: "8px 16px",
     borderRadius: "50px",
