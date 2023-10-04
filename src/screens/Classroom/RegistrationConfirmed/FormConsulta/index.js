@@ -3,6 +3,8 @@ import { Checkbox, FormControlLabel, FormGroup, Grid, Radio, RadioGroup, TextFie
 import { Form, Formik } from "formik";
 import React from "react";
 import styles from "../../../../styles";
+import { Column, Padding } from "../../../../styles/style";
+import MaskDate from "../../../../components/Mask/maskdate";
 
 const useStyles = makeStyles(styles);
 
@@ -27,114 +29,261 @@ const FormConsulta = () => {
             {({ errors, values, touched, handleChange, handleSubmit, setFieldValue }) => {
                 return (
                     <Form onSubmit={handleSubmit}>
-                        <Grid item style={{ width: "100%" }} md={12}>
-                            <p className={classes.label}>Tem historia de febre nas últimas 24 horas:</p>
-                            <RadioGroup
-                                name="febre"
-                                value={values.febre}
-                                onChange={handleChange}
-                            >
-                                <FormControlLabel control={<Radio />} label="Sim" value={'true'}
-                                    name="febre" />
-                                <FormControlLabel control={<Radio />} label="Não" value={'false'}
-                                    name="febre" />
-                            </RadioGroup>
+                        <Grid container spacing={2}>
+                            <Grid item style={{ width: "100%" }} md={6}>
+                                <p className={classes.label}>Nome do médico</p>
+                                <Column>
+                                    <TextField className={classes.inputStudent} name="name" onChange={handleChange} variant="outlined" />
+                                </Column>
+                            </Grid>
+                            <Grid item style={{ width: "100%" }} md={6}>
+                                <p className={classes.label}>CRM</p>
+                                <Column>
+                                    <TextField className={classes.inputStudent} name="name" onChange={handleChange} variant="outlined" />
+                                </Column>
+                            </Grid>
                         </Grid>
-                        <Grid item style={{ width: "100%" }} md={12}>
-                            <p className={classes.label}>Tem história de convusão há menos de 15 dias:</p>
-                            <RadioGroup
-                                name="convucao"
-                                value={values.convucao}
-                                onChange={handleChange}
-                            >
-                                <FormControlLabel control={<Radio />} label="Sim" value={'true'}
-                                    name="convucao" />
-                                <FormControlLabel control={<Radio />} label="Não" value={'false'}
-                                    name="convucao" />
-                            </RadioGroup>
+                        <Grid container>
+                            <Grid item style={{ width: "100%" }} md={6}>
+                                <p className={classes.label}>Data de Consulta </p>
+                                <Column>
+                                    <TextField className={classes.inputStudent} name="birthday" onChange={handleChange}
+                                        InputProps={{
+                                            inputComponent: MaskDate,
+                                            value: values.birthday,
+                                            onChange: handleChange
+                                        }}
+                                        value={values.birthday}
+                                        variant="outlined" />
+                                </Column>
+                            </Grid>
                         </Grid>
-                        <Grid item style={{ width: "100%" }} md={12}>
-                            <p className={classes.label}>Tem alergia a colirios:</p>
-                            <RadioGroup
-                                name="alergiaColirio"
-                                value={values.alergiaColirio}
-                                onChange={handleChange}
-                            >
-                                <FormControlLabel control={<Radio />} label="Sim" value={'true'}
-                                    name="alergiaColirio" />
-                                <FormControlLabel control={<Radio />} label="Não" value={'false'}
-                                    name="alergiaColirio" />
-                            </RadioGroup>
+                        <Padding padding="16px" />
+                        <h2>
+                            Escaneamento Visual pelo Spot Vision
+                        </h2>
+                        <h3>
+                            Olho direito
+                        </h3>
+                        <Grid container spacing={2} md={12}>
+                            <Grid item style={{ width: "100%" }} md={4}>
+                                <p className={classes.label}>Refração Esférico</p>
+                                <Column>
+                                    <TextField className={classes.inputStudent} name="olhoDireito" onChange={handleChange} variant="outlined" />
+                                </Column>
+                            </Grid>
+                            <Grid item style={{ width: "100%" }} md={4}>
+                                <p className={classes.label}>Refração cilíndrico</p>
+                                <Column>
+                                    <TextField className={classes.inputStudent} name="olhoDireito" onChange={handleChange} variant="outlined" />
+                                </Column>
+                            </Grid>
+                            <Grid item style={{ width: "100%" }} md={4}>
+                                <p className={classes.label}>Refração eixo</p>
+                                <Column>
+                                    <TextField className={classes.inputStudent} name="olhoDireito" onChange={handleChange} variant="outlined" />
+                                </Column>
+                            </Grid>
                         </Grid>
-                        <Grid item style={{ width: "100%" }} md={12}>
-                            <p className={classes.label}>Tem doenças no coração:</p>
-                            <RadioGroup
-                                name="doençasNoCoração"
-                                value={values.doençasNoCoração}
-                                onChange={handleChange}
-                            >
-                                <FormControlLabel control={<Radio />} label="Sim" value={'true'}
-                                    name="doençasNoCoração" />
-                                <FormControlLabel control={<Radio />} label="Não" value={'false'}
-                                    name="doençasNoCoração" />
-                            </RadioGroup>
+                        <Grid container spacing={2} md={12}>
+                            <Grid item style={{ width: "100%" }} md={4}>
+                                <p className={classes.label}>Refração equivalente esférico</p>
+                                <Column>
+
+                                    <TextField className={classes.inputStudent} name="olhoDireito" onChange={handleChange} variant="outlined" />
+                                </Column>
+                            </Grid>
+                            <Grid item style={{ width: "100%" }} md={4}>
+                                <p className={classes.label}>Refração DP</p>
+                                <Column>
+                                    <TextField className={classes.inputStudent} name="olhoDireito" onChange={handleChange} variant="outlined" />
+                                </Column>
+                            </Grid>
+
                         </Grid>
-                        <Grid item style={{ width: "100%" }} md={12}>
-                            <p className={classes.label}>DNP pupilometro</p>
-                            <TextField className={classes.inputStudent} name="pupilometro" onChange={handleChange} variant="outlined" />
+                        <h3>
+                            Olho esquerdo
+                        </h3>
+                        <Grid container spacing={2} md={12}>
+                            <Grid item style={{ width: "100%" }} md={4}>
+                                <p className={classes.label}>Refração Esférico</p>
+                                <Column>
+                                    <TextField className={classes.inputStudent} name="olhoDireito" onChange={handleChange} variant="outlined" />
+                                </Column>
+                            </Grid>
+
+                            <Grid item style={{ width: "100%" }} md={4}>
+                                <p className={classes.label}>Refração cilíndrico</p>
+                                <Column>
+                                    <TextField className={classes.inputStudent} name="olhoDireito" onChange={handleChange} variant="outlined" />
+                                </Column>
+                            </Grid>
+
+                            <Grid item style={{ width: "100%" }} md={4}>
+                                <p className={classes.label}>Refração eixo olho</p>
+                                <Column>
+                                    <TextField className={classes.inputStudent} name="olhoDireito" onChange={handleChange} variant="outlined" />
+                                </Column>
+                            </Grid>
                         </Grid>
-                        <Grid item style={{ width: "100%" }} md={12}>
-                            <p className={classes.label}>Refração estática olho direito</p>
-                            <TextField className={classes.inputStudent} name="olhoDireito" onChange={handleChange} variant="outlined" />
+                        <Grid container spacing={2} md={12}>
+                            <Grid item style={{ width: "100%" }} md={4}>
+                                <p className={classes.label}>Refração equivalente esférico</p>
+                                <Column>
+                                    <TextField className={classes.inputStudent} name="olhoDireito" onChange={handleChange} variant="outlined" />
+                                </Column>
+                            </Grid>
+                            <Grid item style={{ width: "100%" }} md={4}>
+                                <p className={classes.label}>Refração DP</p>
+                                <Column>
+                                    <TextField className={classes.inputStudent} name="olhoDireito" onChange={handleChange} variant="outlined" />
+                                </Column>
+                            </Grid>
                         </Grid>
+                        <Padding padding="16px" />
+
                         <Grid item style={{ width: "100%" }} md={12}>
-                            <p className={classes.label}>Acuidade visual corrigida olho direito?</p>
+                            <p className={classes.label}>Marque as Observações encontradas no Spot Vision</p>
                             <FormGroup>
-                                <FormControlLabel control={<Checkbox />} label="20/200" />
-                                <FormControlLabel control={<Checkbox />} label="20/100" />
-                                <FormControlLabel control={<Checkbox />} label="20/80" />
-                                <FormControlLabel control={<Checkbox />} label="20/70" />
-                                <FormControlLabel control={<Checkbox />} label="20/60" />
-                                <FormControlLabel control={<Checkbox />} label="20/50" />
-                                <FormControlLabel control={<Checkbox />} label="20/40" />
-                                <FormControlLabel control={<Checkbox />} label="20/30" />
-                                <FormControlLabel control={<Checkbox />} label="20/25" />
-                                <FormControlLabel control={<Checkbox />} label="20/20" />
-                                <FormControlLabel control={<Checkbox />} label="Nenhuma das opções" />
+                                <FormControlLabel control={<Checkbox />} label="Miopia OD" />
+                                <FormControlLabel control={<Checkbox />} label="Miopia OE " />
+                                <FormControlLabel control={<Checkbox />} label="Astigmatismo OD" />
+                                <FormControlLabel control={<Checkbox />} label="Astigmatismo OE" />
+                                <FormControlLabel control={<Checkbox />} label="Hipermetropia OD" />
+                                <FormControlLabel control={<Checkbox />} label="Hipermetropia OE " />
+                                <FormControlLabel control={<Checkbox />} label="Estrabismo OD" />
+                                <FormControlLabel control={<Checkbox />} label=" Estrabismo OE" />
+                                <FormControlLabel control={<Checkbox />} label="Anisometropia" />
+                                <FormControlLabel control={<Checkbox />} label="Anisocoria" />
                             </FormGroup>
                         </Grid>
-                        <Grid item style={{ width: "100%" }} md={12}>
-                            <p className={classes.label}>Refração estática olho esquerdo</p>
-                            <TextField className={classes.inputStudent} value={values.olhoEsquerdo} name="olhoEsquerdo" onChange={handleChange} variant="outlined" />
+                        <Padding padding="16px" />
+                        <Grid item style={{ width: "100%" }} md={6}>
+                            <p className={classes.label}>Anamnese</p>
+                            <Column>
+                                <TextField className={classes.inputStudent} value={values.olhoEsquerdo} name="olhoEsquerdo" onChange={handleChange} variant="outlined" />
+                            </Column>
                         </Grid>
-                        <Grid item style={{ width: "100%" }} md={12}>
-                            <p className={classes.label}>Acuidade visual corrigida olho esquerdo?</p>
-                            <FormGroup>
-                                <FormControlLabel control={<Checkbox />} label="20/200" />
-                                <FormControlLabel control={<Checkbox />} label="20/100" />
-                                <FormControlLabel control={<Checkbox />} label="20/80" />
-                                <FormControlLabel control={<Checkbox />} label="20/70" />
-                                <FormControlLabel control={<Checkbox />} label="20/60" />
-                                <FormControlLabel control={<Checkbox />} label="20/50" />
-                                <FormControlLabel control={<Checkbox />} label="20/40" />
-                                <FormControlLabel control={<Checkbox />} label="20/30" />
-                                <FormControlLabel control={<Checkbox />} label="20/25" />
-                                <FormControlLabel control={<Checkbox />} label="20/20" />
-                                <FormControlLabel control={<Checkbox />} label="Nenhuma das opções" />
-                            </FormGroup>
+                        <Padding padding="16px" />
+                        <h2>Refração Estática</h2>
+                        <h3>Olho direito</h3>
+                        <Grid container spacing={2} md={12}>
+                            <Grid item style={{ width: "100%" }} md={4}>
+                                <p className={classes.label}>Refração estático Esférico</p>
+                                <Column>
+                                    <TextField className={classes.inputStudent} name="olhoDireito" onChange={handleChange} variant="outlined" />
+                                </Column>
+                            </Grid>
+                            <Grid item style={{ width: "100%" }} md={4}>
+                                <p className={classes.label}>Refração estático cilíndrico</p>
+                                <Column>
+                                    <TextField className={classes.inputStudent} name="olhoDireito" onChange={handleChange} variant="outlined" />
+                                </Column>
+                            </Grid>
+                            <Grid item style={{ width: "100%" }} md={4}>
+                                <p className={classes.label}>Refração estático eixo</p>
+                                <Column>
+                                    <TextField className={classes.inputStudent} name="olhoDireito" onChange={handleChange} variant="outlined" />
+                                </Column>
+                            </Grid>
                         </Grid>
-                        <Grid item style={{ width: "100%" }} md={12}>
+                        <Grid container spacing={2} md={12}>
+                            <Grid item style={{ width: "100%" }} md={4}>
+                                <p className={classes.label}>Refração estático acuidade visual</p>
+                                <Column>
+                                    <TextField className={classes.inputStudent} name="olhoDireito" onChange={handleChange} variant="outlined" />
+                                </Column>
+                            </Grid>
+                        </Grid>
+                        <h3>Olho esquerdo</h3>
+                        <Grid container spacing={2} md={12}>
+                            <Grid item style={{ width: "100%" }} md={4}>
+                                <p className={classes.label}>Refração estático Esférico</p>
+                                <Column>
+                                    <TextField className={classes.inputStudent} name="olhoDireito" onChange={handleChange} variant="outlined" />
+                                </Column>
+                            </Grid>
+                            <Grid item style={{ width: "100%" }} md={4}>
+                                <p className={classes.label}>Refração estático cilíndrico</p>
+                                <Column>
+                                    <TextField className={classes.inputStudent} name="olhoDireito" onChange={handleChange} variant="outlined" />
+                                </Column>
+                            </Grid>
+                            <Grid item style={{ width: "100%" }} md={4}>
+                                <p className={classes.label}>Refração estático eixo</p>
+                                <Column>
+                                    <TextField className={classes.inputStudent} name="olhoDireito" onChange={handleChange} variant="outlined" />
+                                </Column>
+                            </Grid>
+                        </Grid>
+                        <Grid container spacing={2} md={12}>
+                            <Grid item style={{ width: "100%" }} md={4}>
+                                <p className={classes.label}>Refração estático acuidade visual</p>
+                                <Column>
+                                    <TextField className={classes.inputStudent} name="olhoDireito" onChange={handleChange} variant="outlined" />
+                                </Column>
+                            </Grid>
+                        </Grid>
+                        <Padding padding="16px" />
+
+                        <h2>Biomicroscopiao</h2>
+                        <Grid container spacing={2} md={12}>
+                            <Grid item style={{ width: "100%" }} md={6}>
+                                <p className={classes.label}>Olho direito</p>
+                                <Column>
+                                    <TextField className={classes.inputStudent} name="name" onChange={handleChange} variant="outlined" />
+                                </Column>
+                            </Grid>
+                            <Grid item style={{ width: "100%" }} md={6}>
+                                <p className={classes.label}>Olho esquerdo</p>
+                                <Column>
+                                    <TextField className={classes.inputStudent} name="name" onChange={handleChange} variant="outlined" />
+                                </Column>
+                            </Grid>
+                        </Grid>
+                        <Padding padding="16px" />
+
+
+                        <h2>Fundoscopia</h2>
+                        <Grid container spacing={2} md={12}>
+                            <Grid item style={{ width: "100%" }} md={6}>
+                                <p className={classes.label}>Olho direito</p>
+                                <Column>
+                                    <TextField className={classes.inputStudent} name="name" onChange={handleChange} variant="outlined" />
+                                </Column>
+                            </Grid>
+                            <Grid item style={{ width: "100%" }} md={6}>
+                                <p className={classes.label}>Olho esquerdo</p>
+                                <Column>
+                                    <TextField className={classes.inputStudent} name="name" onChange={handleChange} variant="outlined" />
+                                </Column>
+                            </Grid>
+                        </Grid>
+                        <Padding padding="16px" />
+                        <Grid item style={{ width: "100%" }} md={6}>
                             <p className={classes.label}>Motilidade ocularo</p>
-                            <TextField className={classes.inputStudent} name="name" onChange={handleChange} variant="outlined" />
+                            <Column>
+                                <TextField className={classes.inputStudent} name="name" onChange={handleChange} variant="outlined" />
+                            </Column>
                         </Grid>
-                        <Grid item style={{ width: "100%" }} md={12}>
-                            <p className={classes.label}>Biomicroscopiao</p>
-                            <TextField className={classes.inputStudent} name="name" onChange={handleChange} variant="outlined" />
+                        <Padding padding="16px" />
+
+                        <Grid item style={{ width: "100%" }} md={6}>
+                            <p className={classes.label}>Diagnóstico</p>
+                            <Column>
+                                <TextField className={classes.inputStudent} name="name" onChange={handleChange} variant="outlined" />
+                            </Column>
                         </Grid>
-                        <Grid item style={{ width: "100%" }} md={12}>
-                            <p className={classes.label}>Fundoscopia</p>
-                            <TextField className={classes.inputStudent} name="name" onChange={handleChange} variant="outlined" />
+                        <Padding padding="16px" />
+
+                        <Grid item style={{ width: "100%" }} md={6}>
+                            <p className={classes.label}>Conduta</p>
+                            <Column>
+                                <TextField className={classes.inputStudent} name="name" onChange={handleChange} variant="outlined" />
+                            </Column>
                         </Grid>
+                        <Padding padding="16px" />
+
                         <Grid item style={{ width: "100%" }} md={12}>
                             <p className={classes.label}>Precisa de óculos</p>
                             <RadioGroup
@@ -145,17 +294,32 @@ const FormConsulta = () => {
                                 <FormControlLabel control={<Radio />} label="Não" />
                             </RadioGroup>
                         </Grid>
+                        <Padding padding="16px" />
+
                         <Grid item style={{ width: "100%" }} md={12}>
-                            <p className={classes.label}>Óculos prescritos olho direito</p>
-                            <TextField className={classes.inputStudent} name="name" onChange={handleChange} variant="outlined" />
+                            <p className={classes.label}>Acuidade visual corrigida olho esquerdo?</p>
+                            <FormGroup>
+                                <FormControlLabel control={<Checkbox />} label="Ambliopia" />
+                                <FormControlLabel control={<Checkbox />} label="Retinoblastoma " />
+                                <FormControlLabel control={<Checkbox />} label="Catarata Congênita" />
+                                <FormControlLabel control={<Checkbox />} label="Obstrução de Vias Lacrimais" />
+                                <FormControlLabel control={<Checkbox />} label="Estrabismo" />
+                                <FormControlLabel control={<Checkbox />} label="Glaucoma congênito" />
+                                <FormControlLabel control={<Checkbox />} label="Uveítes" />
+                                <FormControlLabel control={<Checkbox />} label="Nistagmo" />
+                                <FormControlLabel control={<Checkbox />} label="Miopia progressiva" />
+                                <FormControlLabel control={<Checkbox />} label="Ectasias de córnea " />
+                                <FormControlLabel control={<Checkbox />} label="Alergias/Conjuntivites/Calázio" />
+                                <FormControlLabel control={<Checkbox />} label="Baixa visão Central" />
+                            </FormGroup>
                         </Grid>
-                        <Grid item style={{ width: "100%" }} md={12}>
-                            <p className={classes.label}>Óculos prescritos olho esquerdo</p>
-                            <TextField className={classes.inputStudent} name="name" onChange={handleChange} variant="outlined" />
-                        </Grid>
-                        <Grid item style={{ width: "100%" }} md={12}>
-                            <p className={classes.label}>Observações dos óculos</p>
-                            <TextField className={classes.inputStudent} name="name" onChange={handleChange} variant="outlined" />
+                        <Padding padding="16px" />
+
+                        <Grid item style={{ width: "100%" }} md={6}>
+                            <p className={classes.label}>Indicação para próxima consulta (em meses)</p>
+                            <Column>
+                                <TextField className={classes.inputStudent} name="name" onChange={handleChange} variant="outlined" />
+                            </Column>
                         </Grid>
                     </Form>
                 )

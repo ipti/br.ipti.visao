@@ -9,6 +9,7 @@ import styles from "../../../../styles";
 
 import styleBase from "../../../../styles";
 import { Column, Padding } from "../../../../styles/style";
+import MaskDate from "../../../../components/Mask/maskdate";
 
 
 const useStyles = makeStyles(styles);
@@ -33,69 +34,85 @@ const FormPerson = ({ values, handleChange }) => {
 
             <h2> Dados básicos </h2>
             <Grid container>
-                <Column>
+                <Grid item md={6}>
                     <p className={classes.label}>Name</p>
-                    <TextField
-                        className={classes.inputStudent}
-                        value={values.name}
-                        name="name" onChange={handleChange} variant="outlined" />
-                </Column>
-                <Grid
-                    className={`${classes.contentMain}`}
-                    container
-                    direction="row"
-                    justifyContent="center"
-                    alignItems="center"
-                >
-                    <Grid item xs={12}>
-                        <Padding padding="8px" />
-                        <FormControl
-                            component="fieldset"
-                            className={classes.formControl}
-                        // error={errorList.sex}
-                        >
-                            <p className={classes.label}>Sexo *</p>
-                            <RadioGroup
-                                value={values.sex}
-                                name="sex"
-                                onChange={handleChange}
-                                row
-                            >
-                                <FormControlLabel
-                                    value={'2'}
-                                    name="sex"
-                                    control={<PurpleRadio />}
-                                    label="Feminino"
-                                />
-                                <FormControlLabel
-                                    value={'1'}
-                                    name="sex"
-                                    control={<PurpleRadio />}
-                                    label="Masculino"
-                                />
-                            </RadioGroup>
-                        </FormControl>
-                    </Grid>
-                </Grid>
-                <Grid item style={{ width: "100%" }} md={12}>
-                    <p className={classes.label}>Data de Nascimento</p>
-                    <TextField className={classes.inputStudent} name="birthday" onChange={handleChange}
-                        value={values.birthday}
-                        variant="outlined" />
-                </Grid>
-                <Grid item style={{ width: "100%" }} md={12}>
-                    <p className={classes.label}>CPF</p>
-                    <TextField className={classes.inputStudent} InputProps={{
-                        inputComponent: MaskCpf,
-                        value: values.cpf,
-                        inputRef: inputRef,
-                        onChange: handleChange,
-                    }} name="cpf" onChange={handleChange}
-                        value={values.cpf}
-                        variant="outlined" />
+                    <Column>
+                        <TextField
+                            className={classes.inputStudent}
+                            value={values.name}
+                            name="name" onChange={handleChange} variant="outlined" />
+                    </Column>
                 </Grid>
             </Grid>
+            <Grid
+                className={`${classes.contentMain}`}
+                container
+                direction="row"
+                justifyContent="center"
+                alignItems="center"
+            >
+                <Grid item xs={12}>
+                    <Padding padding="8px" />
+                    <FormControl
+                        component="fieldset"
+                        className={classes.formControl}
+                    // error={errorList.sex}
+                    >
+                        <p className={classes.label}>Sexo *</p>
+                        <RadioGroup
+                            value={values.sex}
+                            name="sex"
+                            onChange={handleChange}
+                            row
+                        >
+                            <FormControlLabel
+                                value={'2'}
+                                name="sex"
+                                control={<PurpleRadio />}
+                                label="Feminino"
+                            />
+                            <FormControlLabel
+                                value={'1'}
+                                name="sex"
+                                control={<PurpleRadio />}
+                                label="Masculino"
+                            />
+                        </RadioGroup>
+                    </FormControl>
+                </Grid>
+            </Grid>
+            <Grid container>
+                <Grid item style={{ width: "100%" }} md={6}>
+                    <p className={classes.label}>Data de Nascimento</p>
+                    <Column>
+                        <TextField className={classes.inputStudent} name="birthday" onChange={handleChange}
+                            value={values.birthday}
+                            InputProps={{
+                                inputComponent: MaskDate,
+                                value: values.birthday,
+                                onChange: handleChange
+                            }}
+                            variant="outlined" />
+                    </Column>
+                </Grid>
+            </Grid>
+            <Grid container>
 
+                <Grid item style={{ width: "100%" }} md={6}>
+                    <p className={classes.label}>CPF</p>
+                    <Column>
+                        <TextField className={classes.inputStudent} InputProps={{
+                            inputComponent: MaskCpf,
+                            value: values.cpf,
+                            inputRef: inputRef,
+                            onChange: handleChange,
+                        }} name="cpf" onChange={handleChange}
+                            value={values.cpf}
+                            variant="outlined" />
+                    </Column>
+                </Grid>
+
+            </Grid>
         </>
     )
 }

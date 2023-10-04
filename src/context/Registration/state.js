@@ -44,7 +44,7 @@ export const RegistrationState = () => {
       ['true', 'false'].includes(value) ? value === true : null
     handleSubmitStudent({
       ...dataValues, sex: parseInt(dataValues.sex),
-      birthday: dataValues.birthday,
+      birthday: dataValues.birthday.replace(/\D/g, ''),
       filhoOculos: parseBool(dataValues.filhoOculos),
       cpf: dataValues.cpf ? dataValues.cpf.replace(/\D/g, '') : null,
       horasUsoAparelhosEletronicos: parseInt(dataValues.horasUsoAparelhosEletronicos),
