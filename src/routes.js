@@ -1,16 +1,16 @@
 import React, { Suspense, lazy } from "react";
 import { HashRouter, Redirect, Route, Switch } from "react-router-dom";
+import PdfPrioridade from "./Pdf/PdfPrioridadeStudent";
+import PdfReceita from "./Pdf/PdfReceita";
 import MainLayout from "./components/Layouts/MainLayout";
 import NotFoundPage from "./components/Layouts/NotFoundPage";
 import CircularLoading from "./components/Loading/CircularLoading";
 import { Classroom, ClassroomForm } from "./containers/Classroom";
 import CreateClassroom from "./containers/Classroom/AddClassroom";
-import FormOphthalmological from "./containers/Classroom/Registration/FormOphthalmological/FormOphthalmological";
 import Login from "./containers/Login";
 import Register from "./containers/Register";
 import FormRegistration from "./containers/Registration/FormRegistration/FormRegistration";
 import { isAuthenticated } from "./services/auth";
-import PdfPrioridade from "./Pdf/PdfPrioridade";
 
 //const Home = lazy(() => import("./containers/Home"));
 
@@ -65,10 +65,10 @@ const Routes = () => (
         component={RegistrationClassroom}
       />
 
-      <PrivateRoute
+      <Route
         exact
-        path="/turmas/:id/matricula/:idRegistration/form"
-        component={FormOphthalmological}
+        path="/turmas/:id/matricula/:idRegistration/receita"
+        component={PdfReceita}
       />
       <PrivateRoute exact path="/turmas/:id" component={ClassroomForm} />
       <PrivateRoute

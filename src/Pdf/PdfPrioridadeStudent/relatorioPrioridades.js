@@ -3,13 +3,13 @@ import html2canvas from 'html2canvas';
 import jsPDF from 'jspdf';
 import React, { useEffect, useRef, useState } from 'react';
 import { useParams } from "react-router-dom";
-import fetchOneSchool from '../controller/School/fetchOneSchool';
-import fetchOneClassroom from '../controller/classroom/fetchOneClassroom';
-import fetchRegistration from '../controller/registration/fetchRegistration';
-import { getIdSchool } from '../services/auth';
-import { Column, Padding, Row } from '../styles/style';
-import { Table, TableData, TableHeader, TableWrapper } from './style';
-import logo from "../assets/images/logo.svg";
+import fetchOneSchool from '../../controller/School/fetchOneSchool';
+import fetchOneClassroom from '../../controller/classroom/fetchOneClassroom';
+import fetchRegistration from '../../controller/registration/fetchRegistration';
+import { getIdSchool } from '../../services/auth';
+import { Column, Padding, Row } from '../../styles/style';
+import { Table, TableData, TableHeader, TableWrapper } from '../style';
+import logo from "../../assets/images/logo.svg";
 
 
 
@@ -33,7 +33,7 @@ const MyDocument = () => {
             const imgHeight = (canvas.height * imgWidth) / canvas.width;
             pdf.addImage(imgData, 'PNG', 0, 0, imgWidth, imgHeight);
 
-            pdf.save('relatorio-alunos.pdf');
+            pdf.save('Relatorio-alunos-Lupa.pdf');
         });
     };
 

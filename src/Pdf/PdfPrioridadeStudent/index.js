@@ -1,6 +1,6 @@
 
 import React from "react";
-import MyDocument from "../relatorioPrioridades";
+import MyDocument from "./relatorioPrioridades";
 
 const PdfPrioridade = () => {
 

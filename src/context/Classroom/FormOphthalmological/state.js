@@ -29,7 +29,7 @@ const FormRegistrationState = () => {
 
 
   const handleUpdate = (values) => {
-    updateStudent(idRegistration, values)
+    updateStudent(idRegistration, {...values})
   }
 
   const initialValues = {
@@ -84,7 +84,72 @@ const FormRegistrationState = () => {
     acuidadeTriagemEsquerdo: oneRegistration?.object.acuidadeTriagemEsquerdo ?? "",
     testCover: oneRegistration?.object.testCover ?? "",
     testMovimentoOcular: oneRegistration?.object.testMovimentoOcular ?? "",
-    testManchaBranca: oneRegistration?.object.testManchaBranca ?? ""
+    testManchaBranca: oneRegistration?.object.testManchaBranca ?? "",
+    nomeMedico: oneRegistration?.object.nomeMedico ?? "",
+    crmMedico: oneRegistration?.object.crmMedico ?? "",
+    dataConsulta: oneRegistration?.object.dataConsulta ?? "",
+    refracaoEsfericoOlhoDireito: oneRegistration?.object.refracaoEsfericoOlhoDireito ?? "",
+    refracaoCilindricoOlhoDireito: oneRegistration?.object.refracaoCilindricoOlhoDireito ?? "",
+    refracaoEixoOlhoDireito: oneRegistration?.object.refracaoEixoOlhoDireito ?? "",
+    refracaoEquivalenteEsfericoOlhoDireito: oneRegistration?.object.refracaoEquivalenteEsfericoOlhoDireito ?? "",
+    refracaoDpOlhoDireito: oneRegistration?.object.refracaoDpOlhoDireito ?? "",
+    refracaoEsfericoOlhoEsquerdo: oneRegistration?.object.refracaoEsfericoOlhoEsquerdo ?? "",
+    refracaoCilindricoOlhoEsquerdo: oneRegistration?.object.refracaoCilindricoOlhoEsquerdo ?? "",
+    refracaoEixoOlhoEsquerdo: oneRegistration?.object.refracaoEixoOlhoEsquerdo ?? "",
+    refracaoEquivalenteEsfericoOlhoEsquerdo: oneRegistration?.object.refracaoEquivalenteEsfericoOlhoEsquerdo ?? "",
+    refracaoDpOlhoEsquerdo: oneRegistration?.object.refracaoDpOlhoEsquerdo ?? "",
+    observacoesSpotVision: {
+      miopiaOd: oneRegistration?.object.observacoesSpotVision?.miopiaOd ?? false,
+      miopiaOs: oneRegistration?.object.observacoesSpotVision?.miopiaOs ?? false,
+      astigmatismoOd: oneRegistration?.object.observacoesSpotVision?.astigmatismoOd ?? false,
+      astigmatismoOs: oneRegistration?.object.observacoesSpotVision?.astigmatismoOs ?? false,
+      hipermetropiaOd: oneRegistration?.object.observacoesSpotVision?.hipermetropiaOd ?? false,
+      hipermetropiaOs: oneRegistration?.object.observacoesSpotVision?.hipermetropiaOs ?? false,
+      estrabismoOd: oneRegistration?.object.observacoesSpotVision?.estrabismoOd ?? false,
+      estrabismoOs: oneRegistration?.object.observacoesSpotVision?.estrabismoOs ?? false,
+      anisometropia: oneRegistration?.object.observacoesSpotVision?.anisometropia ?? false,
+      anisocoria: oneRegistration?.object.observacoesSpotVision?.anisocoria ?? false,
+    },
+    anamnese: oneRegistration?.object.anamnese ?? "",
+    refracaoEstaticaEsfericoOlhoDireito: oneRegistration?.object.refracaoEstaticaEsfericoOlhoDireito ?? "",
+    refracaoEstaticaCilindricoOlhoDireito: oneRegistration?.object.refracaoEstaticaCilindricoOlhoDireito ?? "",
+    refracaoEstaticaEixoOlhoDireito: oneRegistration?.object.refracaoEstaticaEixoOlhoDireito ?? "",
+    refracaoEstaticaAcuidadeVisualOlhoDireito: oneRegistration?.object.refracaoEstaticaAcuidadeVisualOlhoDireito ?? "",
+    refracaoEstaticaEsfericoOlhoEsquerdo: oneRegistration?.object.refracaoEstaticaEsfericoOlhoEsquerdo ?? "",
+    refracaoEstaticaCilindricoOlhoEsquerdo: oneRegistration?.object.refracaoEstaticaCilindricoOlhoEsquerdo ?? "",
+    refracaoEstaticaEixoOlhoEsquerdo: oneRegistration?.object.refracaoEstaticaEixoOlhoEsquerdo ?? "",
+    refracaoEstaticaAcuidadeVisualOlhoEsquerdo: oneRegistration?.object.refracaoEstaticaAcuidadeVisualOlhoEsquerdo ?? "",
+    biomicroscopiaOd: oneRegistration?.object.biomicroscopiaOd ?? "",
+    biomicroscopiaOs: oneRegistration?.object.biomicroscopiaOs ?? "",
+    fundoscopiaOd: oneRegistration?.object.fundoscopiaOd ?? "",
+    fundoscopiaOs: oneRegistration?.object.fundoscopiaOs ?? "",
+    motilidadeOcular: oneRegistration?.object.motilidadeOcular ?? "",
+    diagnostico: oneRegistration?.object.diagnostico ?? "",
+    conduta: oneRegistration?.object.conduta ?? "",
+    precisaOculos: oneRegistration?.object.precisaOculos ?? "",
+    acompanhamento: {
+      ambliopia: oneRegistration?.object.acompanhamento?.ambliopia ?? false,
+      retinoblastoma: oneRegistration?.object.acompanhamento?.retinoblastoma ?? false,
+      catarataCongenita: oneRegistration?.object.acompanhamento?.catarataCongenita ?? false,
+      obstrucaoViasLacrimais: oneRegistration?.object.acompanhamento?.obstrucaoViasLacrimais ?? false,
+      estrabismo: oneRegistration?.object.acompanhamento?.estrabismo ?? false,
+      glaucomaCongenito: oneRegistration?.object.acompanhamento?.glaucomaCongenito ?? false,
+      uveites: oneRegistration?.object.acompanhamento?.uveites ?? false,
+      nistagmo: oneRegistration?.object.acompanhamento?.nistagmo ?? false,
+      miopiaProgressiva: oneRegistration?.object.acompanhamento?.miopiaProgressiva ?? false,
+      ectasiasCornea: oneRegistration?.object.acompanhamento?.ectasiasCornea ?? false,
+      alergiasConjuntivitesCalazio: oneRegistration?.object.acompanhamento?.alergiasConjuntivitesCalazio ?? false,
+      baixaVisaoCentral: oneRegistration?.object.acompanhamento?.baixaVisaoCentral ?? false,
+    },
+    proximaConsulta: oneRegistration?.object.proximaConsulta ?? "",
+    receitaEsfericoOlhoDireito: oneRegistration?.object.receitaEsfericoOlhoDireito ?? "",
+    receitaCilindricoOlhoDireito: oneRegistration?.object.receitaCilindricoOlhoDireito ?? "",
+    receitaEixoOlhoDireito: oneRegistration?.object.receitaEixoOlhoDireito ?? "",
+    receitaDpOlhoDireito: oneRegistration?.object.receitaDpOlhoDireito ?? "",
+    receitaEsfericoOlhoEsquerdo: oneRegistration?.object.receitaEsfericoOlhoEsquerdo ?? "",
+    receitaCilindricoOlhoEsquerdo: oneRegistration?.object.receitaCilindricoOlhoEsquerdo ?? "",
+    receitaEixoOlhoEsquerdo: oneRegistration?.object.receitaEixoOlhoEsquerdo ?? "",
+    receitaDpOlhoEsquerdo: oneRegistration?.object.receitaDpOlhoEsquerdo ?? "",
   };
 
 
@@ -168,7 +233,7 @@ const FormRegistrationState = () => {
         count = count + 5;
       }
       if (
-        oneRegistration.object.acuidadeTriagemEsquerdo === "8" 
+        oneRegistration.object.acuidadeTriagemEsquerdo === "8"
       ) {
         count = count + 2;
       }
@@ -189,7 +254,7 @@ const FormRegistrationState = () => {
         count = count + 5;
       }
       if (
-        oneRegistration.object.acuidadeTriagemDireito === "8" 
+        oneRegistration.object.acuidadeTriagemDireito === "8"
       ) {
         count = count + 2;
       }
