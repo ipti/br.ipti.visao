@@ -11,6 +11,7 @@ import Login from "./containers/Login";
 import Register from "./containers/Register";
 import FormRegistration from "./containers/Registration/FormRegistration/FormRegistration";
 import { isAuthenticated } from "./services/auth";
+import PdfTodasReceita from "./Pdf/PdfTodasReceitas";
 
 //const Home = lazy(() => import("./containers/Home"));
 
@@ -80,6 +81,11 @@ const Routes = () => (
         exact
         path="/turmas/:id/pdf"
         component={PdfPrioridade}
+      />
+      <Route
+        exact
+        path="/turmas/:id/pdfreceita"
+        component={PdfTodasReceita}
       />
       <PrivateRoute exact path="/turma/adicionar" component={CreateClassroom} />
       <Route path="/*" component={NotFoundPage} />

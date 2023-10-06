@@ -7,15 +7,15 @@ import Alert from "@material-ui/lab/Alert";
 // Third party
 
 // Components
+import { useParams } from "react-router-dom";
 import { BoxRegistration } from "../../components/Boxes";
 import List from "../../components/List";
-import { useParams } from "react-router-dom";
 
 // Styles
 import { ArrowBack } from "@material-ui/icons";
 import { useHistory } from "react-router";
-import { Padding } from "../../styles/style";
 import { ButtonPurple } from "../../components/Buttons";
+import { Padding } from "../../styles/style";
 
 const Create = props => {
 
@@ -24,6 +24,7 @@ const Create = props => {
   const {
     data,
     baseLink,
+    classroom
   } = props;
 
   const { id } = useParams()
@@ -35,7 +36,7 @@ const Create = props => {
 
       const points = () => {
         var count = 0;
-    
+
         if (registration) {
           if (registration.object.filhoOculos === "1") {
             count++;
@@ -113,7 +114,7 @@ const Create = props => {
             count = count + 5;
           }
           if (
-            registration.object.acuidadeTriagemEsquerdo === "8" 
+            registration.object.acuidadeTriagemEsquerdo === "8"
           ) {
             count = count + 2;
           }
@@ -134,7 +135,7 @@ const Create = props => {
             count = count + 5;
           }
           if (
-            registration.object.acuidadeTriagemDireito === "8" 
+            registration.object.acuidadeTriagemDireito === "8"
           ) {
             count = count + 2;
           }
@@ -144,7 +145,7 @@ const Create = props => {
             count = count + 2;
           }
         }
-    
+
         return count;
       }
 
@@ -164,23 +165,35 @@ const Create = props => {
     });
   };
 
+  console.log(classroom)
+
   return (
     <>
       <ArrowBack onClick={() => { history.goBack() }} style={{ cursor: "pointer" }} />
-      <h1>{data && data.name}</h1>
+      <h1>{classroom && classroom?.object?.name}</h1>
       <h2>Alunos</h2>
       <Padding padding="16px" />
       <Grid
         // className={classes.marginButtom}
         container
+
         direction="row"
         style={{ marginBottom: "16px" }}
       >
-        <Grid item md={2} sm={2}>
+        <Grid item md={3} sm={2}>
           <ButtonPurple
             className="t-button-primary"
             onClick={() => history.push(`/turmas/${id}/pdf`)}
             title={"Relatório de alunos"}
+          />
+        </Grid>
+
+        <Padding />
+        <Grid item md={3} sm={2}>
+          <ButtonPurple
+            className="t-button-primary"
+            onClick={() => history.push(`/turmas/${id}/pdfreceita`)}
+            title={"Gerar receitas"}
           />
         </Grid>
       </Grid>

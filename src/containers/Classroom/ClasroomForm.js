@@ -6,6 +6,7 @@ import { useParams } from "react-router-dom";
 import { useEffect } from "react";
 import { useState } from "react";
 import fetchRegistration from "../../controller/registration/fetchRegistration";
+import fetchOneClassroom from "../../controller/classroom/fetchOneClassroom";
 
 const Form = props => {
 
@@ -21,6 +22,7 @@ const Form = props => {
   });
 
   const [students, setStudents] = useState([])
+  const [classroom, setClassroom] = useState([])
 
   useEffect(() => {
     fetchRegistration()
@@ -32,6 +34,15 @@ const Form = props => {
         // Trate erros, se ocorrerem
         console.error(err)
       })
+
+      fetchOneClassroom(id)
+        .then((testDataList) => {
+          setClassroom(testDataList)
+        })
+        .catch((err) => {
+          // Trate erros, se ocorrerem
+          console.error(err)
+        })
   }, [id])
 
 
@@ -44,6 +55,7 @@ const Form = props => {
           baseLink={`/turmas/${props.match.params.id}/matricula`}
           loadingIcon={props?.loading}
           data={students}
+          classroom={classroom}
         />
       </>
     </>

@@ -217,11 +217,7 @@ const MyDocument = () => {
             </Padding>
             <div ref={contentRef}>
                 <Padding padding="16px">
-                    <Column id="center">
-                        <Row id="center">
-                            <img style={{ width: "256px", padding: "8px 16px" }} alt="" src={logo} />
-                        </Row>
-                    </Column>
+
                     <Column>
                         <Row id='space-between'>
                             <Column>
@@ -230,6 +226,11 @@ const MyDocument = () => {
                                 <h1 style={{ padding: "0 4px", margin: 0, color: "#000" }}>Turma: {classroom?.object.name}</h1>
                                 <Padding />
                                 <h1 style={{ padding: "0 4px", margin: 0, color: "#000" }}>Data de Emissão: {formatarDataHora()}</h1>
+                            </Column>
+                            <Column id="center">
+                                <Row id="center">
+                                    <img style={{ width: "256px", padding: "8px 16px" }} alt="" src={logo} />
+                                </Row>
                             </Column>
                         </Row>
                     </Column>
@@ -256,7 +257,7 @@ const MyDocument = () => {
                                             <tr key={index}>
                                                 <TableData>{item.student.object.name}</TableData>
                                                 <TableData>{item.points}</TableData>
-                                                <TableData>{item.points < 5 ? "Prioridade minima" : (item.points >= 5 && item.points < 9) ? "Prioridade média" : item.points >=  10 ? "Prioridade máxima":  ""}</TableData>
+                                                <TableData>{item.points < 5 ? "Prioridade minima" : (item.points >= 5 && item.points < 9) ? "Prioridade média" : item.points >= 10 ? "Prioridade máxima" : ""}</TableData>
                                             </tr>
                                         )
                                     })}

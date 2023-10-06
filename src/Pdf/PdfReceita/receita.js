@@ -73,11 +73,7 @@ const MyDocument = () => {
             </Padding>
             <div ref={contentRef}>
                 <Padding padding="16px">
-                    <Column id="center">
-                        <Row id="center">
-                            <img style={{ width: "256px", padding: "8px 16px" }} alt="" src={logo} />
-                        </Row>
-                    </Column>
+
                     <Column>
                         <Row id='space-between'>
                             <Column>
@@ -88,6 +84,11 @@ const MyDocument = () => {
                                 <h2 style={{ padding: "0 4px", margin: 0, color: "#000" }}>Data da consulta: {students?.object.dataConsulta}</h2>
                                 <Padding />
                                 <h2 style={{ padding: "0 4px", margin: 0, color: "#000" }}>Médico: {students?.object.nomeMedico}    <Padding /> CRM: {students?.object.crmMedico}</h2>
+                            </Column>
+                            <Column id="center">
+                                <Row id="center">
+                                    <img style={{ width: "256px", padding: "8px 16px" }} alt="" src={logo} />
+                                </Row>
                             </Column>
                         </Row>
                     </Column>
