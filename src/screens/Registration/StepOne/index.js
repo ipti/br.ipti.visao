@@ -127,7 +127,8 @@ const StepOne = () => {
     cpf: dataValues?.cpf ?? "",
     school_fk: dataValues?.school_fk ?? "",
     classroom_fk: dataValues?.classroom_fk ?? "",
-    turno: dataValues?.turno
+    turno: dataValues?.turno,
+    permission: true
   };
 
 
@@ -135,7 +136,7 @@ const StepOne = () => {
     <>
       <Formik
         initialValues={initialValues}
-        onSubmit={values => next(1, values)}
+        onSubmit={values => next(2, values)}
         validationSchema={validationSchema}
         validateOnChange={false}
         enableReinitialize

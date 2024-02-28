@@ -28,7 +28,7 @@ const Home = props => {
   const history = useHistory()
 
   const { oneRegistration, handleUpdate, initialValues, points } = useContext(FormRegistrationContext)
-
+console.log(oneRegistration)
   return (
     <>
       <ArrowBack onClick={() => { history.goBack() }} style={{ cursor: "pointer" }} />

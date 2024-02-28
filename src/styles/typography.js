@@ -5,7 +5,6 @@ const typography = {
     medium: 20,
     large: "5vh",
     extraLarge: "6vh",
-    
   },
   types: {
     light: "Poppins Light",
