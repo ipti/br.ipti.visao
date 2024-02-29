@@ -2,20 +2,20 @@ import React from "react";
 
 // Material UI
 import Grid from "@material-ui/core/Grid";
-import Alert from "@material-ui/lab/Alert";
 import { makeStyles } from "@material-ui/core/styles";
+import Alert from "@material-ui/lab/Alert";
 
 import { useHistory } from "react-router-dom";
 
 // Components
-import { BoxBig } from "../../components/Boxes";
 import AddIcon from "@material-ui/icons/Add";
+import { BoxBig } from "../../components/Boxes";
 import List from "../../components/List";
 
 // Styles
-import styles from "./styles";
 import { Fab, ThemeProvider, createTheme } from "@mui/material";
 import styleBase from "../../styles";
+import styles from "./styles";
 
 const useStyles = makeStyles(styles);
 

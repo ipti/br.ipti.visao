@@ -1,35 +1,35 @@
 import { signInWithEmailAndPassword } from "firebase/auth";
-import { auth } from "../../config/firebase";
+import { auth, firestore } from "../../config/firebase";
+import { addDoc } from "@firebase/firestore"
+import { collection } from "@firebase/firestore"
 
-// Configuração do Firebase
 
-// Inicializa o Firebase
 
-// Adiciona mais atributos ao objeto de autenticação
 const email = "admin@admin.com";
 const senha = "p@s4ipti";
 
-export const editUser = () => {
-  signInWithEmailAndPassword(auth, email, senha)
-    .then((userCredential) => {
-      // Se autenticado com sucesso, você pode adicionar mais atributos ao usuário
-      const user = userCredential.user;
-      // Por exemplo, você pode definir o nome do usuário
-      user
-        .updateProfile({
-          role: "ADMIN",
-        })
-        .then(() => {
-          // Atualização de perfil concluída com sucesso
-          console.log("Perfil do usuário atualizado com sucesso!");
-        })
-        .catch((error) => {
-          // Se houver algum erro ao atualizar o perfil
-          console.error("Erro ao atualizar perfil:", error);
-        });
+export const editUser = async () => {
+   signInWithEmailAndPassword(auth,email, senha)
+  .then((userCredential) => {
+    const user = userCredential.user;
+
+    const userData = {
+      nome: user.displayName,
+      email: user.email,
+      uid: user.uid,
+    };
+
+    const ref = collection(firestore, "userData");
+    
+    addDoc(ref, userData)
+    .then(() => {
+      console.log("Dados do usuário armazenados com sucesso!");
     })
     .catch((error) => {
-      // Se houver algum erro durante a autenticação
-      console.error("Erro ao autenticar:", error);
+      console.error("Erro ao armazenar dados do usuário:", error);
     });
+  })
+  .catch((error) => {
+    console.error("Erro ao autenticar:", error);
+  });
 };
