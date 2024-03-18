@@ -8,7 +8,7 @@ const handleLogin = async (email, password, history) => {
     signInWithEmailAndPassword(auth, email, password)
         .then((userCredential) => {
             const user = userCredential.user;
-            login(user);
+            login(user.accessToken);
             history.push("/");
         })
         .catch((error) => {

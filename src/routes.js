@@ -12,6 +12,7 @@ import Register from "./containers/Register";
 import FormRegistration from "./containers/Registration/FormRegistration/FormRegistration";
 import { isAuthenticated } from "./services/auth";
 import PdfTodasReceita from "./Pdf/PdfTodasReceitas";
+import CreateUserScreen from "./screens/Users/CreateUser";
 
 //const Home = lazy(() => import("./containers/Home"));
 
@@ -55,6 +56,7 @@ const Routes = () => (
       <Route path="/register" exact component={Register} />
       <Route path="/matricula" exact component={FormRegistration} />
       <PrivateRoute exact path="/" component={School} />
+      <PrivateRoute exact path="/users/criar" component={CreateUserScreen} />
       <PrivateRoute exact path="/escolas" component={School} />
       <PrivateRoute exact path="/escolas/:id" component={SchoolClassrooms} />
       <PrivateRoute exact path="/criar/escolas" component={SchoolCreate} />

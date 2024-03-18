@@ -84,7 +84,7 @@ root {
 }
 
 
-/* input[type="text"],
+input[type="text"],
   input[type="password"],
   input[type="datetime"],
   input[type="datetime-local"],
@@ -109,4 +109,4 @@ root {
     -moz-transition: border linear .2s, box-shadow linear .2s;
     -o-transition: border linear .2s, box-shadow linear .2s;
     transition: border linear .2s, box-shadow linear .2s;
-  } */
+  }
