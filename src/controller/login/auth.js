@@ -1,6 +1,6 @@
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../../config/firebase";
-import { login } from "../../services/auth";
+import { idUser, login } from "../../services/auth";
 
 const handleLogin = async (email, password, history) => {
 
@@ -9,6 +9,7 @@ const handleLogin = async (email, password, history) => {
         .then((userCredential) => {
             const user = userCredential.user;
             login(user.accessToken);
+            idUser(user.uid)
             history.push("/");
         })
         .catch((error) => {

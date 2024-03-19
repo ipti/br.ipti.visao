@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useContext } from "react";
 
 // Material UI
 import Grid from "@material-ui/core/Grid";
@@ -16,6 +16,7 @@ import List from "../../components/List";
 import { Fab, ThemeProvider, createTheme } from "@mui/material";
 import styleBase from "../../styles";
 import styles from "./styles";
+import { PrivateRouterContext } from "../../context/PrivateRouter/context";
 
 const useStyles = makeStyles(styles);
 
@@ -32,6 +33,9 @@ const theme = createTheme({
 const Home = ({ data }) => {
   const history = useHistory()
   const classes = useStyles();
+
+  const {user} = useContext(PrivateRouterContext)
+
   const schools = () => {
     const schoolList = data ?? [];
 
@@ -66,13 +70,13 @@ const Home = ({ data }) => {
           </Grid>
         </List>
       </Grid>
-      <div onClick={() => history.push("/criar/escolas")} className={`${classes.addStage}`}>
+      {user?.role === 1 ?  <div onClick={() => history.push("/criar/escolas")} className={`${classes.addStage}`}>
         <ThemeProvider theme={theme}>
           <Fab color="primary" aria-label="add">
             <AddIcon />
           </Fab>
         </ThemeProvider>
-      </div>
+      </div> : null}
     </>
   );
 };

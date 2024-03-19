@@ -5,8 +5,8 @@ import { collection } from "@firebase/firestore"
 
 
 
-const email = "admin@admin.com";
-const senha = "p@s4ipti";
+const email = "lupa@lupa.com";
+const senha = "lupa2024";
 
 export const editUser = async () => {
    signInWithEmailAndPassword(auth,email, senha)
@@ -14,7 +14,8 @@ export const editUser = async () => {
     const user = userCredential.user;
 
     const userData = {
-      nome: user.displayName,
+      name: "lupa",
+      role: 1,
       email: user.email,
       uid: user.uid,
     };

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 
 // Material UI
 import Grid from "@material-ui/core/Grid";
@@ -14,6 +14,7 @@ import List from "../../components/List";
 import { Fab, useMediaQuery } from "@material-ui/core";
 import AddIcon from "@material-ui/icons/Add";
 import { Link } from "react-router-dom";
+import { PrivateRouterContext } from "../../context/PrivateRouter/context";
 import fetchSchool from "../../controller/School/fetchSchools";
 import { idSchoolLocal } from "../../services/auth";
 import styleBase from "../../styles";
@@ -34,7 +35,8 @@ const useStyles = makeStyles(theme => styles);
 const Classroom = ({ classroom, setIdSchool, idSchool }) => {
   const [school, setSchool] = useState([])
 
- 
+  const {user} = useContext(PrivateRouterContext)
+
 
   const matches = useMediaQuery('(max-width:600px)')
 
@@ -116,13 +118,14 @@ const Classroom = ({ classroom, setIdSchool, idSchool }) => {
           </Grid>
         </List>
       </Grid>
-      <Link to="/turma/adicionar" className={`${classes.addStage}`}>
+      {user?.role === 1 ?    <Link to="/turma/adicionar" className={`${classes.addStage}`}>
         <ThemeProvider theme={theme}>
           <Fab color="primary" aria-label="add">
             <AddIcon />
           </Fab>
         </ThemeProvider>
-      </Link>
+      </Link> : null}
+    
     </div>
   );
 };

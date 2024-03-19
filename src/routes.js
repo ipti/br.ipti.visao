@@ -13,6 +13,7 @@ import FormRegistration from "./containers/Registration/FormRegistration/FormReg
 import { isAuthenticated } from "./services/auth";
 import PdfTodasReceita from "./Pdf/PdfTodasReceitas";
 import CreateUserScreen from "./screens/Users/CreateUser";
+import PrivateRouterProvider from "./context/PrivateRouter/context";
 
 //const Home = lazy(() => import("./containers/Home"));
 
@@ -21,10 +22,7 @@ const SchoolClassrooms = lazy(() =>
   import("./containers/School/SchoolClassrooms")
 );
 
-const SchoolCreate = lazy(() =>
-  import("./containers/School/SchoolCreate")
-);
-
+const SchoolCreate = lazy(() => import("./containers/School/SchoolCreate"));
 
 const RegistrationClassroom = lazy(() =>
   import("./containers/Classroom/Registration/Registration")
@@ -33,13 +31,15 @@ const RegistrationClassroom = lazy(() =>
 const PrivateRoute = ({ component: Component, ...rest }) => (
   <Route
     {...rest}
-    render={props =>
+    render={(props) =>
       isAuthenticated() ? (
-        <MainLayout>
-          <Suspense fallback={<CircularLoading />}>
-            <Component {...props} />
-          </Suspense>
-        </MainLayout>
+        <PrivateRouterProvider>
+          <MainLayout>
+            <Suspense fallback={<CircularLoading />}>
+              <Component {...props} />
+            </Suspense>
+          </MainLayout>
+        </PrivateRouterProvider>
       ) : (
         <Redirect
           to={{ pathname: "/register", state: { from: props.location } }}
@@ -56,7 +56,7 @@ const Routes = () => (
       <Route path="/register" exact component={Register} />
       <Route path="/matricula" exact component={FormRegistration} />
       <PrivateRoute exact path="/" component={School} />
-      <PrivateRoute exact path="/users/criar" component={CreateUserScreen} />
+      <PrivateRoute exact path="/usuario/criar" component={CreateUserScreen} />
       <PrivateRoute exact path="/escolas" component={School} />
       <PrivateRoute exact path="/escolas/:id" component={SchoolClassrooms} />
       <PrivateRoute exact path="/criar/escolas" component={SchoolCreate} />
@@ -79,16 +79,8 @@ const Routes = () => (
         path="/turmas/:id/matricula/:idRegistration"
         component={RegistrationClassroom}
       />
-      <Route
-        exact
-        path="/turmas/:id/pdf"
-        component={PdfPrioridade}
-      />
-      <Route
-        exact
-        path="/turmas/:id/pdfreceita"
-        component={PdfTodasReceita}
-      />
+      <Route exact path="/turmas/:id/pdf" component={PdfPrioridade} />
+      <Route exact path="/turmas/:id/pdfreceita" component={PdfTodasReceita} />
       <PrivateRoute exact path="/turma/adicionar" component={CreateClassroom} />
       <Route path="/*" component={NotFoundPage} />
     </Switch>
