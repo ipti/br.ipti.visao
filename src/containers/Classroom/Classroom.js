@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import fetchClassroom from "../../controller/classroom/fetchClassroom";
 import Classroom from "../../screens/Classroom/Classroom";
+import { getIdSchool } from "../../services/auth";
 
 const Home = props => {
 
@@ -11,7 +12,7 @@ const Home = props => {
   useEffect(() => {
     fetchClassroom()
       .then((testDataList) => {
-        const classroomSchool = testDataList.filter(props => props.object.school_fk === idSchool)
+        const classroomSchool = testDataList.filter(props => props.object.school_fk === getIdSchool())
         setClassroom(classroomSchool)
       })
       .catch((err) => {

@@ -12,28 +12,51 @@ import { BoxRegistration } from "../../components/Boxes";
 import List from "../../components/List";
 
 // Styles
-import { ArrowBack } from "@material-ui/icons";
+import { ArrowBack, Delete } from "@material-ui/icons";
 import { useHistory } from "react-router";
 import { ButtonPurple } from "../../components/Buttons";
-import { Padding } from "../../styles/style";
+import { Column, Padding, Row } from "../../styles/style";
+import { deleteItem } from "../../controller/classroom/deleteClassroom";
+import Swal from "sweetalert2";
+import styles from "../../styles";
+import image from "../../assets/images/Atenção-img.png";
 
-const Create = props => {
 
-  const history = useHistory()
+const Create = (props) => {
+  const history = useHistory();
 
-  const {
-    data,
-    baseLink,
-    classroom
-  } = props;
+  const { data, baseLink, classroom } = props;
 
-  const { id } = useParams()
+  const { id } = useParams();
+
+  const deletePreRegistration = (e, id) => {
+    e.stopPropagation()
+    if (id) {
+
+
+      return Swal.fire({
+        title: "Excluir pré matricula?",
+        text: "Essa ação é irreversível não pode ser desfeita",
+        imageUrl: image,
+        imageHeight: 250,
+        showCancelButton: true,
+        confirmButtonColor: styles.colors.colorsBaseProductNormal,
+        cancelButtonColor: styles.colors.colorsBaseCloudNormal,
+        confirmButtonText: 'Aceitar',
+        reverseButtons: true,
+        cancelButtonText: `<div style="color:black" >Cancelar</div>`
+      }).then((result) => {
+        if (result.isConfirmed) {
+          deleteItem(id, history)
+        }
+      })
+    }
+  }
 
   const registrations = () => {
     const registrationList = data ?? [];
 
     return registrationList.map((registration, index) => {
-
       const points = () => {
         var count = 0;
 
@@ -41,14 +64,21 @@ const Create = props => {
           if (registration.object.filhoOculos === "1") {
             count++;
           }
-          if ((registration.object.filhossintomas.dificuldadeQuadro && registration.object.filhossintomas.olhoTortoMomentos) ||
-            (registration.object.filhossintomas.dificuldadeLivro && registration.object.filhossintomas.olhoTortoMomentos) ||
-            (registration.object.filhossintomas.dificuldadeQuadro && registration.object.filhossintomas.rostoApertaOlhos) ||
-            (registration.object.filhossintomas.dificuldadeLivro && registration.object.filhossintomas.rostoApertaOlhos) ||
+          if (
+            (registration.object.filhossintomas.dificuldadeQuadro &&
+              registration.object.filhossintomas.olhoTortoMomentos) ||
+            (registration.object.filhossintomas.dificuldadeLivro &&
+              registration.object.filhossintomas.olhoTortoMomentos) ||
+            (registration.object.filhossintomas.dificuldadeQuadro &&
+              registration.object.filhossintomas.rostoApertaOlhos) ||
+            (registration.object.filhossintomas.dificuldadeLivro &&
+              registration.object.filhossintomas.rostoApertaOlhos) ||
             registration.object.filhossintomas.olhoTortoConstante ||
-            (registration.object.filhossintomas.olhoTortoMomentos && registration.object.filhossintomas.rostoApertaOlhos) ||
+            (registration.object.filhossintomas.olhoTortoMomentos &&
+              registration.object.filhossintomas.rostoApertaOlhos) ||
             registration.object.filhossintomas.tremorOlhos ||
-            registration.object.filhossintomas.manchaBrancaPupila) {
+            registration.object.filhossintomas.manchaBrancaPupila
+          ) {
             count++;
           }
           if (
@@ -90,7 +120,10 @@ const Create = props => {
           ) {
             count++;
           }
-          if (registration.object.horasAtividadesAoArLivre === 1 || registration.object.horasAtividadesAoArLivre === 2) {
+          if (
+            registration.object.horasAtividadesAoArLivre === 1 ||
+            registration.object.horasAtividadesAoArLivre === 2
+          ) {
             count++;
           }
           if (registration.object.testCover === "1") {
@@ -113,14 +146,10 @@ const Create = props => {
           ) {
             count = count + 5;
           }
-          if (
-            registration.object.acuidadeTriagemEsquerdo === "8"
-          ) {
+          if (registration.object.acuidadeTriagemEsquerdo === "8") {
             count = count + 2;
           }
-          if (
-            registration.object.acuidadeTriagemEsquerdo === "nenhum"
-          ) {
+          if (registration.object.acuidadeTriagemEsquerdo === "nenhum") {
             count = count + 2;
           }
           if (
@@ -134,20 +163,16 @@ const Create = props => {
           ) {
             count = count + 5;
           }
-          if (
-            registration.object.acuidadeTriagemDireito === "8"
-          ) {
+          if (registration.object.acuidadeTriagemDireito === "8") {
             count = count + 2;
           }
-          if (
-            registration.object.acuidadeTriagemDireito === "nenhum"
-          ) {
+          if (registration.object.acuidadeTriagemDireito === "nenhum") {
             count = count + 2;
           }
         }
 
         return count;
-      }
+      };
 
       return (
         <BoxRegistration
@@ -165,18 +190,26 @@ const Create = props => {
     });
   };
 
-  console.log(classroom)
-
   return (
     <>
-      <ArrowBack onClick={() => { history.goBack() }} style={{ cursor: "pointer" }} />
-      <h1>{classroom && classroom?.object?.name}</h1>
+      <ArrowBack
+        onClick={() => {
+          history.goBack();
+        }}
+        style={{ cursor: "pointer" }}
+      />
+      <Row id="space-between" style={{width: "100%", justifyContent: "space-between"}}>
+        <h1>{classroom && classroom?.object?.name}</h1>
+        <Column id="center">
+        <Delete style={{cursor: "pointer"}} onClick={e => deletePreRegistration(e, classroom.id)} />
+
+        </Column>
+      </Row>
       <h2>Alunos</h2>
       <Padding padding="16px" />
       <Grid
         // className={classes.marginButtom}
         container
-
         direction="row"
         style={{ marginBottom: "16px" }}
       >
