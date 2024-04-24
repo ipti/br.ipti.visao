@@ -35,7 +35,7 @@ const Create = (props) => {
 
 
       return Swal.fire({
-        title: "Excluir pré matricula?",
+        title: "Excluir turma?",
         text: "Essa ação é irreversível não pode ser desfeita",
         imageUrl: image,
         imageHeight: 250,
