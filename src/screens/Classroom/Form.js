@@ -198,10 +198,10 @@ const Create = (props) => {
         }}
         style={{ cursor: "pointer" }}
       />
-      <Row id="space-between" style={{width: "100%", justifyContent: "space-between"}}>
+      <Row id="space-between" style={{ width: "100%", justifyContent: "space-between" }}>
         <h1>{classroom && classroom?.object?.name}</h1>
         <Column id="center">
-        <Delete style={{cursor: "pointer"}} onClick={e => deletePreRegistration(e, classroom.id)} />
+          <Delete style={{ cursor: "pointer" }} onClick={e => deletePreRegistration(e, classroom.id)} />
 
         </Column>
       </Row>
@@ -227,6 +227,14 @@ const Create = (props) => {
             className="t-button-primary"
             onClick={() => history.push(`/turmas/${id}/pdfreceita`)}
             title={"Gerar receitas"}
+          />
+        </Grid>
+        <Padding />
+        <Grid item md={3} sm={2}>
+          <ButtonPurple
+            className="t-button-primary"
+            onClick={() => history.push(`/turmas/${id}/criar-aluno`)}
+            title={"Adicionar alunos"}
           />
         </Grid>
       </Grid>

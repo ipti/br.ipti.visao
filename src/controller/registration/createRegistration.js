@@ -3,14 +3,14 @@ import { collection } from "@firebase/firestore"
 import { addDoc } from "@firebase/firestore"
 
 
-const handleSubmitStudent = (body, history) => {
+const handleSubmitStudent = (body, history, path) => {
     const ref = collection(firestore, "student");
 
     let data = body
 
     try {
         addDoc(ref, data)
-        history.push("/")
+        history.push(path)
     } catch (err) {
         console.log(err)
     }
