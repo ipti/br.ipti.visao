@@ -13,6 +13,7 @@ import IconNotActive from "../../assets/images/notactiveRegistration.svg";
 import IconClasMedia from "../../assets/images/iconClasMedia.svg"
 import styled from "../../styles";
 import styles from "./styles";
+import { deleteRegistration } from "../../controller/registration/deleteRegistration";
 
 const useStyles = makeStyles(styles);
 
@@ -49,6 +50,7 @@ const BoxRegistration = props => {
         cancelButtonText: `<div style="color:black" >Cancelar</div>`
       }).then((result) => {
         if (result.isConfirmed) {
+          deleteRegistration(id)
           // requestDeletePreRegistrationMutation.mutate(id)
         }
       })

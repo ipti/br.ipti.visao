@@ -19,7 +19,6 @@ const fetchOneUser = async (id) => {
             testDataList.push(data)
         })
         console.log(testDataList)
-        console.log(id)
       return testDataList.find(props => props.uid === id);
     } catch (err) {
       console.error("Erro ao buscar dados:", err);

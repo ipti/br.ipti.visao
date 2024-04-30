@@ -41,10 +41,8 @@ const MyDocument = () => {
     };
 
     useEffect(() => {
-        console.log("eeuu")
         fetchOneRegistration(idRegistration)
             .then((testDataList) => {
-                console.log("eeuu")
                 setStudents(testDataList)
             })
             .catch((err) => {

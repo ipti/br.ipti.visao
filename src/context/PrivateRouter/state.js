@@ -7,7 +7,6 @@ export const PrivateRouterState = () => {
   useEffect(() => {
     fetchOneUser(getIdUser())
       .then((testDataList) => {
-        console.log(testDataList)
         setuser(testDataList);
       })
       .catch((err) => {
