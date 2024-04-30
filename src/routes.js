@@ -14,6 +14,7 @@ import { isAuthenticated } from "./services/auth";
 import PdfTodasReceita from "./Pdf/PdfTodasReceitas";
 import CreateUserScreen from "./screens/Users/CreateUser";
 import PrivateRouterProvider from "./context/PrivateRouter/context";
+import CreateRegistration from "./screens/Classroom/CreateRegistration";
 
 //const Home = lazy(() => import("./containers/Home"));
 
@@ -61,19 +62,19 @@ const Routes = () => (
       <PrivateRoute exact path="/escolas/:id" component={SchoolClassrooms} />
       <PrivateRoute exact path="/criar/escolas" component={SchoolCreate} />
       <PrivateRoute exact path="/turmas" component={Classroom} />
-
       <PrivateRoute
         exact
         path="/turmas/:id/matricula/:idRegistration"
         component={RegistrationClassroom}
       />
-
       <Route
         exact
         path="/turmas/:id/matricula/:idRegistration/receita"
         component={PdfReceita}
       />
       <PrivateRoute exact path="/turmas/:id" component={ClassroomForm} />
+      <PrivateRoute exact path="/turmas/:id/criar-aluno" component={CreateRegistration} />
+
       <PrivateRoute
         exact
         path="/turmas/:id/matricula/:idRegistration"

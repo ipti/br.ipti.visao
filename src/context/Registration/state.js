@@ -49,7 +49,7 @@ export const RegistrationState = () => {
       cpf: dataValues.cpf ? dataValues.cpf.replace(/\D/g, '') : null,
       horasUsoAparelhosEletronicos: parseInt(dataValues.horasUsoAparelhosEletronicos),
       horasAtividadesAoArLivre: parseInt(dataValues.horasAtividadesAoArLivre)
-    }, history)
+    }, history, "/")
 
   };
 

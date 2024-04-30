@@ -78,8 +78,6 @@ const MyDocument = () => {
 
     return (
         <div style={{ width: "100%" }}>
-
-
             <Padding padding="32px 16px">
                 <button style={{ padding: "8px", cursor: "pointer" }} onClick={generatePDF}><Row><SaveAlt /><h3 style={{ padding: "0 4px", margin: 0, color: "#000" }}>Gerar PDF</h3></Row></button>
             </Padding>
