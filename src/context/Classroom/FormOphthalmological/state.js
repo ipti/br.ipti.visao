@@ -37,6 +37,7 @@ const FormRegistrationState = () => {
     cpf: oneRegistration ? oneRegistration.object.cpf : "",
     sex: oneRegistration ? oneRegistration.object.sex : "",
     birthday: oneRegistration ? oneRegistration.object.birthday : "",
+    observation: oneRegistration?.object?.observation ? oneRegistration.object.observation : "",
     filhossintomas: {
       dificuldadeQuadro: oneRegistration?.object.filhossintomas?.dificuldadeQuadro,
       dificuldadeLivro: oneRegistration?.object.filhossintomas?.dificuldadeLivro,
@@ -76,7 +77,7 @@ const FormRegistrationState = () => {
       catarataGlaucoma: oneRegistration?.object.doencasFamiliares?.catarataGlaucoma,
       olhoPreguicoso: oneRegistration?.object.doencasFamiliares?.olhoPreguicoso,
       tumorOlho: oneRegistration?.object.doencasFamiliares?.tumorOlho,
-      nenhumaOpcao: oneRegistration?.object.doencasFamiliares?.nenhumaOpcao,
+      nenhumaOpcao: oneRegistration?.object.doencasFamiliares?.nenhumaOpcao ?? false,
     },
     horasUsoAparelhosEletronicos: oneRegistration?.object.horasUsoAparelhosEletronicos ?? "",
     horasAtividadesAoArLivre: oneRegistration?.object.horasAtividadesAoArLivre ?? "",

@@ -122,7 +122,7 @@ const FormTriagemParents = ({ values, handleChange }) => {
                     <FormControlLabel control={<Checkbox name="doencasFamiliares.catarataGlaucoma" onChange={handleChange} checked={values.doencasFamiliares.catarataGlaucoma} value={values.doencasFamiliares.catarataGlaucoma} />} label="Catarata na infância ou Glaucoma congênito" />
                     <FormControlLabel control={<Checkbox name="doencasFamiliares.olhoPreguicoso" onChange={handleChange} checked={values.doencasFamiliares.olhoPreguicoso} value={values.doencasFamiliares.olhoPreguicoso} />} label="Olho preguiçoso (ambliopia)" />
                     <FormControlLabel control={<Checkbox name="doencasFamiliares.tumorOlho" onChange={handleChange} checked={values.doencasFamiliares.tumorOlho} value={values.doencasFamiliares.tumorOlho} />} label="Tumor no olho (RETINOBLASTOMA)" />
-                    <FormControlLabel control={<Checkbox name="doencasFamiliares.nenhumaOpcao}" onChange={handleChange} checked={values.doencasFamiliares.nenhumaOpcao} value={values.doencasFamiliares.nenhumaOpcao} />} label="Nenhuma das opções" />
+                    <FormControlLabel control={<Checkbox name="doencasFamiliares.nenhumaOpcao" onChange={handleChange} checked={values.doencasFamiliares.nenhumaOpcao} value={values.doencasFamiliares.nenhumaOpcao} />} label="Nenhuma das opções" />
                 </FormGroup>
             </Grid>
             <Padding />
