@@ -55,7 +55,7 @@ const CreateRegistrationState = () => {
         },
         {
             id: 2,
-            name: "Turma"
+            name: "Tarde"
         },
         {
             id: 3,

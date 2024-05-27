@@ -66,7 +66,7 @@ const StepOne = () => {
     },
     {
       id: 2,
-      name: "Turma"
+      name: "Tarde"
     },
     {
       id: 3,
