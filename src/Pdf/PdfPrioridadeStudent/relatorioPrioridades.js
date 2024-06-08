@@ -208,6 +208,7 @@ const MyDocument = () => {
         return `${dia}/${mes}/${ano} - ${hora}:${minutos}h`;
     }
 
+    console.log(ordenarPorPrioridade())
     return (
         <div style={{ width: "100%" }}>
 
@@ -247,6 +248,7 @@ const MyDocument = () => {
                                 <thead>
                                     <tr>
                                         <TableHeader>Nome</TableHeader>
+                                        <TableHeader>Triagem</TableHeader>
                                         <TableHeader>Pontuação</TableHeader>
                                         <TableHeader>Prioridade</TableHeader>
                                     </tr>
@@ -256,6 +258,7 @@ const MyDocument = () => {
                                         return (
                                             <tr key={index}>
                                                 <TableData>{item.student.object.name}</TableData>
+                                                <TableData>{(item.student.object.testCover || item.student.object.testManchaBranca || item.student.object.testMovimentoOcular) ? "Sim": "Não"}</TableData>
                                                 <TableData>{item.points}</TableData>
                                                 <TableData>{item.points < 5 ? "Prioridade minima" : (item.points >= 5 && item.points < 9) ? "Prioridade média" : item.points >= 10 ? "Prioridade máxima" : ""}</TableData>
                                             </tr>

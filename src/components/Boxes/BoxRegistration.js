@@ -18,7 +18,7 @@ import { deleteRegistration } from "../../controller/registration/deleteRegistra
 const useStyles = makeStyles(styles);
 
 const BoxRegistration = props => {
-  const { name, link, md, sm, xs, student_fk, id, points } = props;
+  const { name, link, md, sm, xs, triagem, id, points } = props;
 
 
 
@@ -61,7 +61,7 @@ const BoxRegistration = props => {
     <Grid item md={md ? md : 4} sm={sm ? sm : 4} xs={xs ? xs : 12}>
       <Grid onClick={toLink} className={`${classes.boxStudentConfirmation}`}>
         <div className={`${classes.floatLeft} ${classes.nameStudent}`}>
-          <span className={classes.subtitleStudent}>Aluno - {student_fk ? "Rematricula" : "Matricula"}</span>
+          <span className={classes.subtitleStudent}>Aluno - {triagem ? "Triado" : "Não triado"}</span>
           <Clear onClick={e => deletePreRegistration(e, id)} style={{ cursor: 'pointer' }} />
         </div>
         <div className={classes.iconStudent}>

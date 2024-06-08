@@ -6,9 +6,14 @@ const updateStudent = async (studentId, updatedData) => {
   const studentRef = doc(firestore, "student", studentId);
 
 
+  const currentDate = new Date();
 
+  currentDate.setHours(currentDate.getHours() - 3);
+
+  // Extract the date part in ISO format (YYYY-MM-DD)
+  const isoDate = currentDate.toISOString().split('T')[0];
   try {
-    await updateDoc(studentRef, updatedData);
+    await updateDoc(studentRef, {...updatedData, dataTriagem: ((updatedData.testCover || updatedData.testManchaBranca || updatedData.testMovimentoOcular) && !updatedData.dataTriagem) ? isoDate : updatedData.dataTriagem});
     console.log("Documento atualizado com sucesso!");
     swal("Alteração Salva");
   } catch (err) {

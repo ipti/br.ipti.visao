@@ -168,7 +168,7 @@ const StepOne = () => {
                     className={classes.formControl}
                     error={errorList.name}
                   >
-                    <FormLabel>Nome Completo *</FormLabel>
+                    <FormLabel>Nome Completo do aluno *</FormLabel>
                     <TextField
                       name="name"
                       onChange={handleChange}
@@ -195,7 +195,7 @@ const StepOne = () => {
                     className={classes.formControl}
                     error={!!errorList.birthday}
                   >
-                    <FormLabel>Nascimento *</FormLabel>
+                    <FormLabel>Nascimento do aluno*</FormLabel>
                     <TextField
                       name="birthday"
                       variant="outlined"
@@ -224,7 +224,7 @@ const StepOne = () => {
                     className={classes.formControl}
                     error={errorList.sex}
                   >
-                    <FormLabel component="legend">Sexo *</FormLabel>
+                    <FormLabel component="legend">Sexo do aluno *</FormLabel>
                     <RadioGroup
                       value={values.sex}
                       name="sex"
@@ -261,7 +261,7 @@ const StepOne = () => {
                     className={classes.formControl}
                     error={errorList.cpf}
                   >
-                    <FormLabel>Nº do CPF *</FormLabel>
+                    <FormLabel>Nº do CPF do aluno*</FormLabel>
                     <TextField
                       name="cpf"
                       variant="outlined"

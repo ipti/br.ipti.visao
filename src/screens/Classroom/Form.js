@@ -174,6 +174,7 @@ const Create = (props) => {
         return count;
       };
 
+      console.log(registration)
       return (
         <BoxRegistration
           link={`${baseLink}/${registration?.id}`}
@@ -182,6 +183,7 @@ const Create = (props) => {
           sex={registration?.sex}
           id={registration?.id}
           points={points()}
+          triagem={(registration.object.testCover || registration.object.testManchaBranca || registration.object.testMovimentoOcular)}
           md={4}
           sm={4}
           unavailable={registration?.unavailable}

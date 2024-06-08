@@ -37,6 +37,7 @@ const FormRegistrationState = () => {
     cpf: oneRegistration ? oneRegistration.object.cpf : "",
     sex: oneRegistration ? oneRegistration.object.sex : "",
     birthday: oneRegistration ? oneRegistration.object.birthday : "",
+    dataTriagem: oneRegistration?.object?.dataTriagem ? oneRegistration.object.dataTriagem : null,
     observation: oneRegistration?.object?.observation ? oneRegistration.object.observation : "",
     filhossintomas: {
       dificuldadeQuadro: oneRegistration?.object.filhossintomas?.dificuldadeQuadro,
