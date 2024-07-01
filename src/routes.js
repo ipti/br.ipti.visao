@@ -15,6 +15,7 @@ import PdfTodasReceita from "./Pdf/PdfTodasReceitas";
 import CreateUserScreen from "./screens/Users/CreateUser";
 import PrivateRouterProvider from "./context/PrivateRouter/context";
 import CreateRegistration from "./screens/Classroom/CreateRegistration";
+import Report from "./screens/Report"
 
 //const Home = lazy(() => import("./containers/Home"));
 
@@ -84,6 +85,8 @@ const Routes = () => (
       <Route exact path="/turmas/:id/pdfreceita" component={PdfTodasReceita} />
       <PrivateRoute exact path="/turma/adicionar" component={CreateClassroom} />
       <Route path="/*" component={NotFoundPage} />
+
+      <PrivateRoute exact path="/relatorios" component={Report} />
     </Switch>
   </HashRouter>
 );
