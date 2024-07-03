@@ -1,20 +1,13 @@
-import React from "react";
-import Loading from "../../components/Loading/CircularLoading";
+import React, { useEffect, useState } from "react";
+import ReportPage from "../../screens/Report/Report";
 
 const Home = props => {
 
   return (
     <>
-      {false ? (
-        <Loading />
-      ) : (
-        <>
-          {/* <Reports  /> */}
-        </>
-      )}
-    </>
+      <ReportPage />
+    </ >
   );
 };
-
 
 export default Home;

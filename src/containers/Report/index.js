@@ -1,2 +1,3 @@
-import School from "./School";
-export { School };
+import Report from "./Report";
+
+export { Report };

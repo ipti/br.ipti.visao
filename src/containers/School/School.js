@@ -10,25 +10,21 @@ const Home = props => {
 
   useEffect(() => {
     fetchSchool()
-    .then((testDataList) => {
+      .then((testDataList) => {
         setSchool(testDataList)
-    })
-    .catch((err) => {
+      })
+      .catch((err) => {
         // Trate erros, se ocorrerem
         console.error(err)
-    })
+      })
   }, [])
 
 
   return (
     <>
-      {!school ? (
-        <Loading />
-      ) : (
+      {!school ? (<Loading />) : (
         <>
-          <School
-            data={school}
-          />
+          <School data={school} />
         </>
       )}
     </>
