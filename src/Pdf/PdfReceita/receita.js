@@ -9,17 +9,12 @@ import { Column, Padding, Row } from '../../styles/style';
 import { Table, TableData, TableHeader, TableWrapper } from '../style';
 
 
-
-
 // Create Document Component
 const MyDocument = () => {
 
-
     const contentRef = useRef(null);
 
-
     const { idRegistration } = useParams()
-
 
     const [students, setStudents] = useState()
 
@@ -67,7 +62,9 @@ const MyDocument = () => {
 
 
             <Padding padding="32px 16px">
-                <button style={{ padding: "8px", cursor: "pointer" }} onClick={generatePDF}><Row><SaveAlt /><h3 style={{ padding: "0 4px", margin: 0, color: "#000" }}>Gerar PDF</h3></Row></button>
+                <button style={{ padding: "8px", cursor: "pointer" }} onClick={generatePDF}>
+                    <Row><SaveAlt /><h3 style={{ padding: "0 4px", margin: 0, color: "#000" }}>Gerar PDF</h3></Row>
+                </button>
             </Padding>
             <div ref={contentRef}>
                 <Padding padding="16px">

@@ -1,75 +1,113 @@
-import React from 'react';
-import styled from 'styled-components';
+import { SaveAlt } from '@material-ui/icons';
+import html2canvas from 'html2canvas';
+import jsPDF from 'jspdf';
+import React, { useEffect, useRef, useState } from 'react';
 
-const Table = styled.table`
-  border-collapse: collapse;
-  width: 100%;
-`;
+import logo from "../../assets/images/logo.svg";
+import fetchReport from '../../controller/School/fetchReport';
+import { Column, Padding, Row } from '../../styles/style';
+import { Table, TableData, TableHeader, TableWrapper } from '../style';
 
-const Thead = styled.thead`
-  background-color: #f0f0f0;
-`;
 
-const Tr = styled.tr`
-  border-bottom: 1px solid #ddd;
-`;
+// Create Document Component
+const MyDocument = () => {
 
-const Th = styled.th`
-  padding: 10px;
-  text-align: left;
-`;
+    const contentRef = useRef(null);
 
-const Td = styled.td`
-  padding: 10px;
-  text-align: left;
-`;
+    // setreport é uma funcao padrao que define os valores recebidos, na variavel do estado "report"
+    const [report, setReport] = useState() 
 
-const RelatorioGeral = () => {
-  return (
-    <Table>
-      <Thead>
-        <Tr>
-            <Th>Nome da escola</Th>
-            <Th>N° de Turmas</Th>
-            <Th>Total de Matrículas</Th>
-            <Th>Total de Triagens</Th>
-        </Tr>
-      </Thead>
-        <tbody>
-            {/* todo:Preencher com os dados do banco */}
-            <Tr>
-                <Td>Escola A</Td>
-                <Td>10</Td>
-                <Td>250</Td>
-                <Td>50</Td>
-            </Tr>
-            <Tr>
-                <Td>Escola B</Td>
-                <Td>15</Td>
-                <Td>300</Td>
-                <Td>75</Td>
-            </Tr>
-            <Tr>
-                <Td>Escola C</Td>
-                <Td>8</Td>
-                <Td>200</Td>
-                <Td>40</Td>
-            </Tr>
-            <Tr>
-                <Td>Escola D</Td>
-                <Td>12</Td>
-                <Td>280</Td>
-                <Td>60</Td>
-            </Tr>
-            <Tr>
-                <Td>Escola E</Td>
-                <Td>9</Td>
-                <Td>220</Td>
-                <Td>45</Td>
-            </Tr>
-        </tbody>
-    </Table>
-  );
-};
+    const generatePDF = () => {
+        if (!contentRef.current) return;
 
-export default RelatorioGeral;
+        const elementToCapture = contentRef.current;
+
+        html2canvas(elementToCapture).then((canvas) => {
+            const pdf = new jsPDF('p', 'mm', 'a4');
+
+            const imgData = canvas.toDataURL('image/png');
+            const imgWidth = 210;
+            const imgHeight = (canvas.height * imgWidth) / canvas.width;
+            pdf.addImage(imgData, 'PNG', 0, 0, imgWidth, imgHeight);
+
+            pdf.save(`RelatorioGeral-Lupa.pdf`);
+        });
+    };
+
+    useEffect(() => {
+        fetchReport().then((testDataList) => {
+            console.log("DATALIST", testDataList);
+            testDataList.forEach(element => {
+              console.log("ELEMENT", element[0]);
+            });
+            // problema aqui, quem é esse SETREPORT?
+            setReport(testDataList);
+        }).catch((err) => {
+          // Trate erros, se ocorrerem
+          console.error(err)
+      });
+    }, [])
+
+    return (
+      
+        <div style={{ width: "100%" }}>
+
+            <Padding padding="32px 16px">
+                <button style={{ padding: "8px", cursor: "pointer" }} onClick={generatePDF}><Row><SaveAlt /><h3 style={{ padding: "0 4px", margin: 0, color: "#000" }}>Gerar PDF</h3></Row></button>
+            </Padding>
+            <div ref={contentRef}>
+                <Padding padding="16px">
+
+                    <Column>
+                        <Row id='space-between'>
+                            <Column>
+                                <h1 style={{ padding: "0 4px", margin: 0, color: "#000" }}>Lupa : Relatório Geral </h1>
+                                <Padding />
+                            </Column>
+                            <Column id="center">
+                                <Row id="center">
+                                    <img style={{ width: "256px", padding: "8px 16px" }} alt="" src={logo} />
+                                </Row>
+                            </Column>
+                        </Row>
+                    </Column>
+
+                    <Padding padding="8px" />
+                    <div style={{ backgroundColor: "black", height: "1px" }}></div>
+                    <Column>
+                        <Row id='center'>
+                            <h1 style={{ padding: "0px" }}>Relatório Geral - Lupa </h1>
+                        </Row>
+                    </Column>
+                    <div>
+                        <TableWrapper>
+                            <Table>
+                                <thead>
+                                    <tr>
+                                        <TableHeader></TableHeader>
+                                        <TableHeader style={{ textAlign: "center" }}>Nome da escola</TableHeader>
+                                        <TableHeader style={{ textAlign: "center" }}>Nº de Turmas</TableHeader>
+                                        <TableHeader style={{ textAlign: "center" }}>Total de Matriculas</TableHeader>
+                                        <TableHeader style={{ textAlign: "center" }}>Total de Triagens</TableHeader>
+                                    </tr>
+                                </thead>
+                                <tbody>
+
+                                    <tr>
+                                        <TableData style={{ textAlign: "center" }}>{report?.object?.school}</TableData>
+                                        <TableData style={{ textAlign: "center" }}>{report?.countClassroom}</TableData>
+                                        <TableData style={{ textAlign: "center" }}>{report?.countRegister}</TableData>
+                                        <TableData style={{ textAlign: "center" }}>{report?.countRegisterTriados}</TableData>
+                                    </tr>
+                                   
+                                </tbody>
+                            </Table>
+                        </TableWrapper>
+                    </div>
+                    
+                </Padding>
+            </div>
+        </div>
+    )
+}
+export default MyDocument

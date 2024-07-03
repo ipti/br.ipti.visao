@@ -16,6 +16,7 @@ import CreateUserScreen from "./screens/Users/CreateUser";
 import PrivateRouterProvider from "./context/PrivateRouter/context";
 import CreateRegistration from "./screens/Classroom/CreateRegistration";
 import {Report} from "./containers/Report"
+import PdfRelatorioGeral from "./Pdf/PdfRelatorioGeral";
 
 //const Home = lazy(() => import("./containers/Home"));
 
@@ -64,6 +65,9 @@ const Routes = () => (
       <PrivateRoute exact path="/criar/escolas" component={SchoolCreate} />
       <PrivateRoute exact path="/turmas" component={Classroom} />
       <PrivateRoute exact path="/relatorios" component={Report} />
+
+      <PrivateRoute exact path="/relatorios/pdfrelatorio" component={PdfRelatorioGeral} />
+
       <PrivateRoute exact path="/turmas/:id/matricula/:idRegistration" component={RegistrationClassroom} />
       <Route exact path="/turmas/:id/matricula/:idRegistration/receita" component={PdfReceita} />
       <PrivateRoute exact path="/turmas/:id" component={ClassroomForm} />
@@ -73,6 +77,7 @@ const Routes = () => (
       <Route exact path="/turmas/:id/pdf" component={PdfPrioridade} />
       <Route exact path="/turmas/:id/pdfreceita" component={PdfTodasReceita} />
       <PrivateRoute exact path="/turma/adicionar" component={CreateClassroom} />
+      
       <Route path="/*" component={NotFoundPage} />
 
     </Switch>
