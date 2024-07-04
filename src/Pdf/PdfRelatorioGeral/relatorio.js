@@ -2,7 +2,6 @@ import { SaveAlt } from '@material-ui/icons';
 import html2canvas from 'html2canvas';
 import jsPDF from 'jspdf';
 import React, { useEffect, useRef, useState } from 'react';
-
 import logo from "../../assets/images/logo.svg";
 import fetchReport from '../../controller/School/fetchReport';
 import { Column, Padding, Row } from '../../styles/style';
@@ -14,8 +13,7 @@ const MyDocument = () => {
 
     const contentRef = useRef(null);
 
-    // setreport é uma funcao padrao que define os valores recebidos, na variavel do estado "report"
-    const [report, setReport] = useState() 
+    const [report, setReport] = useState([])
 
     const generatePDF = () => {
         if (!contentRef.current) return;
@@ -35,21 +33,16 @@ const MyDocument = () => {
     };
 
     useEffect(() => {
-        fetchReport().then((testDataList) => {
-            console.log("DATALIST", testDataList);
-            testDataList.forEach(element => {
-              console.log("ELEMENT", element[0]);
-            });
-            // problema aqui, quem é esse SETREPORT?
-            setReport(testDataList);
+        fetchReport()
+        .then((testDataList) => {
+            setReport(testDataList)
         }).catch((err) => {
-          // Trate erros, se ocorrerem
-          console.error(err)
-      });
+            console.error(err)
+        })
     }, [])
 
     return (
-      
+
         <div style={{ width: "100%" }}>
 
             <Padding padding="32px 16px">
@@ -84,7 +77,6 @@ const MyDocument = () => {
                             <Table>
                                 <thead>
                                     <tr>
-                                        <TableHeader></TableHeader>
                                         <TableHeader style={{ textAlign: "center" }}>Nome da escola</TableHeader>
                                         <TableHeader style={{ textAlign: "center" }}>Nº de Turmas</TableHeader>
                                         <TableHeader style={{ textAlign: "center" }}>Total de Matriculas</TableHeader>
@@ -92,19 +84,19 @@ const MyDocument = () => {
                                     </tr>
                                 </thead>
                                 <tbody>
-
-                                    <tr>
-                                        <TableData style={{ textAlign: "center" }}>{report?.object?.school}</TableData>
-                                        <TableData style={{ textAlign: "center" }}>{report?.countClassroom}</TableData>
-                                        <TableData style={{ textAlign: "center" }}>{report?.countRegister}</TableData>
-                                        <TableData style={{ textAlign: "center" }}>{report?.countRegisterTriados}</TableData>
-                                    </tr>
-                                   
+                                    {report.map((item, index) => (
+                                        <tr key={index}>
+                                            <TableData style={{ textAlign: "center" }}>{item.school}</TableData>
+                                            <TableData style={{ textAlign: "center" }}>{item.countClassroom}</TableData>
+                                            <TableData style={{ textAlign: "center" }}>{item.countRegister}</TableData>
+                                            <TableData style={{ textAlign: "center" }}>{item.countRegisterTriados}</TableData>
+                                        </tr>
+                                    ))}
                                 </tbody>
                             </Table>
                         </TableWrapper>
                     </div>
-                    
+
                 </Padding>
             </div>
         </div>
