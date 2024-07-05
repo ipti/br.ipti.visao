@@ -33,7 +33,7 @@ const ReportPage = () => {
                             <Column id="space-between">
                                 <h2>Relatório Geral</h2>
                                 {/* padding */}
-                                <p style={{ color: styles.colors.grayClear, fontSize: "12px" }}>Preenchimento de formulários por escola</p>
+                                <p style={{ color: styles.colors.grayClear, fontSize: "12px" }}>Relatório referente ao preenchimento de formulários por escola</p>
                             </Column>
                         </Column>
                     </Row>

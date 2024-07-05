@@ -7,6 +7,9 @@ import fetchReport from '../../controller/School/fetchReport';
 import { Column, Padding, Row } from '../../styles/style';
 import { Table, TableData, TableHeader, TableWrapper } from '../style';
 
+import Skeleton from 'react-loading-skeleton'
+import 'react-loading-skeleton/dist/skeleton.css'
+import { is } from 'date-fns/locale';
 
 // Create Document Component
 const MyDocument = () => {
@@ -14,6 +17,7 @@ const MyDocument = () => {
     const contentRef = useRef(null);
 
     const [report, setReport] = useState([])
+    const [isFetching, setIsFetching] = useState(true)
 
     const generatePDF = () => {
         if (!contentRef.current) return;
@@ -38,6 +42,8 @@ const MyDocument = () => {
             setReport(testDataList)
         }).catch((err) => {
             console.error(err)
+        }).finally(() => {
+            setIsFetching(false)
         })
     }, [])
 
@@ -84,14 +90,25 @@ const MyDocument = () => {
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    {report.map((item, index) => (
-                                        <tr key={index}>
-                                            <TableData style={{ textAlign: "center" }}>{item.school}</TableData>
-                                            <TableData style={{ textAlign: "center" }}>{item.countClassroom}</TableData>
-                                            <TableData style={{ textAlign: "center" }}>{item.countRegister}</TableData>
-                                            <TableData style={{ textAlign: "center" }}>{item.countRegisterTriados}</TableData>
+                                    {isFetching ? (
+                                        // Mostrar Skeleton enquanto os dados estão sendo carregados
+                                        <tr>
+                                            <TableData><Skeleton height={20} /></TableData>
+                                            <TableData><Skeleton height={20} /></TableData>
+                                            <TableData><Skeleton height={20} /></TableData>
+                                            <TableData><Skeleton height={20} /></TableData>
                                         </tr>
-                                    ))}
+                                    ) : (
+                                        // Renderizar os dados do relatório
+                                        report.map((item, index) => (
+                                            <tr key={index}>
+                                                <TableData style={{ textAlign: "center" }}>{item.school}</TableData>
+                                                <TableData style={{ textAlign: "center" }}>{item.countClassroom}</TableData>
+                                                <TableData style={{ textAlign: "center" }}>{item.countRegister}</TableData>
+                                                <TableData style={{ textAlign: "center" }}>{item.countRegisterTriados}</TableData>
+                                            </tr>
+                                        ))
+                                    )}
                                 </tbody>
                             </Table>
                         </TableWrapper>
@@ -100,6 +117,6 @@ const MyDocument = () => {
                 </Padding>
             </div>
         </div>
-    )
+    );
 }
 export default MyDocument
