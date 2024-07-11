@@ -1,25 +1,6 @@
-const
-    functions =
-        require
-            (
-                'firebase-functions'
-            );
-const
-    admin =
-        require
-            (
-                'firebase-admin'
-            ); admin.
-                initializeApp
-                ();
-exports
-    .helloWorld = functions.https.
-        onRequest
-        (
-            (request, response) => {
-                response.
-                    send
-                (
-                    "Hello from Firebase!"
-                );
-            });
+const admin = require('firebase-admin');
+admin.initializeApp();
+
+// reports
+const report = require('./controller/report/fetchReport')
+exports.generateReport = report.generateReport()
