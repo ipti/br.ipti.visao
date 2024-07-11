@@ -1,25 +1,33 @@
-const fetchClassroomData = require('../classroom/fetchClassroom')
-const fetchSchoolData = require('../school/fetchSchool')
-const fetchStudentData = require('../student/fecthStudent')
+import { fetchClassroomData } from '../classroom/fetchClassroom';
 
-const functions = require('firebase-functions');
 
-exports.generateReport = functions.https.onRequest(async (req, res) => {
-    try {
-      const report = await fetchReport();
-      res.status(200).send(report);
-    } catch (err) {
-      res.status(500).send(err.message);
-    }
-  });
+import * as functions from 'firebase-functions';
+import { fetchSchoolData } from '../school/fetchSchool';
+import { fetchStudentData } from '../student/fecthStudent';
 
- const fetchReport = async () => {
+interface Report {
+  school: string;
+  countClassroom: number;
+  countRegister: number;
+  countRegisterTriados: number;
+}
+
+export const generateReport = functions.https.onRequest(async (req, res) => {
+  try {
+    const report = await fetchReport();
+    res.status(200).send(report);
+  } catch (err: any) {
+    res.status(500).send(err.message);
+  }
+});
+
+const fetchReport = async (): Promise<Report[]> => {
   try {
     const schools = await fetchSchoolData();
     const classrooms = await fetchClassroomData();
     const students = await fetchStudentData();
 
-    const report = [];
+    const report: Report[] = [];
 
     schools.forEach((school) => {
       let countClassroom = 0;
@@ -57,5 +65,3 @@ exports.generateReport = functions.https.onRequest(async (req, res) => {
     throw err;
   }
 };
-
-
