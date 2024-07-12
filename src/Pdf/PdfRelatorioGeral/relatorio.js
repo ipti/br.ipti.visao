@@ -9,7 +9,7 @@ import { Table, TableData, TableHeader, TableWrapper } from '../style';
 
 import Skeleton from 'react-loading-skeleton'
 import 'react-loading-skeleton/dist/skeleton.css'
-import { is } from 'date-fns/locale';
+// import { is } from 'date-fns/locale';
 
 // Create Document Component
 const MyDocument = () => {
