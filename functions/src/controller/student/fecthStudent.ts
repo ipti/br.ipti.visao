@@ -1,4 +1,3 @@
-import { collection, getDocs } from "@firebase/firestore";
 import { firestore } from "../../config/firebase";
 
 interface StudentData {
@@ -7,9 +6,9 @@ interface StudentData {
 }
 
 const fetchStudentData = async (): Promise<StudentData[]> => {
-  const refStudent = collection(firestore, "student");
+  const refStudent = await firestore.collection("student").get();
   try {
-    const querySnapshotStudent = await getDocs(refStudent);
+    const querySnapshotStudent =  refStudent.docs;
     const studentData: StudentData[] = [];
     querySnapshotStudent.forEach((doc) => {
       studentData.push({ id: doc.id, object: doc.data() });
@@ -22,3 +21,4 @@ const fetchStudentData = async (): Promise<StudentData[]> => {
 };
 
 export { fetchStudentData };
+

@@ -13,15 +13,16 @@ import * as cors from "cors"
 import { generateReport } from "./controller/report/fetchReport";
 
 
-admin.initializeApp();
+// admin.initializeApp();
 
 const corsOptions = {
     origin: 'http://localhost:3000', // Substitua pelo seu frontend
     methods: ['GET', 'POST'], // Adicione outros métodos se necessário
     allowedHeaders: ['Content-Type', 'Authorization'], // Adicione outros cabeçalhos se necessário
-  };
+};
   
   const corsMiddleware = cors(corsOptions);
+
 export const generalReport = generateReport;
 
 export const helloWorld = functions.https.onRequest((request, response) => {
@@ -29,3 +30,10 @@ export const helloWorld = functions.https.onRequest((request, response) => {
       response.send("Hello from Firebase!");
     });
   });
+
+// utilizando minha função do firebase
+
+// export const generalReport = functions.https.onRequest(async (req, res) => {
+
+
+// }

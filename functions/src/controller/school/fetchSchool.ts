@@ -1,4 +1,3 @@
-import { collection, getDocs } from "@firebase/firestore";
 import { firestore } from "../../config/firebase";
 
 interface SchoolData {
@@ -7,14 +6,9 @@ interface SchoolData {
 }
 
 const fetchSchoolData = async (): Promise<SchoolData[]> => {
-  const ref = collection(firestore, "school");
+  const ref = await firestore.collection("school").get();
   try {
-    const querySnapshot = await getDocs(ref);
-    const schoolData: SchoolData[] = [];
-    querySnapshot.forEach((doc) => {
-      schoolData.push({ id: doc.id, object: doc.data() });
-    });
-    return schoolData;
+    return ref.docs.map((doc) => { return { id: doc.id, object: doc.data() } });
   } catch (err) {
     console.error("Erro ao buscar dados da escola:", err);
     throw err;

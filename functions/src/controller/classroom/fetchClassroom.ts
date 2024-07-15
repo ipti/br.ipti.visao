@@ -1,4 +1,3 @@
-import { collection, getDocs } from "@firebase/firestore";
 import { firestore } from "../../config/firebase";
 
 
@@ -8,11 +7,11 @@ interface ClassroomData {
 }
 
 const fetchClassroomData = async (): Promise<ClassroomData[]> => {
-  const refClassroom = collection(firestore, "classroom");
+  const refClassroom = await firestore.collection("classroom").get();
   try {
-    const querySnapshotClassroom = await getDocs(refClassroom);
+    const querySnapshotClassroom = refClassroom.docs;
     const classroomData: ClassroomData[] = [];
-    querySnapshotClassroom.forEach((doc) => {
+    querySnapshotClassroom.forEach((doc:any) => {
       classroomData.push({ id: doc.id, object: doc.data() });
     });
     return classroomData;
