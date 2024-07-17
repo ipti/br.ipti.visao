@@ -1,18 +1,25 @@
 import { firestore } from "../../config/firebase";
 
-interface SchoolData {
+export interface School {
+  name: string;
+}
+export interface SchoolData {
   id: string;
-  object: any;
+  object: School;
 }
 
-const fetchSchoolData = async (): Promise<SchoolData[]> => {
+const fetchSchoolsData = async (): Promise<SchoolData[]> => {
   const ref = await firestore.collection("school").get();
   try {
-    return ref.docs.map((doc) => { return { id: doc.id, object: doc.data() } });
+    return ref.docs.map((doc) => {
+      return {
+        id: doc.id, object: doc.data() as School
+      }
+    });
   } catch (err) {
     console.error("Erro ao buscar dados da escola:", err);
     throw err;
   }
 };
 
-export { fetchSchoolData };
+export { fetchSchoolsData };

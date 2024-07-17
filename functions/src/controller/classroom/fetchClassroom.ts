@@ -1,7 +1,9 @@
 import { firestore } from "../../config/firebase";
 
-
-interface ClassroomData {
+// interface Classroom {
+//   object: string;
+// }
+export interface ClassroomData {
   id: string;
   object: any;
 }

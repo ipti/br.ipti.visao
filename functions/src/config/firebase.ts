@@ -1,6 +1,7 @@
 
 // The Firebase Admin SDK to access Firestore.
-import { initializeApp } from "firebase/app";
+
+import { initializeApp } from "firebase-admin";
 import { getFirestore } from "firebase-admin/firestore";
 
 initializeApp();
