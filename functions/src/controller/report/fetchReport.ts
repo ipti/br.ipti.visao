@@ -3,6 +3,8 @@ import { fetchSchoolsData, SchoolData } from '../school/fetchSchool';
 import { fetchClassroomData, ClassroomData } from '../classroom/fetchClassroom';
 import { fetchStudentData, StudentData} from '../student/fecthStudent';
 import { firestore } from '../../config/firebase';
+// import { collection, query, where } from "firebase/firestore";  
+
 
 interface Report {
   school: string;
@@ -17,15 +19,20 @@ const generateRowReport = async (school: SchoolData, classroom: ClassroomData[],
   
   let countClassroom = 0; // let para variável que pode ser alterada
   
-  let countRegisterTriados = 0; // Triados em relação a alunos triados em ambos os olhos
+  // let countRegisterTriados = 0; // Triados em relação a alunos triados em ambos os olhos
   let countTriagemPais = 0; // Triagem em relação a pais que fizeram triagem
-  let countConsultation = 0; // Consulta em relação a alunos que fizeram consulta
+  let countConsultation = 0; // Consulta em relação a alunos que fizeram 
+
+  //const studentRef = collection (db, "student");
+
 
   const totalAlunos = await firestore.collection("student").where("school_fk", "==", school.id).count().get();
 
-  
-  //const totalTriagens = await firestore.collection("student").where("school_fk", "==", school.id).where("acuidadeTriagemDireito", "!=", "").where("acuidadeTriagemEsquerdo", "!=", "").count().get();
 
+  
+  const totalTriagens = await firestore.collection("student").where("school_fk", "==", school.id).where("acuidadeTriagemDireito", "!=", "").where("acuidadeTriagemEsquerdo", "!=", "").count().get();
+  
+ 
 
   classroom.forEach((classroom) => {
     /*
@@ -45,7 +52,7 @@ const generateRowReport = async (school: SchoolData, classroom: ClassroomData[],
               student.object.acuidadeTriagemDireito &&
               student.object.acuidadeTriagemEsquerdo
             ) {
-              countRegisterTriados++;
+              // countRegisterTriados++;
             }
   
             if(
@@ -74,7 +81,7 @@ const generateRowReport = async (school: SchoolData, classroom: ClassroomData[],
     school: school.object.name, 
     countClassroom: countClassroom,
     countRegister: totalAlunos.data().count,
-    countRegisterTriados: countRegisterTriados,
+    countRegisterTriados: totalTriagens.data().count,
     countTriagemPais: countTriagemPais,
     countConsultation: countConsultation,
     countReceipt: 0,
