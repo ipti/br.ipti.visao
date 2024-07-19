@@ -3,8 +3,7 @@ import { fetchSchoolsData, SchoolData } from '../school/fetchSchool';
 import { fetchClassroomData, ClassroomData } from '../classroom/fetchClassroom';
 import { fetchStudentData, StudentData} from '../student/fecthStudent';
 import { firestore } from '../../config/firebase';
-// import { collection, query, where } from "firebase/firestore";  
-
+//import { collection, query, where } from "firebase/firestore";  
 
 interface Report {
   school: string;
@@ -16,32 +15,55 @@ interface Report {
 }
 
 const generateRowReport = async (school: SchoolData, classroom: ClassroomData[], student: StudentData[]): Promise<Report> => {
+
+  const totalClassroom = await firestore.collection("classroom")
+    .where("school_fk", "==", school.id).get();
+
+  const totalAlunos = await firestore.collection("student")
+    .where("school_fk", "==", school.id).count().get();
+
+  const totalTriagens = await firestore.collection("student")
+    .where("school_fk", "==", school.id)
+    .get();
+
+  const triagensFiltered = totalTriagens.docs.filter(doc => 
+    doc.data().acuidadeTriagemDireito !== undefined && 
+    doc.data().acuidadeTriagemDireito !== "" &&
+    doc.data().acuidadeTriagemEsquerdo !== undefined &&
+    doc.data().acuidadeTriagemEsquerdo !== ""
+  );
+
+  // const totalTriagemPais = await firestore.collection("student")
+  //   .where("school_fk", "==", school.id)
+  //   .get();
+
+  // const triagemPaisFiltered = totalTriagemPais.docs.filter(doc => 
+  //   doc.data().horasAtividadeAoArLivre !== undefined && 
+  //   doc.data().horasAtividadeAoArLivre !== null &&
+  //   doc.data().horasUsoAparelhosEletronicos !== undefined &&
+  //   doc.data().horasUsoAparelhosEletronicos !== null
+  // );
+
+  // const totalConsultation = await firestore.collection("student")
+  //   .where("school_fk", "==", school.id)
+  //   .where("crmMedico", "!=", null)
+  //   .where("dataConsulta", "!=", null).get();
+
+  // const totalReceipt = await firestore.collection("student")
+  //   .where("school_fk", "==", school.id)
+  //   .where("", "!=", null).get();
   
-  let countClassroom = 0; // let para variável que pode ser alterada
-  
-  // let countRegisterTriados = 0; // Triados em relação a alunos triados em ambos os olhos
-  let countTriagemPais = 0; // Triagem em relação a pais que fizeram triagem
-  let countConsultation = 0; // Consulta em relação a alunos que fizeram 
-
-  //const studentRef = collection (db, "student");
-
-
-  const totalAlunos = await firestore.collection("student").where("school_fk", "==", school.id).count().get();
-
+  /*
 
   
-  const totalTriagens = await firestore.collection("student").where("school_fk", "==", school.id).where("acuidadeTriagemDireito", "!=", "").where("acuidadeTriagemEsquerdo", "!=", "").count().get();
-  
- 
-
+receitaCilindricoOlhoDireito
   classroom.forEach((classroom) => {
-    /*
+    
     const coll = collection(db, "cities");
     const q = query(coll, where("state", "==", "CA"));
     const snapshot = await getCountFromServer(q);
     console.log('count: ', snapshot.data().count);
-    */
-
+   
       if (school.id === classroom.object.school_fk) {
         countClassroom++;
         student.forEach((student) => {
@@ -76,17 +98,17 @@ const generateRowReport = async (school: SchoolData, classroom: ClassroomData[],
       
     }
   );
+   */
 
   const report: Report = {
-    school: school.object.name, 
-    countClassroom: countClassroom,
+    school: school.object.name,
+    countClassroom: totalClassroom.docs.length,
     countRegister: totalAlunos.data().count,
-    countRegisterTriados: totalTriagens.data().count,
-    countTriagemPais: countTriagemPais,
-    countConsultation: countConsultation,
-    countReceipt: 0,
-  
-  } as Report;
+    countRegisterTriados: triagensFiltered.length,
+    //countTriagemPais: triagemPaisFiltered.length,
+    //countConsultation: totalConsultation.size,
+    //countReceipt: totalReceipt.size,
+  } as unknown as Report;
 
   return report;
 }
