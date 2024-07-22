@@ -4,6 +4,7 @@ import jsPDF from 'jspdf';
 import React, { useEffect, useRef, useState } from 'react';
 import logo from "../../assets/images/logo.svg";
 import fetchReport from '../../controller/School/fetchReport';
+
 import { Column, Padding, Row } from '../../styles/style';
 import { Table, TableData, TableHeader, TableWrapper } from '../style';
 
@@ -87,12 +88,19 @@ const MyDocument = () => {
                                         <TableHeader style={{ textAlign: "center" }}>Nº de Turmas</TableHeader>
                                         <TableHeader style={{ textAlign: "center" }}>Total de Matriculas</TableHeader>
                                         <TableHeader style={{ textAlign: "center" }}>Total de Triagens</TableHeader>
+                                        <TableHeader style={{ textAlign: "center" }}>Total de Triagens dos Pais</TableHeader>
+                                        <TableHeader style={{ textAlign: "center" }}>Total de Consultas</TableHeader>
+                                        <TableHeader style={{ textAlign: "center" }}>Total de Receitas</TableHeader>
+                                        
                                     </tr>
                                 </thead>
                                 <tbody>
                                     {isFetching ? (
                                         // Mostrar Skeleton enquanto os dados estão sendo carregados
                                         <tr>
+                                            <TableData><Skeleton height={20} /></TableData>
+                                            <TableData><Skeleton height={20} /></TableData>
+                                            <TableData><Skeleton height={20} /></TableData>
                                             <TableData><Skeleton height={20} /></TableData>
                                             <TableData><Skeleton height={20} /></TableData>
                                             <TableData><Skeleton height={20} /></TableData>
@@ -106,6 +114,9 @@ const MyDocument = () => {
                                                 <TableData style={{ textAlign: "center" }}>{item.countClassroom}</TableData>
                                                 <TableData style={{ textAlign: "center" }}>{item.countRegister}</TableData>
                                                 <TableData style={{ textAlign: "center" }}>{item.countRegisterTriados}</TableData>
+                                                <TableData style={{ textAlign: "center" }}>{item.countTriagemPais}</TableData>
+                                                <TableData style={{ textAlign: "center" }}>{item.countConsultation}</TableData>
+                                                <TableData style={{ textAlign: "center" }}>{item.countReceipt}</TableData>
                                             </tr>
                                         ))
                                     )}
