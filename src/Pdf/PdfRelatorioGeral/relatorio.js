@@ -10,6 +10,7 @@ import { Table, TableData, TableHeader, TableWrapper } from '../style';
 
 import Skeleton from 'react-loading-skeleton'
 import 'react-loading-skeleton/dist/skeleton.css'
+import api from '../../services/api';
 // import { is } from 'date-fns/locale';
 
 // Create Document Component
@@ -38,15 +39,19 @@ const MyDocument = () => {
     };
 
     useEffect(() => {
-        fetchReport()
-        .then((testDataList) => {
-            setReport(testDataList)
-        }).catch((err) => {
-            console.error(err)
-        }).finally(() => {
-            setIsFetching(false)
-        })
+        const callFunction = async () => {
+            try {
+              const result = await api.get('https://us-central1-br-ipti-visao.cloudfunctions.net/generalReport');
+            setReport(result.data);
+            } catch (error) {
+              console.error('Error calling function:', error);
+            } finally {
+              setIsFetching(false);
+            }
+        };
+        callFunction();
     }, [])
+
 
     return (
 

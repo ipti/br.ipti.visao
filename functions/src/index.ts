@@ -16,20 +16,18 @@ import { generateReport } from "./controller/report/fetchReport";
 // admin.initializeApp();
 
 const corsOptions = {
-    origin: '*', // Substitua pelo seu frontend
-    methods: ['GET', 'POST'], // Adicione outros métodos se necessário
-    allowedHeaders: ['Content-Type', 'Authorization'], // Adicione outros cabeçalhos se necessário
+  origin: true, // Substitua pelo seu frontend
 };
-  
-  const corsMiddleware = cors(corsOptions);
 
-export const generalReport = generateReport;
+const corsMiddleware = cors(corsOptions);
+
+export const generalReport = generateReport(corsMiddleware);
 
 export const helloWorld = functions.https.onRequest((request, response) => {
-    corsMiddleware(request, response, () => {
-      response.send("Hello from Firebase!");
-    });
+  corsMiddleware(request, response, () => {
+    response.send("Hello from Firebase!");
   });
+});
 
 // utilizando minha função do firebase
 
