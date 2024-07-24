@@ -3,15 +3,13 @@ import html2canvas from 'html2canvas';
 import jsPDF from 'jspdf';
 import React, { useEffect, useRef, useState } from 'react';
 import logo from "../../assets/images/logo.svg";
-import fetchReport from '../../controller/School/fetchReport';
 
 import { Column, Padding, Row } from '../../styles/style';
 import { Table, TableData, TableHeader, TableWrapper } from '../style';
 
-import Skeleton from 'react-loading-skeleton'
-import 'react-loading-skeleton/dist/skeleton.css'
+import Skeleton from 'react-loading-skeleton';
+import 'react-loading-skeleton/dist/skeleton.css';
 import api from '../../services/api';
-// import { is } from 'date-fns/locale';
 
 // Create Document Component
 const MyDocument = () => {
