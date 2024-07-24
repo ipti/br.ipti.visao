@@ -43,6 +43,7 @@ const fetchReport = async () => {
           });
         }
       });
+
       report.push({
         school: school.object.name,
         countClassroom: countClassroom,

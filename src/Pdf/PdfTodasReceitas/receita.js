@@ -10,21 +10,15 @@ import { Table, TableData, TableHeader, TableWrapper } from '../style';
 import fetchOneClassroom from '../../controller/classroom/fetchOneClassroom';
 
 
-
-
 // Create Document Component
 const MyDocument = () => {
 
-
     const contentRef = useRef(null);
-
 
     const { id } = useParams()
 
-
     const [students, setStudents] = useState()
     const [classroom, setClassroom] = useState([])
-
 
     const generatePDF = () => {
         if (!contentRef.current) return;

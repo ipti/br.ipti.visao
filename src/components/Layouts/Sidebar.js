@@ -31,6 +31,13 @@ const Sidebar = ({isSidebar}) => {
       exact: false,
       IconActive: <img src={turmaBlueSvg} alt=""></img>,
       Icon: <img src={turmaGraySvg} alt=""></img>
+    },
+    {
+      to: "/relatorios",
+      name: "Relatórios",
+      exact: false,
+      IconActive: <img src={turmaBlueSvg} alt=""></img>,
+      Icon: <img src={turmaGraySvg} alt=""></img>
     }
   ];
 
