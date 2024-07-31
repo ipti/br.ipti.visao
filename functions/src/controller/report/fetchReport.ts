@@ -45,11 +45,6 @@ const generateRowReport = async (school: SchoolData, classroom: ClassroomData[],
     doc.data().horasUsoAparelhosEletronicos !== null
   );
 
-  // const totalConsultation = await firestore.collection("student")
-  //   .where(Filter.and(
-  //     Filter.where("school_fk", "==", school.id),
-  //   )).orderBy("crmMedico").orderBy("dataConsulta").count().get();
-
   const totalConsultation = await firestore.collection("student")
     .where("school_fk", "==", school.id)
     .orderBy("crmMedico")
