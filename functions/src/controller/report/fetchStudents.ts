@@ -2,7 +2,6 @@ import * as functions from 'firebase-functions';
 import { fetchSchoolsData, SchoolData } from '../school/fetchSchool';
 import { fetchClassroomData, ClassroomData } from '../classroom/fetchClassroom';
 import { fetchStudentData, StudentData } from '../student/fecthStudent';
-import { firestore } from '../../config/firebase';
 
 
 //todo: importar studentData, pegar todos os students, pegar a classroom_fk, e a escola
@@ -18,19 +17,27 @@ interface StudentReport {
     turno: string;
   }
   
-const generateRowStudentsReport = async (school: SchoolData[], classroom: ClassroomData[], student: StudentData): Promise<StudentReport> => {
+const generateRowStudentsReport = async (schools: SchoolData[], classrooms: ClassroomData[], student: StudentData): Promise<StudentReport> => {
     
     // pegar nome da turma do aluno
-    const studentClassroom = await firestore.collection("student")
-        .where("classroom_fk", "==", classroom[0].id).get();
+    // const studentClassroom = await firestore.collection("student")
+    //     .where("classroom_fk", "==", classroom[0].id).get();
         
-    // pegar nome da escola do aluno
-    const studentSchool = await firestore.collection("classroom")
-        .where("school_fk", "==", school[0].id).get();
+    // // pegar nome da escola do aluno
+    // const studentSchool = await firestore.collection("classroom")
+    //     .where("school_fk", "==", school[0].id).get();
+
+    const classroom = classrooms.find(classroom => classroom.id === student.object.classroom_fk);
+
+    let school: SchoolData | undefined;
+    if (classroom) {
+      school = schools.find(school => school.id === classroom.object.school_fk);
+    }
+  
     
     const studentsReport: StudentReport = { 
-        //school: studentSchool.docs.map(doc => doc.data().name),
-        //classroom: studentClassroom.docs.map(doc => doc.data().name),
+        school: school?.object.name,
+        classroom: classroom?.object.name,
         student_name: student.object.name,
         birthday: student.object.birthday,
         sex: student.object.sex,
