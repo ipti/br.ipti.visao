@@ -9,6 +9,12 @@ const deleteClassroom = async (firestore: Firestore, id: string) => {
         throw new Error("Turma não encontrada");
         }
         await firestore.collection("classroom").doc(id).delete();
+        
+        const refStudents = await firestore.collection("student").where("classroom_fk", "==", id).get();
+        refStudents.forEach(async (doc) => {
+            await firestore.collection("student").doc(doc.id).delete();
+        });
+        
         return "Turma deletada com sucesso";
     } catch (err) {
         console.error("Erro ao deletar turma:", err);
@@ -17,16 +23,3 @@ const deleteClassroom = async (firestore: Firestore, id: string) => {
     }
 
 export { deleteClassroom };
-
-// export const deleteItem = async (id, history) => {
-//     const itemRef = doc(collection(firestore, "classroom"), id);
-
-//     try {
-//         await deleteDoc(itemRef);
-//         history.push("/turmas")
-//         console.log("Item deleted successfully");
-//     } catch (err) {
-//         console.error("Error deleting item:", err);
-//         throw err;
-//     }
-// }
