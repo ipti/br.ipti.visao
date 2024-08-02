@@ -3,11 +3,6 @@ import { fetchSchoolsData, SchoolData } from '../school/fetchSchool';
 import { fetchClassroomData, ClassroomData } from '../classroom/fetchClassroom';
 import { fetchStudentData, StudentData } from '../student/fecthStudent';
 
-
-//todo: importar studentData, pegar todos os students, pegar a classroom_fk, e a escola
-// nome da escola, classroom, nome do aluno, dta nasc, sexo , turno
-// se foi triado, se foi consultado, se foi recebido
-
 interface StudentReport {
     school: string;
     classroom: string;
