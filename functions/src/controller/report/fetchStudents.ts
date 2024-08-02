@@ -15,17 +15,15 @@ interface StudentReport {
     birthday: string;
     sex: string;
     turno: string;
+    acompanhamento: string[];
+    doencas: string[];
+    doencasFamiliares: string[];
+    doencasNosOlhos: string[];
+    filhossintomas: string[];
+    observacoesSpotVision: string[];
   }
   
 const generateRowStudentsReport = async (schools: SchoolData[], classrooms: ClassroomData[], student: StudentData): Promise<StudentReport> => {
-    
-    // pegar nome da turma do aluno
-    // const studentClassroom = await firestore.collection("student")
-    //     .where("classroom_fk", "==", classroom[0].id).get();
-        
-    // // pegar nome da escola do aluno
-    // const studentSchool = await firestore.collection("classroom")
-    //     .where("school_fk", "==", school[0].id).get();
 
     const classroom = classrooms.find(classroom => classroom.id === student.object.classroom_fk);
 
@@ -33,7 +31,6 @@ const generateRowStudentsReport = async (schools: SchoolData[], classrooms: Clas
     if (classroom) {
       school = schools.find(school => school.id === classroom.object.school_fk);
     }
-  
     
     const studentsReport: StudentReport = { 
         school: school?.object.name,
@@ -42,7 +39,15 @@ const generateRowStudentsReport = async (schools: SchoolData[], classrooms: Clas
         birthday: student.object.birthday,
         sex: student.object.sex,
         turno: student.object.turno,
-    
+        horasAtividadesAoArLivre: student.object.horasAtividadesAoArLivre,
+        horasUsoAparelhosEletronicos: student.object.horasUsoAparelhosEletronicos,
+        acompanhamento: student.object.acompanhamento,
+        doencas: student.object.doencas,
+        doencasFamiliares: student.object.doencasFamiliares,
+        doencasNosOlhos: student.object.doencasNosOlhos,
+        filhossintomas: student.object.filhossintomas,
+        observacoesSpotVision: student.object.observacoesSpotVision,
+       
     } as unknown as StudentReport;
 
     return studentsReport;
