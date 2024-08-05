@@ -1,7 +1,7 @@
 import * as functions from 'firebase-functions';
 import { fetchSchoolsData, SchoolData } from '../school/fetchSchool';
 import { fetchClassroomData, ClassroomData } from '../classroom/fetchClassroom';
-import { fetchStudentData, StudentData } from '../student/fecthStudent';
+import { fetchStudentData, StudentData } from '../student/fetchStudent';
 import { firestore } from '../../config/firebase';
 interface Report {
   school: string;
@@ -36,10 +36,10 @@ const generateRowReport = async (school: SchoolData, classroom: ClassroomData[],
     .get();
 
   const triagemPaisFiltered = totalTriagemPais.docs.filter(doc =>
-    doc.data().horasAtividadeAoArLivre !== undefined &&
-    doc.data().horasAtividadeAoArLivre !== null &&
-    doc.data().horasUsoAparelhosEletronicos !== undefined &&
-    doc.data().horasUsoAparelhosEletronicos !== null
+    //doc.data().horasAtividadeAoArLivre !== undefined &&
+    doc.data().horasAtividadeAoArLivre !== "" &&
+    //doc.data().horasUsoAparelhosEletronicos !== undefined &&
+    doc.data().horasUsoAparelhosEletronicos !== ""
   );
 
   const totalConsultation = await firestore.collection("student")
@@ -94,7 +94,6 @@ export const generateReport = (cors: any) => functions.https.onRequest(async (re
       const student = await fetchStudentData();
 
       const completedReport = schools.map((school: SchoolData) => generateRowReport(school, classrooms, student));
-
       res.status(200).send(await Promise.all(completedReport));
 
     } catch (err: any) {

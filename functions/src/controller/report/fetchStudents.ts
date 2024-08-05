@@ -1,7 +1,7 @@
 import * as functions from 'firebase-functions';
 import { fetchSchoolsData, SchoolData } from '../school/fetchSchool';
 import { fetchClassroomData, ClassroomData } from '../classroom/fetchClassroom';
-import { fetchStudentData, StudentData } from '../student/fecthStudent';
+import { fetchStudentData, StudentData } from '../student/fetchStudent';
 
 interface StudentReport {
     school: string;
