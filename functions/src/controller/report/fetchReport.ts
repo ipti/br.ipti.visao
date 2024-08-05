@@ -3,9 +3,6 @@ import { fetchSchoolsData, SchoolData } from '../school/fetchSchool';
 import { fetchClassroomData, ClassroomData } from '../classroom/fetchClassroom';
 import { fetchStudentData, StudentData } from '../student/fecthStudent';
 import { firestore } from '../../config/firebase';
-//import { Filter } from 'firebase-admin/firestore';
-//import { collection, query, where } from "firebase/firestore";  
-
 interface Report {
   school: string;
   countClassroom: number;
@@ -45,11 +42,6 @@ const generateRowReport = async (school: SchoolData, classroom: ClassroomData[],
     doc.data().horasUsoAparelhosEletronicos !== null
   );
 
-  // const totalConsultation = await firestore.collection("student")
-  //   .where(Filter.and(
-  //     Filter.where("school_fk", "==", school.id),
-  //   )).orderBy("crmMedico").orderBy("dataConsulta").count().get();
-
   const totalConsultation = await firestore.collection("student")
     .where("school_fk", "==", school.id)
     .orderBy("crmMedico")
@@ -69,8 +61,8 @@ const generateRowReport = async (school: SchoolData, classroom: ClassroomData[],
     .where("school_fk", "==", school.id)
     .orderBy("receitaCilindricoOlhoEsquerdo")
     .orderBy("receitaCilindricoOlhoDireito")
-    .startAt("")  // Iniciar a consulta em um valor não vazio
-    .endAt("\uf8ff")  // Terminar a consulta em um valor unicode alto para incluir todos os valores não vazios
+    .startAt("") 
+    .endAt("\uf8ff") 
     .get()
     .then((querySnapshot) => {
       let filteredDocs = querySnapshot.docs.filter(doc => {
