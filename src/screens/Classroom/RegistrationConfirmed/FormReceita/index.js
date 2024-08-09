@@ -6,27 +6,38 @@ import { Column, Padding } from "../../../../styles/style";
 import { ButtonPurple } from "../../../../components/Buttons";
 import { useHistory } from "react-router";
 import { useParams } from "react-router-dom";
-
+import { useContext } from "react";
+import { FormRegistrationContext } from "../../../../context/Classroom/FormOphthalmological/context";
 
 const useStyles = makeStyles(styles);
 
-
 const FormReceita = ({ values, handleChange }) => {
     const classes = useStyles();
-
     const history = useHistory()
-
     // const { initialValues } = useContext(FormOphthalmologicalContext);
+    const { handleUpdate } = useContext(FormRegistrationContext)
+
     const { id, idRegistration } = useParams()
+   
+    const handleSaveAndNavigate = async () => {
+        try {
+            await handleUpdate(values);
+            await new Promise(resolve => setTimeout(resolve, 2000));
+            await history.push(`/turmas/${id}/matricula/${idRegistration}/receita`);
+        } catch (error) {
+            console.error("Erro ao salvar:", error);
+        }
+    };
    
     return (
         <>
         <Padding padding="8px" />
         <Grid item style={{ width: "100%" }} md={3}>
+                
                 <ButtonPurple
                   className="t-button-primary"
                   title="Gerar receita"
-                  onClick={() => history.push(`/turmas/${id}/matricula/${idRegistration}/receita`)}
+                  onClick={handleSaveAndNavigate}
                   type="button"
                 />
               </Grid>

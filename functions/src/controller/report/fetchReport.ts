@@ -1,11 +1,8 @@
 import * as functions from 'firebase-functions';
 import { fetchSchoolsData, SchoolData } from '../school/fetchSchool';
 import { fetchClassroomData, ClassroomData } from '../classroom/fetchClassroom';
-import { fetchStudentData, StudentData } from '../student/fecthStudent';
+import { fetchStudentData, StudentData } from '../student/fetchStudent';
 import { firestore } from '../../config/firebase';
-//import { Filter } from 'firebase-admin/firestore';
-//import { collection, query, where } from "firebase/firestore";  
-
 interface Report {
   school: string;
   countClassroom: number;
@@ -39,16 +36,11 @@ const generateRowReport = async (school: SchoolData, classroom: ClassroomData[],
     .get();
 
   const triagemPaisFiltered = totalTriagemPais.docs.filter(doc =>
-    doc.data().horasAtividadeAoArLivre !== undefined &&
-    doc.data().horasAtividadeAoArLivre !== null &&
-    doc.data().horasUsoAparelhosEletronicos !== undefined &&
-    doc.data().horasUsoAparelhosEletronicos !== null
+    //doc.data().horasAtividadeAoArLivre !== undefined &&
+    doc.data().horasAtividadeAoArLivre !== "" &&
+    //doc.data().horasUsoAparelhosEletronicos !== undefined &&
+    doc.data().horasUsoAparelhosEletronicos !== ""
   );
-
-  // const totalConsultation = await firestore.collection("student")
-  //   .where(Filter.and(
-  //     Filter.where("school_fk", "==", school.id),
-  //   )).orderBy("crmMedico").orderBy("dataConsulta").count().get();
 
   const totalConsultation = await firestore.collection("student")
     .where("school_fk", "==", school.id)
@@ -69,8 +61,8 @@ const generateRowReport = async (school: SchoolData, classroom: ClassroomData[],
     .where("school_fk", "==", school.id)
     .orderBy("receitaCilindricoOlhoEsquerdo")
     .orderBy("receitaCilindricoOlhoDireito")
-    .startAt("")  // Iniciar a consulta em um valor não vazio
-    .endAt("\uf8ff")  // Terminar a consulta em um valor unicode alto para incluir todos os valores não vazios
+    .startAt("") 
+    .endAt("\uf8ff") 
     .get()
     .then((querySnapshot) => {
       let filteredDocs = querySnapshot.docs.filter(doc => {
@@ -102,7 +94,6 @@ export const generateReport = (cors: any) => functions.https.onRequest(async (re
       const student = await fetchStudentData();
 
       const completedReport = schools.map((school: SchoolData) => generateRowReport(school, classrooms, student));
-
       res.status(200).send(await Promise.all(completedReport));
 
     } catch (err: any) {

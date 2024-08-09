@@ -1,5 +1,5 @@
-import { collection, deleteDoc, doc } from "@firebase/firestore";
-import { firestore } from "../../config/firebase";
+// import { collection, deleteDoc, doc } from "@firebase/firestore";
+// import { firestore } from "../../config/firebase";
 import axios from 'axios';
 
 
