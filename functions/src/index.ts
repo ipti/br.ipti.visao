@@ -11,6 +11,7 @@
 import * as functions from "firebase-functions";
 import * as cors from "cors"
 import { generateReport } from "./controller/report/fetchReport";
+import { deleteClassroom } from "./controller/classroom/deleteClassroom";
 
 
 // admin.initializeApp();
@@ -22,6 +23,8 @@ const corsOptions = {
 const corsMiddleware = cors(corsOptions);
 
 export const generalReport = generateReport(corsMiddleware);
+
+export const classroomDelete = deleteClassroom(corsMiddleware);
 
 export const helloWorld = functions.https.onRequest((request, response) => {
   corsMiddleware(request, response, () => {
