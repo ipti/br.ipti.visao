@@ -30,7 +30,6 @@ const PurpleRadio = withStyles({
 
 const FormPerson = ({ values, handleChange }) => {
   const classes = useStyles();
-
   const inputRef = useRef(null);
 
   return (

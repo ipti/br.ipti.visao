@@ -11,6 +11,8 @@ import { FormRegistrationContext } from "../../../../context/Classroom/FormOphth
 
 const useStyles = makeStyles(styles);
 
+//TODO: criar campo para informar se a criança recebeu um oculos, talvez campo de confirmação
+
 const FormReceita = ({ values, handleChange }) => {
     const classes = useStyles();
     const history = useHistory()
@@ -18,7 +20,7 @@ const FormReceita = ({ values, handleChange }) => {
     const { handleUpdate } = useContext(FormRegistrationContext)
 
     const { id, idRegistration } = useParams()
-   
+
     const handleSaveAndNavigate = async () => {
         try {
             await handleUpdate(values);
@@ -28,19 +30,19 @@ const FormReceita = ({ values, handleChange }) => {
             console.error("Erro ao salvar:", error);
         }
     };
-   
+
     return (
         <>
-        <Padding padding="8px" />
-        <Grid item style={{ width: "100%" }} md={3}>
-                
+            <Padding padding="8px" />
+            <Grid item style={{ width: "100%" }} md={3}>
+
                 <ButtonPurple
-                  className="t-button-primary"
-                  title="Gerar receita"
-                  onClick={handleSaveAndNavigate}
-                  type="button"
+                    className="t-button-primary"
+                    title="Gerar receita"
+                    onClick={handleSaveAndNavigate}
+                    type="button"
                 />
-              </Grid>
+            </Grid>
             <Padding padding="16px" />
             <h2>
                 Receita de óculos

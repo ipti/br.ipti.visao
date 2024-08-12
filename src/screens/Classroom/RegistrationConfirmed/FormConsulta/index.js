@@ -6,15 +6,11 @@ import styles from "../../../../styles";
 import { Column, Padding } from "../../../../styles/style";
 
 const useStyles = makeStyles(styles);
-
-
+//TODO: criar campo para informar se a consulta foi feita, talvez campo de confirmação
 const FormConsulta = ({ values, handleChange }) => {
     const classes = useStyles();
 
-
-
     return (
-
         <>
             <Grid container spacing={2}>
                 <Grid item style={{ width: "100%" }} md={6}>
