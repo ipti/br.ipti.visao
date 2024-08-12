@@ -31,11 +31,11 @@ const generateRowReport = async (school: SchoolData, classroom: ClassroomData[],
     doc.data().acuidadeTriagemEsquerdo !== ""
   );
 
-  const totalTriagemPais = await firestore.collection("student")
+  const totalquestianarioPais = await firestore.collection("student")
     .where("school_fk", "==", school.id)
     .get();
 
-  const triagemPaisFiltered = totalTriagemPais.docs.filter(doc =>
+  const questianarioPaisFiltered = totalquestianarioPais.docs.filter(doc =>
     //doc.data().horasAtividadeAoArLivre !== undefined &&
     doc.data().horasAtividadeAoArLivre !== "" &&
     //doc.data().horasUsoAparelhosEletronicos !== undefined &&
@@ -77,7 +77,7 @@ const generateRowReport = async (school: SchoolData, classroom: ClassroomData[],
     countClassroom: totalClassroom.docs.length,
     countRegister: totalAlunos.data().count,
     countRegisterTriados: triagensFiltered.length,
-    countTriagemPais: triagemPaisFiltered.length,
+    countquestianarioPais: questianarioPaisFiltered.length,
     countConsultation: totalConsultation,
     countReceipt: totalReceipt,
   } as unknown as Report;

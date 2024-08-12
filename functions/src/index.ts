@@ -11,8 +11,8 @@
 import * as functions from "firebase-functions";
 import * as cors from "cors"
 import { generateReport } from "./controller/report/fetchReport";
+import { generateStudentsReport } from "./controller/report/fetchStudents";
 import { deleteClassroom } from "./controller/classroom/deleteClassroom";
-
 
 // admin.initializeApp();
 
@@ -23,7 +23,7 @@ const corsOptions = {
 const corsMiddleware = cors(corsOptions);
 
 export const generalReport = generateReport(corsMiddleware);
-
+export const studentsReport = generateStudentsReport(corsMiddleware);
 export const classroomDelete = deleteClassroom(corsMiddleware);
 
 export const helloWorld = functions.https.onRequest((request, response) => {
@@ -33,8 +33,6 @@ export const helloWorld = functions.https.onRequest((request, response) => {
 });
 
 // utilizando minha função do firebase
-
 // export const generalReport = functions.https.onRequest(async (req, res) => {
-
 
 // }
