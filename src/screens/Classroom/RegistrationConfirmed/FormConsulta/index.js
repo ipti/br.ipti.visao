@@ -303,6 +303,19 @@ const FormConsulta = ({ values, handleChange }) => {
                     <TextField className={classes.inputStudent} name="proximaConsulta" value={values.proximaConsulta} onChange={handleChange} variant="outlined" />
                 </Column>
             </Grid>
+
+            <Padding />
+            <Grid item style={{ width: "100%" }} md={12}>
+                <p className={classes.label}>Considerar formulário como concluído?</p>
+                <FormGroup>
+                    <FormControlLabel control={<Checkbox 
+                    name="consultaCompleted" 
+                    defaultChecked={values.consultaCompleted} 
+                    onChange={handleChange} 
+                    value={values.consultaCompleted} />}     
+                    label="Considerar consulta como concluída" />
+                </FormGroup>
+            </Grid>
         </>
 
     )

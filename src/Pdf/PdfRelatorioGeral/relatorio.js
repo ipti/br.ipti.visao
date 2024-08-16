@@ -91,7 +91,7 @@ const MyDocument = () => {
                                         <TableHeader style={{ textAlign: "center" }}>Nº de Turmas</TableHeader>
                                         <TableHeader style={{ textAlign: "center" }}>Total de Matriculas</TableHeader>
                                         <TableHeader style={{ textAlign: "center" }}>Total de Triagens</TableHeader>
-                                        <TableHeader style={{ textAlign: "center" }}>Total de Questionario dos Pais</TableHeader>
+                                        <TableHeader style={{ textAlign: "center" }}>Total de Questionario com os Pais</TableHeader>
                                         <TableHeader style={{ textAlign: "center" }}>Total de Consultas</TableHeader>
                                         <TableHeader style={{ textAlign: "center" }}>Total de Receitas</TableHeader>
                                     </tr>

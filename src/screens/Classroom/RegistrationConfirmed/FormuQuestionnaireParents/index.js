@@ -8,11 +8,6 @@ import styles from "../../../../styles";
 
 import styleBase from "../../../../styles";
 import { Padding } from "../../../../styles/style";
-import { ButtonPurple } from "../../../../components/Buttons";
-
-import { useContext } from "react";
-import { FormRegistrationContext } from "../../../../context/Classroom/FormOphthalmological/context";
-
 
 const useStyles = makeStyles(styles);
 
@@ -25,37 +20,14 @@ const PurpleRadio = withStyles({
     checked: {}
 })(props => <Radio color="default" {...props} />);
 
-//TODO: criar campo para informar se a triagem foi feita, talvez campo de confirmação
+//TODO: criar campo para informar se a Questionnaire foi feita, talvez campo de confirmação
 
-const FormTriagemParents = ({ values, handleChange }) => {
+const FormQuestionnaireParents = ({ values, handleChange }) => {
     const classes = useStyles();
-
-    const { handleUpdate } = useContext(FormRegistrationContext)
-
-    const handleSaveAndConfirm = async () => {
-        try {
-            await handleUpdate(values);
-            await new Promise(resolve => setTimeout(resolve, 2000));
-            // fazer salvar um campo no banco de dados para informar que a triagem foi feita
-        } catch (error) {
-            console.error("Erro ao salvar:", error);
-        }
-    };
 
     return (
         <>  
             <Padding padding="8px" />
-            <Grid item style={{ width: "100%" }} md={3}>
-
-                <ButtonPurple
-                    className="t-button-primary"
-                    title="Gerar receita"
-                    onClick={handleSaveAndConfirm}
-                    type="button"
-                />
-            </Grid>
-            <Padding padding="16px" />
-
 
             <Grid item style={{ width: "100%" }} md={12}>
                 <p className={classes.label}>Seu filho tem algum sintoma na visão ou nos olhos?</p>
@@ -248,9 +220,21 @@ const FormTriagemParents = ({ values, handleChange }) => {
                 </Grid>
             </Grid>
 
+            <Padding />
+            <Grid item style={{ width: "100%" }} md={12}>
+                <p className={classes.label}>Considerar formulário como concluído?</p>
+                <FormGroup>
+                    <FormControlLabel control={<Checkbox 
+                        name="questionarioPaisCompleted" 
+                        defaultChecked={values.questionarioPaisCompleted} 
+                        onChange={handleChange} 
+                        value={values.questionarioPaisCompleted} />} 
+                        label="Questionário dos pais concluído" />
+                </FormGroup>
+            </Grid>
 
         </>
     );
 };
 
-export default FormTriagemParents;
+export default FormQuestionnaireParents;
