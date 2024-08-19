@@ -1,6 +1,7 @@
 import { makeStyles } from "@material-ui/core/styles";
 import { Checkbox, FormControlLabel, FormGroup, Grid, TextField } from "@mui/material";
 import React from "react";
+import { useState, useEffect } from 'react';
 import styles from "../../../../styles";
 import { Column, Padding } from "../../../../styles/style";
 import { ButtonPurple } from "../../../../components/Buttons";
@@ -32,6 +33,41 @@ const FormReceita = ({ values, handleChange }) => {
             console.error("Erro ao salvar:", error);
         }
     };
+
+    const [isReceitaCheckboxDisabled, setIsReceitaCheckboxDisabled] = useState(true);
+    const [isEntregaCheckboxDisabled, setIsEntregaCheckboxDisabled] = useState(true);
+    
+    // Verifica se todos os campos relacionados à receita estão preenchidos
+    useEffect(() => {
+        const receitaCamposPreenchidos =
+            values.receitaEsfericoOlhoDireito &&
+            values.receitaCilindricoOlhoDireito &&
+            values.receitaEixoOlhoDireito &&
+            values.receitaDpOlhoDireito &&
+            values.receitaEsfericoOlhoEsquerdo &&
+            values.receitaCilindricoOlhoEsquerdo &&
+            values.receitaEixoOlhoEsquerdo &&
+            values.receitaDpOlhoEsquerdo;
+
+        setIsReceitaCheckboxDisabled(!receitaCamposPreenchidos);
+    }, [
+        values.receitaEsfericoOlhoDireito,
+        values.receitaCilindricoOlhoDireito,
+        values.receitaEixoOlhoDireito,
+        values.receitaDpOlhoDireito,
+        values.receitaEsfericoOlhoEsquerdo,
+        values.receitaCilindricoOlhoEsquerdo,
+        values.receitaEixoOlhoEsquerdo,
+        values.receitaDpOlhoEsquerdo,
+        handleChange 
+    ]);
+
+    // Verifica se os campos de entrega estão preenchidos
+    useEffect(() => {
+        const entregaCamposPreenchidos = values.dataEntregaOculos && values.responsavelEntregaOculos;
+        setIsEntregaCheckboxDisabled(!entregaCamposPreenchidos);
+    }, [values.dataEntregaOculos, values.responsavelEntregaOculos, handleChange]); 
+
 
     return (
         <>
@@ -120,10 +156,11 @@ const FormReceita = ({ values, handleChange }) => {
                 <p className={classes.label}>Marcar receita como concluída</p>
                 <FormGroup>
                     <FormControlLabel control={<Checkbox 
-                    name="entregaOculosCompleted" 
-                    defaultChecked={values.entregaOculosCompleted} 
+                    name="receitaOculosCompleted" 
+                    defaultChecked={values.receitaOculosCompleted} 
                     onChange={handleChange} 
-                    value={values.entregaOculosCompleted} />}     
+                    value={values.receitaOculosCompleted} 
+                    disabled={isReceitaCheckboxDisabled} />}     
                     label="Receita concluída" />
                 </FormGroup>
             </Grid>
@@ -165,7 +202,8 @@ const FormReceita = ({ values, handleChange }) => {
                     name="entregaOculosCompleted" 
                     defaultChecked={values.entregaOculosCompleted} 
                     onChange={handleChange} 
-                    value={values.entregaOculosCompleted} />}     
+                    value={values.entregaOculosCompleted}
+                    disabled={isEntregaCheckboxDisabled} />}     
                     label="Óculos entregue" />
                 </FormGroup>
             </Grid>

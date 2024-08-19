@@ -10,6 +10,7 @@ import { Table, TableData, TableHeader, TableWrapper } from '../style';
 import Skeleton from 'react-loading-skeleton';
 import 'react-loading-skeleton/dist/skeleton.css';
 import api from '../../services/api';
+//import { Tab } from 'semantic-ui-react';
 
 // Create Document Component
 const MyDocument = () => {
@@ -39,7 +40,8 @@ const MyDocument = () => {
     useEffect(() => {
         const callFunction = async () => {
             try {
-              const result = await api.get('https://us-central1-br-ipti-visao.cloudfunctions.net/generalReport');
+              //const result = await api.get('https://us-central1-br-ipti-visao.cloudfunctions.net/generalReport');  //comitei para testar com o local
+              const result = await api.get('http://127.0.0.1:5001/br-ipti-visao/us-central1/generalReport');
             setReport(result.data);
             } catch (error) {
               console.error('Error calling function:', error);
@@ -90,16 +92,18 @@ const MyDocument = () => {
                                         <TableHeader style={{ textAlign: "center" }}>Nome da escola</TableHeader>
                                         <TableHeader style={{ textAlign: "center" }}>Nº de Turmas</TableHeader>
                                         <TableHeader style={{ textAlign: "center" }}>Total de Matriculas</TableHeader>
-                                        <TableHeader style={{ textAlign: "center" }}>Total de Triagens</TableHeader>
                                         <TableHeader style={{ textAlign: "center" }}>Total de Questionario com os Pais</TableHeader>
-                                        <TableHeader style={{ textAlign: "center" }}>Total de Consultas</TableHeader>
-                                        <TableHeader style={{ textAlign: "center" }}>Total de Receitas</TableHeader>
+                                        <TableHeader style={{ textAlign: "center" }}>Total de Triagens</TableHeader>
+                                        <TableHeader style={{ textAlign: "center" }}>Total de Consultas Realizadas</TableHeader>
+                                        <TableHeader style={{ textAlign: "center" }}>Total de Receitas Geradas</TableHeader>
+                                        <TableHeader style={{ textAlign: "center" }}>Total de Óculos Entregues</TableHeader>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     {isFetching ? (
                                         // Mostrar Skeleton enquanto os dados estão sendo carregados
                                         <tr>
+                                            <TableData><Skeleton height={20} /></TableData>
                                             <TableData><Skeleton height={20} /></TableData>
                                             <TableData><Skeleton height={20} /></TableData>
                                             <TableData><Skeleton height={20} /></TableData>
@@ -115,10 +119,11 @@ const MyDocument = () => {
                                                 <TableData style={{ textAlign: "center" }}>{item.school}</TableData>
                                                 <TableData style={{ textAlign: "center" }}>{item.countClassroom}</TableData>
                                                 <TableData style={{ textAlign: "center" }}>{item.countRegister}</TableData>
+                                                <TableData style={{ textAlign: "center" }}>{item.countQuestianarioPais}</TableData>
                                                 <TableData style={{ textAlign: "center" }}>{item.countRegisterTriados}</TableData>
-                                                <TableData style={{ textAlign: "center" }}>{item.countTriagemPais}</TableData>
-                                                <TableData style={{ textAlign: "center" }}>{item.countConsultation}</TableData>
-                                                <TableData style={{ textAlign: "center" }}>{item.countReceipt}</TableData>
+                                                <TableData style={{ textAlign: "center" }}>{item.countConsultationCompleted}</TableData>
+                                                <TableData style={{ textAlign: "center" }}>{item.countReceitaOculosCompleted}</TableData>
+                                                <TableData style={{ textAlign: "center" }}>{item.countEntregaOculosCompleted}</TableData>
                                             </tr>
                                         ))
                                     )}

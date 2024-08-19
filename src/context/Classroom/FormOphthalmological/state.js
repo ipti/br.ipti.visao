@@ -152,7 +152,7 @@ const FormRegistrationState = () => {
 
     triagemCompleted: oneRegistration?.object.triagemCompleted ?? false,
     consultaCompleted: oneRegistration?.object.consultaCompleted ?? false,
-    receitaCompleted: oneRegistration?.object.receitaCompleted ?? false,
+    receitaOculosCompleted: oneRegistration?.object.receitaCompleted ?? false,
     entregaOculosCompleted: oneRegistration?.object.entregaOculosCompleted ?? false,
     questionarioPaisCompleted: oneRegistration?.object.questionarioPaisCompleted ?? false,
 

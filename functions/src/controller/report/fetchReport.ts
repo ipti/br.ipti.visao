@@ -33,53 +33,40 @@ const generateRowReport = async (school: SchoolData, classroom: ClassroomData[],
 
   const totalquestianarioPais = await firestore.collection("student")
     .where("school_fk", "==", school.id)
+    //.where("questionarioPaisCompleted", "==", true)   //TODO: Verificar se o questionário foi respondido, rodar script para atualizar os dados
     .get();
 
   const questianarioPaisFiltered = totalquestianarioPais.docs.filter(doc =>
-    //doc.data().horasAtividadeAoArLivre !== undefined &&
     doc.data().horasAtividadeAoArLivre !== "" &&
-    //doc.data().horasUsoAparelhosEletronicos !== undefined &&
     doc.data().horasUsoAparelhosEletronicos !== ""
   );
 
-  const totalConsultation = await firestore.collection("student")
+  const totalConsultationCompleted = await firestore.collection("student")
     .where("school_fk", "==", school.id)
-    .orderBy("crmMedico")
-    .orderBy("dataConsulta")
-    .startAt("")  // Iniciar a consulta em um valor não vazio
-    .endAt("\uf8ff")  // Terminar a consulta em um valor unicode alto para incluir todos os valores não vazios
-    .get()
-    .then((querySnapshot) => {
-      let filteredDocs = querySnapshot.docs.filter(doc => {
-        const data = doc.data();
-        return data.crmMedico !== "" && data.dataConsulta !== "";
-      });
-      return filteredDocs.length;
-    });
+    .where("consultaCompleted", "==", true)
+    .count().get();
 
-  const totalReceipt = await firestore.collection("student")
+  const totalReceitaOculosCompleted = await firestore.collection("student")
     .where("school_fk", "==", school.id)
-    .orderBy("receitaCilindricoOlhoEsquerdo")
-    .orderBy("receitaCilindricoOlhoDireito")
-    .startAt("") 
-    .endAt("\uf8ff") 
-    .get()
-    .then((querySnapshot) => {
-      let filteredDocs = querySnapshot.docs.filter(doc => {
-        const data = doc.data();
-        return data.receitaCilindricoOlhoEsquerdo !== "" && data.receitaCilindricoOlhoDireito !== "";
-      });
-      return filteredDocs.length;
-    });
+    .where("receitaOculosCompleted", "==", true)
+    .count().get();
+
+  const totalEntregaOculosCompleted = await firestore.collection("student")
+    .where("school_fk", "==", school.id)
+    .where("entregaOculosCompleted", "==", true)
+    .count().get();
+
 
   const report: Report = {
     school: school.object.name,
     countClassroom: totalClassroom.docs.length,
     countRegister: totalAlunos.data().count,
     countRegisterTriados: triagensFiltered.length,
-    countquestianarioPais: questianarioPaisFiltered.length,
-    countConsultation: totalConsultation,
-    countReceipt: totalReceipt,
+    countQuestianarioPais: questianarioPaisFiltered.length,
+    
+    countConsultationCompleted: totalConsultationCompleted.data().count,
+    countReceitaOculosCompleted: totalReceitaOculosCompleted.data().count,
+    countEntregaOculosCompleted: totalEntregaOculosCompleted.data().count,
   } as unknown as Report;
 
   return report;
