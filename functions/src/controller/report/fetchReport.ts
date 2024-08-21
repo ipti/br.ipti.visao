@@ -8,8 +8,11 @@ interface Report {
   countClassroom: number;
   countRegister: number;
   countRegisterTriados: number;
-  countConsultation: number;
-  countReceipt: number;
+  countQuestianarioPais: number;
+  countForwardedConsultation: number;
+  countConsultationCompleted: number;
+  countReceitaOculosCompleted: number;
+  countEntregaOculosCompleted: number;
 }
 
 const generateRowReport = async (school: SchoolData, classroom: ClassroomData[], student: StudentData[]): Promise<Report> => {
@@ -28,17 +31,18 @@ const generateRowReport = async (school: SchoolData, classroom: ClassroomData[],
     doc.data().acuidadeTriagemDireito !== undefined &&
     doc.data().acuidadeTriagemDireito !== "" &&
     doc.data().acuidadeTriagemEsquerdo !== undefined &&
-    doc.data().acuidadeTriagemEsquerdo !== ""
+    doc.data().acuidadeTriagemEsquerdo !== "" ||
+    doc.data().triagemCompleted == true
   );
 
-  const totalquestianarioPais = await firestore.collection("student")
+  const totalAlunosEscola = await firestore.collection("student")
     .where("school_fk", "==", school.id)
-    //.where("questionarioPaisCompleted", "==", true)   //TODO: Verificar se o questionário foi respondido, rodar script para atualizar os dados
     .get();
 
-  const questianarioPaisFiltered = totalquestianarioPais.docs.filter(doc =>
+  const totalQuestianarioPais = totalAlunosEscola.docs.filter(doc =>
     doc.data().horasAtividadeAoArLivre !== "" &&
-    doc.data().horasUsoAparelhosEletronicos !== ""
+    doc.data().horasUsoAparelhosEletronicos !== ""||
+    doc.data().questionarioPaisCompleted == true
   );
 
   const totalConsultationCompleted = await firestore.collection("student")
@@ -56,14 +60,18 @@ const generateRowReport = async (school: SchoolData, classroom: ClassroomData[],
     .where("entregaOculosCompleted", "==", true)
     .count().get();
 
+  const totalForwardedConsultation = totalAlunosEscola.docs.filter(doc => {
+    return  doc.data().points >= 5;
+  });
 
   const report: Report = {
     school: school.object.name,
     countClassroom: totalClassroom.docs.length,
     countRegister: totalAlunos.data().count,
     countRegisterTriados: triagensFiltered.length,
-    countQuestianarioPais: questianarioPaisFiltered.length,
-    
+    countQuestianarioPais: totalQuestianarioPais.length,
+
+    countForwardedConsultation: totalForwardedConsultation.length,
     countConsultationCompleted: totalConsultationCompleted.data().count,
     countReceitaOculosCompleted: totalReceitaOculosCompleted.data().count,
     countEntregaOculosCompleted: totalEntregaOculosCompleted.data().count,
