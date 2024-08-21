@@ -2,7 +2,7 @@
 import React from 'react';
 import { TabView, TabPanel } from 'primereact/tabview';
 import FormPerson from '../FormPerson';
-import FormTriagemParents from '../FormTriagemParents';
+import FormQuestionnaireParents from '../FormuQuestionnaireParents';
 import FormOphthalmologicalPage from '../FormOphthalmological/FormOphthalmological';
 import FormConsulta from '../FormConsulta';
 import FormReceita from '../FormReceita';
@@ -17,8 +17,8 @@ export default function TabsRegister({ values, handleChange }) {
         }} header="Aluno">
           <FormPerson values={values} handleChange={handleChange} />
         </TabPanel>
-        <TabPanel header="Triagem Pais">
-          < FormTriagemParents values={values} handleChange={handleChange} />
+        <TabPanel header="Questinário com os Pais">
+          < FormQuestionnaireParents values={values} handleChange={handleChange} />
         </TabPanel>
         <TabPanel header="Triagem">
           <FormOphthalmologicalPage values={values} handleChange={handleChange} />

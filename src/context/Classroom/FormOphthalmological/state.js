@@ -9,11 +9,6 @@ const FormRegistrationState = () => {
 
   const { idRegistration } = useParams()
 
-
-
-
-
-
   const [oneRegistration, setOneRegistration] = useState();
 
   useEffect(() => {
@@ -29,7 +24,7 @@ const FormRegistrationState = () => {
 
 
   const handleUpdate = (values) => {
-    updateStudent(idRegistration, {...values})
+    updateStudent(idRegistration, {...values, points: points()})
   }
 
   const initialValues = {
@@ -152,6 +147,15 @@ const FormRegistrationState = () => {
     receitaCilindricoOlhoEsquerdo: oneRegistration?.object.receitaCilindricoOlhoEsquerdo ?? "",
     receitaEixoOlhoEsquerdo: oneRegistration?.object.receitaEixoOlhoEsquerdo ?? "",
     receitaDpOlhoEsquerdo: oneRegistration?.object.receitaDpOlhoEsquerdo ?? "",
+    dataEntregaOculos: oneRegistration?.object?.dataEntregaOculos ? oneRegistration.object.dataEntregaOculos : null,
+    responsavelEntregaOculos: oneRegistration?.object.responsavelEntregaOculos ?? "",
+
+    triagemCompleted: oneRegistration?.object.triagemCompleted ?? false,
+    consultaCompleted: oneRegistration?.object.consultaCompleted ?? false,
+    receitaOculosCompleted: oneRegistration?.object.receitaCompleted ?? false,
+    entregaOculosCompleted: oneRegistration?.object.entregaOculosCompleted ?? false,
+    questionarioPaisCompleted: oneRegistration?.object.questionarioPaisCompleted ?? false,
+
   };
 
 

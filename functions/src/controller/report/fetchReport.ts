@@ -8,8 +8,11 @@ interface Report {
   countClassroom: number;
   countRegister: number;
   countRegisterTriados: number;
-  countConsultation: number;
-  countReceipt: number;
+  countQuestianarioPais: number;
+  countForwardedConsultation: number;
+  countConsultationCompleted: number;
+  countReceitaOculosCompleted: number;
+  countEntregaOculosCompleted: number;
 }
 
 const generateRowReport = async (school: SchoolData, classroom: ClassroomData[], student: StudentData[]): Promise<Report> => {
@@ -28,58 +31,50 @@ const generateRowReport = async (school: SchoolData, classroom: ClassroomData[],
     doc.data().acuidadeTriagemDireito !== undefined &&
     doc.data().acuidadeTriagemDireito !== "" &&
     doc.data().acuidadeTriagemEsquerdo !== undefined &&
-    doc.data().acuidadeTriagemEsquerdo !== ""
+    doc.data().acuidadeTriagemEsquerdo !== "" ||
+    doc.data().triagemCompleted == true
   );
 
-  const totalquestianarioPais = await firestore.collection("student")
+  const totalAlunosEscola = await firestore.collection("student")
     .where("school_fk", "==", school.id)
     .get();
 
-  const questianarioPaisFiltered = totalquestianarioPais.docs.filter(doc =>
-    //doc.data().horasAtividadeAoArLivre !== undefined &&
+  const totalQuestianarioPais = totalAlunosEscola.docs.filter(doc =>
     doc.data().horasAtividadeAoArLivre !== "" &&
-    //doc.data().horasUsoAparelhosEletronicos !== undefined &&
-    doc.data().horasUsoAparelhosEletronicos !== ""
+    doc.data().horasUsoAparelhosEletronicos !== ""||
+    doc.data().questionarioPaisCompleted == true
   );
 
-  const totalConsultation = await firestore.collection("student")
+  const totalConsultationCompleted = await firestore.collection("student")
     .where("school_fk", "==", school.id)
-    .orderBy("crmMedico")
-    .orderBy("dataConsulta")
-    .startAt("")  // Iniciar a consulta em um valor não vazio
-    .endAt("\uf8ff")  // Terminar a consulta em um valor unicode alto para incluir todos os valores não vazios
-    .get()
-    .then((querySnapshot) => {
-      let filteredDocs = querySnapshot.docs.filter(doc => {
-        const data = doc.data();
-        return data.crmMedico !== "" && data.dataConsulta !== "";
-      });
-      return filteredDocs.length;
-    });
+    .where("consultaCompleted", "==", true)
+    .count().get();
 
-  const totalReceipt = await firestore.collection("student")
+  const totalReceitaOculosCompleted = await firestore.collection("student")
     .where("school_fk", "==", school.id)
-    .orderBy("receitaCilindricoOlhoEsquerdo")
-    .orderBy("receitaCilindricoOlhoDireito")
-    .startAt("") 
-    .endAt("\uf8ff") 
-    .get()
-    .then((querySnapshot) => {
-      let filteredDocs = querySnapshot.docs.filter(doc => {
-        const data = doc.data();
-        return data.receitaCilindricoOlhoEsquerdo !== "" && data.receitaCilindricoOlhoDireito !== "";
-      });
-      return filteredDocs.length;
-    });
+    .where("receitaOculosCompleted", "==", true)
+    .count().get();
+
+  const totalEntregaOculosCompleted = await firestore.collection("student")
+    .where("school_fk", "==", school.id)
+    .where("entregaOculosCompleted", "==", true)
+    .count().get();
+
+  const totalForwardedConsultation = totalAlunosEscola.docs.filter(doc => {
+    return  doc.data().points >= 5;
+  });
 
   const report: Report = {
     school: school.object.name,
     countClassroom: totalClassroom.docs.length,
     countRegister: totalAlunos.data().count,
     countRegisterTriados: triagensFiltered.length,
-    countquestianarioPais: questianarioPaisFiltered.length,
-    countConsultation: totalConsultation,
-    countReceipt: totalReceipt,
+    countQuestianarioPais: totalQuestianarioPais.length,
+
+    countForwardedConsultation: totalForwardedConsultation.length,
+    countConsultationCompleted: totalConsultationCompleted.data().count,
+    countReceitaOculosCompleted: totalReceitaOculosCompleted.data().count,
+    countEntregaOculosCompleted: totalEntregaOculosCompleted.data().count,
   } as unknown as Report;
 
   return report;

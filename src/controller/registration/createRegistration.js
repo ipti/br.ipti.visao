@@ -6,7 +6,7 @@ import { addDoc } from "@firebase/firestore"
 const handleSubmitStudent = (body, history, path) => {
     const ref = collection(firestore, "student");
 
-    let data = body
+    let data = {...body, questionarioPaisCompleted:true}
 
     try {
         addDoc(ref, data)

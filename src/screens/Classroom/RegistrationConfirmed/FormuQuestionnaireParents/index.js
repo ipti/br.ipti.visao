@@ -1,17 +1,8 @@
 import React from "react";
 
-// Material UI
 import { FormControl, FormControlLabel, Grid, Radio, RadioGroup } from "@material-ui/core";
-
 import { makeStyles, withStyles } from "@material-ui/core/styles";
 
-// Components
-
-// Third party
-
-
-
-// Styles
 import { Checkbox, FormGroup } from "@mui/material";
 import styles from "../../../../styles";
 
@@ -29,14 +20,15 @@ const PurpleRadio = withStyles({
     checked: {}
 })(props => <Radio color="default" {...props} />);
 
+//TODO: criar campo para informar se a Questionnaire foi feita, talvez campo de confirmação
 
-
-
-const FormTriagemParents = ({ values, handleChange }) => {
+const FormQuestionnaireParents = ({ values, handleChange }) => {
     const classes = useStyles();
 
     return (
-        <>
+        <>  
+            <Padding padding="8px" />
+
             <Grid item style={{ width: "100%" }} md={12}>
                 <p className={classes.label}>Seu filho tem algum sintoma na visão ou nos olhos?</p>
                 <FormGroup>
@@ -228,9 +220,21 @@ const FormTriagemParents = ({ values, handleChange }) => {
                 </Grid>
             </Grid>
 
+            <Padding />
+            <Grid item style={{ width: "100%" }} md={12}>
+                <p className={classes.label}>Considerar formulário como concluído?</p>
+                <FormGroup>
+                    <FormControlLabel control={<Checkbox 
+                        name="questionarioPaisCompleted" 
+                        defaultChecked={values.questionarioPaisCompleted} 
+                        onChange={handleChange} 
+                        value={values.questionarioPaisCompleted} />} 
+                        label="Questionário dos pais concluído" />
+                </FormGroup>
+            </Grid>
 
         </>
     );
 };
 
-export default FormTriagemParents;
+export default FormQuestionnaireParents;

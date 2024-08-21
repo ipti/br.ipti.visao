@@ -6,15 +6,11 @@ import styles from "../../../../styles";
 import { Column, Padding } from "../../../../styles/style";
 
 const useStyles = makeStyles(styles);
-
-
+//TODO: criar campo para informar se a consulta foi feita, talvez campo de confirmação
 const FormConsulta = ({ values, handleChange }) => {
     const classes = useStyles();
 
-
-
     return (
-
         <>
             <Grid container spacing={2}>
                 <Grid item style={{ width: "100%" }} md={6}>
@@ -306,6 +302,19 @@ const FormConsulta = ({ values, handleChange }) => {
                 <Column>
                     <TextField className={classes.inputStudent} name="proximaConsulta" value={values.proximaConsulta} onChange={handleChange} variant="outlined" />
                 </Column>
+            </Grid>
+
+            <Padding />
+            <Grid item style={{ width: "100%" }} md={12}>
+                <p className={classes.label}>Considerar formulário como concluído?</p>
+                <FormGroup>
+                    <FormControlLabel control={<Checkbox 
+                    name="consultaCompleted" 
+                    defaultChecked={values.consultaCompleted} 
+                    onChange={handleChange} 
+                    value={values.consultaCompleted} />}     
+                    label="Considerar consulta como concluída" />
+                </FormGroup>
             </Grid>
         </>
 

@@ -1,6 +1,7 @@
 import { makeStyles } from "@material-ui/core/styles";
-import { Grid, TextField } from "@mui/material";
+import { Checkbox, FormControlLabel, FormGroup, Grid, TextField } from "@mui/material";
 import React from "react";
+import { useState, useEffect } from 'react';
 import styles from "../../../../styles";
 import { Column, Padding } from "../../../../styles/style";
 import { ButtonPurple } from "../../../../components/Buttons";
@@ -8,8 +9,12 @@ import { useHistory } from "react-router";
 import { useParams } from "react-router-dom";
 import { useContext } from "react";
 import { FormRegistrationContext } from "../../../../context/Classroom/FormOphthalmological/context";
+import MaskDate from "../../../../components/Mask/maskdate";
+
 
 const useStyles = makeStyles(styles);
+
+//TODO: criar campo para informar se a criança recebeu um oculos, talvez campo de confirmação
 
 const FormReceita = ({ values, handleChange }) => {
     const classes = useStyles();
@@ -18,7 +23,7 @@ const FormReceita = ({ values, handleChange }) => {
     const { handleUpdate } = useContext(FormRegistrationContext)
 
     const { id, idRegistration } = useParams()
-   
+
     const handleSaveAndNavigate = async () => {
         try {
             await handleUpdate(values);
@@ -28,19 +33,54 @@ const FormReceita = ({ values, handleChange }) => {
             console.error("Erro ao salvar:", error);
         }
     };
-   
+
+    const [isReceitaCheckboxDisabled, setIsReceitaCheckboxDisabled] = useState(true);
+    const [isEntregaCheckboxDisabled, setIsEntregaCheckboxDisabled] = useState(true);
+    
+    // Verifica se todos os campos relacionados à receita estão preenchidos
+    useEffect(() => {
+        const receitaCamposPreenchidos =
+            values.receitaEsfericoOlhoDireito &&
+            values.receitaCilindricoOlhoDireito &&
+            values.receitaEixoOlhoDireito &&
+            values.receitaDpOlhoDireito &&
+            values.receitaEsfericoOlhoEsquerdo &&
+            values.receitaCilindricoOlhoEsquerdo &&
+            values.receitaEixoOlhoEsquerdo &&
+            values.receitaDpOlhoEsquerdo;
+
+        setIsReceitaCheckboxDisabled(!receitaCamposPreenchidos);
+    }, [
+        values.receitaEsfericoOlhoDireito,
+        values.receitaCilindricoOlhoDireito,
+        values.receitaEixoOlhoDireito,
+        values.receitaDpOlhoDireito,
+        values.receitaEsfericoOlhoEsquerdo,
+        values.receitaCilindricoOlhoEsquerdo,
+        values.receitaEixoOlhoEsquerdo,
+        values.receitaDpOlhoEsquerdo,
+        handleChange 
+    ]);
+
+    // Verifica se os campos de entrega estão preenchidos
+    useEffect(() => {
+        const entregaCamposPreenchidos = values.dataEntregaOculos && values.responsavelEntregaOculos;
+        setIsEntregaCheckboxDisabled(!entregaCamposPreenchidos);
+    }, [values.dataEntregaOculos, values.responsavelEntregaOculos, handleChange]); 
+
+
     return (
         <>
-        <Padding padding="8px" />
-        <Grid item style={{ width: "100%" }} md={3}>
-                
+            <Padding padding="8px" />
+            <Grid item style={{ width: "100%" }} md={3}>
+
                 <ButtonPurple
-                  className="t-button-primary"
-                  title="Gerar receita"
-                  onClick={handleSaveAndNavigate}
-                  type="button"
+                    className="t-button-primary"
+                    title="Gerar receita"
+                    onClick={handleSaveAndNavigate}
+                    type="button"
                 />
-              </Grid>
+            </Grid>
             <Padding padding="16px" />
             <h2>
                 Receita de óculos
@@ -110,7 +150,63 @@ const FormReceita = ({ values, handleChange }) => {
                     </Column>
                 </Grid>
             </Grid>
+            
+            <Padding padding="8px" />
+            <Grid item style={{ width: "100%" }} md={12}>
+                <p className={classes.label}>Marcar receita como concluída</p>
+                <FormGroup>
+                    <FormControlLabel control={<Checkbox 
+                    name="receitaOculosCompleted" 
+                    defaultChecked={values.receitaOculosCompleted} 
+                    onChange={handleChange} 
+                    value={values.receitaOculosCompleted} 
+                    disabled={isReceitaCheckboxDisabled} />}     
+                    label="Receita concluída" />
+                </FormGroup>
+            </Grid>
             <Padding padding="16px" />
+
+            <h2>
+                Entrega de óculos
+            </h2>
+            <Grid container spacing={2} md={12}>
+                <Grid item style={{ width: "100%" }} md={4}>
+                    <p className={classes.label}>Data de entrega</p>
+                    <Column>
+                        <TextField className={classes.inputStudent} name="dataEntregaOculos" onChange={handleChange}
+                            InputProps={{
+                                inputComponent: MaskDate,
+                                value: values.dataEntregaOculos,
+                                onChange: handleChange
+                            }}
+                            value={values.dataEntregaOculos}
+                            variant="outlined" />
+                    </Column>
+                </Grid>
+                <Grid item style={{ width: "100%" }} md={4}>
+                    <p className={classes.label}>Responsável</p>
+                    <Column>
+                        <TextField className={classes.inputStudent} 
+                            name="responsavelEntregaOculos" 
+                            value={values.responsavelEntregaOculos} 
+                            onChange={handleChange} 
+                            variant="outlined" />
+                    </Column>
+                </Grid>
+            </Grid>
+            <Padding />
+            <Grid item style={{ width: "100%" }} md={12}>
+                <p className={classes.label}>Marcar óculos como entregue</p>
+                <FormGroup>
+                    <FormControlLabel control={<Checkbox 
+                    name="entregaOculosCompleted" 
+                    defaultChecked={values.entregaOculosCompleted} 
+                    onChange={handleChange} 
+                    value={values.entregaOculosCompleted}
+                    disabled={isEntregaCheckboxDisabled} />}     
+                    label="Óculos entregue" />
+                </FormGroup>
+            </Grid>
 
         </>
     )

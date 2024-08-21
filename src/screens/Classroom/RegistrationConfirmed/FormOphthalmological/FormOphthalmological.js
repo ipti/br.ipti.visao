@@ -1,6 +1,9 @@
 import { TextField } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import { FormControlLabel, Grid, Radio, RadioGroup } from "@mui/material";
+import { Checkbox, FormGroup } from "@mui/material";
+import { Padding } from "../../../../styles/style";
+
 import React from "react";
 import styles from "../../../../styles";
 import { Column } from "../../../../styles/style";
@@ -126,6 +129,19 @@ const FormOphthalmologicalPage = ({ values, handleChange }) => {
           variant="outlined"
         />
       </Grid>
+
+      <Padding />
+          <Grid item style={{ width: "100%" }} md={12}>
+            <p className={classes.label}>Considerar formulário como concluído?</p>
+              <FormGroup>
+                <FormControlLabel control={<Checkbox 
+                  name="triagemCompleted" 
+                  defaultChecked={values.triagemCompleted} 
+                  onChange={handleChange} 
+                  value={values.triagemCompleted} />} 
+                  label="Considerar triagem como concluída" />
+              </FormGroup>
+          </Grid>
     </>
   );
 };
