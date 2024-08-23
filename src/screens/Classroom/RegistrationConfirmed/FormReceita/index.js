@@ -9,12 +9,8 @@ import { useHistory } from "react-router";
 import { useParams } from "react-router-dom";
 import { useContext } from "react";
 import { FormRegistrationContext } from "../../../../context/Classroom/FormOphthalmological/context";
-import MaskDate from "../../../../components/Mask/maskdate";
-
 
 const useStyles = makeStyles(styles);
-
-//TODO: criar campo para informar se a criança recebeu um oculos, talvez campo de confirmação
 
 const FormReceita = ({ values, handleChange }) => {
     const classes = useStyles();
@@ -35,9 +31,7 @@ const FormReceita = ({ values, handleChange }) => {
     };
 
     const [isReceitaCheckboxDisabled, setIsReceitaCheckboxDisabled] = useState(true);
-    const [isEntregaCheckboxDisabled, setIsEntregaCheckboxDisabled] = useState(true);
     
-    // Verifica se todos os campos relacionados à receita estão preenchidos
     useEffect(() => {
         const receitaCamposPreenchidos =
             values.receitaEsfericoOlhoDireito &&
@@ -61,13 +55,6 @@ const FormReceita = ({ values, handleChange }) => {
         values.receitaDpOlhoEsquerdo,
         handleChange 
     ]);
-
-    // Verifica se os campos de entrega estão preenchidos
-    useEffect(() => {
-        const entregaCamposPreenchidos = values.dataEntregaOculos && values.responsavelEntregaOculos;
-        setIsEntregaCheckboxDisabled(!entregaCamposPreenchidos);
-    }, [values.dataEntregaOculos, values.responsavelEntregaOculos, handleChange]); 
-
 
     return (
         <>
@@ -165,48 +152,6 @@ const FormReceita = ({ values, handleChange }) => {
                 </FormGroup>
             </Grid>
             <Padding padding="16px" />
-
-            <h2>
-                Entrega de óculos
-            </h2>
-            <Grid container spacing={2} md={12}>
-                <Grid item style={{ width: "100%" }} md={4}>
-                    <p className={classes.label}>Data de entrega</p>
-                    <Column>
-                        <TextField className={classes.inputStudent} name="dataEntregaOculos" onChange={handleChange}
-                            InputProps={{
-                                inputComponent: MaskDate,
-                                value: values.dataEntregaOculos,
-                                onChange: handleChange
-                            }}
-                            value={values.dataEntregaOculos}
-                            variant="outlined" />
-                    </Column>
-                </Grid>
-                <Grid item style={{ width: "100%" }} md={4}>
-                    <p className={classes.label}>Responsável</p>
-                    <Column>
-                        <TextField className={classes.inputStudent} 
-                            name="responsavelEntregaOculos" 
-                            value={values.responsavelEntregaOculos} 
-                            onChange={handleChange} 
-                            variant="outlined" />
-                    </Column>
-                </Grid>
-            </Grid>
-            <Padding />
-            <Grid item style={{ width: "100%" }} md={12}>
-                <p className={classes.label}>Marcar óculos como entregue</p>
-                <FormGroup>
-                    <FormControlLabel control={<Checkbox 
-                    name="entregaOculosCompleted" 
-                    defaultChecked={values.entregaOculosCompleted} 
-                    onChange={handleChange} 
-                    value={values.entregaOculosCompleted}
-                    disabled={isEntregaCheckboxDisabled} />}     
-                    label="Óculos entregue" />
-                </FormGroup>
-            </Grid>
 
         </>
     )

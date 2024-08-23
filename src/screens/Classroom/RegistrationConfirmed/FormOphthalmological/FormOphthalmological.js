@@ -90,7 +90,7 @@ const FormOphthalmologicalPage = ({ values, handleChange }) => {
         </RadioGroup>
       </Grid>
       <Grid item style={{ width: "100%" }} md={12}>
-        <p className={classes.label}>NTeste de movimento binocular</p>
+        <p className={classes.label}>Teste de movimento binocular</p>
         <RadioGroup
           value={values.testMovimentoOcular}
           onChange={handleChange}
