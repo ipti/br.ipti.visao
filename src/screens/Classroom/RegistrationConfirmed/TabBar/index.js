@@ -6,6 +6,7 @@ import FormQuestionnaireParents from '../FormuQuestionnaireParents';
 import FormOphthalmologicalPage from '../FormOphthalmological/FormOphthalmological';
 import FormConsulta from '../FormConsulta';
 import FormReceita from '../FormReceita';
+import FormOculos from '../FormOculos/FormOculos';
 
 export default function TabsRegister({ values, handleChange }) {
   return (
@@ -28,6 +29,9 @@ export default function TabsRegister({ values, handleChange }) {
         </TabPanel>
         <TabPanel header="Receita">
           <FormReceita values={values} handleChange={handleChange} />
+        </TabPanel>
+        <TabPanel header="Entrega do Óculos">
+          <FormOculos values={values} handleChange={handleChange} />
         </TabPanel>
       </TabView>
     </div>

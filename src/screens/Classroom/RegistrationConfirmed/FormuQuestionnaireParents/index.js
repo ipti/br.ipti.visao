@@ -20,8 +20,6 @@ const PurpleRadio = withStyles({
     checked: {}
 })(props => <Radio color="default" {...props} />);
 
-//TODO: criar campo para informar se a Questionnaire foi feita, talvez campo de confirmação
-
 const FormQuestionnaireParents = ({ values, handleChange }) => {
     const classes = useStyles();
 

@@ -6,12 +6,12 @@ import styles from "../../../../styles";
 import { Column, Padding } from "../../../../styles/style";
 
 const useStyles = makeStyles(styles);
-//TODO: criar campo para informar se a consulta foi feita, talvez campo de confirmação
 const FormConsulta = ({ values, handleChange }) => {
     const classes = useStyles();
 
     return (
         <>
+        
             <Grid container spacing={2}>
                 <Grid item style={{ width: "100%" }} md={6}>
                     <p className={classes.label}>Nome do médico</p>
@@ -26,6 +26,7 @@ const FormConsulta = ({ values, handleChange }) => {
                     </Column>
                 </Grid>
             </Grid>
+
             <Grid container>
                 <Grid item style={{ width: "100%" }} md={6}>
                     <p className={classes.label}>Data de Consulta </p>
@@ -41,6 +42,23 @@ const FormConsulta = ({ values, handleChange }) => {
                     </Column>
                 </Grid>
             </Grid>
+
+            <Padding padding="16px" />
+            <h2> <strong> Histórico de Consulta</strong> </h2>
+        
+            <Grid item style={{ width: "100%" }} md={12}>
+                <p className={classes.label}>Já realizou alguma consulta oftalmológica na vida?</p>
+                <RadioGroup
+                value={values.jaRealizouConsultaAntes}
+                name="jaRealizouConsultaAntes"
+                onChange={handleChange}
+                >
+                    <FormControlLabel control={<Radio />} value={"Sim"} label="Sim" />
+                    <FormControlLabel control={<Radio />} value={"Não"} label="Não" />
+                </RadioGroup>
+            </Grid>
+            
+
             <Padding padding="16px" />
             <h2>
                 Escaneamento Visual pelo Spot Vision
