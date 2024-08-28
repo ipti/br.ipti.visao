@@ -2,16 +2,18 @@ import * as functions from 'firebase-functions';
 import { fetchUsersData, UserData } from "./fetchUsers";
 
 interface UserReport {
+    uid: string;
     email: string;
-    nome: string;
+    name: string;
     role: number;
 }
   
 const generateRowUsersList = async (user: UserData): Promise<UserReport> => {
     
     const userReport: UserReport = { 
+        uid: user.id,
         email: user.object.email,
-        nome: user.object.nome,
+        name: user.object.name,
         role: user.object.role,
     } as unknown as UserReport;
 

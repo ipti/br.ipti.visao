@@ -1,14 +1,14 @@
 import { makeStyles } from "@material-ui/core/styles";
-import React , { useContext } from "react";
+import React, { useContext } from "react";
 import { Link, useHistory } from "react-router-dom";
 import cronogramaBlueSvg from "../../assets/images/cronograma-blue.svg";
 import cronogramaGraySvg from "../../assets/images/cronograma-gray.svg";
 
-import turmaGraySvg from "../../assets/images/classroom-gray.svg";
 import turmaBlueSvg from "../../assets/images/classroom-blue.svg";
+import turmaGraySvg from "../../assets/images/classroom-gray.svg";
 
-import usersGraySvg from "../../assets/images/usuarios-grey.svg";
 import usersBlueSvg from "../../assets/images/usuarios-blue.svg";
+import usersGraySvg from "../../assets/images/usuarios-grey.svg";
 
 import { useMediaQuery } from "@material-ui/core";
 import styles from "./styles";
