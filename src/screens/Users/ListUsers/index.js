@@ -1,30 +1,63 @@
 import React, {useState} from "react";
 import { useEffect } from "react";
 
+import {deleteUser} from "../../../controller/user/deleteUser";
+
 // Material UI
 import Grid from "@material-ui/core/Grid";
-import Alert from "@material-ui/lab/Alert";
+//import Alert from "@material-ui/lab/Alert";
+
+
 import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper } from '@mui/material';
 
 // Components
-import { useParams } from "react-router-dom";
+//import { useParams } from "react-router-dom";
 //import { BoxUsers } from "../../../components/Boxes/BoxUsers";
-import List from "../../../components/List";
+//import List from "../../../components/List";
 
 // Styles
 import { useHistory } from "react-router";
 import { ButtonPurple } from "../../../components/Buttons";
 import { Padding, Row } from "../../../styles/style";
+import { Delete } from "@material-ui/icons";
 import color from "../../../styles/colors";
+
+import Swal from "sweetalert2";
+import styles from "../../../styles";
+import image from "../../../assets/images/Atenção-img.png";
 
 import api from '../../../services/api';
 
 const ListUserScreen = (props) => {
 
   const history = useHistory();
-  const { data } = props;
+  const { data, userData } = props;
 
   const [usersList, setUsers] = useState([])
+
+  const deleteUser = (e, id) => {
+    e.stopPropagation()
+    if (id) {
+
+
+      return Swal.fire({
+        title: "Excluir usuário?",
+        text: "Essa ação é irreversível não pode ser desfeita",
+        imageUrl: image,
+        imageHeight: 250,
+        showCancelButton: true,
+        confirmButtonColor: styles.colors.colorsBaseProductNormal,
+        cancelButtonColor: styles.colors.colorsBaseCloudNormal,
+        confirmButtonText: 'Aceitar',
+        reverseButtons: true,
+        cancelButtonText: `<div style="color:black" >Cancelar</div>`
+      }).then((result) => {
+        if (result.isConfirmed) {
+          deleteUser(id, history)
+        }
+      })
+    }
+  }
 
   useEffect(() => {
     const callFunction = async () => {
@@ -51,18 +84,23 @@ const ListUserScreen = (props) => {
               <TableCell align="left" sx={{ fontWeight: 'bold' }} >Nome</TableCell>
               <TableCell align="center" sx={{ fontWeight: 'bold' }} >Email</TableCell>
               <TableCell align="center" sx={{ fontWeight: 'bold' }} >Tipo de usuário</TableCell>
+              <TableCell align="center"></TableCell>
                   
             </TableRow>
           </TableHead>
           <TableBody>
             {usersList.map((user) => (
               <TableRow
-                key={user.name}
+                key={user.uid}
                 sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
               >
                 <TableCell align="left">{user?.name}</TableCell>
                 <TableCell align="center">{user?.email}</TableCell>
                 <TableCell align="center">{user?.role}</TableCell>
+                <TableCell align="center">
+                  <Delete style={{ cursor: "pointer" }} onClick={e => deleteUser(e, user?.id)} />
+                </TableCell>
+
                     
               </TableRow>
             ))}
