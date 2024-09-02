@@ -46,11 +46,11 @@ const ListUserScreen = (props) => {
     return(
       <TableContainer component={Paper}>
         <Table sx={{ minWidth: 650 }} aria-label="simple table">
-          <TableHead style={{ backgroundColor: color.blueClear}}>
+          <TableHead style={{ backgroundColor: color.blueMedium}}>
             <TableRow>
-              <TableCell align="left">Nome</TableCell>
-              <TableCell align="center">Email</TableCell>
-              <TableCell align="center">Tipo de usuário</TableCell>
+              <TableCell align="left" sx={{ fontWeight: 'bold' }} >Nome</TableCell>
+              <TableCell align="center" sx={{ fontWeight: 'bold' }} >Email</TableCell>
+              <TableCell align="center" sx={{ fontWeight: 'bold' }} >Tipo de usuário</TableCell>
                   
             </TableRow>
           </TableHead>
