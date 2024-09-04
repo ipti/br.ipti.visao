@@ -15,5 +15,5 @@ export {
   IconSchedule,
   IconScheduleActive,
   IconSchool,
-  IconSchoolActive
+  IconSchoolActive,
 };

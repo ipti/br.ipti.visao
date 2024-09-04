@@ -14,6 +14,10 @@ import { generateReport } from "./controller/report/fetchReport";
 import { generateStudentsReport } from "./controller/report/fetchStudents";
 import { deleteClassroom } from "./controller/classroom/deleteClassroom";
 
+import { listUsers } from "./controller/users/listUsers";
+import { deleteUserData } from "./controller/users/deleteUser";
+// import { fetchUsersData } from "./controller/users/fetchUsers";
+
 // admin.initializeApp();
 
 const corsOptions = {
@@ -25,6 +29,9 @@ const corsMiddleware = cors(corsOptions);
 export const generalReport = generateReport(corsMiddleware);
 export const studentsReport = generateStudentsReport(corsMiddleware);
 export const classroomDelete = deleteClassroom(corsMiddleware);
+
+export const usersList = listUsers(corsMiddleware);
+export const userDelete = deleteUserData(corsMiddleware);
 
 export const helloWorld = functions.https.onRequest((request, response) => {
   corsMiddleware(request, response, () => {

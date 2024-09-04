@@ -24,6 +24,7 @@ const FormRegistrationState = () => {
 
 
   const handleUpdate = (values) => {
+    console.log(points())
     updateStudent(idRegistration, {...values, points: points()})
   }
 

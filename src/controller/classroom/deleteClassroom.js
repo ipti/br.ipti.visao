@@ -7,9 +7,9 @@ export const deleteItem = async (id, history) => {
     try {
         await axios.delete(`https://us-central1-br-ipti-visao.cloudfunctions.net/classroomDelete/${id}`);
         history.push("/turmas")
-        console.log("Item deleted successfully");
+        console.log("Item deletado com sucesso");
     } catch (err) {
-        console.error("Error deleting item:", err);
+        console.error("Erro ao deletar item", err);
         throw err;
     }
 }

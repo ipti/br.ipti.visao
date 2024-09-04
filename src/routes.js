@@ -12,6 +12,7 @@ import Register from "./containers/Register";
 import FormRegistration from "./containers/Registration/FormRegistration/FormRegistration";
 import { isAuthenticated } from "./services/auth";
 import PdfTodasReceita from "./Pdf/PdfTodasReceitas";
+import UsersScreen from "./screens/Users/ListUsers";
 import CreateUserScreen from "./screens/Users/CreateUser";
 import PrivateRouterProvider from "./context/PrivateRouter/context";
 import CreateRegistration from "./screens/Classroom/CreateRegistration";
@@ -59,6 +60,7 @@ const Routes = () => (
       <Route path="/register" exact component={Register} />
       <Route path="/matricula" exact component={FormRegistration} />
       <PrivateRoute exact path="/" component={School} />
+      <PrivateRoute exact path="/usuarios" component={UsersScreen} />
       <PrivateRoute exact path="/usuario/criar" component={CreateUserScreen} />
       <PrivateRoute exact path="/escolas" component={School} />
       <PrivateRoute exact path="/escolas/:id" component={SchoolClassrooms} />

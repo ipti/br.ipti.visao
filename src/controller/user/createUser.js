@@ -2,6 +2,7 @@ import { createUserWithEmailAndPassword } from "firebase/auth";
 import { auth, firestore } from "../../config/firebase";
 import { collection } from "@firebase/firestore";
 import { addDoc } from "@firebase/firestore";
+import Swal from "sweetalert2";
 
 export function createUser(data) {
   // Create the user with email and password
@@ -19,6 +20,13 @@ export function createUser(data) {
 
       const ref = collection(firestore, "userData");
       addDoc(ref, userData);
+      Swal.fire({
+        title: "Sucesso!",
+        text: "Usuário criado com sucesso!",
+        icon: "success",
+        confirmButtonText: "Ok",
+      });
+
     })
     .catch((error) => {
       // Handle errors
