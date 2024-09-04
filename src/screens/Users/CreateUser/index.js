@@ -11,14 +11,19 @@ import { Form, Formik } from "formik";
 import { ButtonPurple } from "../../../components/Buttons";
 import SelectUi from "../../../ui/Select";
 import { createUser } from "../../../controller/user/createUser";
+import { ArrowBack } from "@material-ui/icons";
+import { useHistory } from "react-router-dom/cjs/react-router-dom.min";
 
 const useStyles = makeStyles(styles);
 
 const CreateUserScreen = () => {
   const classes = useStyles();
 
+  const history = useHistory();
+
   return (
     <div>
+      <ArrowBack onClick={() => { history.goBack() }} style={{ cursor: "pointer" }} />
       <h1>Criar usuário</h1>
       <Padding />
       <Formik initialValues={{ name: "", email: "", password: "", role: "" }} onSubmit={(values) => createUser(values)}>

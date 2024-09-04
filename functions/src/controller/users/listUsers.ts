@@ -11,7 +11,8 @@ interface UserReport {
 const generateRowUsersList = async (user: UserData): Promise<UserReport> => {
     
     const userReport: UserReport = { 
-        uid: user.id,
+        id: user.id,
+        uid: user.object.uid,
         email: user.object.email,
         name: user.object.name,
         role: user.object.role,

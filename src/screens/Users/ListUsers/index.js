@@ -5,7 +5,6 @@ import {deleteUser} from "../../../controller/user/deleteUser";
 
 // Material UI
 import Grid from "@material-ui/core/Grid";
-//import Alert from "@material-ui/lab/Alert";
 
 
 import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper } from '@mui/material';
@@ -31,11 +30,11 @@ import api from '../../../services/api';
 const ListUserScreen = (props) => {
 
   const history = useHistory();
-  const { data, userData } = props;
 
   const [usersList, setUsers] = useState([])
 
-  const deleteUser = (e, id) => {
+  const deleteUsers = (e, id) => {
+
     e.stopPropagation()
     if (id) {
 
@@ -54,6 +53,7 @@ const ListUserScreen = (props) => {
       }).then((result) => {
         if (result.isConfirmed) {
           deleteUser(id, history)
+          setUsers(usersList.filter(user => user.id !== id))
         }
       })
     }
@@ -73,6 +73,7 @@ const ListUserScreen = (props) => {
     };
     callFunction();
   }, [])
+
 
   const usuarios = () => {
 
@@ -96,12 +97,16 @@ const ListUserScreen = (props) => {
               >
                 <TableCell align="left">{user?.name}</TableCell>
                 <TableCell align="center">{user?.email}</TableCell>
-                <TableCell align="center">{user?.role}</TableCell>
                 <TableCell align="center">
-                  <Delete style={{ cursor: "pointer" }} onClick={e => deleteUser(e, user?.id)} />
+                  {user?.role === 1 ? "Administrador" :
+                  user?.role === 2 ? "Triador" :
+                  user?.role === 3 ? "Médico" :
+                  "Desconhecido"}
+                </TableCell>
+                <TableCell align="center">
+                  <Delete style={{ cursor: "pointer" }} onClick={e => deleteUsers(e, user?.id)} />
                 </TableCell>
 
-                    
               </TableRow>
             ))}
           </TableBody>
