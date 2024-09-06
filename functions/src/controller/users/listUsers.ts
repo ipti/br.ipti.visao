@@ -2,6 +2,7 @@ import * as functions from 'firebase-functions';
 import { fetchUsersData, UserData } from "./fetchUsers";
 
 interface UserReport {
+    id: string;
     uid: string;
     email: string;
     name: string;
@@ -21,7 +22,7 @@ const generateRowUsersList = async (user: UserData): Promise<UserReport> => {
     return userReport;
 }
 
-export const listUsers = (cors: any) => functions.https.onRequest(async (req, res) => {
+const listUsers = (cors: any) => functions.https.onRequest(async (req, res) => {
     cors(req, res, async () => {
       try {
         const user = await fetchUsersData();
@@ -34,4 +35,6 @@ export const listUsers = (cors: any) => functions.https.onRequest(async (req, re
       }
     });
   });
+
+  export { listUsers };
   

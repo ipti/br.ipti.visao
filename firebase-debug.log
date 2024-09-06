@@ -1,0 +1,248 @@
+[debug] [2024-09-06T04:59:57.046Z] ----------------------------------------------------------------------
+[debug] [2024-09-06T04:59:57.049Z] Command:       C:\Program Files\nodejs\node.exe C:\Program Files\nodejs\node_modules\firebase-tools\lib\bin\firebase.js emulators:start --only functions
+[debug] [2024-09-06T04:59:57.050Z] CLI Version:   13.14.0
+[debug] [2024-09-06T04:59:57.051Z] Platform:      win32
+[debug] [2024-09-06T04:59:57.051Z] Node Version:  v18.20.4
+[debug] [2024-09-06T04:59:57.052Z] Time:          Fri Sep 06 2024 01:59:57 GMT-0300 (Horário Padrão de Brasília)
+[debug] [2024-09-06T04:59:57.052Z] ----------------------------------------------------------------------
+[debug] 
+[debug] [2024-09-06T04:59:57.275Z] > command requires scopes: ["email","openid","https://www.googleapis.com/auth/cloudplatformprojects.readonly","https://www.googleapis.com/auth/firebase","https://www.googleapis.com/auth/cloud-platform"]
+[debug] [2024-09-06T04:59:57.276Z] > authorizing via signed-in user (joannestephany@gmail.com)
+[info] i  emulators: Starting emulators: functions {"metadata":{"emulator":{"name":"hub"},"message":"Starting emulators: functions"}}
+[debug] [2024-09-06T04:59:57.293Z] [logging] Logging Emulator only supports listening on one address (127.0.0.1). Not listening on ::1
+[debug] [2024-09-06T04:59:57.294Z] assigned listening specs for emulators {"user":{"hub":[{"address":"127.0.0.1","family":"IPv4","port":4400},{"address":"::1","family":"IPv6","port":4400}],"ui":[{"address":"127.0.0.1","family":"IPv4","port":4000},{"address":"::1","family":"IPv6","port":4000}],"logging":[{"address":"127.0.0.1","family":"IPv4","port":4500}]},"metadata":{"message":"assigned listening specs for emulators"}}
+[debug] [2024-09-06T04:59:57.304Z] [hub] writing locator at C:\Users\Joanne\AppData\Local\Temp\hub-br-ipti-visao.json
+[debug] [2024-09-06T04:59:57.330Z] [functions] Functions Emulator only supports listening on one address (127.0.0.1). Not listening on ::1
+[debug] [2024-09-06T04:59:57.331Z] [eventarc] Eventarc Emulator only supports listening on one address (127.0.0.1). Not listening on ::1
+[debug] [2024-09-06T04:59:57.332Z] late-assigned ports for functions and eventarc emulators {"user":{"hub":[{"address":"127.0.0.1","family":"IPv4","port":4400},{"address":"::1","family":"IPv6","port":4400}],"ui":[{"address":"127.0.0.1","family":"IPv4","port":4000},{"address":"::1","family":"IPv6","port":4000}],"logging":[{"address":"127.0.0.1","family":"IPv4","port":4500}],"functions":[{"address":"127.0.0.1","family":"IPv4","port":5001}],"eventarc":[{"address":"127.0.0.1","family":"IPv4","port":9299}]},"metadata":{"message":"late-assigned ports for functions and eventarc emulators"}}
+[warn] !  functions: The following emulators are not running, calls to these services from the Functions emulator will affect production: auth, firestore, database, hosting, pubsub, storage, dataconnect {"metadata":{"emulator":{"name":"functions"},"message":"The following emulators are not running, calls to these services from the Functions emulator will affect production: \u001b[1mauth, firestore, database, hosting, pubsub, storage, dataconnect\u001b[22m"}}
+[debug] [2024-09-06T04:59:57.342Z] defaultcredentials: writing to file C:\Users\Joanne\AppData\Roaming\firebase\joannestephany_gmail_com_application_default_credentials.json
+[debug] [2024-09-06T04:59:57.355Z] Setting GAC to C:\Users\Joanne\AppData\Roaming\firebase\joannestephany_gmail_com_application_default_credentials.json {"metadata":{"emulator":{"name":"functions"},"message":"Setting GAC to C:\\Users\\Joanne\\AppData\\Roaming\\firebase\\joannestephany_gmail_com_application_default_credentials.json"}}
+[debug] [2024-09-06T04:59:57.358Z] >>> [apiv2][query] GET https://firebase.googleapis.com/v1beta1/projects/br-ipti-visao/adminSdkConfig [none]
+[debug] [2024-09-06T04:59:57.879Z] <<< [apiv2][status] GET https://firebase.googleapis.com/v1beta1/projects/br-ipti-visao/adminSdkConfig 200
+[debug] [2024-09-06T04:59:57.879Z] <<< [apiv2][body] GET https://firebase.googleapis.com/v1beta1/projects/br-ipti-visao/adminSdkConfig {"projectId":"br-ipti-visao","databaseURL":"https://br-ipti-visao-default-rtdb.firebaseio.com","storageBucket":"br-ipti-visao.appspot.com"}
+[debug] [2024-09-06T04:59:57.907Z] Ignoring unsupported arg: auto_download {"metadata":{"emulator":{"name":"ui"},"message":"Ignoring unsupported arg: auto_download"}}
+[debug] [2024-09-06T04:59:57.907Z] Ignoring unsupported arg: port {"metadata":{"emulator":{"name":"ui"},"message":"Ignoring unsupported arg: port"}}
+[debug] [2024-09-06T04:59:57.908Z] Starting Emulator UI with command {"binary":"node","args":["C:\\Users\\Joanne\\.cache\\firebase\\emulators\\ui-v1.13.0\\server\\server.mjs"],"optionalArgs":[],"joinArgs":false,"shell":false} {"metadata":{"emulator":{"name":"ui"},"message":"Starting Emulator UI with command {\"binary\":\"node\",\"args\":[\"C:\\\\Users\\\\Joanne\\\\.cache\\\\firebase\\\\emulators\\\\ui-v1.13.0\\\\server\\\\server.mjs\"],\"optionalArgs\":[],\"joinArgs\":false,\"shell\":false}"}}
+[info] i  ui: Emulator UI logging to ui-debug.log {"metadata":{"emulator":{"name":"ui"},"message":"Emulator UI logging to \u001b[1mui-debug.log\u001b[22m"}}
+[debug] [2024-09-06T04:59:58.207Z] Web / API server started at 127.0.0.1:4000
+ {"metadata":{"emulator":{"name":"ui"},"message":"Web / API server started at 127.0.0.1:4000\n"}}
+[debug] [2024-09-06T04:59:58.207Z] Web / API server started at ::1:4000
+ {"metadata":{"emulator":{"name":"ui"},"message":"Web / API server started at ::1:4000\n"}}
+[info] i  functions: Watching "C:\Users\Joanne\Documents\CodeJojo\br.ipti.visao\functions" for Cloud Functions... {"metadata":{"emulator":{"name":"functions"},"message":"Watching \"C:\\Users\\Joanne\\Documents\\CodeJojo\\br.ipti.visao\\functions\" for Cloud Functions..."}}
+[debug] [2024-09-06T04:59:58.357Z] Validating nodejs source
+[warn] !  functions: package.json indicates an outdated version of firebase-functions. Please upgrade using npm install --save firebase-functions@latest in your functions directory. 
+[debug] [2024-09-06T04:59:59.894Z] > [functions] package.json contents: {
+  "name": "functions",
+  "scripts": {
+    "build": "tsc",
+    "build:watch": "tsc --watch",
+    "serve": "npm run build && firebase emulators:start --only functions",
+    "shell": "npm run build && firebase functions:shell",
+    "start": "npm run shell",
+    "deploy": "firebase deploy --only functions",
+    "logs": "firebase functions:log"
+  },
+  "engines": {
+    "node": "18"
+  },
+  "main": "lib/index.js",
+  "dependencies": {
+    "@firebase/firestore": "^4.6.4",
+    "axios": "^1.7.3",
+    "firebase-admin": "^12.1.0",
+    "firebase-functions": "^5.0.0"
+  },
+  "devDependencies": {
+    "firebase-functions-test": "^3.1.0",
+    "typescript": "^4.9.0"
+  },
+  "private": true
+}
+[debug] [2024-09-06T04:59:59.894Z] Building nodejs source
+[debug] [2024-09-06T04:59:59.895Z] Failed to find version of module node: reached end of search path C:\Users\Joanne\Documents\CodeJojo\br.ipti.visao\functions\node_modules
+[info] +  functions: Using node@18 from host. 
+[debug] [2024-09-06T04:59:59.898Z] Could not find functions.yaml. Must use http discovery
+[debug] [2024-09-06T04:59:59.912Z] Found firebase-functions binary at 'C:\Users\Joanne\Documents\CodeJojo\br.ipti.visao\functions\node_modules\.bin\firebase-functions'
+[info] Serving at port 8284
+
+[debug] [2024-09-06T05:00:00.788Z] Got response from /__/functions.yaml {"endpoints":{"generalReport":{"platform":"gcfv1","availableMemoryMb":null,"timeoutSeconds":null,"minInstances":null,"maxInstances":null,"ingressSettings":null,"serviceAccountEmail":null,"vpc":null,"httpsTrigger":{},"entryPoint":"generalReport"},"classroomDelete":{"platform":"gcfv1","availableMemoryMb":null,"timeoutSeconds":null,"minInstances":null,"maxInstances":null,"ingressSettings":null,"serviceAccountEmail":null,"vpc":null,"httpsTrigger":{},"entryPoint":"classroomDelete"},"helloWorld":{"platform":"gcfv1","availableMemoryMb":null,"timeoutSeconds":null,"minInstances":null,"maxInstances":null,"ingressSettings":null,"serviceAccountEmail":null,"vpc":null,"httpsTrigger":{},"entryPoint":"helloWorld"}},"specVersion":"v1alpha1","requiredAPIs":[]}
+[info] +  functions: Loaded functions definitions from source: generalReport, classroomDelete, helloWorld. {"metadata":{"emulator":{"name":"functions"},"message":"Loaded functions definitions from source: generalReport, classroomDelete, helloWorld."}}
+[info] +  functions[us-central1-generalReport]: http function initialized (http://127.0.0.1:5001/br-ipti-visao/us-central1/generalReport). {"metadata":{"emulator":{"name":"functions"},"message":"\u001b[1mhttp\u001b[22m function initialized (http://127.0.0.1:5001/br-ipti-visao/us-central1/generalReport)."}}
+[info] +  functions[us-central1-classroomDelete]: http function initialized (http://127.0.0.1:5001/br-ipti-visao/us-central1/classroomDelete). {"metadata":{"emulator":{"name":"functions"},"message":"\u001b[1mhttp\u001b[22m function initialized (http://127.0.0.1:5001/br-ipti-visao/us-central1/classroomDelete)."}}
+[info] +  functions[us-central1-helloWorld]: http function initialized (http://127.0.0.1:5001/br-ipti-visao/us-central1/helloWorld). {"metadata":{"emulator":{"name":"functions"},"message":"\u001b[1mhttp\u001b[22m function initialized (http://127.0.0.1:5001/br-ipti-visao/us-central1/helloWorld)."}}
+[info] 
+┌─────────────────────────────────────────────────────────────┐
+│ ✔  All emulators ready! It is now safe to connect your app. │
+│ i  View Emulator UI at http://127.0.0.1:4000/               │
+└─────────────────────────────────────────────────────────────┘
+
+┌───────────┬────────────────┬─────────────────────────────────┐
+│ Emulator  │ Host:Port      │ View in Emulator UI             │
+├───────────┼────────────────┼─────────────────────────────────┤
+│ Functions │ 127.0.0.1:5001 │ http://127.0.0.1:4000/functions │
+└───────────┴────────────────┴─────────────────────────────────┘
+  Emulator Hub running at 127.0.0.1:4400
+  Other reserved ports: 4500
+
+Issues? Report them at https://github.com/firebase/firebase-tools/issues and attach the *-debug.log files.
+ 
+[debug] [2024-09-06T05:01:46.313Z] File C:\Users\Joanne\Documents\CodeJojo\br.ipti.visao\functions\src\controller\users\listUsers.ts changed, reloading triggers {"metadata":{"emulator":{"name":"functions"},"message":"File C:\\Users\\Joanne\\Documents\\CodeJojo\\br.ipti.visao\\functions\\src\\controller\\users\\listUsers.ts changed, reloading triggers"}}
+[debug] [2024-09-06T05:01:47.326Z] Validating nodejs source
+[warn] !  functions: package.json indicates an outdated version of firebase-functions. Please upgrade using npm install --save firebase-functions@latest in your functions directory. 
+[debug] [2024-09-06T05:01:48.857Z] > [functions] package.json contents: {
+  "name": "functions",
+  "scripts": {
+    "build": "tsc",
+    "build:watch": "tsc --watch",
+    "serve": "npm run build && firebase emulators:start --only functions",
+    "shell": "npm run build && firebase functions:shell",
+    "start": "npm run shell",
+    "deploy": "firebase deploy --only functions",
+    "logs": "firebase functions:log"
+  },
+  "engines": {
+    "node": "18"
+  },
+  "main": "lib/index.js",
+  "dependencies": {
+    "@firebase/firestore": "^4.6.4",
+    "axios": "^1.7.3",
+    "firebase-admin": "^12.1.0",
+    "firebase-functions": "^5.0.0"
+  },
+  "devDependencies": {
+    "firebase-functions-test": "^3.1.0",
+    "typescript": "^4.9.0"
+  },
+  "private": true
+}
+[debug] [2024-09-06T05:01:48.858Z] Building nodejs source
+[debug] [2024-09-06T05:01:48.858Z] Failed to find version of module node: reached end of search path C:\Users\Joanne\Documents\CodeJojo\br.ipti.visao\functions\node_modules
+[info] +  functions: Using node@18 from host. 
+[debug] [2024-09-06T05:01:48.859Z] Could not find functions.yaml. Must use http discovery
+[debug] [2024-09-06T05:01:48.872Z] Found firebase-functions binary at 'C:\Users\Joanne\Documents\CodeJojo\br.ipti.visao\functions\node_modules\.bin\firebase-functions'
+[info] Serving at port 8803
+
+[debug] [2024-09-06T05:01:49.670Z] Got response from /__/functions.yaml {"endpoints":{"generalReport":{"platform":"gcfv1","availableMemoryMb":null,"timeoutSeconds":null,"minInstances":null,"maxInstances":null,"ingressSettings":null,"serviceAccountEmail":null,"vpc":null,"httpsTrigger":{},"entryPoint":"generalReport"},"classroomDelete":{"platform":"gcfv1","availableMemoryMb":null,"timeoutSeconds":null,"minInstances":null,"maxInstances":null,"ingressSettings":null,"serviceAccountEmail":null,"vpc":null,"httpsTrigger":{},"entryPoint":"classroomDelete"},"helloWorld":{"platform":"gcfv1","availableMemoryMb":null,"timeoutSeconds":null,"minInstances":null,"maxInstances":null,"ingressSettings":null,"serviceAccountEmail":null,"vpc":null,"httpsTrigger":{},"entryPoint":"helloWorld"}},"specVersion":"v1alpha1","requiredAPIs":[]}
+[info] +  functions: Loaded functions definitions from source: generalReport, classroomDelete, helloWorld. {"metadata":{"emulator":{"name":"functions"},"message":"Loaded functions definitions from source: generalReport, classroomDelete, helloWorld."}}
+[debug] [2024-09-06T05:01:51.316Z] File C:\Users\Joanne\Documents\CodeJojo\br.ipti.visao\functions\src\controller\users\listUsers.ts changed, reloading triggers {"metadata":{"emulator":{"name":"functions"},"message":"File C:\\Users\\Joanne\\Documents\\CodeJojo\\br.ipti.visao\\functions\\src\\controller\\users\\listUsers.ts changed, reloading triggers"}}
+[debug] [2024-09-06T05:01:51.439Z] File C:\Users\Joanne\Documents\CodeJojo\br.ipti.visao\functions\src\controller\users\listUsers.ts changed, reloading triggers {"metadata":{"emulator":{"name":"functions"},"message":"File C:\\Users\\Joanne\\Documents\\CodeJojo\\br.ipti.visao\\functions\\src\\controller\\users\\listUsers.ts changed, reloading triggers"}}
+[debug] [2024-09-06T05:01:52.455Z] Validating nodejs source
+[warn] !  functions: package.json indicates an outdated version of firebase-functions. Please upgrade using npm install --save firebase-functions@latest in your functions directory. 
+[debug] [2024-09-06T05:01:53.928Z] > [functions] package.json contents: {
+  "name": "functions",
+  "scripts": {
+    "build": "tsc",
+    "build:watch": "tsc --watch",
+    "serve": "npm run build && firebase emulators:start --only functions",
+    "shell": "npm run build && firebase functions:shell",
+    "start": "npm run shell",
+    "deploy": "firebase deploy --only functions",
+    "logs": "firebase functions:log"
+  },
+  "engines": {
+    "node": "18"
+  },
+  "main": "lib/index.js",
+  "dependencies": {
+    "@firebase/firestore": "^4.6.4",
+    "axios": "^1.7.3",
+    "firebase-admin": "^12.1.0",
+    "firebase-functions": "^5.0.0"
+  },
+  "devDependencies": {
+    "firebase-functions-test": "^3.1.0",
+    "typescript": "^4.9.0"
+  },
+  "private": true
+}
+[debug] [2024-09-06T05:01:53.928Z] Building nodejs source
+[debug] [2024-09-06T05:01:53.928Z] Failed to find version of module node: reached end of search path C:\Users\Joanne\Documents\CodeJojo\br.ipti.visao\functions\node_modules
+[info] +  functions: Using node@18 from host. 
+[debug] [2024-09-06T05:01:53.930Z] Could not find functions.yaml. Must use http discovery
+[debug] [2024-09-06T05:01:53.942Z] Found firebase-functions binary at 'C:\Users\Joanne\Documents\CodeJojo\br.ipti.visao\functions\node_modules\.bin\firebase-functions'
+[info] Serving at port 8320
+
+[debug] [2024-09-06T05:01:54.763Z] Got response from /__/functions.yaml {"endpoints":{"generalReport":{"platform":"gcfv1","availableMemoryMb":null,"timeoutSeconds":null,"minInstances":null,"maxInstances":null,"ingressSettings":null,"serviceAccountEmail":null,"vpc":null,"httpsTrigger":{},"entryPoint":"generalReport"},"classroomDelete":{"platform":"gcfv1","availableMemoryMb":null,"timeoutSeconds":null,"minInstances":null,"maxInstances":null,"ingressSettings":null,"serviceAccountEmail":null,"vpc":null,"httpsTrigger":{},"entryPoint":"classroomDelete"},"helloWorld":{"platform":"gcfv1","availableMemoryMb":null,"timeoutSeconds":null,"minInstances":null,"maxInstances":null,"ingressSettings":null,"serviceAccountEmail":null,"vpc":null,"httpsTrigger":{},"entryPoint":"helloWorld"}},"specVersion":"v1alpha1","requiredAPIs":[]}
+[info] +  functions: Loaded functions definitions from source: generalReport, classroomDelete, helloWorld. {"metadata":{"emulator":{"name":"functions"},"message":"Loaded functions definitions from source: generalReport, classroomDelete, helloWorld."}}
+[debug] [2024-09-06T05:02:43.633Z] File C:\Users\Joanne\Documents\CodeJojo\br.ipti.visao\functions\src\controller\users\createUser.ts changed, reloading triggers {"metadata":{"emulator":{"name":"functions"},"message":"File C:\\Users\\Joanne\\Documents\\CodeJojo\\br.ipti.visao\\functions\\src\\controller\\users\\createUser.ts changed, reloading triggers"}}
+[debug] [2024-09-06T05:02:44.637Z] Validating nodejs source
+[warn] !  functions: package.json indicates an outdated version of firebase-functions. Please upgrade using npm install --save firebase-functions@latest in your functions directory. 
+[debug] [2024-09-06T05:02:46.123Z] > [functions] package.json contents: {
+  "name": "functions",
+  "scripts": {
+    "build": "tsc",
+    "build:watch": "tsc --watch",
+    "serve": "npm run build && firebase emulators:start --only functions",
+    "shell": "npm run build && firebase functions:shell",
+    "start": "npm run shell",
+    "deploy": "firebase deploy --only functions",
+    "logs": "firebase functions:log"
+  },
+  "engines": {
+    "node": "18"
+  },
+  "main": "lib/index.js",
+  "dependencies": {
+    "@firebase/firestore": "^4.6.4",
+    "axios": "^1.7.3",
+    "firebase-admin": "^12.1.0",
+    "firebase-functions": "^5.0.0"
+  },
+  "devDependencies": {
+    "firebase-functions-test": "^3.1.0",
+    "typescript": "^4.9.0"
+  },
+  "private": true
+}
+[debug] [2024-09-06T05:02:46.123Z] Building nodejs source
+[debug] [2024-09-06T05:02:46.123Z] Failed to find version of module node: reached end of search path C:\Users\Joanne\Documents\CodeJojo\br.ipti.visao\functions\node_modules
+[info] +  functions: Using node@18 from host. 
+[debug] [2024-09-06T05:02:46.125Z] Could not find functions.yaml. Must use http discovery
+[debug] [2024-09-06T05:02:46.140Z] Found firebase-functions binary at 'C:\Users\Joanne\Documents\CodeJojo\br.ipti.visao\functions\node_modules\.bin\firebase-functions'
+[info] Serving at port 8794
+
+[debug] [2024-09-06T05:02:46.937Z] Got response from /__/functions.yaml {"endpoints":{"generalReport":{"platform":"gcfv1","availableMemoryMb":null,"timeoutSeconds":null,"minInstances":null,"maxInstances":null,"ingressSettings":null,"serviceAccountEmail":null,"vpc":null,"httpsTrigger":{},"entryPoint":"generalReport"},"classroomDelete":{"platform":"gcfv1","availableMemoryMb":null,"timeoutSeconds":null,"minInstances":null,"maxInstances":null,"ingressSettings":null,"serviceAccountEmail":null,"vpc":null,"httpsTrigger":{},"entryPoint":"classroomDelete"},"helloWorld":{"platform":"gcfv1","availableMemoryMb":null,"timeoutSeconds":null,"minInstances":null,"maxInstances":null,"ingressSettings":null,"serviceAccountEmail":null,"vpc":null,"httpsTrigger":{},"entryPoint":"helloWorld"}},"specVersion":"v1alpha1","requiredAPIs":[]}
+[info] +  functions: Loaded functions definitions from source: generalReport, classroomDelete, helloWorld. {"metadata":{"emulator":{"name":"functions"},"message":"Loaded functions definitions from source: generalReport, classroomDelete, helloWorld."}}
+[debug] [2024-09-06T05:02:51.772Z] File C:\Users\Joanne\Documents\CodeJojo\br.ipti.visao\functions\src\index.ts changed, reloading triggers {"metadata":{"emulator":{"name":"functions"},"message":"File C:\\Users\\Joanne\\Documents\\CodeJojo\\br.ipti.visao\\functions\\src\\index.ts changed, reloading triggers"}}
+[debug] [2024-09-06T05:02:52.522Z] File C:\Users\Joanne\Documents\CodeJojo\br.ipti.visao\functions\src\index.ts changed, reloading triggers {"metadata":{"emulator":{"name":"functions"},"message":"File C:\\Users\\Joanne\\Documents\\CodeJojo\\br.ipti.visao\\functions\\src\\index.ts changed, reloading triggers"}}
+[debug] [2024-09-06T05:02:53.538Z] Validating nodejs source
+[warn] !  functions: package.json indicates an outdated version of firebase-functions. Please upgrade using npm install --save firebase-functions@latest in your functions directory. 
+[debug] [2024-09-06T05:02:55.087Z] > [functions] package.json contents: {
+  "name": "functions",
+  "scripts": {
+    "build": "tsc",
+    "build:watch": "tsc --watch",
+    "serve": "npm run build && firebase emulators:start --only functions",
+    "shell": "npm run build && firebase functions:shell",
+    "start": "npm run shell",
+    "deploy": "firebase deploy --only functions",
+    "logs": "firebase functions:log"
+  },
+  "engines": {
+    "node": "18"
+  },
+  "main": "lib/index.js",
+  "dependencies": {
+    "@firebase/firestore": "^4.6.4",
+    "axios": "^1.7.3",
+    "firebase-admin": "^12.1.0",
+    "firebase-functions": "^5.0.0"
+  },
+  "devDependencies": {
+    "firebase-functions-test": "^3.1.0",
+    "typescript": "^4.9.0"
+  },
+  "private": true
+}
+[debug] [2024-09-06T05:02:55.087Z] Building nodejs source
+[debug] [2024-09-06T05:02:55.087Z] Failed to find version of module node: reached end of search path C:\Users\Joanne\Documents\CodeJojo\br.ipti.visao\functions\node_modules
+[info] +  functions: Using node@18 from host. 
+[debug] [2024-09-06T05:02:55.089Z] Could not find functions.yaml. Must use http discovery
+[debug] [2024-09-06T05:02:55.100Z] Found firebase-functions binary at 'C:\Users\Joanne\Documents\CodeJojo\br.ipti.visao\functions\node_modules\.bin\firebase-functions'
+[info] Serving at port 8312
+
+[debug] [2024-09-06T05:02:55.942Z] Got response from /__/functions.yaml {"endpoints":{"generalReport":{"platform":"gcfv1","availableMemoryMb":null,"timeoutSeconds":null,"minInstances":null,"maxInstances":null,"ingressSettings":null,"serviceAccountEmail":null,"vpc":null,"httpsTrigger":{},"entryPoint":"generalReport"},"classroomDelete":{"platform":"gcfv1","availableMemoryMb":null,"timeoutSeconds":null,"minInstances":null,"maxInstances":null,"ingressSettings":null,"serviceAccountEmail":null,"vpc":null,"httpsTrigger":{},"entryPoint":"classroomDelete"},"helloWorld":{"platform":"gcfv1","availableMemoryMb":null,"timeoutSeconds":null,"minInstances":null,"maxInstances":null,"ingressSettings":null,"serviceAccountEmail":null,"vpc":null,"httpsTrigger":{},"entryPoint":"helloWorld"}},"specVersion":"v1alpha1","requiredAPIs":[]}
+[info] +  functions: Loaded functions definitions from source: generalReport, classroomDelete, helloWorld. {"metadata":{"emulator":{"name":"functions"},"message":"Loaded functions definitions from source: generalReport, classroomDelete, helloWorld."}}
+[debug] [2024-09-06T05:04:07.535Z] Received signal SIGHUP 1
