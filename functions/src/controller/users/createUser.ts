@@ -1,44 +1,35 @@
-import { firestore } from "../../config/firebase";
 import * as functions from 'firebase-functions';
-import { getAuth, createUserWithEmailAndPassword  } from "firebase/auth";
-import { collection } from "@firebase/firestore";
-import { addDoc } from "@firebase/firestore";
+import { auth, firestore } from "../../config/firebase";
+import * as cors from 'cors';
 
-const createUserData = (cors: any) => functions.https.onRequest(async (req, res) => {
+const createUserData = functions.https.onRequest(async (req, res) => {
+    const handleCors = cors({ origin: true });
 
-    const auth = getAuth();
-    return cors(req, res, async () => {
+    handleCors(req, res, async () => {
         try {
-               await createUserWithEmailAndPassword(auth, req.body.email, req.body.password)
-                .then((userCredential) => {
-                const user = userCredential.user;
-            
-                const userData = {
-                    name: req.body.name,
-                    role: req.body.role,
-                    email: user.email,
-                    uid: user.uid,
-                };
-            
-                const ref = collection(firestore, "userData");
-                addDoc(ref, userData);
-            
-                })
-                .catch((error) => {
-                // Handle errors
-                console.error("Error creating user:", error.message);
-                });
-            const userData = await firestore.collection("userData").doc(id).get();
-            if (!userData.exists) {
-                throw new Error("Usuário não encontrado");
-            }
-        
-            // await firestore.collection("userData").doc(id).delete();
-            // res.json({ message: "Usuário deletado com sucesso" });
-            // return "Usuário deletado com sucesso";
-        } catch (err) {
-            console.error("Erro ao deletar Usuário:", err);
-            throw err;
+            // Criação do usuário com o Firebase Admin SDK
+            const userRecord = await auth.createUser({
+                email: req.body.email,
+                password: req.body.password,
+                displayName: req.body.name,
+            });
+
+            // Estrutura do documento a ser salvo no Firestore
+            const userData = {
+                name: req.body.name,
+                role: req.body.role,
+                email: userRecord.email,
+                uid: userRecord.uid,
+            };
+
+            // Salvando os dados do usuário no Firestore
+            await firestore.collection("userData").add(userData);
+
+            // Enviar resposta de sucesso
+            res.status(200).send({ message: "Usuário criado e dados salvos com sucesso!" });
+        } catch (error : any) {
+            console.error("Erro ao criar Usuário:", error);
+            res.status(500).send({ message: "Erro ao criar usuário", error: error.message });
         }
     });
 });
