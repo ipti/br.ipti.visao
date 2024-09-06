@@ -16,6 +16,7 @@ import { deleteClassroom } from "./controller/classroom/deleteClassroom";
 
 import { listUsers } from "./controller/users/listUsers";
 import { deleteUserData } from "./controller/users/deleteUser";
+import { addPointsStudent } from "./controller/addPointsStudents/addPointsStudents";
 // import { fetchUsersData } from "./controller/users/fetchUsers";
 
 // admin.initializeApp();
@@ -32,6 +33,8 @@ export const classroomDelete = deleteClassroom(corsMiddleware);
 
 export const usersList = listUsers(corsMiddleware);
 export const userDelete = deleteUserData(corsMiddleware);
+
+export const addPointsStud = addPointsStudent(corsMiddleware)
 
 export const helloWorld = functions.https.onRequest((request, response) => {
   corsMiddleware(request, response, () => {
