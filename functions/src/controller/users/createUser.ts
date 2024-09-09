@@ -1,37 +1,35 @@
 import * as functions from 'firebase-functions';
 import { auth, firestore } from "../../config/firebase";
-import * as cors from 'cors';
 
-const createUserData = functions.https.onRequest(async (req, res) => {
-    const handleCors = cors({ origin: true });
-
-    handleCors(req, res, async () => {
+const createUserData = (cors: any) => functions.https.onRequest(async (req, res) => {
+    return cors(req, res, async () => {
         try {
-            // Criação do usuário com o Firebase Admin SDK
-            const userRecord = await auth.createUser({
+
+            await auth.createUser({
                 email: req.body.email,
                 password: req.body.password,
                 displayName: req.body.name,
-            });
+            })
+            .then(user => {
+                const userData = {
+                    name: req.body.name,
+                    role: req.body.role,
+                    email: user.email,
+                    uid: user.uid,
+                };
 
-            // Estrutura do documento a ser salvo no Firestore
-            const userData = {
-                name: req.body.name,
-                role: req.body.role,
-                email: userRecord.email,
-                uid: userRecord.uid,
-            };
+                const ref = firestore.collection("userData");
+                ref.add(userData);
+                res.status(200).send({ message: "Usuário criado e dados salvos com sucesso!" });
 
-            // Salvando os dados do usuário no Firestore
-            await firestore.collection("userData").add(userData);
-
-            // Enviar resposta de sucesso
-            res.status(200).send({ message: "Usuário criado e dados salvos com sucesso!" });
-        } catch (error : any) {
-            console.error("Erro ao criar Usuário:", error);
-            res.status(500).send({ message: "Erro ao criar usuário", error: error.message });
+            })
+        } catch (err: any) {
+            res.status(500).send(err.message);
+            console.error("Erro ao criar Usuário:", err);
+            throw err;
         }
     });
 });
 
 export { createUserData };
+

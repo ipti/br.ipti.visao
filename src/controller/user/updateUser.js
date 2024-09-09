@@ -3,8 +3,6 @@ import { auth, firestore } from "../../config/firebase";
 import { addDoc } from "@firebase/firestore"
 import { collection } from "@firebase/firestore"
 
-
-
 const email = "lupa@lupa.com";
 const senha = "lupa2024";
 

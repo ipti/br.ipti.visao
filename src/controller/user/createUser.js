@@ -4,6 +4,20 @@ import { collection } from "@firebase/firestore";
 import { addDoc } from "@firebase/firestore";
 import Swal from "sweetalert2";
 
+// ====================================================================================
+// import axios from 'axios';
+
+// export async function createUser(data) {
+//   try {
+//     await axios.post(`http://127.0.0.1:5001/br-ipti-visao/us-central1/userCreate`);
+//     console.log("Usuário criado com sucesso");
+//   } catch (err) {
+//       console.error("Erro ao criar usuário", err);
+//       throw err;
+//   }
+// }
+// ====================================================================================
+
 export function createUser(data) {
   // Create the user with email and password
   createUserWithEmailAndPassword(auth, data.email, data.password)
