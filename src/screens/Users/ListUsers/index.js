@@ -62,8 +62,8 @@ const ListUserScreen = (props) => {
   useEffect(() => {
     const callFunction = async () => {
         try {
-          //const result = await api.get('https://us-central1-br-ipti-visao.cloudfunctions.net/usersList');
-          const result = await api.get('http://127.0.0.1:5001/br-ipti-visao/us-central1/usersList');
+          const result = await api.get('https://us-central1-br-ipti-visao.cloudfunctions.net/usersList');
+          // const result = await api.get('http://127.0.0.1:5001/br-ipti-visao/us-central1/usersList');
           setUsers(result.data);
           console.log(result.data);
           
