@@ -34,7 +34,8 @@ export const userDelete = deleteUserData(corsMiddleware);
 export const userCreate = createUserData(corsMiddleware);
 export const userUpdate = updateUserData(corsMiddleware);
 
-export const addPointsStud = addPointsStudent(corsMiddleware)
+export const addPointsStud = addPointsStudent(corsMiddleware);
+
 
 export const helloWorld = functions.https.onRequest((request, response) => {
   corsMiddleware(request, response, () => {

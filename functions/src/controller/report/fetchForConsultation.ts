@@ -53,11 +53,18 @@ export const generateForConsultationReport = (cors: any) => functions.https.onRe
 
             // Ordenar primeiro pelo nome da escola e depois pelo nome da turma
             const sortedReport = filteredReport.sort((a, b) => {
-                if (a.school! < b.school!) return -1;
-                if (a.school! > b.school!) return 1;
-                if (a.classroom! < b.classroom!) return -1;
-                if (a.classroom! > b.classroom!) return 1;
-                return 0;
+                if (!a || !b) return 0; // Verificar se 'a' e 'b' existem
+            
+                if (!a.school || !b.school) return 0;
+                if (a.school < b.school) return -1;
+                if (a.school > b.school) return 1;
+            
+                
+                if (!a.classroom || !b.classroom) return 0; 
+                if (a.classroom < b.classroom) return -1;
+                if (a.classroom > b.classroom) return 1;
+            
+                return 0; // Se escola e sala forem iguais
             });
 
             res.status(200).send(sortedReport);
