@@ -39,7 +39,6 @@ const generateRowReport = async (schools: SchoolData[], classrooms: ClassroomDat
 export const generateForConsultationReport = (cors: any) => functions.https.onRequest(async (req, res) => {
     cors(req, res, async () => {
         try {
-            // Buscar dados das escolas, salas de aula e estudantes
             const schools = await fetchSchoolsData();
             const classrooms = await fetchClassroomData();
             const students = await fetchStudentData();
@@ -49,15 +48,22 @@ export const generateForConsultationReport = (cors: any) => functions.https.onRe
                 generateRowReport(schools, classrooms, student)
             );
 
-            // Aguardar a geração dos relatórios
             const completedReport = await Promise.all(completedReportPromises);
-
-            // Filtrar relatórios nulos
             const filteredReport = completedReport.filter(report => report !== null);
 
-            res.status(200).send(filteredReport);
+            // Ordenar primeiro pelo nome da escola e depois pelo nome da turma
+            const sortedReport = filteredReport.sort((a, b) => {
+                if (a.school! < b.school!) return -1;
+                if (a.school! > b.school!) return 1;
+                if (a.classroom! < b.classroom!) return -1;
+                if (a.classroom! > b.classroom!) return 1;
+                return 0;
+            });
+
+            res.status(200).send(sortedReport);
         } catch (err: any) {
             res.status(500).send(err.message);
         }
     });
 });
+
