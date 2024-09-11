@@ -113,7 +113,7 @@ const MyDocument = () => {
                                                 <TableData style={{ textAlign: "center" }}>{item.school}</TableData>
                                                 <TableData style={{ textAlign: "center" }}>{item.classroom}</TableData>
                                                 <TableData style={{ textAlign: "center" }}>{item.student_name}</TableData>
-                                                <TableData style={{ textAlign: "center" }}>{item.points}</TableData>                       
+                                                <TableData style={{ textAlign: "center" }}>{item.points < 5 ? "Prioridade minima" : (item.points >= 5 && item.points < 9) ? "Prioridade média" : item.points >= 10 ? "Prioridade máxima" : ""}</TableData>                       
                                             </tr>
                                         ))
                                     )}
