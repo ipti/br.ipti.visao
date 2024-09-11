@@ -10,7 +10,6 @@ import { Table, TableData, TableHeader, TableWrapper } from '../style';
 import Skeleton from 'react-loading-skeleton';
 import 'react-loading-skeleton/dist/skeleton.css';
 import api from '../../services/api';
-//import { Tab } from 'semantic-ui-react';
 
 // Create Document Component
 const MyDocument = () => {
@@ -33,7 +32,7 @@ const MyDocument = () => {
             const imgHeight = (canvas.height * imgWidth) / canvas.width;
             pdf.addImage(imgData, 'PNG', 0, 0, imgWidth, imgHeight);
 
-            pdf.save(`RelatorioGeral-Lupa.pdf`);
+            pdf.save(`RelatorioEncaminhadosParaConsulta-Lupa.pdf`);
         });
     };
 

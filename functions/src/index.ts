@@ -8,12 +8,11 @@ import { deleteClassroom } from "./controller/classroom/deleteClassroom";
 
 import { listUsers } from "./controller/users/listUsers";
 import { deleteUserData } from "./controller/users/deleteUser";
-<<<<<<< HEAD
 import { createUserData } from "./controller/users/createUser";
 import { updateUserData } from "./controller/users/updateUser";
-=======
+
 import { addPointsStudent } from "./controller/addPointsStudents/addPointsStudents";
->>>>>>> origin/main
+
 // import { fetchUsersData } from "./controller/users/fetchUsers";
 
 // admin.initializeApp();
