@@ -37,6 +37,8 @@ export const userUpdate = updateUserData(corsMiddleware);
 export const addPointsStud = addPointsStudent(corsMiddleware);
 
 
+export const addPointsStud = addPointsStudent(corsMiddleware)
+
 export const helloWorld = functions.https.onRequest((request, response) => {
   corsMiddleware(request, response, () => {
     response.send("Hello from Firebase!");
