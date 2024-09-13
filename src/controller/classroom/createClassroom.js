@@ -1,11 +1,9 @@
-import { firestore } from "../../config/firebase"
-import { collection } from "@firebase/firestore"
-import { addDoc } from "@firebase/firestore"
+import { addDoc, collection } from "@firebase/firestore";
+import { firestore } from "../../config/firebase";
 
 
 const handleSubmitClassroom = (body, history) => {
     const ref = collection(firestore, "classroom");
-
     let data =  body
 
     try {
@@ -15,5 +13,6 @@ const handleSubmitClassroom = (body, history) => {
         console.log(err)
     }
 }
+
 
 export default handleSubmitClassroom

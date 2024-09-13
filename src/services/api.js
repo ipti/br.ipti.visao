@@ -1,8 +1,12 @@
 import axios from "axios";
 import { getToken } from "./auth";
 
+
+
+
+
 const api = axios.create({
-    baseURL: "https://apitag.azurewebsites.net/"
+    baseURL: "https://us-central1-br-ipti-visao.cloudfunctions.net/"
 });
 
 api.interceptors.request.use(async config => {
