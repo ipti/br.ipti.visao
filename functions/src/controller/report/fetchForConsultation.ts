@@ -21,7 +21,7 @@ const generateRowReport = async (schools: SchoolData[], classrooms: ClassroomDat
     }
 
     // Filtrar os estudantes que têm mais de 5 pontos
-    if (student.object.points <= 5) {
+    if (student.object.points < 5) {
         return null; // Se os pontos forem menores ou iguais a 5, não gera um relatório
     }
 
