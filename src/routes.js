@@ -18,6 +18,7 @@ import PrivateRouterProvider from "./context/PrivateRouter/context";
 import CreateRegistration from "./screens/Classroom/CreateRegistration";
 import {Report} from "./containers/Report"
 import PdfRelatorioGeral from "./Pdf/PdfRelatorioGeral";
+import PdfForConsultation from "./Pdf/PdfForConsultation";
 
 //const Home = lazy(() => import("./containers/Home"));
 
@@ -69,6 +70,7 @@ const Routes = () => (
       <PrivateRoute exact path="/relatorios" component={Report} />
 
       <PrivateRoute exact path="/relatorios/pdfrelatorio" component={PdfRelatorioGeral} />
+      <PrivateRoute exact path="/relatorios/pdfestudantesparaconsulta" component={PdfForConsultation} />
 
       <PrivateRoute exact path="/turmas/:id/matricula/:idRegistration" component={RegistrationClassroom} />
       <Route exact path="/turmas/:id/matricula/:idRegistration/receita" component={PdfReceita} />

@@ -6,13 +6,7 @@ import {deleteUser} from "../../../controller/user/deleteUser";
 // Material UI
 import Grid from "@material-ui/core/Grid";
 
-
 import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper } from '@mui/material';
-
-// Components
-//import { useParams } from "react-router-dom";
-//import { BoxUsers } from "../../../components/Boxes/BoxUsers";
-//import List from "../../../components/List";
 
 // Styles
 import { useHistory } from "react-router";
@@ -63,7 +57,6 @@ const ListUserScreen = (props) => {
     const callFunction = async () => {
         try {
           const result = await api.get('https://us-central1-br-ipti-visao.cloudfunctions.net/usersList');
-          // const result = await api.get('http://127.0.0.1:5001/br-ipti-visao/us-central1/usersList');
           setUsers(result.data);
           console.log(result.data);
           

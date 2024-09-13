@@ -28,12 +28,19 @@ const generateRowReport = async (school: SchoolData, classroom: ClassroomData[],
     .get();
 
   const triagensFiltered = totalTriagens.docs.filter(doc =>
-    doc.data().acuidadeTriagemDireito !== undefined &&
-    doc.data().acuidadeTriagemDireito !== "" &&
-    doc.data().acuidadeTriagemEsquerdo !== undefined &&
-    doc.data().acuidadeTriagemEsquerdo !== "" ||
+    (doc.data().acuidadeTriagemDireito !== "" &&
+    doc.data().acuidadeTriagemEsquerdo !== "" &&
+    doc.data().testCover!== "" &&
+    doc.data().testManchaBranca!==""&& 
+    doc.data().testMovimentoOcular!=="")||
     doc.data().triagemCompleted == true
   );
+
+  // const quemNumFoi =  totalTriagens.docs.filter(doc => {
+  //   return !triagensFiltered.some(triagem => {
+  //     return triagem.id === doc.id; 
+  //   })
+  // });
 
   const totalAlunosEscola = await firestore.collection("student")
     .where("school_fk", "==", school.id)
@@ -70,6 +77,7 @@ const generateRowReport = async (school: SchoolData, classroom: ClassroomData[],
     countRegister: totalAlunos.data().count,
     countRegisterTriados: triagensFiltered.length,
     countQuestianarioPais: totalQuestianarioPais.length,
+    //quemNumFoi: quemNumFoi,
 
     countForwardedConsultation: totalForwardedConsultation.length,
     countConsultationCompleted: totalConsultationCompleted.data().count,

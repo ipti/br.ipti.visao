@@ -1,35 +1,49 @@
-import { createUserWithEmailAndPassword } from "firebase/auth";
-import { auth, firestore } from "../../config/firebase";
-import { collection } from "@firebase/firestore";
-import { addDoc } from "@firebase/firestore";
-import Swal from "sweetalert2";
+// import { createUserWithEmailAndPassword } from "firebase/auth";
+// import { auth, firestore } from "../../config/firebase";
+// import { collection } from "@firebase/firestore";
+// import { addDoc } from "@firebase/firestore";
+// import Swal from "sweetalert2";
 
-export function createUser(data) {
-  // Create the user with email and password
-  createUserWithEmailAndPassword(auth, data.email, data.password)
-    .then((userCredential) => {
-      // User created successfully
-      const user = userCredential.user;
+// ====================================================================================
+import axios from 'axios';
 
-      const userData = {
-        name: data.name,
-        role: data.role,
-        email: user.email,
-        uid: user.uid,
-      };
-
-      const ref = collection(firestore, "userData");
-      addDoc(ref, userData);
-      Swal.fire({
-        title: "Sucesso!",
-        text: "Usuário criado com sucesso!",
-        icon: "success",
-        confirmButtonText: "Ok",
-      });
-
-    })
-    .catch((error) => {
-      // Handle errors
-      console.error("Error creating user:", error.message);
-    });
+export async function createUser(data) {
+  try {
+    await axios.post(`https://us-central1-br-ipti-visao.cloudfunctions.net/userCreate`);
+    console.log("Usuário criado com sucesso");
+  } catch (err) {
+      console.error("Erro ao criar usuário", err);
+      throw err;
+  }
 }
+// ====================================================================================
+
+// export function createUser(data) {
+//   // Create the user with email and password
+//   createUserWithEmailAndPassword(auth, data.email, data.password)
+//     .then((userCredential) => {
+//       // User created successfully
+//       const user = userCredential.user;
+
+//       const userData = {
+//         name: data.name,
+//         role: data.role,
+//         email: user.email,
+//         uid: user.uid,
+//       };
+
+//       const ref = collection(firestore, "userData");
+//       addDoc(ref, userData);
+//       Swal.fire({
+//         title: "Sucesso!",
+//         text: "Usuário criado com sucesso!",
+//         icon: "success",
+//         confirmButtonText: "Ok",
+//       });
+
+//     })
+//     .catch((error) => {
+//       // Handle errors
+//       console.error("Error creating user:", error.message);
+//     });
+// }

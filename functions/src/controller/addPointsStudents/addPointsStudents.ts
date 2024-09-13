@@ -132,10 +132,13 @@ export const addPointsStudent = (cors: any) => functions.https.onRequest(async (
 
 
         const updatePromises = students.map(async (student: any) => {
-            student.points = points(student);
+            var pontos =  points(student);
+
+            student.object.points = pontos;
     
             const studentRef = firestore.collection('students').doc(student.id);
             await studentRef.set(student, { merge: true });
+            return student;
           });
   
       
