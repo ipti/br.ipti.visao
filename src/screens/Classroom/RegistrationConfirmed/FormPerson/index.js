@@ -9,6 +9,7 @@ import {
   RadioGroup,
   TextField,
 } from "@mui/material";
+import Select from "react-select";
 import { useRef } from "react";
 import MaskCpf from "../../../../components/Mask/maskcpf";
 import styles from "../../../../styles";
@@ -16,6 +17,7 @@ import styles from "../../../../styles";
 import styleBase from "../../../../styles";
 import { Column, Padding } from "../../../../styles/style";
 import MaskDate from "../../../../components/Mask/maskdate";
+//import color from "../../../../styles/colors";
 
 const useStyles = makeStyles(styles);
 
@@ -28,9 +30,37 @@ const PurpleRadio = withStyles({
   checked: {},
 })((props) => <Radio color="default" {...props} />);
 
-const FormPerson = ({ values, handleChange }) => {
+const FormPesonState = () => {  
+
+  const colorRace = [
+    {
+        id: 1,
+        name: "Não declarado"
+    },
+    {
+        id: 2,
+        name: "Branca"
+    },
+    {
+        id: 3,
+        name: "Preta"
+    },
+    {
+        id: 4,
+        name: "Parda"
+    },
+  ]
+
+  return { colorRace};
+
+}
+
+
+const FormPerson = ({ values, handleChange, setFieldValue }) => {
   const classes = useStyles();
   const inputRef = useRef(null);
+
+  const props = FormPesonState();
 
   return (
     <>
@@ -49,6 +79,7 @@ const FormPerson = ({ values, handleChange }) => {
           </Column>
         </Grid>
       </Grid>
+
       <Grid
         className={`${classes.contentMain}`}
         container
@@ -86,6 +117,31 @@ const FormPerson = ({ values, handleChange }) => {
           </FormControl>
         </Grid>
       </Grid>
+
+      <Grid item xs={6}>
+          <FormControl
+              component="fieldset"
+              className={classes.formControl}
+              //error={errorList.colorRace}
+          >
+              <p className={classes.label}>Cor de Raça *</p>
+              <Select
+                  //styles={customStyles}
+                  className="basic-single"
+                  classNamePrefix="select"
+                  placeholder="Selecione Cor/Raça"
+                  value={props.colorRace.filter((option) => option.id === values.colorRace)}
+                  options={props.colorRace}
+                  isLoading={props.isLoadingColorRace}
+                  onChange={(e)=> {setFieldValue('colorRace', e.id)}}
+                  getOptionValue={opt => opt.id}  
+                  getOptionLabel={opt => opt.name}  
+              />
+          </FormControl>
+          {/* <FormHelperText>{errorList.colorRace}</FormHelperText> */}
+      </Grid>
+
+
       <Grid container>
         <Grid item style={{ width: "100%" }} md={6}>
           <p className={classes.label}>Data de Nascimento</p>

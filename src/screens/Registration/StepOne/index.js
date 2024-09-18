@@ -246,8 +246,9 @@ const StepOne = () => {
                     </RadioGroup>
                     <FormHelperText>{errorList.sex}</FormHelperText>
                   </FormControl>
-                </Grid>
+                </Grid>            
               </Grid>
+
               <Grid
                 className={`${classes.contentMain}`}
                 container
