@@ -92,6 +92,7 @@ const CreateRegistrationState = () => {
         birthday: Yup.string().required("Campo obrigatório!"),
         sex: Yup.string().required("Campo obrigatório!"),
         cpf: Yup.string().required("Campo obrigatório!"),
+        zone: Yup.string().required("Campo obrigatório!"),
         school_fk: Yup.string().required("Campo obrigatório!"),
         classroom_fk: Yup.string().required("Campo obrigatório!"),
         turno: Yup.string().required("Campo obrigatório!"),
@@ -107,6 +108,7 @@ const CreateRegistrationState = () => {
         birthday: '',
         sex: "",
         cpf: "",
+        zone:"",
         school_fk: getIdSchool(),
         classroom_fk: id,
         turno: "",
@@ -369,6 +371,42 @@ const CreateRegistration = () => {
                                     />
                                 </FormControl>
                                 <FormHelperText>{errorList.turno}</FormHelperText>
+                            </Grid>
+
+                            <Grid
+                                className={`${classes.contentMain}`}
+                                container
+                                direction="row"
+                            >
+                                <Grid item xs={6}>
+                                    <FormControl
+                                        component="fieldset"
+                                        className={classes.formControl}
+                                        error={errorList.zone}
+                                    >
+                                        <FormLabel component="legend">Zona *</FormLabel>
+                                        <RadioGroup
+                                            value={values.zone}
+                                            name="zone"
+                                            onChange={handleChange}
+                                            row
+                                        >
+                                            <FormControlLabel
+                                                value={'1'}
+                                                name="zone"
+                                                control={<PurpleRadio />}
+                                                label="Rural"
+                                            />
+                                            <FormControlLabel
+                                                value={'2'}
+                                                name="zone"
+                                                control={<PurpleRadio />}
+                                                label="Urbana"
+                                            />
+                                        </RadioGroup>
+                                        <FormHelperText>{errorList.zone}</FormHelperText>
+                                    </FormControl>
+                                </Grid>
                             </Grid>
 
                             <Grid item style={{ width: "100%" }} md={12}>

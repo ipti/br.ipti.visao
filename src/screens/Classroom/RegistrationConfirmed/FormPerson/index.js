@@ -181,6 +181,43 @@ const FormPerson = ({ values, handleChange, setFieldValue }) => {
           </Column>
         </Grid>
       </Grid>
+      <Grid
+        className={`${classes.contentMain}`}
+        container
+        direction="row"
+        justifyContent="center"
+        alignItems="center"
+      >
+        <Grid item xs={12}>
+          <Padding padding="8px" />
+          <FormControl
+            component="fieldset"
+            className={classes.formControl}
+            // error={errorList.zone}
+          >
+            <p className={classes.label}>Zona *</p>
+            <RadioGroup
+              value={values.zone}
+              name="zone"
+              onChange={handleChange}
+              row
+            >
+              <FormControlLabel
+                value={'1'}
+                name="zone"
+                control={<PurpleRadio />}
+                label="Rural"
+              />
+              <FormControlLabel
+                value={'2'}
+                name="zone"
+                control={<PurpleRadio />}
+                label="Urbana"
+              />
+            </RadioGroup>
+          </FormControl>
+        </Grid>
+      </Grid>
     </>
   );
 };
