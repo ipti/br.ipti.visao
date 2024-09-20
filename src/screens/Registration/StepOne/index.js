@@ -78,6 +78,25 @@ const StepOne = () => {
     },
   ]
 
+  const colorRace = [
+    {
+      id: 1,
+      name: "Não declarado"
+    },
+    {
+      id: 2,
+      name: "Branca"
+    },
+    {
+      id: 3,
+      name: "Preta"
+    },
+    {
+      id: 4,
+      name: "Parda"
+    },
+  ]
+
 
   const { next, dataValues } = useContext(RegistrationContext);
 
@@ -114,6 +133,8 @@ const StepOne = () => {
     birthday: Yup.string().required("Campo obrigatório!"),
     sex: Yup.string().required("Campo obrigatório!"),
     cpf: Yup.string().required("Campo obrigatório!"),
+    colorRace: Yup.string().required("Campo obrigatório!"),
+    zone: Yup.string().required("Campo obrigatório!"),
     school_fk: Yup.string().required("Campo obrigatório!"),
     classroom_fk: Yup.string().required("Campo obrigatório!"),
     turno: Yup.string().required("Campo obrigatório!"),
@@ -125,6 +146,8 @@ const StepOne = () => {
     birthday: dataValues?.birthday ?? '',
     sex: dataValues?.sex ?? "",
     cpf: dataValues?.cpf ?? "",
+    colorRace: dataValues?.colorRace ?? "",
+    zone: dataValues?.zone ?? "",
     school_fk: dataValues?.school_fk ?? "",
     classroom_fk: dataValues?.classroom_fk ?? "",
     turno: dataValues?.turno,
@@ -141,13 +164,15 @@ const StepOne = () => {
         validateOnChange={false}
         enableReinitialize
       >
-        {({ errors, values, touched, handleChange, handleSubmit,setFieldValue }) => {
+        {({ errors, values, touched, handleChange, handleSubmit, setFieldValue }) => {
 
           const errorList = {
             name: touched.name && errors.name,
             birthday: touched.birthday && errors.birthday,
             sex: touched.sex && errors.sex,
             cpf: touched.cpf && errors.cpf,
+            colorRace: touched.colorRace && errors.colorRace,
+            zone: touched.zone && errors.zone,
             school_fk: touched.school && errors.school,
             classroom_fk: touched.classroom && errors.classroom,
             turno: touched.turno && errors.turno
@@ -248,6 +273,7 @@ const StepOne = () => {
                   </FormControl>
                 </Grid>
               </Grid>
+
               <Grid
                 className={`${classes.contentMain}`}
                 container
@@ -278,6 +304,67 @@ const StepOne = () => {
                   </FormControl>
                 </Grid>
               </Grid>
+
+              <Grid container >
+                <Grid item xs={12}>
+                  <FormControl
+                    component="fieldset"
+                    className={classes.formControl}
+                    style={{ width: "100%" }}
+                  > 
+                    <FormLabel component="legend">Cor de Raça *</FormLabel>
+                    <Select
+                      //styles={customStyles}
+                      className="basic-single"
+                      classNamePrefix="select"
+                      placeholder="Selecione Cor/Raça"
+                      value={colorRace.filter((option) => option.id === values.colorRace)}
+                      options={colorRace}
+                      //isLoading={isLoadingColorRace}
+                      onChange={(e) => { setFieldValue('colorRace', e.id) }}
+                      getOptionValue={opt => opt.id}
+                      getOptionLabel={opt => opt.name}
+                    />
+                  </FormControl>
+                </Grid>
+              </Grid>
+
+              <Grid
+                className={`${classes.contentMain}`}
+                container
+                direction="row"
+              >
+                <Grid item xs={6}>
+                  <FormControl
+                    component="fieldset"
+                    className={classes.formControl}
+                    error={errorList.zone}
+                  >
+                    <FormLabel component="legend">Zona *</FormLabel>
+                    <RadioGroup
+                      value={values.zone}
+                      name="zone"
+                      onChange={handleChange}
+                      row
+                    >
+                      <FormControlLabel
+                        value={'1'}
+                        name="zone"
+                        control={<PurpleRadio />}
+                        label="Rural"
+                      />
+                      <FormControlLabel
+                        value={'2'}
+                        name="zone"
+                        control={<PurpleRadio />}
+                        label="Urbana"
+                      />
+                    </RadioGroup>
+                    <FormHelperText>{errorList.zone}</FormHelperText>
+                  </FormControl>
+                </Grid>
+              </Grid>
+
               <Grid item xs={12}>
                 <FormControl
                   component="fieldset"
@@ -323,7 +410,7 @@ const StepOne = () => {
                     getOptionLabel={opt => opt.object.name}
                   />
                 </FormControl>
-                  <FormHelperText>{errorList.classroom_fk}</FormHelperText>
+                <FormHelperText>{errorList.classroom_fk}</FormHelperText>
               </Grid>
 
               <Grid item xs={12}>

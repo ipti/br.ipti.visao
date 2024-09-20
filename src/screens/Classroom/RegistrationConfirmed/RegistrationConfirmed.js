@@ -49,7 +49,7 @@ const Home = props => {
         onSubmit={values => {
           handleUpdate(values)
         }}>
-        {({ values, handleChange, handleSubmit }) => {
+        {({ values, handleChange, handleSubmit, setFieldValue }) => {
           return (
             <Form onSubmit={handleSubmit}>
               <Grid item style={{ width: "100%" }} md={3}>
@@ -60,7 +60,7 @@ const Home = props => {
                 />
               </Grid>
               <Padding padding="16px" />
-              <TabsRegister values={values} handleChange={handleChange} />
+              <TabsRegister setFieldValue={setFieldValue} values={values} handleChange={handleChange} />
             </Form>
           )
         }}

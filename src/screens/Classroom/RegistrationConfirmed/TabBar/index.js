@@ -8,7 +8,7 @@ import FormConsulta from '../FormConsulta';
 import FormReceita from '../FormReceita';
 import FormOculos from '../FormOculos/FormOculos';
 
-export default function TabsRegister({ values, handleChange }) {
+export default function TabsRegister({ values, handleChange, setFieldValue }) {
   return (
     <div className="card">
       <TabView>
@@ -16,7 +16,7 @@ export default function TabsRegister({ values, handleChange }) {
           inkbar: { style: { backgroundColor: "black" } },
           header: { style: { border: "transparent" } }
         }} header="Aluno">
-          <FormPerson values={values} handleChange={handleChange} />
+          <FormPerson values={values} handleChange={handleChange} setFieldValue={setFieldValue} />
         </TabPanel>
         <TabPanel header="Questinário com os Pais">
           < FormQuestionnaireParents values={values} handleChange={handleChange} />

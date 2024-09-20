@@ -67,11 +67,33 @@ const CreateRegistrationState = () => {
         },
     ]
 
+    const colorRace = [
+        {
+            id: 1,
+            name: "Não declarado"
+        },
+        {
+            id: 2,
+            name: "Branca"
+        },
+        {
+            id: 3,
+            name: "Preta"
+        },
+        {
+            id: 4,
+            name: "Parda"
+        },
+    ]
+
+
     const validationSchema = Yup.object().shape({
         name: Yup.string().required("Campo obrigatório!").min(10, 'minimo de 10 caracteres'),
         birthday: Yup.string().required("Campo obrigatório!"),
         sex: Yup.string().required("Campo obrigatório!"),
         cpf: Yup.string().required("Campo obrigatório!"),
+        colorRace: Yup.string().required("Campo obrigatório!"),
+        zone: Yup.string().required("Campo obrigatório!"),
         school_fk: Yup.string().required("Campo obrigatório!"),
         classroom_fk: Yup.string().required("Campo obrigatório!"),
         turno: Yup.string().required("Campo obrigatório!"),
@@ -86,6 +108,8 @@ const CreateRegistrationState = () => {
         birthday: '',
         sex: "",
         cpf: "",
+        colorRace: "",
+        zone: "",
         school_fk: getIdSchool(),
         classroom_fk: id,
         turno: "",
@@ -136,7 +160,7 @@ const CreateRegistrationState = () => {
     };
 
     return {
-        turno, validationSchema, initialValues, id
+        turno, colorRace, validationSchema, initialValues, id
     }
 }
 
@@ -150,7 +174,7 @@ const CreateRegistration = () => {
             <h1>Criar aluno</h1>
             <Formik
                 initialValues={props.initialValues}
-                onSubmit={values => {handleSubmitStudent(values, history, `${"/turmas/"+ props.id}`)}}
+                onSubmit={values => { handleSubmitStudent(values, history, `${"/turmas/" + props.id}`) }}
                 validationSchema={props.validationSchema}
                 validateOnChange={false}
                 enableReinitialize
@@ -165,6 +189,7 @@ const CreateRegistration = () => {
                         school_fk: touched.school && errors.school,
                         classroom_fk: touched.classroom && errors.classroom,
                         turno: touched.turno && errors.turno,
+                        colorRace: touched.colorRace && errors.colorRace,
                         filhoOculos: touched.filhoOculos && errors.filhoOculos,
                         horasUsoAparelhosEletronicos: touched.horasUsoAparelhosEletronicos && errors.horasUsoAparelhosEletronicos,
                         horasAtividadesAoArLivre: touched.horasAtividadesAoArLivre && errors.horasAtividadesAoArLivre
@@ -263,6 +288,37 @@ const CreateRegistration = () => {
                                     </FormControl>
                                 </Grid>
                             </Grid>
+
+
+                            <Grid item xs={6}>
+                                <FormControl
+                                    component="fieldset"
+                                    className={classes.formControl}
+                                    error={errorList.colorRace}
+                                >
+                                    <FormLabel
+                                        style={{ display: 'flex', flexDirection: 'row', justifyContent: "start", marginBottom: "24px" }}
+                                    >
+                                        Cor/Raça *
+                                    </FormLabel>
+                                    <Select
+                                        styles={customStyles}
+                                        className="basic-single"
+                                        classNamePrefix="select"
+                                        placeholder="Selecione Cor/Raça"
+                                        options={props.colorRace}
+                                        isLoading={props.isLoadingColorRace}
+                                        onChange={selectedOption => {
+                                            setFieldValue("colorRace", selectedOption.id)
+                                        }}
+                                        getOptionValue={opt => opt.id}
+                                        getOptionLabel={opt => opt.name}
+                                    />
+                                </FormControl>
+                                <FormHelperText>{errorList.colorRace}</FormHelperText>
+                            </Grid>
+
+
                             <Grid
                                 className={`${classes.contentMain}`}
                                 container
@@ -316,6 +372,43 @@ const CreateRegistration = () => {
                                 </FormControl>
                                 <FormHelperText>{errorList.turno}</FormHelperText>
                             </Grid>
+
+                            <Grid
+                                className={`${classes.contentMain}`}
+                                container
+                                direction="row"
+                            >
+                                <Grid item xs={6}>
+                                    <FormControl
+                                        component="fieldset"
+                                        className={classes.formControl}
+                                        error={errorList.zone}
+                                    >
+                                        <FormLabel component="legend">Zona *</FormLabel>
+                                        <RadioGroup
+                                            value={values.zone}
+                                            name="zone"
+                                            onChange={handleChange}
+                                            row
+                                        >
+                                            <FormControlLabel
+                                                value={'1'}
+                                                name="zone"
+                                                control={<PurpleRadio />}
+                                                label="Rural"
+                                            />
+                                            <FormControlLabel
+                                                value={'2'}
+                                                name="zone"
+                                                control={<PurpleRadio />}
+                                                label="Urbana"
+                                            />
+                                        </RadioGroup>
+                                        <FormHelperText>{errorList.zone}</FormHelperText>
+                                    </FormControl>
+                                </Grid>
+                            </Grid>
+
                             <Grid item style={{ width: "100%" }} md={12}>
                                 <p className={classes.label}>Seu filho tem algum sintoma na visão ou nos olhos?</p>
                                 <FormGroup>
@@ -366,6 +459,8 @@ const CreateRegistration = () => {
                                     </FormControl>
                                 </Grid>
                             </Grid>
+
+
                             <Grid item style={{ width: "100%" }} md={12}>
                                 <p className={classes.label}>Seu filho tem ou teve alguma dessas doenças nos olhos?</p>
                                 <FormGroup>
@@ -379,6 +474,7 @@ const CreateRegistration = () => {
                                     <FormControlLabel control={<Checkbox name="doencasNosOlhos.nenhumaOpcao" onChange={handleChange} value={values.doencasNosOlhos.nenhumaOpcao} />} label="Nenhuma das opções" />
                                 </FormGroup>
                             </Grid>
+
                             <Grid item style={{ width: "100%" }} md={12}>
                                 <p className={classes.label}>Seu filho tem ou teve alguma dessas doenças ?</p>
                                 <FormGroup>
