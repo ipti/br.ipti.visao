@@ -30,28 +30,28 @@ const PurpleRadio = withStyles({
   checked: {},
 })((props) => <Radio color="default" {...props} />);
 
-const FormPesonState = () => {  
+const FormPesonState = () => {
 
   const colorRace = [
     {
-        id: 1,
-        name: "Não declarado"
+      id: 1,
+      name: "Não declarado"
     },
     {
-        id: 2,
-        name: "Branca"
+      id: 2,
+      name: "Branca"
     },
     {
-        id: 3,
-        name: "Preta"
+      id: 3,
+      name: "Preta"
     },
     {
-        id: 4,
-        name: "Parda"
+      id: 4,
+      name: "Parda"
     },
   ]
 
-  return { colorRace};
+  return { colorRace };
 
 }
 
@@ -92,7 +92,7 @@ const FormPerson = ({ values, handleChange, setFieldValue }) => {
           <FormControl
             component="fieldset"
             className={classes.formControl}
-            // error={errorList.sex}
+          // error={errorList.sex}
           >
             <p className={classes.label}>Sexo *</p>
             <RadioGroup
@@ -118,29 +118,29 @@ const FormPerson = ({ values, handleChange, setFieldValue }) => {
         </Grid>
       </Grid>
 
-      <Grid item xs={6}>
+      <Grid container >
+        <Grid item xs={6}>
           <FormControl
-              component="fieldset"
-              className={classes.formControl}
-              //error={errorList.colorRace}
+            component="fieldset"
+            className={classes.formControl}
+            style={{ width: "100%" }}
           >
-              <p className={classes.label}>Cor de Raça *</p>
-              <Select
-                  //styles={customStyles}
-                  className="basic-single"
-                  classNamePrefix="select"
-                  placeholder="Selecione Cor/Raça"
-                  value={props.colorRace.filter((option) => option.id === values.colorRace)}
-                  options={props.colorRace}
-                  isLoading={props.isLoadingColorRace}
-                  onChange={(e)=> {setFieldValue('colorRace', e.id)}}
-                  getOptionValue={opt => opt.id}  
-                  getOptionLabel={opt => opt.name}  
-              />
+            <p className={classes.label}>Cor de Raça *</p>
+            <Select
+              //styles={customStyles}
+              className="basic-single"
+              classNamePrefix="select"
+              placeholder="Selecione Cor/Raça"
+              value={props.colorRace.filter((option) => option.id === values.colorRace)}
+              options={props.colorRace}
+              isLoading={props.isLoadingColorRace}
+              onChange={(e) => { setFieldValue('colorRace', e.id) }}
+              getOptionValue={opt => opt.id}
+              getOptionLabel={opt => opt.name}
+            />
           </FormControl>
-          {/* <FormHelperText>{errorList.colorRace}</FormHelperText> */}
+        </Grid>
       </Grid>
-
 
       <Grid container>
         <Grid item style={{ width: "100%" }} md={6}>
@@ -161,6 +161,7 @@ const FormPerson = ({ values, handleChange, setFieldValue }) => {
           </Column>
         </Grid>
       </Grid>
+
       <Grid container>
         <Grid item style={{ width: "100%" }} md={6}>
           <p className={classes.label}>CPF</p>
@@ -193,7 +194,7 @@ const FormPerson = ({ values, handleChange, setFieldValue }) => {
           <FormControl
             component="fieldset"
             className={classes.formControl}
-            // error={errorList.zone}
+          // error={errorList.zone}
           >
             <p className={classes.label}>Zona *</p>
             <RadioGroup

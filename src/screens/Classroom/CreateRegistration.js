@@ -92,11 +92,11 @@ const CreateRegistrationState = () => {
         birthday: Yup.string().required("Campo obrigatório!"),
         sex: Yup.string().required("Campo obrigatório!"),
         cpf: Yup.string().required("Campo obrigatório!"),
+        colorRace: Yup.string().required("Campo obrigatório!"),
         zone: Yup.string().required("Campo obrigatório!"),
         school_fk: Yup.string().required("Campo obrigatório!"),
         classroom_fk: Yup.string().required("Campo obrigatório!"),
         turno: Yup.string().required("Campo obrigatório!"),
-        colorRace: Yup.string().required("Campo obrigatório!"),
         filhoOculos: Yup.string().required(),
         horasUsoAparelhosEletronicos: Yup.string().required(),
         horasAtividadesAoArLivre: Yup.string().required(),
@@ -108,11 +108,11 @@ const CreateRegistrationState = () => {
         birthday: '',
         sex: "",
         cpf: "",
-        zone:"",
+        colorRace: "",
+        zone: "",
         school_fk: getIdSchool(),
         classroom_fk: id,
         turno: "",
-        colorRace: "",
         permission: true,
         filhossintomas: {
             dificuldadeQuadro: false,
@@ -174,7 +174,7 @@ const CreateRegistration = () => {
             <h1>Criar aluno</h1>
             <Formik
                 initialValues={props.initialValues}
-                onSubmit={values => {handleSubmitStudent(values, history, `${"/turmas/"+ props.id}`)}}
+                onSubmit={values => { handleSubmitStudent(values, history, `${"/turmas/" + props.id}`) }}
                 validationSchema={props.validationSchema}
                 validateOnChange={false}
                 enableReinitialize
@@ -289,15 +289,15 @@ const CreateRegistration = () => {
                                 </Grid>
                             </Grid>
 
-                            
+
                             <Grid item xs={6}>
                                 <FormControl
                                     component="fieldset"
                                     className={classes.formControl}
                                     error={errorList.colorRace}
                                 >
-                                    <FormLabel 
-                                        style={{ display: 'flex', flexDirection: 'row', justifyContent: "start", marginBottom: "24px" }} 
+                                    <FormLabel
+                                        style={{ display: 'flex', flexDirection: 'row', justifyContent: "start", marginBottom: "24px" }}
                                     >
                                         Cor/Raça *
                                     </FormLabel>
@@ -311,14 +311,14 @@ const CreateRegistration = () => {
                                         onChange={selectedOption => {
                                             setFieldValue("colorRace", selectedOption.id)
                                         }}
-                                        getOptionValue={opt => opt.id}  
-                                        getOptionLabel={opt => opt.name}  
+                                        getOptionValue={opt => opt.id}
+                                        getOptionLabel={opt => opt.name}
                                     />
                                 </FormControl>
                                 <FormHelperText>{errorList.colorRace}</FormHelperText>
                             </Grid>
-                           
-                      
+
+
                             <Grid
                                 className={`${classes.contentMain}`}
                                 container
