@@ -1,5 +1,5 @@
 import { makeStyles } from "@material-ui/core/styles";
-import { Checkbox, FormControlLabel, FormGroup, Grid, Radio, RadioGroup, TextField } from "@mui/material";
+import { Checkbox, FormControlLabel, FormGroup, Grid, Radio, RadioGroup, TextField, TextareaAutosize } from "@mui/material";
 import React from "react";
 import MaskDate from "../../../../components/Mask/maskdate";
 import styles from "../../../../styles";
@@ -322,7 +322,26 @@ const FormConsulta = ({ values, handleChange }) => {
                 </Column>
             </Grid>
 
-            <Padding />
+            <Padding padding="8px" />
+
+            <Grid container>
+                <Grid item style={{ width: "100%" }} md={6}>
+                    <p className={classes.label}>Observações</p>
+                    <Column>
+                        <TextareaAutosize
+                            className={classes.inputStudent}
+                            style={{ width: "100%", height: "128px", resize: "vertical" }}
+                            name="observationConsulta"
+                            onChange={handleChange}
+                            value={values.observationConsulta}
+                            variant="outlined"
+                        />
+                    </Column>
+                </Grid>
+            </Grid>
+
+            <Padding padding="8px" />
+            
             <Grid item style={{ width: "100%" }} md={12}>
                 <p className={classes.label}>Considerar formulário como concluído?</p>
                 <FormGroup>

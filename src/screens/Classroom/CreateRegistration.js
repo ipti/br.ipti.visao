@@ -69,21 +69,29 @@ const CreateRegistrationState = () => {
 
     const colorRace = [
         {
-            id: 1,
+            id: 0,
             name: "Não declarado"
-        },
-        {
-            id: 2,
+          },
+          {
+            id: 1,
             name: "Branca"
-        },
-        {
-            id: 3,
+          },
+          {
+            id: 2,
             name: "Preta"
-        },
-        {
-            id: 4,
+          },
+          {
+            id: 3,
             name: "Parda"
-        },
+          },
+          {
+            id: 4,
+            name: "Amarela"
+          },
+          {
+            id: 5,
+            name: "Indígena"
+          },
     ]
 
 

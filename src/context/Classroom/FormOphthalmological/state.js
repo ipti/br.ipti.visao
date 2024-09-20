@@ -142,6 +142,8 @@ const FormRegistrationState = () => {
       baixaVisaoCentral: oneRegistration?.object.acompanhamento?.baixaVisaoCentral ?? false,
     },
     proximaConsulta: oneRegistration?.object.proximaConsulta ?? "",
+    observationConsulta: oneRegistration?.object.observationConsulta ?? "",
+
     receitaEsfericoOlhoDireito: oneRegistration?.object.receitaEsfericoOlhoDireito ?? "",
     receitaCilindricoOlhoDireito: oneRegistration?.object.receitaCilindricoOlhoDireito ?? "",
     receitaEixoOlhoDireito: oneRegistration?.object.receitaEixoOlhoDireito ?? "",

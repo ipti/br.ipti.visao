@@ -34,20 +34,28 @@ const FormPesonState = () => {
 
   const colorRace = [
     {
-      id: 1,
+      id: 0,
       name: "Não declarado"
     },
     {
-      id: 2,
+      id: 1,
       name: "Branca"
     },
     {
-      id: 3,
+      id: 2,
       name: "Preta"
     },
     {
-      id: 4,
+      id: 3,
       name: "Parda"
+    },
+    {
+      id: 4,
+      name: "Amarela"
+    },
+    {
+      id: 5,
+      name: "Indígena"
     },
   ]
 
@@ -67,7 +75,7 @@ const FormPerson = ({ values, handleChange, setFieldValue }) => {
       <h2> Dados básicos </h2>
       <Grid container>
         <Grid item md={6}>
-          <p className={classes.label}>Name</p>
+          <p className={classes.label}>Nome</p>
           <Column>
             <TextField
               className={classes.inputStudent}
