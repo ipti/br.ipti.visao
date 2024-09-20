@@ -43,7 +43,7 @@ export const RegistrationState = () => {
     const parseBool = value =>
       ['true', 'false'].includes(value) ? value === true : null
     handleSubmitStudent({
-      ...dataValues, sex: parseInt(dataValues.sex),
+      ...dataValues, sex: parseInt(dataValues.sex), zone: parseInt(dataValues.zone),
       birthday: dataValues.birthday,
       filhoOculos: parseBool(dataValues.filhoOculos),
       cpf: dataValues.cpf ? dataValues.cpf.replace(/\D/g, '') : null,

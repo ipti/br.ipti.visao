@@ -1,4 +1,4 @@
-import { TextField } from "@material-ui/core";
+import { TextareaAutosize } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import { FormControlLabel, Grid, Radio, RadioGroup } from "@mui/material";
 import { Checkbox, FormGroup } from "@mui/material";
@@ -119,29 +119,32 @@ const FormOphthalmologicalPage = ({ values, handleChange }) => {
           />
         </RadioGroup>
       </Grid>
-      <Grid item style={{ width: "100%" }} md={12}>
-        <p className={classes.label}>Observação</p>
-        <TextField
-          className={classes.inputStudent}
-          name="observation"
-          onChange={handleChange}
-          value={values.observation}
-          variant="outlined"
-        />
+      <Grid container>
+        <Grid item style={{ width: "100%" }} md={6}>
+          <p className={classes.label}>Observações</p>
+            <TextareaAutosize
+              className={classes.inputStudent}
+              style={{ width: "100%", height: "128px", resize: "vertical" }}
+              name="observation"
+              onChange={handleChange}
+              value={values.observation}
+              variant="outlined"
+            />
+        </Grid>
       </Grid>
 
       <Padding />
-          <Grid item style={{ width: "100%" }} md={12}>
-            <p className={classes.label}>Considerar formulário como concluído?</p>
-              <FormGroup>
-                <FormControlLabel control={<Checkbox 
-                  name="triagemCompleted" 
-                  defaultChecked={values.triagemCompleted} 
-                  onChange={handleChange} 
-                  value={values.triagemCompleted} />} 
-                  label="Considerar triagem como concluída" />
-              </FormGroup>
-          </Grid>
+      <Grid item style={{ width: "100%" }} md={12}>
+        <p className={classes.label}>Considerar formulário como concluído?</p>
+        <FormGroup>
+          <FormControlLabel control={<Checkbox
+            name="triagemCompleted"
+            defaultChecked={values.triagemCompleted}
+            onChange={handleChange}
+            value={values.triagemCompleted} />}
+            label="Considerar triagem como concluída" />
+        </FormGroup>
+      </Grid>
     </>
   );
 };

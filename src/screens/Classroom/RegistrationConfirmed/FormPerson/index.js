@@ -75,7 +75,7 @@ const FormPerson = ({ values, handleChange, setFieldValue }) => {
       <h2> Dados básicos </h2>
       <Grid container>
         <Grid item md={6}>
-          <p className={classes.label}>Name</p>
+          <p className={classes.label}>Nome</p>
           <Column>
             <TextField
               className={classes.inputStudent}
