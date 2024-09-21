@@ -24,16 +24,15 @@ const FormRegistrationState = () => {
 
 
   const handleUpdate = (values) => {
-    console.log(points())
     updateStudent(idRegistration, {...values, points: points()})
   }
 
   const initialValues = {
     name: oneRegistration ? oneRegistration.object.name : "",
     cpf: oneRegistration ? oneRegistration.object.cpf : "",
-    zone: oneRegistration ? oneRegistration.object.zone : "",
+    zone: oneRegistration?.object?.zone ? oneRegistration.object.zone : "",
     sex: oneRegistration ? oneRegistration.object.sex : "",
-    colorRace: oneRegistration ? oneRegistration.object.colorRace : "",
+    colorRace: oneRegistration?.object?.colorRace ? oneRegistration.object.colorRace : "",
     birthday: oneRegistration ? oneRegistration.object.birthday : "",
     dataTriagem: oneRegistration?.object?.dataTriagem ? oneRegistration.object.dataTriagem : null,
     observation: oneRegistration?.object?.observation ? oneRegistration.object.observation : "",
