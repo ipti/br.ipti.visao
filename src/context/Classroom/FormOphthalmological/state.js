@@ -88,6 +88,7 @@ const FormRegistrationState = () => {
     nomeMedico: oneRegistration?.object.nomeMedico ?? "",
     crmMedico: oneRegistration?.object.crmMedico ?? "",
     dataConsulta: oneRegistration?.object.dataConsulta ?? "",
+    jaRealizouConsultaAntes: oneRegistration?.object.jaRealizouConsultaAntes ?? false,
     refracaoEsfericoOlhoDireito: oneRegistration?.object.refracaoEsfericoOlhoDireito ?? "",
     refracaoCilindricoOlhoDireito: oneRegistration?.object.refracaoCilindricoOlhoDireito ?? "",
     refracaoEixoOlhoDireito: oneRegistration?.object.refracaoEixoOlhoDireito ?? "",

@@ -91,6 +91,7 @@ const MyDocument = () => {
                             <Table>
                                 <thead>
                                     <tr>
+                                        <TableHeader style={{ textAlign: "center" }}>Nº</TableHeader> 
                                         <TableHeader style={{ textAlign: "center" }}>Nome da escola</TableHeader>
                                         <TableHeader style={{ textAlign: "center" }}>Turma</TableHeader>
                                         <TableHeader style={{ textAlign: "center" }}>Nome do Estudante</TableHeader>
@@ -101,6 +102,7 @@ const MyDocument = () => {
                                     {isFetching ? (
                                         // Mostrar Skeleton enquanto os dados estão sendo carregados
                                         <tr>
+                                            <TableData><Skeleton height={20} /></TableData>     
                                             <TableData><Skeleton height={20} /></TableData>
                                             <TableData><Skeleton height={20} /></TableData>
                                             <TableData><Skeleton height={20} /></TableData>
@@ -110,6 +112,7 @@ const MyDocument = () => {
                                         // Renderizar os dados do relatório
                                         report.map((item, index) => (
                                             <tr key={index}>
+                                                <TableData style={{ textAlign: "center" }}>{index + 1}</TableData> 
                                                 <TableData style={{ textAlign: "center" }}>{item.school}</TableData>
                                                 <TableData style={{ textAlign: "center" }}>{item.classroom}</TableData>
                                                 <TableData style={{ textAlign: "center" }}>{item.student_name}</TableData>

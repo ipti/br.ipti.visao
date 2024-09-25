@@ -160,7 +160,14 @@ const FormConsulta = ({ values, handleChange }) => {
             <Grid item style={{ width: "100%" }} md={6}>
                 <p className={classes.label}>Anamnese</p>
                 <Column>
-                    <TextField className={classes.inputStudent} value={values.anamnese} name="anamnese" onChange={handleChange} variant="outlined" />
+                    <TextareaAutosize
+                            className={classes.inputStudent}
+                            style={{ width: "100%", height: "128px", resize: "vertical" }}
+                            name="anamnese"
+                            onChange={handleChange}
+                            value={values.anamnese}
+                            variant="outlined"
+                        />
                 </Column>
             </Grid>
             <Padding padding="16px" />

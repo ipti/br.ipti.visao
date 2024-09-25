@@ -19,6 +19,9 @@ import Swal from "sweetalert2";
 import styles from "../../../styles";
 import image from "../../../assets/images/Atenção-img.png";
 
+import Skeleton from 'react-loading-skeleton';
+import 'react-loading-skeleton/dist/skeleton.css';
+
 import api from '../../../services/api';
 
 const ListUserScreen = (props) => {
@@ -26,6 +29,7 @@ const ListUserScreen = (props) => {
   const history = useHistory();
 
   const [usersList, setUsers] = useState([])
+  const [isFetching, setIsFetching] = useState(true)
 
   const deleteUsers = (e, id) => {
 
@@ -59,9 +63,10 @@ const ListUserScreen = (props) => {
           const result = await api.get('https://us-central1-br-ipti-visao.cloudfunctions.net/usersList');
           setUsers(result.data);
           console.log(result.data);
-          
         } catch (error) {
           console.error('Error calling function:', error);
+        } finally {
+          setIsFetching(false);
         } 
     };
     callFunction();
@@ -83,24 +88,34 @@ const ListUserScreen = (props) => {
             </TableRow>
           </TableHead>
           <TableBody>
-            {usersList.map((user) => (
-              <TableRow
-                key={user.uid}
-                sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
-              >
-                <TableCell align="left">{user?.name}</TableCell>
-                <TableCell align="center">{user?.email}</TableCell>
-                <TableCell align="center">
-                  {user?.role === 1 ? "Administrador" :
-                  user?.role === 2 ? "Triador" :
-                  user?.role === 3 ? "Médico" :
-                  "Desconhecido"}
-                </TableCell>
-                <TableCell align="center">
-                  <Delete style={{ cursor: "pointer" }} onClick={e => deleteUsers(e, user?.id)} />
-                </TableCell>
+            {
+            isFetching ? (
+              <tr>
+                  <TableCell><Skeleton height={20} /></TableCell>     
+                  <TableCell><Skeleton height={20} /></TableCell>
+                  <TableCell><Skeleton height={20} /></TableCell>
+                  <TableCell><Skeleton height={20} /></TableCell>
+              </tr>
+            ) : (usersList.map((user) =>
+              (
+                <TableRow
+                  key={user.uid}
+                  sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
+                >
+                  <TableCell align="left">{user?.name}</TableCell>
+                  <TableCell align="center">{user?.email}</TableCell>
+                  <TableCell align="center">
+                    {user?.role === 1 ? "Administrador" :
+                    user?.role === 2 ? "Triador" :
+                    user?.role === 3 ? "Médico" :
+                    "Desconhecido"}
+                  </TableCell>
+                  <TableCell align="center">
+                    <Delete style={{ cursor: "pointer" }} onClick={e => deleteUsers(e, user?.id)} />
+                  </TableCell>
 
-              </TableRow>
+                </TableRow>
+              )
             ))}
           </TableBody>
         </Table>
