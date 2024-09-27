@@ -5,98 +5,12 @@ import MaskDate from "../../../../components/Mask/maskdate";
 import styles from "../../../../styles";
 import { Column, Padding } from "../../../../styles/style";
 
-import * as Yup from "yup";
 
 const useStyles = makeStyles(styles);
 const FormConsulta = ({ values, handleChange }) => {
     const classes = useStyles();
 
-    const validationSchema = Yup.object().shape({
-        nomeMedico: Yup.string().required("Campo obrigatório"),
-        crmMedico: Yup.string().required("Campo obrigatório"),
-        dataConsulta: Yup.string().required("Campo obrigatório"),
-        jaRealizouConsultaAntes: Yup.string().required("Campo obrigatório"),
-        refracaoEsfericoOlhoDireito: Yup.string().required("Campo obrigatório"),
-        refracaoCilindricoOlhoDireito: Yup.string().required("Campo obrigatório"),
-        refracaoEixoOlhoDireito: Yup.string().required("Campo obrigatório"),
-        refracaoEquivalenteEsfericoOlhoDireito: Yup.string().required("Campo obrigatório"),
-        refracaoDpOlhoDireito: Yup.string().required("Campo obrigatório"),
-        refracaoEsfericoOlhoEsquerdo: Yup.string().required("Campo obrigatório"),
-        refracaoCilindricoOlhoEsquerdo: Yup.string().required("Campo obrigatório"),
-        refracaoEixoOlhoEsquerdo: Yup.string().required("Campo obrigatório"),
-        refracaoEquivalenteEsfericoOlhoEsquerdo: Yup.string().required("Campo obrigatório"),
-        refracaoDpOlhoEsquerdo: Yup.string().required("Campo obrigatório"),
-        //anamnese: Yup.string().required("Campo obrigatório"),
-        refracaoEstaticaEsfericoOlhoDireito: Yup.string().required("Campo obrigatório"),
-        refracaoEstaticaCilindricoOlhoDireito: Yup.string().required("Campo obrigatório"),
-        refracaoEstaticaEixoOlhoDireito: Yup.string().required("Campo obrigatório"),
-        refracaoEstaticaAcuidadeVisualOlhoDireito: Yup.string().required("Campo obrigatório"),
-        refracaoEstaticaEsfericoOlhoEsquerdo: Yup.string().required("Campo obrigatório"),
-        refracaoEstaticaCilindricoOlhoEsquerdo: Yup.string().required("Campo obrigatório"),
-        refracaoEstaticaEixoOlhoEsquerdo: Yup.string().required("Campo obrigatório"),
-        refracaoEstaticaAcuidadeVisualOlhoEsquerdo: Yup.string().required("Campo obrigatório"),
-        biomicroscopiaOd: Yup.string().required("Campo obrigatório"),
-        biomicroscopiaOs: Yup.string().required("Campo obrigatório"),
-        fundoscopiaOd: Yup.string().required("Campo obrigatório"),
-        fundoscopiaOs: Yup.string().required("Campo obrigatório"),
-        motilidadeOcular: Yup.string().required("Campo obrigatório"),
-        diagnostico: Yup.string().required("Campo obrigatório"),
-        conduta: Yup.string().required("Campo obrigatório"),
-        precisaOculos: Yup.string().required("Campo obrigatório"),
-        proximaConsulta: Yup.string().required("Campo obrigatório"),
-    });
-        
-    const initialValues = {
-        nomeMedico: "",
-        crmMedico: "",
-        dataConsulta: "",
-        jaRealizouConsultaAntes: "",
-        refracaoEsfericoOlhoDireito: "",
-        refracaoCilindricoOlhoDireito: "",
-        refracaoEixoOlhoDireito: "",
-        refracaoEquivalenteEsfericoOlhoDireito: "",
-        refracaoDpOlhoDireito: "",
-        refracaoEsfericoOlhoEsquerdo: "",
-        refracaoCilindricoOlhoEsquerdo: "",
-        refracaoEixoOlhoEsquerdo: "",
-        refracaoEquivalenteEsfericoOlhoEsquerdo: "",
-        refracaoDpOlhoEsquerdo: "",
-        anamnese: "",
-        refracaoEstaticaEsfericoOlhoDireito: "",
-        refracaoEstaticaCilindricoOlhoDireito: "",
-        refracaoEstaticaEixoOlhoDireito: "",
-        refracaoEstaticaAcuidadeVisualOlhoDireito: "",
-        refracaoEstaticaEsfericoOlhoEsquerdo: "",
-        refracaoEstaticaCilindricoOlhoEsquerdo: "",
-        refracaoEstaticaEixoOlhoEsquerdo: "",
-        refracaoEstaticaAcuidadeVisualOlhoEsquerdo: "",
-        biomicroscopiaOd: "",
-        biomicroscopiaOs: "",
-        fundoscopiaOd: "",
-        fundoscopiaOs: "",
-        motilidadeOcular: "",
-        diagnostico: "",
-        conduta: "",
-        precisaOculos: "",
-        acompanhamento: {
-            ambliopia: false,
-            retinoblastoma: false,
-            catarataCongenita: false,
-            obstrucaoViasLacrimais: false,
-            estrabismo: false,
-            glaucomaCongenito: false,
-            uveites: false,
-            nistagmo: false,
-            miopiaProgressiva: false,
-            ectasiasCornea: false,
-            alergiasConjuntivitesCalazio: false,
-            baixaVisaoCentral: false
-        },
-        proximaConsulta: "",
-        observationConsulta: "",
-        consultaCompleted: false
-    };
-
+    //TODO: Fazer o salvar em abas/steps e não em um formulário único
     //TODO: Adicionar validação, formik e yup
 
     return (
