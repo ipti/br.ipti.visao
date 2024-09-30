@@ -3,6 +3,7 @@ import { makeStyles } from "@material-ui/core/styles";
 import { FormControlLabel, Grid, Radio, RadioGroup } from "@mui/material";
 import { Checkbox, FormGroup } from "@mui/material";
 import { Padding } from "../../../../styles/style";
+import { ButtonPurple } from "../../../../components/Buttons";
 
 import React from "react";
 import styles from "../../../../styles";
@@ -122,14 +123,14 @@ const FormOphthalmologicalPage = ({ values, handleChange }) => {
       <Grid container>
         <Grid item style={{ width: "100%" }} md={6}>
           <p className={classes.label}>Observações</p>
-            <TextareaAutosize
-              className={classes.inputStudent}
-              style={{ width: "100%", height: "128px", resize: "vertical" }}
-              name="observation"
-              onChange={handleChange}
-              value={values.observation}
-              variant="outlined"
-            />
+          <TextareaAutosize
+            className={classes.inputStudent}
+            style={{ width: "100%", height: "128px", resize: "vertical" }}
+            name="observation"
+            onChange={handleChange}
+            value={values.observation}
+            variant="outlined"
+          />
         </Grid>
       </Grid>
 
@@ -145,6 +146,17 @@ const FormOphthalmologicalPage = ({ values, handleChange }) => {
             label="Considerar triagem como concluída" />
         </FormGroup>
       </Grid>
+      
+      <Padding padding="16px" />
+      <Grid item style={{ width: "100%" }} md={3}>
+        <ButtonPurple
+          className="t-button-primary"
+          title="Salvar"
+          type="submit"
+        />
+      </Grid>
+      <Padding padding="16px" />
+
     </>
   );
 };

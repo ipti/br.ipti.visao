@@ -153,6 +153,15 @@ const FormReceita = ({ values, handleChange }) => {
             </Grid>
             <Padding padding="16px" />
 
+            <Grid item style={{ width: "100%" }} md={3}>
+                <ButtonPurple
+                    className="t-button-primary"
+                    title="Salvar"
+                    type="submit"
+                />
+            </Grid>
+            <Padding padding="16px" />
+
         </>
     )
 }

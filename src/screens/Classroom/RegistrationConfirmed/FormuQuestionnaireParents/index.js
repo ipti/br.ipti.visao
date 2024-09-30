@@ -8,6 +8,7 @@ import styles from "../../../../styles";
 
 import styleBase from "../../../../styles";
 import { Padding } from "../../../../styles/style";
+import { ButtonPurple } from "../../../../components/Buttons";
 
 const useStyles = makeStyles(styles);
 
@@ -230,6 +231,15 @@ const FormQuestionnaireParents = ({ values, handleChange }) => {
                         label="Questionário dos pais concluído" />
                 </FormGroup>
             </Grid>
+            <Padding padding="16px" />
+            <Grid item style={{ width: "100%" }} md={3}>
+                <ButtonPurple
+                    className="t-button-primary"
+                    title="Salvar"
+                    type="submit"
+                />
+            </Grid>
+            <Padding padding="16px" />
 
         </>
     );

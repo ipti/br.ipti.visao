@@ -60,7 +60,7 @@ const Home = props => {
                 />
               </Grid>
               <Padding padding="16px" />
-              <TabsRegister setFieldValue={setFieldValue} values={values} handleChange={handleChange} />
+              <TabsRegister setFieldValue={setFieldValue} values={values} handleChange={handleChange}/>
             </Form>
           )
         }}
