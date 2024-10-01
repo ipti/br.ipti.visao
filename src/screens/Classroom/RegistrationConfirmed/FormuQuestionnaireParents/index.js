@@ -41,7 +41,7 @@ const FormQuestionnaireParents = ({ values, handleChange }) => {
                     <FormControlLabel control={<Checkbox name="filhossintomas.nenhumaOpcao" onChange={handleChange} defaultChecked={values.filhossintomas.nenhumaOpcao} value={values.filhossintomas.nenhumaOpcao} />} label="Nenhuma das opções" />
                 </FormGroup>
             </Grid>
-            <Padding padding="16px" />
+            <Padding padding="8px" />
             <Grid
                 className={`${classes.contentMain}`}
                 container
@@ -223,11 +223,11 @@ const FormQuestionnaireParents = ({ values, handleChange }) => {
             <Grid item style={{ width: "100%" }} md={12}>
                 <p className={classes.label}>Considerar formulário como concluído?</p>
                 <FormGroup>
-                    <FormControlLabel control={<Checkbox 
-                        name="questionarioPaisCompleted" 
-                        defaultChecked={values.questionarioPaisCompleted} 
-                        onChange={handleChange} 
-                        value={values.questionarioPaisCompleted} />} 
+                    <FormControlLabel control={<Checkbox
+                        name="questionarioPaisCompleted"
+                        defaultChecked={values.questionarioPaisCompleted}
+                        onChange={handleChange}
+                        value={values.questionarioPaisCompleted} />}
                         label="Questionário dos pais concluído" />
                 </FormGroup>
             </Grid>

@@ -20,14 +20,101 @@ import { Column, Padding, Row } from "../../../styles/style";
 import styles from "../styles";
 import TabsRegister from "./TabBar";
 
+import * as Yup from "yup";
+
 const useStyles = makeStyles(styles);
 
 const Home = props => {
+
   const classes = useStyles();
-
   const history = useHistory()
+  const { oneRegistration, handleUpdate, initialValues, points, activeIndex, setActiveIndex } = useContext(FormRegistrationContext)
 
-  const { oneRegistration, handleUpdate, initialValues, points } = useContext(FormRegistrationContext)
+  const validationSchemaPerson = Yup.object().shape({
+    name: Yup.string().required("Campo obrigatório"),
+    sex: Yup.string().required("Campo obrigatório"),
+    colorRace: Yup.string().required("Campo obrigatório"),
+    birthday: Yup.string().required("Campo obrigatório"),
+    cpf: Yup.string().required("Campo obrigatório"),
+    zone: Yup.string().required("Campo obrigatório"),
+  });
+
+  const validationSchemaQuestionario = Yup.object().shape({
+    filhoOculos: Yup.string().required("Campo obrigatório"),
+    horasUsoAparelhosEletronicos: Yup.string().required("Campo obrigatório"),
+    horasAtividadesAoArLivre: Yup.string().required("Campo obrigatório"),
+  });
+
+  const validationSchemaTriagem = Yup.object().shape({
+    acuidadeTriagemDireito: Yup.string().required("Campo obrigatório"),
+    acuidadeTriagemEsquerdo: Yup.string().required("Campo obrigatório"),
+    testCover: Yup.string().required("Campo obrigatório"),
+    testMovimentoOcular: Yup.string().required("Campo obrigatório"),
+    testManchaBranca: Yup.string().required("Campo obrigatório"),
+  });
+
+  const validationSchemaConsulta = Yup.object().shape({
+    nomeMedico: Yup.string().required("Campo obrigatório"),
+    crmMedico: Yup.string().required("Campo obrigatório"),
+    dataConsulta: Yup.string().required("Campo obrigatório"),
+    jaRealizouConsultaAntes: Yup.string().required("Campo obrigatório"),
+    refracaoEsfericoOlhoDireito: Yup.string().required("Campo obrigatório"),
+    refracaoCilindricoOlhoDireito: Yup.string().required("Campo obrigatório"),
+    refracaoEixoOlhoDireito: Yup.string().required("Campo obrigatório"),
+    refracaoEquivalenteEsfericoOlhoDireito: Yup.string().required("Campo obrigatório"),
+    refracaoDpOlhoDireito: Yup.string().required("Campo obrigatório"),
+    refracaoEsfericoOlhoEsquerdo: Yup.string().required("Campo obrigatório"),
+    refracaoCilindricoOlhoEsquerdo: Yup.string().required("Campo obrigatório"),
+    refracaoEixoOlhoEsquerdo: Yup.string().required("Campo obrigatório"),
+    refracaoEquivalenteEsfericoOlhoEsquerdo: Yup.string().required("Campo obrigatório"),
+    refracaoDpOlhoEsquerdo: Yup.string().required("Campo obrigatório"),
+    //anamnese: Yup.string().required("Campo obrigatório"),
+    refracaoEstaticaEsfericoOlhoDireito: Yup.string().required("Campo obrigatório"),
+    refracaoEstaticaCilindricoOlhoDireito: Yup.string().required("Campo obrigatório"),
+    refracaoEstaticaEixoOlhoDireito: Yup.string().required("Campo obrigatório"),
+    refracaoEstaticaAcuidadeVisualOlhoDireito: Yup.string().required("Campo obrigatório"),
+    refracaoEstaticaEsfericoOlhoEsquerdo: Yup.string().required("Campo obrigatório"),
+    refracaoEstaticaCilindricoOlhoEsquerdo: Yup.string().required("Campo obrigatório"),
+    refracaoEstaticaEixoOlhoEsquerdo: Yup.string().required("Campo obrigatório"),
+    refracaoEstaticaAcuidadeVisualOlhoEsquerdo: Yup.string().required("Campo obrigatório"),
+    biomicroscopiaOd: Yup.string().required("Campo obrigatório"),
+    biomicroscopiaOs: Yup.string().required("Campo obrigatório"),
+    fundoscopiaOd: Yup.string().required("Campo obrigatório"),
+    fundoscopiaOs: Yup.string().required("Campo obrigatório"),
+    motilidadeOcular: Yup.string().required("Campo obrigatório"),
+    diagnostico: Yup.string().required("Campo obrigatório"),
+    conduta: Yup.string().required("Campo obrigatório"),
+    precisaOculos: Yup.string().required("Campo obrigatório"),
+    proximaConsulta: Yup.string().required("Campo obrigatório"),
+  });
+
+  const validationSchemaReceita = Yup.object().shape({
+    receitaEsfericoOlhoDireito: Yup.string().required("Campo obrigatório"),
+    receitaCilindricoOlhoDireito: Yup.string().required("Campo obrigatório"),
+    receitaEixoOlhoDireito: Yup.string().required("Campo obrigatório"),
+    receitaDpOlhoDireito: Yup.string().required("Campo obrigatório"),
+    receitaEsfericoOlhoEsquerdo: Yup.string().required("Campo obrigatório"),
+    receitaCilindricoOlhoEsquerdo: Yup.string().required("Campo obrigatório"),
+    receitaEixoOlhoEsquerdo: Yup.string().required("Campo obrigatório"),
+    receitaDpOlhoEsquerdo: Yup.string().required("Campo obrigatório"),
+  });
+
+  const validationSchemaOculos = Yup.object().shape({
+    dataEntregaOculos: Yup.string().required("Campo obrigatório"),
+    responsavelEntregaOculos: Yup.string().required("Campo obrigatório"),
+  });
+
+  const validationSchemas = {
+    0: validationSchemaPerson,
+    1: validationSchemaQuestionario,
+    2: validationSchemaTriagem,
+    3: validationSchemaConsulta,
+    4: validationSchemaReceita,
+    5: validationSchemaOculos,
+  };
+
+
+
   return (
     <>
       <ArrowBack onClick={() => { history.goBack() }} style={{ cursor: "pointer" }} />
@@ -44,27 +131,34 @@ const Home = props => {
         }</h4>
       </div>
       <Padding padding="16px" />
-      {oneRegistration ? <Formik
-        initialValues={initialValues}
-        onSubmit={values => {
-          handleUpdate(values)
-        }}>
-        {({ values, handleChange, handleSubmit, setFieldValue }) => {
-          return (
-            <Form onSubmit={handleSubmit}>
-              <Grid item style={{ width: "100%" }} md={3}>
-                <ButtonPurple
-                  className="t-button-primary"
-                  title="Salvar"
-                  type="submit"
-                />
-              </Grid>
-              <Padding padding="16px" />
-              <TabsRegister setFieldValue={setFieldValue} values={values} handleChange={handleChange}/>
-            </Form>
-          )
-        }}
-      </Formik> :
+      {oneRegistration ?
+        <Formik
+          initialValues={initialValues}
+          validationSchema={validationSchemas[activeIndex]}
+          validateOnChange={true}
+          onSubmit={values => {
+            handleUpdate(values)
+          }}>
+
+          {({ values, handleChange, handleSubmit, setFieldValue }) => {
+            return (
+              <Form onSubmit={handleSubmit}>
+                <Grid item style={{ width: "100%" }} md={3}>
+                  <ButtonPurple
+                    className="t-button-primary"
+                    title="Salvar"
+                    type="submit"
+                  />
+                </Grid>
+                <Padding padding="16px" />
+
+                <TabsRegister setFieldValue={setFieldValue} values={values} handleChange={handleChange} />
+
+              </Form>
+            )
+          }}
+
+        </Formik> :
         <Column id="center">
           <Row id="center">
             <CircularProgress />
@@ -73,6 +167,7 @@ const Home = props => {
       }
     </>
   );
+
 };
 
 export default Home;

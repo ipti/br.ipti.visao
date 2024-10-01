@@ -11,6 +11,9 @@ const FormRegistrationState = () => {
 
   const [oneRegistration, setOneRegistration] = useState();
 
+  const [activeIndex, setActiveIndex] = useState(0);
+
+
   useEffect(() => {
     fetchOneRegistration(idRegistration)
       .then((testDataList) => {
@@ -280,10 +283,10 @@ const FormRegistrationState = () => {
     return count;
   }
 
-
+  
 
   return {
-    initialValues, oneRegistration, handleUpdate, points
+    initialValues, oneRegistration, handleUpdate, points,activeIndex, setActiveIndex
   }
 }
 
