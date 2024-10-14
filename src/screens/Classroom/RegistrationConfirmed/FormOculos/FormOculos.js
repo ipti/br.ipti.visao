@@ -3,6 +3,7 @@ import { Checkbox, FormControlLabel, FormGroup, Grid, TextField } from "@mui/mat
 import React, { useState, useEffect } from 'react';
 import styles from "../../../../styles";
 import { Column, Padding } from "../../../../styles/style";
+import { ButtonPurple } from "../../../../components/Buttons";
 
 import MaskDate from "../../../../components/Mask/maskdate";
 const useStyles = makeStyles(styles);
@@ -63,6 +64,16 @@ const FormOculos = ({ values, handleChange }) => {
                     label="Óculos entregue" />
                 </FormGroup>
             </Grid>
+            
+            <Padding padding="16px" />
+            <Grid item style={{ width: "100%" }} md={3}>
+                <ButtonPurple
+                    className="t-button-primary"
+                    title="Salvar"
+                    type="submit"
+                />
+            </Grid>
+            <Padding padding="16px" />
 
         </>
     )

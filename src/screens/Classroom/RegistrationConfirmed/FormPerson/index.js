@@ -17,6 +17,7 @@ import styles from "../../../../styles";
 import styleBase from "../../../../styles";
 import { Column, Padding } from "../../../../styles/style";
 import MaskDate from "../../../../components/Mask/maskdate";
+import { ButtonPurple } from "../../../../components/Buttons";
 //import color from "../../../../styles/colors";
 
 const useStyles = makeStyles(styles);
@@ -227,6 +228,15 @@ const FormPerson = ({ values, handleChange, setFieldValue }) => {
           </FormControl>
         </Grid>
       </Grid>
+      <Padding padding="16px" />
+      <Grid item style={{ width: "100%" }} md={3}>
+        <ButtonPurple
+          className="t-button-primary"
+          title="Salvar"
+          type="submit"
+        />
+      </Grid>
+      <Padding padding="16px" />
     </>
   );
 };

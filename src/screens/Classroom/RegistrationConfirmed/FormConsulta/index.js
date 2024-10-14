@@ -4,14 +4,20 @@ import React from "react";
 import MaskDate from "../../../../components/Mask/maskdate";
 import styles from "../../../../styles";
 import { Column, Padding } from "../../../../styles/style";
+import { ButtonPurple } from "../../../../components/Buttons";
+
 
 const useStyles = makeStyles(styles);
 const FormConsulta = ({ values, handleChange }) => {
     const classes = useStyles();
 
+    //TODO: Adicionar validação, formik e yup
+
+
+
     return (
         <>
-        
+
             <Grid container spacing={2}>
                 <Grid item style={{ width: "100%" }} md={6}>
                     <p className={classes.label}>Nome do médico</p>
@@ -45,19 +51,19 @@ const FormConsulta = ({ values, handleChange }) => {
 
             <Padding padding="16px" />
             <h2> <strong> Histórico de Consulta</strong> </h2>
-        
+
             <Grid item style={{ width: "100%" }} md={12}>
                 <p className={classes.label}>Já realizou alguma consulta oftalmológica na vida?</p>
                 <RadioGroup
-                value={values.jaRealizouConsultaAntes}
-                name="jaRealizouConsultaAntes"
-                onChange={handleChange}
+                    value={values.jaRealizouConsultaAntes}
+                    name="jaRealizouConsultaAntes"
+                    onChange={handleChange}
                 >
                     <FormControlLabel control={<Radio />} value={"Sim"} label="Sim" />
                     <FormControlLabel control={<Radio />} value={"Não"} label="Não" />
                 </RadioGroup>
             </Grid>
-            
+
 
             <Padding padding="16px" />
             <h2>
@@ -161,13 +167,13 @@ const FormConsulta = ({ values, handleChange }) => {
                 <p className={classes.label}>Anamnese</p>
                 <Column>
                     <TextareaAutosize
-                            className={classes.inputStudent}
-                            style={{ width: "100%", height: "128px", resize: "vertical" }}
-                            name="anamnese"
-                            onChange={handleChange}
-                            value={values.anamnese}
-                            variant="outlined"
-                        />
+                        className={classes.inputStudent}
+                        style={{ width: "100%", height: "128px", resize: "vertical" }}
+                        name="anamnese"
+                        onChange={handleChange}
+                        value={values.anamnese}
+                        variant="outlined"
+                    />
                 </Column>
             </Grid>
             <Padding padding="16px" />
@@ -293,9 +299,9 @@ const FormConsulta = ({ values, handleChange }) => {
             <Grid item style={{ width: "100%" }} md={12}>
                 <p className={classes.label}>Precisa de óculos</p>
                 <RadioGroup
-                value={values.precisaOculos}
-                name="precisaOculos"
-                onChange={handleChange}
+                    value={values.precisaOculos}
+                    name="precisaOculos"
+                    onChange={handleChange}
                 >
                     <FormControlLabel control={<Radio />} value={"Sim"} label="Sim" />
                     <FormControlLabel control={<Radio />} value={"Não"} label="Não" />
@@ -348,18 +354,28 @@ const FormConsulta = ({ values, handleChange }) => {
             </Grid>
 
             <Padding padding="8px" />
-            
+
             <Grid item style={{ width: "100%" }} md={12}>
                 <p className={classes.label}>Considerar formulário como concluído?</p>
                 <FormGroup>
-                    <FormControlLabel control={<Checkbox 
-                    name="consultaCompleted" 
-                    defaultChecked={values.consultaCompleted} 
-                    onChange={handleChange} 
-                    value={values.consultaCompleted} />}     
-                    label="Considerar consulta como concluída" />
+                    <FormControlLabel control={<Checkbox
+                        name="consultaCompleted"
+                        defaultChecked={values.consultaCompleted}
+                        onChange={handleChange}
+                        value={values.consultaCompleted} />}
+                        label="Considerar consulta como concluída" />
                 </FormGroup>
             </Grid>
+            
+            <Padding padding="16px" />
+            <Grid item style={{ width: "100%" }} md={3}>
+                <ButtonPurple
+                    className="t-button-primary"
+                    title="Salvar"
+                    type="submit"
+                />
+            </Grid>
+            <Padding padding="16px" />
         </>
 
     )
