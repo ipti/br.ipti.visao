@@ -319,7 +319,7 @@ const StepOne = () => {
                     component="fieldset"
                     className={classes.formControl}
                     style={{ width: "100%" }}
-                  > 
+                  >
                     <FormLabel component="legend">Cor de Raça *</FormLabel>
                     <Select
                       //styles={customStyles}

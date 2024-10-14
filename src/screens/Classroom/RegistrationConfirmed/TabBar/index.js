@@ -8,10 +8,16 @@ import FormConsulta from '../FormConsulta';
 import FormReceita from '../FormReceita';
 import FormOculos from '../FormOculos/FormOculos';
 
-export default function TabsRegister({ values, handleChange, setFieldValue }) {
+import { useContext } from "react";
+import { FormRegistrationContext } from '../../../../context/Classroom/FormOphthalmological/context';
+
+
+export default function TabsRegister({ values, handleChange, setFieldValue}) {
+  const { activeIndex, setActiveIndex } = useContext(FormRegistrationContext)
+
   return (
     <div className="card">
-      <TabView>
+      <TabView activeIndex={activeIndex} onTabChange={(e) => setActiveIndex(e.index)}>
         <TabPanel pt={{
           inkbar: { style: { backgroundColor: "black" } },
           header: { style: { border: "transparent" } }
@@ -30,8 +36,8 @@ export default function TabsRegister({ values, handleChange, setFieldValue }) {
         <TabPanel header="Receita">
           <FormReceita values={values} handleChange={handleChange} />
         </TabPanel>
-        <TabPanel header="Entrega do Óculos">
-          <FormOculos values={values} handleChange={handleChange} />
+        <TabPanel  header="Entrega do Óculos">
+          <FormOculos  values={values} handleChange={handleChange} />
         </TabPanel>
       </TabView>
     </div>
