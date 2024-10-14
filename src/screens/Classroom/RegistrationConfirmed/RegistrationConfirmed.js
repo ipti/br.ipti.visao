@@ -28,7 +28,7 @@ const Home = props => {
 
   const classes = useStyles();
   const history = useHistory()
-  const { oneRegistration, handleUpdate, initialValues, points, activeIndex, setActiveIndex } = useContext(FormRegistrationContext)
+  const { oneRegistration, handleUpdate, initialValues, points, activeIndex } = useContext(FormRegistrationContext)
 
   const validationSchemaPerson = Yup.object().shape({
     name: Yup.string().required("Campo obrigatório"),

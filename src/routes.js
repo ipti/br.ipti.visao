@@ -1,7 +1,6 @@
 import React, { Suspense, lazy } from "react";
 import { HashRouter, Redirect, Route, Switch } from "react-router-dom";
-import PdfPrioridade from "./Pdf/PdfPrioridadeStudent";
-import PdfReceita from "./Pdf/PdfReceita";
+
 import MainLayout from "./components/Layouts/MainLayout";
 import NotFoundPage from "./components/Layouts/NotFoundPage";
 import CircularLoading from "./components/Loading/CircularLoading";
@@ -11,14 +10,21 @@ import Login from "./containers/Login";
 import Register from "./containers/Register";
 import FormRegistration from "./containers/Registration/FormRegistration/FormRegistration";
 import { isAuthenticated } from "./services/auth";
-import PdfTodasReceita from "./Pdf/PdfTodasReceitas";
 import UsersScreen from "./screens/Users/ListUsers";
 import CreateUserScreen from "./screens/Users/CreateUser";
 import PrivateRouterProvider from "./context/PrivateRouter/context";
 import CreateRegistration from "./screens/Classroom/CreateRegistration";
 import {Report} from "./containers/Report"
+
+
+// PDFs
+import PdfPrioridade from "./Pdf/PdfPrioridadeStudent";
+import PdfReceita from "./Pdf/PdfReceita";
+import PdfTodasReceita from "./Pdf/PdfTodasReceitas";
+import PdfProntuarioMedico from "./Pdf/PdfProntuarioMedico";
 import PdfRelatorioGeral from "./Pdf/PdfRelatorioGeral";
 import PdfForConsultation from "./Pdf/PdfForConsultation";
+
 
 //const Home = lazy(() => import("./containers/Home"));
 
@@ -74,6 +80,7 @@ const Routes = () => (
 
       <PrivateRoute exact path="/turmas/:id/matricula/:idRegistration" component={RegistrationClassroom} />
       <Route exact path="/turmas/:id/matricula/:idRegistration/receita" component={PdfReceita} />
+      <Route exact path="/turmas/:id/matricula/:idRegistration/prontuarioMedico" component={PdfProntuarioMedico} />
       <PrivateRoute exact path="/turmas/:id" component={ClassroomForm} />
       <PrivateRoute exact path="/turmas/:id/criar-aluno" component={CreateRegistration} />
 

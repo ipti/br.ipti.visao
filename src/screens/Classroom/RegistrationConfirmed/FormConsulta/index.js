@@ -6,17 +6,29 @@ import styles from "../../../../styles";
 import { Column, Padding } from "../../../../styles/style";
 import { ButtonPurple } from "../../../../components/Buttons";
 
+import { useHistory } from "react-router";
+import { useParams } from "react-router-dom";
 
 const useStyles = makeStyles(styles);
 const FormConsulta = ({ values, handleChange }) => {
     const classes = useStyles();
-
+    const history = useHistory()
     //TODO: Adicionar validação, formik e yup
-
+    const { id, idRegistration } = useParams()
 
 
     return (
         <>
+            <Padding padding="8px" />
+            <Grid item style={{ width: "100%" }} md={3}>
+
+                <ButtonPurple
+                    className="t-button-primary"
+                    title="Gerar prontuário"
+                    onClick={ () => history.push(`/turmas/${id}/matricula/${idRegistration}/prontuarioMedico`) }
+                    type="button"
+                />
+            </Grid>
 
             <Grid container spacing={2}>
                 <Grid item style={{ width: "100%" }} md={6}>
@@ -181,19 +193,19 @@ const FormConsulta = ({ values, handleChange }) => {
             <h3>Olho direito</h3>
             <Grid container spacing={2} md={12}>
                 <Grid item style={{ width: "100%" }} md={4}>
-                    <p className={classes.label}>Refração estático Esférico</p>
+                    <p className={classes.label}>Refração Estático Esférico</p>
                     <Column>
                         <TextField className={classes.inputStudent} name="refracaoEstaticaEsfericoOlhoDireito" value={values.refracaoEstaticaEsfericoOlhoDireito} onChange={handleChange} variant="outlined" />
                     </Column>
                 </Grid>
                 <Grid item style={{ width: "100%" }} md={4}>
-                    <p className={classes.label}>Refração estático cilíndrico</p>
+                    <p className={classes.label}>Refração Estático Cilíndrico</p>
                     <Column>
                         <TextField className={classes.inputStudent} name="refracaoEstaticaCilindricoOlhoDireito" value={values.refracaoEstaticaCilindricoOlhoDireito} onChange={handleChange} variant="outlined" />
                     </Column>
                 </Grid>
                 <Grid item style={{ width: "100%" }} md={4}>
-                    <p className={classes.label}>Refração estático eixo</p>
+                    <p className={classes.label}>Refração Estático Eixo</p>
                     <Column>
                         <TextField className={classes.inputStudent} name="refracaoEstaticaEixoOlhoDireito" value={values.refracaoEstaticaEixoOlhoDireito} onChange={handleChange} variant="outlined" />
                     </Column>
@@ -201,7 +213,7 @@ const FormConsulta = ({ values, handleChange }) => {
             </Grid>
             <Grid container spacing={2} md={12}>
                 <Grid item style={{ width: "100%" }} md={4}>
-                    <p className={classes.label}>Refração estático acuidade visual</p>
+                    <p className={classes.label}>Refração Estático Acuidade Visual</p>
                     <Column>
                         <TextField className={classes.inputStudent} name="refracaoEstaticaAcuidadeVisualOlhoDireito" value={values.refracaoEstaticaAcuidadeVisualOlhoDireito} onChange={handleChange} variant="outlined" />
                     </Column>
