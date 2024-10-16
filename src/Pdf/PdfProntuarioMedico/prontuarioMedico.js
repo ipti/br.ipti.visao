@@ -82,13 +82,14 @@ const MyDocument = () => {
                                 <Padding />
                                 <h2 style={{ padding: "0 4px", margin: 0, color: "#000" }}>Data da consulta: {students?.object.dataConsulta}</h2>
                                 <Padding />
-                                <h2 style={{ padding: "0 4px", margin: 0, color: "#000" }}>Médico: {students?.object.nomeMedico}  &nbsp;&nbsp;&nbsp; CRM: {students?.object.crmMedico}</h2>
-                            </Column>
+                                <h2 style={{ padding: "0 4px", margin: 0, color: "#000" }}> CRM: {students?.object.crmMedico} &nbsp;&nbsp;&nbsp; Médico: {students?.object.nomeMedico} &nbsp;&nbsp;&nbsp; Ass.: </h2>
+                            </Column>      
                             <Column id="center">
                                 <Row id="center">
                                     <img style={{ width: "256px", padding: "8px 16px" }} alt="" src={logo} />
                                 </Row>
                             </Column>
+                            
                         </Row>
                     </Column>
 
@@ -137,7 +138,7 @@ const MyDocument = () => {
                         <Padding padding="4px" />
                         <Column style={{ display: 'flex', alignItems: 'flex-start', marginBottom: '10px' }}>
                             <h2 style={{ margin: 0, marginBottom: '2px' }}>Observações encontradas no Spot Vision:</h2>
-                            <div style={{ marginLeft: '10px' }}>
+                            <div>
                                 {students?.object.observacoesSpotVision ? (
                                     (() => {
                                         const observacoes = students.object.observacoesSpotVision;
@@ -171,8 +172,8 @@ const MyDocument = () => {
 
                         <Padding padding="4px" />
                         {students?.object.anamnese && (
-                            <div style={{ display: 'flex', alignItems: 'flex-start', marginBottom: '10px' }}>
-                                <h2 style={{ margin: 0, marginRight: '10px' }}>Anamnese:</h2>
+                            <div style={{ marginBottom: '10px' }}>
+                                <h2 style={{ margin: 0, marginBottom: '4px' }}>Anamnese:</h2>
                                 <p style={{ margin: 0 }}>{students.object.anamnese}</p>
                             </div>
                         )}
@@ -302,7 +303,7 @@ const MyDocument = () => {
 
                         <Column style={{ display: 'flex', alignItems: 'flex-start', marginBottom: '10px' }}>
                             <h2 style={{ margin: 0, padding: 0 }}>Justificativa para acompanhamento:</h2>
-                            <div style={{ marginLeft: '10px', padding: 0 }}>
+                            <div style={{ padding: 0 }}>
                                 {students?.object.acompanhamento ? (
                                     (() => {
                                         const acompanhamento = students.object.acompanhamento;
@@ -337,14 +338,15 @@ const MyDocument = () => {
                             </div>
                         </Column>
 
-                        <div className='oculos-alert' style={{  display: 'flex', alignItems: 'center',}}>
+                        <div className='oculos-alert' style={{ display: 'flex', alignItems: 'center', }}>
                             <h2 >Indicação para próxima consulta: </h2> <p>&nbsp;&nbsp;{students?.object.proximaConsulta}</p>
                         </div>
 
+
                         {students?.object.observationConsulta && (
                             <div>
-                                <h2 >Observações:</h2>
-                                <p>{students?.object.observationConsulta}</p>
+                                <h2 style={{ margin: 0, padding: 0, marginBottom: '4px' }}>Observações:</h2>
+                                <p style={{ margin: 0, padding: 0 }}>{students?.object.observationConsulta}</p>
                             </div>
                         )}
 
