@@ -179,7 +179,7 @@ const CreateRegistration = () => {
     const props = CreateRegistrationState();
     return (
         <div>
-            <h1>Criar aluno</h1>
+            <h1>Criar Aluno</h1>
             <Formik
                 initialValues={props.initialValues}
                 onSubmit={values => { handleSubmitStudent(values, history, `${"/turmas/" + props.id}`) }}

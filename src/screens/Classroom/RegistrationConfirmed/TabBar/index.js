@@ -12,7 +12,7 @@ import { useContext } from "react";
 import { FormRegistrationContext } from '../../../../context/Classroom/FormOphthalmological/context';
 
 
-export default function TabsRegister({ values, handleChange, setFieldValue}) {
+export default function TabsRegister({ values, handleChange, setFieldValue, errors}) {
   const { activeIndex, setActiveIndex } = useContext(FormRegistrationContext)
 
   return (
@@ -31,7 +31,7 @@ export default function TabsRegister({ values, handleChange, setFieldValue}) {
           <FormOphthalmologicalPage values={values} handleChange={handleChange} />
         </TabPanel>
         <TabPanel header="Consulta">
-          <FormConsulta values={values} handleChange={handleChange} />
+          <FormConsulta values={values} handleChange={handleChange} errors={errors} />
         </TabPanel>
         <TabPanel header="Receita">
           <FormReceita values={values} handleChange={handleChange} />

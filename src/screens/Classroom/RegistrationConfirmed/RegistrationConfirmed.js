@@ -24,11 +24,11 @@ import * as Yup from "yup";
 
 const useStyles = makeStyles(styles);
 
-const Home = props => {
-
+const Home = (props) => {
   const classes = useStyles();
-  const history = useHistory()
-  const { oneRegistration, handleUpdate, initialValues, points, activeIndex, setActiveIndex } = useContext(FormRegistrationContext)
+  const history = useHistory();
+  const { oneRegistration, handleUpdate, initialValues, points, activeIndex } =
+    useContext(FormRegistrationContext);
 
   const validationSchemaPerson = Yup.object().shape({
     name: Yup.string().required("Campo obrigatório"),
@@ -61,22 +61,31 @@ const Home = props => {
     refracaoEsfericoOlhoDireito: Yup.string().required("Campo obrigatório"),
     refracaoCilindricoOlhoDireito: Yup.string().required("Campo obrigatório"),
     refracaoEixoOlhoDireito: Yup.string().required("Campo obrigatório"),
-    refracaoEquivalenteEsfericoOlhoDireito: Yup.string().required("Campo obrigatório"),
+    refracaoEquivalenteEsfericoOlhoDireito:
+      Yup.string().required("Campo obrigatório"),
     refracaoDpOlhoDireito: Yup.string().required("Campo obrigatório"),
     refracaoEsfericoOlhoEsquerdo: Yup.string().required("Campo obrigatório"),
     refracaoCilindricoOlhoEsquerdo: Yup.string().required("Campo obrigatório"),
     refracaoEixoOlhoEsquerdo: Yup.string().required("Campo obrigatório"),
-    refracaoEquivalenteEsfericoOlhoEsquerdo: Yup.string().required("Campo obrigatório"),
+    refracaoEquivalenteEsfericoOlhoEsquerdo:
+      Yup.string().required("Campo obrigatório"),
     refracaoDpOlhoEsquerdo: Yup.string().required("Campo obrigatório"),
     //anamnese: Yup.string().required("Campo obrigatório"),
-    refracaoEstaticaEsfericoOlhoDireito: Yup.string().required("Campo obrigatório"),
-    refracaoEstaticaCilindricoOlhoDireito: Yup.string().required("Campo obrigatório"),
+    refracaoEstaticaEsfericoOlhoDireito:
+      Yup.string().required("Campo obrigatório"),
+    refracaoEstaticaCilindricoOlhoDireito:
+      Yup.string().required("Campo obrigatório"),
     refracaoEstaticaEixoOlhoDireito: Yup.string().required("Campo obrigatório"),
-    refracaoEstaticaAcuidadeVisualOlhoDireito: Yup.string().required("Campo obrigatório"),
-    refracaoEstaticaEsfericoOlhoEsquerdo: Yup.string().required("Campo obrigatório"),
-    refracaoEstaticaCilindricoOlhoEsquerdo: Yup.string().required("Campo obrigatório"),
-    refracaoEstaticaEixoOlhoEsquerdo: Yup.string().required("Campo obrigatório"),
-    refracaoEstaticaAcuidadeVisualOlhoEsquerdo: Yup.string().required("Campo obrigatório"),
+    refracaoEstaticaAcuidadeVisualOlhoDireito:
+      Yup.string().required("Campo obrigatório"),
+    refracaoEstaticaEsfericoOlhoEsquerdo:
+      Yup.string().required("Campo obrigatório"),
+    refracaoEstaticaCilindricoOlhoEsquerdo:
+      Yup.string().required("Campo obrigatório"),
+    refracaoEstaticaEixoOlhoEsquerdo:
+      Yup.string().required("Campo obrigatório"),
+    refracaoEstaticaAcuidadeVisualOlhoEsquerdo:
+      Yup.string().required("Campo obrigatório"),
     biomicroscopiaOd: Yup.string().required("Campo obrigatório"),
     biomicroscopiaOs: Yup.string().required("Campo obrigatório"),
     fundoscopiaOd: Yup.string().required("Campo obrigatório"),
@@ -113,34 +122,61 @@ const Home = props => {
     5: validationSchemaOculos,
   };
 
-
-
   return (
     <>
-      <ArrowBack onClick={() => { history.goBack() }} style={{ cursor: "pointer" }} />
+      <ArrowBack
+        onClick={() => {
+          history.goBack();
+        }}
+        style={{ cursor: "pointer" }}
+      />
       <Grid className={classes.boxTitlePagination} container direction="row">
         <h2>Dados do aluno</h2>
       </Grid>
       <h1 style={{ margin: 0, padding: 0 }}>Pontos somados: {points()}</h1>
       <Padding />
-      <div className={classes.priority} style={{
-        background: points() < 5 ? stylesBase.colors.green : (points() >= 5 && points() < 9) ? stylesBase.colors.yellow : points() >= 10 ? stylesBase.colors.red : ""
-      }}>
-        <h4 style={{ padding: "8px", margin: "0" }}>{
-          points() < 5 ? "Prioridade minima" : (points() >= 5 && points() < 9) ? "Prioridade média" : points() >= 10 ? "Prioridade máxima" : ""
-        }</h4>
+      <div
+        className={classes.priority}
+        style={{
+          background:
+            points() < 5
+              ? stylesBase.colors.green
+              : points() >= 5 && points() < 9
+              ? stylesBase.colors.yellow
+              : points() >= 10
+              ? stylesBase.colors.red
+              : "",
+        }}
+      >
+        <h4 style={{ padding: "8px", margin: "0" }}>
+          {points() < 5
+            ? "Prioridade minima"
+            : points() >= 5 && points() < 9
+            ? "Prioridade média"
+            : points() >= 10
+            ? "Prioridade máxima"
+            : ""}
+        </h4>
       </div>
       <Padding padding="16px" />
-      {oneRegistration ?
+      {oneRegistration ? (
         <Formik
           initialValues={initialValues}
           validationSchema={validationSchemas[activeIndex]}
           validateOnChange={true}
-          onSubmit={values => {
-            handleUpdate(values)
-          }}>
-
-          {({ values, handleChange, handleSubmit, setFieldValue }) => {
+          onSubmit={(values) => {
+            handleUpdate(values);
+          }}
+        >
+          {({
+            values,
+            handleChange,
+            handleSubmit,
+            setFieldValue,
+            errors,
+            touched,
+          }) => {
+            console.log("values", errors);
             return (
               <Form onSubmit={handleSubmit}>
                 <Grid item style={{ width: "100%" }} md={3}>
@@ -152,22 +188,26 @@ const Home = props => {
                 </Grid>
                 <Padding padding="16px" />
 
-                <TabsRegister setFieldValue={setFieldValue} values={values} handleChange={handleChange} />
-
+                <TabsRegister
+                  setFieldValue={setFieldValue}
+                  values={values}
+                  handleChange={handleChange}
+                  errors={errors}
+                  touched={touched}
+                />
               </Form>
-            )
+            );
           }}
-
-        </Formik> :
+        </Formik>
+      ) : (
         <Column id="center">
           <Row id="center">
             <CircularProgress />
           </Row>
         </Column>
-      }
+      )}
     </>
   );
-
 };
 
 export default Home;

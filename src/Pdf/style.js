@@ -14,11 +14,11 @@ export const Table = styled.table`
 export const TableHeader = styled.th`
   background-color: #f2f2f2;
   text-align: left;
-  padding: 12px;
+  padding: 10px;
   border-bottom: 1px solid #ddd;
 `;
 
 export const TableData = styled.td`
-  padding: 12px;
+  padding: 10px;
   border-bottom: 1px solid #ddd;
 `;
