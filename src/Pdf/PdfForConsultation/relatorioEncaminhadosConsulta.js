@@ -73,7 +73,7 @@ const MyDocument = () => {
                             </Column>
                             <Column id="center">
                                 <Row id="center">
-                                    <img style={{ width: "256px", padding: "8px 16px" }} alt="" src={logo} />
+                                    <img style={{ width: "256px", padding: "8px 16px" }} alt="Logotipo Lupa" src={logo} />
                                 </Row>
                             </Column>
                         </Row>
