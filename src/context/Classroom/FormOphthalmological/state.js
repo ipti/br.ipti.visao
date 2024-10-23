@@ -147,6 +147,15 @@ const FormRegistrationState = () => {
     proximaConsulta: oneRegistration?.object.proximaConsulta ?? "",
     observationConsulta: oneRegistration?.object.observationConsulta ?? "",
 
+    receitaAntigaEsfericoOlhoDireito: oneRegistration?.object.receitaEsfericoOlhoDireito ?? "",
+    receitaAntigaCilindricoOlhoDireito: oneRegistration?.object.receitaCilindricoOlhoDireito ?? "",
+    receitaAntigaEixoOlhoDireito: oneRegistration?.object.receitaEixoOlhoDireito ?? "",
+    receitaAntigaDpOlhoDireito: oneRegistration?.object.receitaDpOlhoDireito ?? "",
+    receitaAntigaEsfericoOlhoEsquerdo: oneRegistration?.object.receitaEsfericoOlhoEsquerdo ?? "",
+    receitaAntigaCilindricoOlhoEsquerdo: oneRegistration?.object.receitaCilindricoOlhoEsquerdo ?? "",
+    receitaAntigaEixoOlhoEsquerdo: oneRegistration?.object.receitaEixoOlhoEsquerdo ?? "",
+    receitaAntigaDpOlhoEsquerdo: oneRegistration?.object.receitaDpOlhoEsquerdo ?? "",
+
     receitaEsfericoOlhoDireito: oneRegistration?.object.receitaEsfericoOlhoDireito ?? "",
     receitaCilindricoOlhoDireito: oneRegistration?.object.receitaCilindricoOlhoDireito ?? "",
     receitaEixoOlhoDireito: oneRegistration?.object.receitaEixoOlhoDireito ?? "",

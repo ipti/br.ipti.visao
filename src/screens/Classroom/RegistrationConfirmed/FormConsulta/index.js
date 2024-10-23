@@ -20,7 +20,7 @@ import { useParams } from "react-router-dom";
 import { FormHelperText } from "@material-ui/core";
 
 const useStyles = makeStyles(styles);
-const FormConsulta = ({ values, handleChange, errors}) => {
+const FormConsulta = ({ values, handleChange, errors }) => {
   const classes = useStyles();
   const history = useHistory();
   //TODO: Adicionar validação, formik e yup
@@ -41,6 +41,8 @@ const FormConsulta = ({ values, handleChange, errors}) => {
           type="button"
         />
       </Grid>
+      <Padding padding="16px" />
+      <h2>Consulta Oftalmológica</h2>
 
       <Grid container spacing={2}>
         <Grid item style={{ width: "100%" }} md={6}>
@@ -54,7 +56,9 @@ const FormConsulta = ({ values, handleChange, errors}) => {
               error={errors.nomeMedico}
               variant="outlined"
             />
-            {errors.nomeMedico && <FormHelperText>{errors.nomeMedico}</FormHelperText> }
+            {errors.nomeMedico && (
+              <FormHelperText>{errors.nomeMedico}</FormHelperText>
+            )}
           </Column>
         </Grid>
         <Grid item style={{ width: "100%" }} md={6}>
@@ -68,7 +72,9 @@ const FormConsulta = ({ values, handleChange, errors}) => {
               error={errors.crmMedico}
               variant="outlined"
             />
-            {errors.crmMedico && <FormHelperText>{errors.crmMedico}</FormHelperText> }  
+            {errors.crmMedico && (
+              <FormHelperText>{errors.crmMedico}</FormHelperText>
+            )}
           </Column>
         </Grid>
       </Grid>
@@ -90,33 +96,160 @@ const FormConsulta = ({ values, handleChange, errors}) => {
               value={values.dataConsulta}
               variant="outlined"
             />
-            {errors.dataConsulta && <FormHelperText>{errors.dataConsulta}</FormHelperText> }
+            {errors.dataConsulta && (
+              <FormHelperText>{errors.dataConsulta}</FormHelperText>
+            )}
           </Column>
         </Grid>
       </Grid>
 
       <Padding padding="16px" />
-      <h2>
-        {" "}
-        <strong> Histórico de Consulta</strong>{" "}
-      </h2>
 
-      <Grid item style={{ width: "100%" }} md={12}>
-        <p className={classes.label}>
-          Já realizou alguma consulta oftalmológica na vida?
-        </p>
-        <RadioGroup
-          value={values.jaRealizouConsultaAntes}
-          name="jaRealizouConsultaAntes"
-          onChange={handleChange}
+      <div>
+        <h2>
+          {" "}
+          <strong> Histórico de Consulta</strong>{" "}
+        </h2>
+
+        <Grid item style={{ width: "100%" }} md={12}>
+          <p className={classes.label}>
+            Já realizou alguma consulta oftalmológica na vida?
+          </p>
+          <RadioGroup
+            value={values.jaRealizouConsultaAntes}
+            name="jaRealizouConsultaAntes"
+            onChange={handleChange}
             error={errors.jaRealizouConsultaAntes}
-        >
-          <FormControlLabel  error={errors.jaRealizouConsultaAntes} control={<Radio />} value={"Sim"} label="Sim" />
-          <FormControlLabel  error={errors.jaRealizouConsultaAntes} control={<Radio />} value={"Não"} label="Não" />
-        </RadioGroup>
-        {errors.jaRealizouConsultaAntes && <FormHelperText>{errors.jaRealizouConsultaAntes}</FormHelperText> }
+          >
+            <FormControlLabel
+              error={errors.jaRealizouConsultaAntes}
+              control={<Radio />}
+              value={"Sim"}
+              label="Sim"
+            />
+            <FormControlLabel
+              error={errors.jaRealizouConsultaAntes}
+              control={<Radio />}
+              value={"Não"}
+              label="Não"
+            />
+          </RadioGroup>
+          {errors.jaRealizouConsultaAntes && (
+            <FormHelperText>{errors.jaRealizouConsultaAntes}</FormHelperText>
+          )}
+        </Grid>
         
-      </Grid>
+        {values.filhoOculos === "1" && (
+          <div>
+            <h2>Receita do óculos anterior</h2>
+            <h3>Olho direito</h3>
+            <Grid container spacing={2}>
+              <Grid item md={3}>
+                <p className={classes.label}>Esférico</p>
+                <Column>
+                  <TextField
+                    className={classes.inputStudent}
+                    name="receitaAntigaEsfericoOlhoDireito"
+                    value={values.receitaAntigaEsfericoOlhoDireito}
+                    onChange={handleChange}
+                    variant="outlined"
+                  />
+                </Column>
+              </Grid>
+              <Grid item md={3}>
+                <p className={classes.label}>Cilíndrico</p>
+                <Column>
+                  <TextField
+                    className={classes.inputStudent}
+                    name="receitaAntigaCilindricoOlhoDireito"
+                    value={values.receitaAntigaCilindricoOlhoDireito}
+                    onChange={handleChange}
+                    variant="outlined"
+                  />
+                </Column>
+              </Grid>
+              <Grid item md={3}>
+                <p className={classes.label}>Eixo</p>
+                <Column>
+                  <TextField
+                    className={classes.inputStudent}
+                    name="receitaAntigaEixoOlhoDireito"
+                    value={values.receitaAntigaEixoOlhoDireito}
+                    onChange={handleChange}
+                    variant="outlined"
+                  />
+                </Column>
+              </Grid>
+              <Grid item md={3}>
+                <p className={classes.label}>DP</p>
+                <Column>
+                  <TextField
+                    className={classes.inputStudent}
+                    name="receitaAntigaDpOlhoDireito"
+                    value={values.receitaAntigaDpOlhoDireito}
+                    onChange={handleChange}
+                    variant="outlined"
+                  />
+                </Column>
+              </Grid>
+            </Grid>
+
+            <Padding />
+
+            <h3>Olho esquerdo</h3>
+            <Grid container spacing={2}>
+              <Grid item md={3}>
+                <p className={classes.label}>Esférico</p>
+                <Column>
+                  <TextField
+                    className={classes.inputStudent}
+                    name="receitaAntigaEsfericoOlhoDireito"
+                    value={values.receitaAntigaEsfericoOlhoDireito}
+                    onChange={handleChange}
+                    variant="outlined"
+                  />
+                </Column>
+              </Grid>
+              <Grid item md={3}>
+                <p className={classes.label}>Cilíndrico</p>
+                <Column>
+                  <TextField
+                    className={classes.inputStudent}
+                    name="receitaAntigaCilindricoOlhoDireito"
+                    value={values.receitaAntigaCilindricoOlhoDireito}
+                    onChange={handleChange}
+                    variant="outlined"
+                  />
+                </Column>
+              </Grid>
+              <Grid item md={3}>
+                <p className={classes.label}>Eixo</p>
+                <Column>
+                  <TextField
+                    className={classes.inputStudent}
+                    name="receitaAntigaEixoOlhoDireito"
+                    value={values.receitaAntigaEixoOlhoDireito}
+                    onChange={handleChange}
+                    variant="outlined"
+                  />
+                </Column>
+              </Grid>
+              <Grid item md={3}>
+                <p className={classes.label}>DP</p>
+                <Column>
+                  <TextField
+                    className={classes.inputStudent}
+                    name="receitaAntigaDpOlhoDireito"
+                    value={values.receitaAntigaDpOlhoDireito}
+                    onChange={handleChange}
+                    variant="outlined"
+                  />
+                </Column>
+              </Grid>
+            </Grid>
+          </div>
+        )}
+      </div>
 
       <Padding padding="16px" />
       <h2>Escaneamento Visual pelo Spot Vision</h2>
@@ -133,7 +266,11 @@ const FormConsulta = ({ values, handleChange, errors}) => {
               error={errors.refracaoEsfericoOlhoDireito}
               variant="outlined"
             />
-            {errors.refracaoEsfericoOlhoDireito && <FormHelperText>{errors.refracaoEsfericoOlhoDireito}</FormHelperText> }
+            {errors.refracaoEsfericoOlhoDireito && (
+              <FormHelperText>
+                {errors.refracaoEsfericoOlhoDireito}
+              </FormHelperText>
+            )}
           </Column>
         </Grid>
         <Grid item style={{ width: "100%" }} md={4}>
@@ -147,7 +284,11 @@ const FormConsulta = ({ values, handleChange, errors}) => {
               error={errors.refracaoCilindricoOlhoDireito}
               variant="outlined"
             />
-            {errors.refracaoCilindricoOlhoDireito && <FormHelperText>{errors.refracaoCilindricoOlhoDireito}</FormHelperText> }
+            {errors.refracaoCilindricoOlhoDireito && (
+              <FormHelperText>
+                {errors.refracaoCilindricoOlhoDireito}
+              </FormHelperText>
+            )}
           </Column>
         </Grid>
         <Grid item style={{ width: "100%" }} md={4}>
@@ -161,7 +302,9 @@ const FormConsulta = ({ values, handleChange, errors}) => {
               error={errors.refracaoEixoOlhoDireito}
               variant="outlined"
             />
-            {errors.refracaoEixoOlhoDireito && <FormHelperText>{errors.refracaoEixoOlhoDireito}</FormHelperText> }
+            {errors.refracaoEixoOlhoDireito && (
+              <FormHelperText>{errors.refracaoEixoOlhoDireito}</FormHelperText>
+            )}
           </Column>
         </Grid>
       </Grid>
@@ -177,7 +320,11 @@ const FormConsulta = ({ values, handleChange, errors}) => {
               error={errors.refracaoEquivalenteEsfericoOlhoDireito}
               variant="outlined"
             />
-            {errors.refracaoEquivalenteEsfericoOlhoDireito && <FormHelperText>{errors.refracaoEquivalenteEsfericoOlhoDireito}</FormHelperText> }
+            {errors.refracaoEquivalenteEsfericoOlhoDireito && (
+              <FormHelperText>
+                {errors.refracaoEquivalenteEsfericoOlhoDireito}
+              </FormHelperText>
+            )}
           </Column>
         </Grid>
         <Grid item style={{ width: "100%" }} md={4}>
@@ -191,7 +338,9 @@ const FormConsulta = ({ values, handleChange, errors}) => {
               error={errors.refracaoDpOlhoDireito}
               variant="outlined"
             />
-            {errors.refracaoDpOlhoDireito && <FormHelperText>{errors.refracaoDpOlhoDireito}</FormHelperText> }
+            {errors.refracaoDpOlhoDireito && (
+              <FormHelperText>{errors.refracaoDpOlhoDireito}</FormHelperText>
+            )}
           </Column>
         </Grid>
       </Grid>
@@ -208,7 +357,11 @@ const FormConsulta = ({ values, handleChange, errors}) => {
               error={errors.refracaoEsfericoOlhoEsquerdo}
               variant="outlined"
             />
-            {errors.refracaoEsfericoOlhoEsquerdo && <FormHelperText>{errors.refracaoEsfericoOlhoEsquerdo}</FormHelperText> }
+            {errors.refracaoEsfericoOlhoEsquerdo && (
+              <FormHelperText>
+                {errors.refracaoEsfericoOlhoEsquerdo}
+              </FormHelperText>
+            )}
           </Column>
         </Grid>
 
@@ -223,7 +376,11 @@ const FormConsulta = ({ values, handleChange, errors}) => {
               error={errors.refracaoCilindricoOlhoEsquerdo}
               variant="outlined"
             />
-            {errors.refracaoCilindricoOlhoEsquerdo && <FormHelperText>{errors.refracaoCilindricoOlhoEsquerdo}</FormHelperText> }
+            {errors.refracaoCilindricoOlhoEsquerdo && (
+              <FormHelperText>
+                {errors.refracaoCilindricoOlhoEsquerdo}
+              </FormHelperText>
+            )}
           </Column>
         </Grid>
 
@@ -238,7 +395,9 @@ const FormConsulta = ({ values, handleChange, errors}) => {
               error={errors.refracaoEixoOlhoEsquerdo}
               variant="outlined"
             />
-            {errors.refracaoEixoOlhoEsquerdo && <FormHelperText>{errors.refracaoEixoOlhoEsquerdo}</FormHelperText> }
+            {errors.refracaoEixoOlhoEsquerdo && (
+              <FormHelperText>{errors.refracaoEixoOlhoEsquerdo}</FormHelperText>
+            )}
           </Column>
         </Grid>
       </Grid>
@@ -254,7 +413,11 @@ const FormConsulta = ({ values, handleChange, errors}) => {
               error={errors.refracaoEquivalenteEsfericoOlhoEsquerdo}
               variant="outlined"
             />
-            {errors.refracaoEquivalenteEsfericoOlhoEsquerdo && <FormHelperText>{errors.refracaoEquivalenteEsfericoOlhoEsquerdo}</FormHelperText> }
+            {errors.refracaoEquivalenteEsfericoOlhoEsquerdo && (
+              <FormHelperText>
+                {errors.refracaoEquivalenteEsfericoOlhoEsquerdo}
+              </FormHelperText>
+            )}
           </Column>
         </Grid>
         <Grid item style={{ width: "100%" }} md={4}>
@@ -268,7 +431,9 @@ const FormConsulta = ({ values, handleChange, errors}) => {
               error={errors.refracaoDpOlhoEsquerdo}
               variant="outlined"
             />
-            {errors.refracaoDpOlhoEsquerdo && <FormHelperText>{errors.refracaoDpOlhoEsquerdo}</FormHelperText> }
+            {errors.refracaoDpOlhoEsquerdo && (
+              <FormHelperText>{errors.refracaoDpOlhoEsquerdo}</FormHelperText>
+            )}
           </Column>
         </Grid>
       </Grid>
@@ -419,7 +584,11 @@ const FormConsulta = ({ values, handleChange, errors}) => {
               error={errors.refracaoEstaticaEsfericoOlhoDireito}
               variant="outlined"
             />
-            {errors.refracaoEstaticaEsfericoOlhoDireito && <FormHelperText>{errors.refracaoEstaticaEsfericoOlhoDireito}</FormHelperText> }
+            {errors.refracaoEstaticaEsfericoOlhoDireito && (
+              <FormHelperText>
+                {errors.refracaoEstaticaEsfericoOlhoDireito}
+              </FormHelperText>
+            )}
           </Column>
         </Grid>
         <Grid item style={{ width: "100%" }} md={4}>
@@ -433,7 +602,11 @@ const FormConsulta = ({ values, handleChange, errors}) => {
               error={errors.refracaoEstaticaCilindricoOlhoDireito}
               variant="outlined"
             />
-            {errors.refracaoEstaticaCilindricoOlhoDireito && <FormHelperText>{errors.refracaoEstaticaCilindricoOlhoDireito}</FormHelperText> }
+            {errors.refracaoEstaticaCilindricoOlhoDireito && (
+              <FormHelperText>
+                {errors.refracaoEstaticaCilindricoOlhoDireito}
+              </FormHelperText>
+            )}
           </Column>
         </Grid>
         <Grid item style={{ width: "100%" }} md={4}>
@@ -447,7 +620,11 @@ const FormConsulta = ({ values, handleChange, errors}) => {
               error={errors.refracaoEstaticaEixoOlhoDireito}
               variant="outlined"
             />
-            {errors.refracaoEstaticaEixoOlhoDireito && <FormHelperText>{errors.refracaoEstaticaEixoOlhoDireito}</FormHelperText> }
+            {errors.refracaoEstaticaEixoOlhoDireito && (
+              <FormHelperText>
+                {errors.refracaoEstaticaEixoOlhoDireito}
+              </FormHelperText>
+            )}
           </Column>
         </Grid>
       </Grid>
@@ -463,7 +640,11 @@ const FormConsulta = ({ values, handleChange, errors}) => {
               error={errors.refracaoEstaticaAcuidadeVisualOlhoDireito}
               variant="outlined"
             />
-            {errors.refracaoEstaticaAcuidadeVisualOlhoDireito && <FormHelperText>{errors.refracaoEstaticaAcuidadeVisualOlhoDireito}</FormHelperText> }
+            {errors.refracaoEstaticaAcuidadeVisualOlhoDireito && (
+              <FormHelperText>
+                {errors.refracaoEstaticaAcuidadeVisualOlhoDireito}
+              </FormHelperText>
+            )}
           </Column>
         </Grid>
       </Grid>
@@ -480,7 +661,11 @@ const FormConsulta = ({ values, handleChange, errors}) => {
               error={errors.refracaoEstaticaEsfericoOlhoEsquerdo}
               variant="outlined"
             />
-            {errors.refracaoEstaticaEsfericoOlhoEsquerdo && <FormHelperText>{errors.refracaoEstaticaEsfericoOlhoEsquerdo}</FormHelperText> }
+            {errors.refracaoEstaticaEsfericoOlhoEsquerdo && (
+              <FormHelperText>
+                {errors.refracaoEstaticaEsfericoOlhoEsquerdo}
+              </FormHelperText>
+            )}
           </Column>
         </Grid>
         <Grid item style={{ width: "100%" }} md={4}>
@@ -494,7 +679,11 @@ const FormConsulta = ({ values, handleChange, errors}) => {
               error={errors.refracaoEstaticaCilindricoOlhoEsquerdo}
               variant="outlined"
             />
-            {errors.refracaoEstaticaCilindricoOlhoEsquerdo && <FormHelperText>{errors.refracaoEstaticaCilindricoOlhoEsquerdo}</FormHelperText> }
+            {errors.refracaoEstaticaCilindricoOlhoEsquerdo && (
+              <FormHelperText>
+                {errors.refracaoEstaticaCilindricoOlhoEsquerdo}
+              </FormHelperText>
+            )}
           </Column>
         </Grid>
         <Grid item style={{ width: "100%" }} md={4}>
@@ -508,7 +697,11 @@ const FormConsulta = ({ values, handleChange, errors}) => {
               error={errors.refracaoEstaticaEixoOlhoEsquerdo}
               variant="outlined"
             />
-            {errors.refracaoEstaticaEixoOlhoEsquerdo && <FormHelperText>{errors.refracaoEstaticaEixoOlhoEsquerdo}</FormHelperText> }
+            {errors.refracaoEstaticaEixoOlhoEsquerdo && (
+              <FormHelperText>
+                {errors.refracaoEstaticaEixoOlhoEsquerdo}
+              </FormHelperText>
+            )}
           </Column>
         </Grid>
       </Grid>
@@ -524,7 +717,11 @@ const FormConsulta = ({ values, handleChange, errors}) => {
               error={errors.refracaoEstaticaAcuidadeVisualOlhoEsquerdo}
               variant="outlined"
             />
-            {errors.refracaoEstaticaAcuidadeVisualOlhoEsquerdo && <FormHelperText>{errors.refracaoEstaticaAcuidadeVisualOlhoEsquerdo}</FormHelperText> }
+            {errors.refracaoEstaticaAcuidadeVisualOlhoEsquerdo && (
+              <FormHelperText>
+                {errors.refracaoEstaticaAcuidadeVisualOlhoEsquerdo}
+              </FormHelperText>
+            )}
           </Column>
         </Grid>
       </Grid>
@@ -543,7 +740,9 @@ const FormConsulta = ({ values, handleChange, errors}) => {
               error={errors.biomicroscopiaOd}
               variant="outlined"
             />
-            {errors.biomicroscopiaOd && <FormHelperText>{errors.biomicroscopiaOd}</FormHelperText> }
+            {errors.biomicroscopiaOd && (
+              <FormHelperText>{errors.biomicroscopiaOd}</FormHelperText>
+            )}
           </Column>
         </Grid>
         <Grid item style={{ width: "100%" }} md={6}>
@@ -557,7 +756,9 @@ const FormConsulta = ({ values, handleChange, errors}) => {
               error={errors.biomicroscopiaOs}
               variant="outlined"
             />
-            {errors.biomicroscopiaOs && <FormHelperText>{errors.biomicroscopiaOs}</FormHelperText> }
+            {errors.biomicroscopiaOs && (
+              <FormHelperText>{errors.biomicroscopiaOs}</FormHelperText>
+            )}
           </Column>
         </Grid>
       </Grid>
@@ -576,7 +777,9 @@ const FormConsulta = ({ values, handleChange, errors}) => {
               error={errors.fundoscopiaOd}
               variant="outlined"
             />
-            {errors.fundoscopiaOd && <FormHelperText>{errors.fundoscopiaOd}</FormHelperText> }
+            {errors.fundoscopiaOd && (
+              <FormHelperText>{errors.fundoscopiaOd}</FormHelperText>
+            )}
           </Column>
         </Grid>
         <Grid item style={{ width: "100%" }} md={6}>
@@ -590,7 +793,9 @@ const FormConsulta = ({ values, handleChange, errors}) => {
               error={errors.fundoscopiaOs}
               variant="outlined"
             />
-            {errors.fundoscopiaOs && <FormHelperText>{errors.fundoscopiaOs}</FormHelperText> }
+            {errors.fundoscopiaOs && (
+              <FormHelperText>{errors.fundoscopiaOs}</FormHelperText>
+            )}
           </Column>
         </Grid>
       </Grid>
@@ -606,7 +811,9 @@ const FormConsulta = ({ values, handleChange, errors}) => {
             error={errors.motilidadeOcular}
             variant="outlined"
           />
-          {errors.motilidadeOcular && <FormHelperText>{errors.motilidadeOcular}</FormHelperText> }
+          {errors.motilidadeOcular && (
+            <FormHelperText>{errors.motilidadeOcular}</FormHelperText>
+          )}
         </Column>
       </Grid>
       <Padding padding="16px" />
@@ -622,7 +829,9 @@ const FormConsulta = ({ values, handleChange, errors}) => {
             error={errors.diagnostico}
             variant="outlined"
           />
-          {errors.diagnostico && <FormHelperText>{errors.diagnostico}</FormHelperText> }
+          {errors.diagnostico && (
+            <FormHelperText>{errors.diagnostico}</FormHelperText>
+          )}
         </Column>
       </Grid>
       <Padding padding="16px" />
@@ -638,7 +847,7 @@ const FormConsulta = ({ values, handleChange, errors}) => {
             error={errors.conduta}
             variant="outlined"
           />
-          {errors.conduta && <FormHelperText>{errors.conduta}</FormHelperText> }
+          {errors.conduta && <FormHelperText>{errors.conduta}</FormHelperText>}
         </Column>
       </Grid>
       <Padding padding="16px" />
@@ -651,10 +860,22 @@ const FormConsulta = ({ values, handleChange, errors}) => {
           onChange={handleChange}
           error={errors.precisaOculos}
         >
-          <FormControlLabel  error={errors.precisaOculos} control={<Radio />} value={"Sim"} label="Sim" />
-          <FormControlLabel  error={errors.precisaOculos} control={<Radio />} value={"Não"} label="Não" />
+          <FormControlLabel
+            error={errors.precisaOculos}
+            control={<Radio />}
+            value={"Sim"}
+            label="Sim"
+          />
+          <FormControlLabel
+            error={errors.precisaOculos}
+            control={<Radio />}
+            value={"Não"}
+            label="Não"
+          />
         </RadioGroup>
-        {errors.precisaOculos && <FormHelperText>{errors.precisaOculos}</FormHelperText> }
+        {errors.precisaOculos && (
+          <FormHelperText>{errors.precisaOculos}</FormHelperText>
+        )}
       </Grid>
       <Padding padding="16px" />
 
@@ -814,7 +1035,9 @@ const FormConsulta = ({ values, handleChange, errors}) => {
             error={errors.proximaConsulta}
             variant="outlined"
           />
-            {errors.proximaConsulta && <FormHelperText>{errors.proximaConsulta}</FormHelperText> }
+          {errors.proximaConsulta && (
+            <FormHelperText>{errors.proximaConsulta}</FormHelperText>
+          )}
         </Column>
       </Grid>
 
