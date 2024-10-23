@@ -582,6 +582,12 @@ const CreateRegistration = () => {
                 </Grid>
               </Grid>
 
+              {values.filhoOculos === "1" && (
+                <p style={{ color: "red" }} className={classes.label}>
+                  Lembrar de trazer última receita oftalmológica para a consulta
+                </p>
+              )}
+
               <Grid item style={{ width: "100%" }} md={12}>
                 <p className={classes.label}>
                   Seu filho tem ou teve alguma dessas doenças nos olhos?

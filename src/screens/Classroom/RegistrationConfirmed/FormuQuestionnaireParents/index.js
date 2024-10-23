@@ -162,8 +162,15 @@ const FormQuestionnaireParents = ({ values, handleChange }) => {
           </FormControl>
         </Grid>
       </Grid>
+
+      {values.filhoOculos === "1" && (
+        <p style={{ color: "red" }} className={classes.label}>
+          Lembrar de trazer última receita oftalmológica para a consulta
+        </p>
+      )}
+
       <Grid item style={{ width: "100%" }} md={12}>
-        <p className={classes.label}>
+        <p sclassName={classes.label}>
           Seu filho tem ou teve alguma dessas doenças nos olhos?
         </p>
         <FormGroup>
