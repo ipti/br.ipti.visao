@@ -7,6 +7,7 @@ interface StudentReport {
     school: string | undefined;
     classroom: string | undefined;
     student_name: string;
+    birthday: string;
     points: number;
 }
 
@@ -26,6 +27,7 @@ const generateRowReport = async (schools: SchoolData[], classrooms: ClassroomDat
         school: school?.object.name,
         classroom: classroom?.object.name,
         student_name: student.object.name, 
+        birthday: student.object.birthday,
         points: student.object.points,
     };
 
