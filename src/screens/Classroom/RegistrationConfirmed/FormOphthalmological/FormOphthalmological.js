@@ -1,6 +1,11 @@
 import { TextareaAutosize } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
-import { FormControlLabel, Grid, Radio, RadioGroup } from "@mui/material";
+import {
+  FormControlLabel,
+  Grid,
+  Radio,
+  RadioGroup,
+} from "@mui/material";
 import { Checkbox, FormGroup } from "@mui/material";
 import { Padding } from "../../../../styles/style";
 import { ButtonPurple } from "../../../../components/Buttons";
@@ -16,6 +21,11 @@ const FormOphthalmologicalPage = ({ values, handleChange }) => {
 
   return (
     <>
+
+      <Padding />
+
+      <h2>Triagem Oftalmológica</h2>
+
       <Grid item style={{ width: "100%" }} md={12}>
         <p className={classes.label}>
           Acuidade visual olho direito (sem óculos) ?
@@ -138,15 +148,20 @@ const FormOphthalmologicalPage = ({ values, handleChange }) => {
       <Grid item style={{ width: "100%" }} md={12}>
         <p className={classes.label}>Considerar formulário como concluído?</p>
         <FormGroup>
-          <FormControlLabel control={<Checkbox
-            name="triagemCompleted"
-            defaultChecked={values.triagemCompleted}
-            onChange={handleChange}
-            value={values.triagemCompleted} />}
-            label="Considerar triagem como concluída" />
+          <FormControlLabel
+            control={
+              <Checkbox
+                name="triagemCompleted"
+                defaultChecked={values.triagemCompleted}
+                onChange={handleChange}
+                value={values.triagemCompleted}
+              />
+            }
+            label="Considerar triagem como concluída"
+          />
         </FormGroup>
       </Grid>
-      
+
       <Padding padding="16px" />
       <Grid item style={{ width: "100%" }} md={3}>
         <ButtonPurple
@@ -156,7 +171,6 @@ const FormOphthalmologicalPage = ({ values, handleChange }) => {
         />
       </Grid>
       <Padding padding="16px" />
-
     </>
   );
 };
