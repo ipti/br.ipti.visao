@@ -9,6 +9,7 @@ const createUserData = (cors: any) => functions.https.onRequest(async (req, res)
                 email: req.body.email,
                 password: req.body.password,
                 displayName: req.body.name,
+                emailVerified: false,
             })
             .then(user => {
                 const userData = {
