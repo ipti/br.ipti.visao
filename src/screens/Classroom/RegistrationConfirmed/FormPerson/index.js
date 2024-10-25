@@ -1,5 +1,5 @@
 import { makeStyles, withStyles } from "@material-ui/core/styles";
-import React from "react";
+import React, { useContext } from "react";
 
 import { Grid } from "@material-ui/core";
 import {
@@ -18,6 +18,8 @@ import styleBase from "../../../../styles";
 import { Column, Padding } from "../../../../styles/style";
 import MaskDate from "../../../../components/Mask/maskdate";
 import { ButtonPurple } from "../../../../components/Buttons";
+import { PrivateRouterContext } from "../../../../context/PrivateRouter/context";
+
 //import color from "../../../../styles/colors";
 
 const useStyles = makeStyles(styles);
@@ -32,44 +34,43 @@ const PurpleRadio = withStyles({
 })((props) => <Radio color="default" {...props} />);
 
 const FormPesonState = () => {
-
   const colorRace = [
     {
       id: 0,
-      name: "Não declarado"
+      name: "Não declarado",
     },
     {
       id: 1,
-      name: "Branca"
+      name: "Branca",
     },
     {
       id: 2,
-      name: "Preta"
+      name: "Preta",
     },
     {
       id: 3,
-      name: "Parda"
+      name: "Parda",
     },
     {
       id: 4,
-      name: "Amarela"
+      name: "Amarela",
     },
     {
       id: 5,
-      name: "Indígena"
+      name: "Indígena",
     },
-  ]
+  ];
 
   return { colorRace };
-
-}
-
+};
 
 const FormPerson = ({ values, handleChange, setFieldValue }) => {
   const classes = useStyles();
   const inputRef = useRef(null);
 
   const props = FormPesonState();
+
+  const { isAdmin } = useContext(PrivateRouterContext);
 
   return (
     <>
@@ -84,6 +85,7 @@ const FormPerson = ({ values, handleChange, setFieldValue }) => {
               name="name"
               onChange={handleChange}
               variant="outlined"
+              disabled={!isAdmin}
             />
           </Column>
         </Grid>
@@ -101,7 +103,7 @@ const FormPerson = ({ values, handleChange, setFieldValue }) => {
           <FormControl
             component="fieldset"
             className={classes.formControl}
-          // error={errorList.sex}
+            // error={errorList.sex}
           >
             <p className={classes.label}>Sexo *</p>
             <RadioGroup
@@ -115,19 +117,21 @@ const FormPerson = ({ values, handleChange, setFieldValue }) => {
                 name="sex"
                 control={<PurpleRadio />}
                 label="Feminino"
+                disabled={!isAdmin}
               />
               <FormControlLabel
                 value={"1"}
                 name="sex"
                 control={<PurpleRadio />}
                 label="Masculino"
+                disabled={!isAdmin}
               />
             </RadioGroup>
           </FormControl>
         </Grid>
       </Grid>
 
-      <Grid container >
+      <Grid container>
         <Grid item xs={6}>
           <FormControl
             component="fieldset"
@@ -140,12 +144,17 @@ const FormPerson = ({ values, handleChange, setFieldValue }) => {
               className="basic-single"
               classNamePrefix="select"
               placeholder="Selecione Cor/Raça"
-              value={props.colorRace.filter((option) => option.id === values.colorRace)}
+              value={props.colorRace.filter(
+                (option) => option.id === values.colorRace
+              )}
               options={props.colorRace}
               isLoading={props.isLoadingColorRace}
-              onChange={(e) => { setFieldValue('colorRace', e.id) }}
-              getOptionValue={opt => opt.id}
-              getOptionLabel={opt => opt.name}
+              onChange={(e) => {
+                setFieldValue("colorRace", e.id);
+              }}
+              getOptionValue={(opt) => opt.id}
+              getOptionLabel={(opt) => opt.name}
+              isDisabled={!isAdmin}
             />
           </FormControl>
         </Grid>
@@ -166,6 +175,7 @@ const FormPerson = ({ values, handleChange, setFieldValue }) => {
                 onChange: handleChange,
               }}
               variant="outlined"
+              disabled={!isAdmin}
             />
           </Column>
         </Grid>
@@ -187,6 +197,7 @@ const FormPerson = ({ values, handleChange, setFieldValue }) => {
               onChange={handleChange}
               value={values.cpf}
               variant="outlined"
+              disabled={!isAdmin}
             />
           </Column>
         </Grid>
@@ -203,7 +214,7 @@ const FormPerson = ({ values, handleChange, setFieldValue }) => {
           <FormControl
             component="fieldset"
             className={classes.formControl}
-          // error={errorList.zone}
+            // error={errorList.zone}
           >
             <p className={classes.label}>Zona *</p>
             <RadioGroup
@@ -213,16 +224,18 @@ const FormPerson = ({ values, handleChange, setFieldValue }) => {
               row
             >
               <FormControlLabel
-                value={'1'}
+                value={"1"}
                 name="zone"
                 control={<PurpleRadio />}
                 label="Rural"
+                disabled={!isAdmin}
               />
               <FormControlLabel
-                value={'2'}
+                value={"2"}
                 name="zone"
                 control={<PurpleRadio />}
                 label="Urbana"
+                disabled={!isAdmin}
               />
             </RadioGroup>
           </FormControl>

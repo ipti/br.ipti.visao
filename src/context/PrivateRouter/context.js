@@ -5,12 +5,15 @@ export const PrivateRouterContext = createContext({});
 
 const PrivateRouterProvider = ({ children }) => {
    
-    const {user} = PrivateRouterState()
+    const {user, isAdmin, isTriador, isMedico} = PrivateRouterState()
 
     return (
         <PrivateRouterContext.Provider
             value={{
-                user
+                user,
+                isAdmin,
+                isTriador,
+                isMedico
             }}>
             {children}
         </PrivateRouterContext.Provider>
