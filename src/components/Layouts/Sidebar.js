@@ -10,8 +10,8 @@ import turmaGraySvg from "../../assets/images/classroom-gray.svg";
 import usersBlueSvg from "../../assets/images/usuarios-blue.svg";
 import usersGraySvg from "../../assets/images/usuarios-grey.svg";
 
-// import estetoscopioBlueSvg from "../../assets/images/estetoscopio-blue.svg";
-// import estetoscopioGraySvg from "../../assets/images/estetoscopio-grey.svg";
+import estetoscopioBlueSvg from "../../assets/images/stethoscope-blue.svg";
+import estetoscopioGraySvg from "../../assets/images/stethoscope-grey.svg";
 
 import { useMediaQuery } from "@material-ui/core";
 import styles from "./styles";
@@ -42,13 +42,19 @@ const Sidebar = ({isSidebar}) => {
       Icon: <img src={turmaGraySvg} alt="icone de turma em cinza"></img>
     },
     {
+      to: "/Consultas",
+      name: "Consultas",
+      exact: false,
+      IconActive: <img src={estetoscopioBlueSvg} alt="estetoscopio em azul" />,
+      Icon: <img src={estetoscopioGraySvg} alt="estetoscopio em cinza" />
+    },
+    user?.role === 1 && {
       to: "/relatorios",
       name: "Relatórios",
       exact: false,
       IconActive: <img src={turmaBlueSvg} alt="icone de relatórios em azul"></img>,
       Icon: <img src={turmaGraySvg} alt="icone de relatórios em cinza"></img>
     },
-
     user?.role === 1 && {
       to: "/usuarios",
       name: "Usuários",
@@ -56,14 +62,7 @@ const Sidebar = ({isSidebar}) => {
       IconActive: <img src={usersBlueSvg} alt="icone de usuários em azul" />,
       Icon: <img src={usersGraySvg} alt="icone de usuários em cinza" />
     },
-
-    // user?.role === 3 && {
-    //   to: "/areaMedica",
-    //   name: "Area Médica",
-    //   exact: false,
-    //   IconActive: <img src={estetoscopioBlueSvg} alt="estetoscopio em azul" />,
-    //   Icon: <img src={estetoscopioGraySvg} alt="estetoscopio em cinza" />
-    // },
+    
     
   ];
 
