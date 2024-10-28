@@ -21,7 +21,6 @@ import Swal from "sweetalert2";
 import styles from "../../styles";
 import image from "../../assets/images/Atenção-img.png";
 
-
 const Create = (props) => {
   const history = useHistory();
 
@@ -30,10 +29,8 @@ const Create = (props) => {
   const { id } = useParams();
 
   const deletePreRegistration = (e, id) => {
-    e.stopPropagation()
+    e.stopPropagation();
     if (id) {
-
-
       return Swal.fire({
         title: "Excluir turma?",
         text: "Essa ação é irreversível não pode ser desfeita",
@@ -42,16 +39,16 @@ const Create = (props) => {
         showCancelButton: true,
         confirmButtonColor: styles.colors.colorsBaseProductNormal,
         cancelButtonColor: styles.colors.colorsBaseCloudNormal,
-        confirmButtonText: 'Aceitar',
+        confirmButtonText: "Aceitar",
         reverseButtons: true,
-        cancelButtonText: `<div style="color:black" >Cancelar</div>`
+        cancelButtonText: `<div style="color:black" >Cancelar</div>`,
       }).then((result) => {
         if (result.isConfirmed) {
-          deleteItem(id, history)
+          deleteItem(id, history);
         }
-      })
+      });
     }
-  }
+  };
 
   const registrations = () => {
     const registrationList = data ?? [];
@@ -174,7 +171,7 @@ const Create = (props) => {
         return count;
       };
 
-      console.log(registration)
+      console.log(registration);
       return (
         <BoxRegistration
           link={`${baseLink}/${registration?.id}`}
@@ -183,7 +180,11 @@ const Create = (props) => {
           sex={registration?.sex}
           id={registration?.id}
           points={points()}
-          triagem={(registration.object.testCover || registration.object.testManchaBranca || registration.object.testMovimentoOcular)}
+          triagem={
+            registration.object.testCover ||
+            registration.object.testManchaBranca ||
+            registration.object.testMovimentoOcular
+          }
           md={4}
           sm={4}
           unavailable={registration?.unavailable}
@@ -200,11 +201,16 @@ const Create = (props) => {
         }}
         style={{ cursor: "pointer" }}
       />
-      <Row id="space-between" style={{ width: "100%", justifyContent: "space-between" }}>
+      <Row
+        id="space-between"
+        style={{ width: "100%", justifyContent: "space-between" }}
+      >
         <h1>{classroom && classroom?.object?.name}</h1>
         <Column id="center">
-          <Delete style={{ cursor: "pointer" }} onClick={e => deletePreRegistration(e, classroom.id)} />
-
+          <Delete
+            style={{ cursor: "pointer" }}
+            onClick={(e) => deletePreRegistration(e, classroom.id)}
+          />
         </Column>
       </Row>
       <h2>Alunos</h2>
