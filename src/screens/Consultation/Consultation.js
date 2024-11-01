@@ -1,60 +1,92 @@
+import Grid from "@material-ui/core/Grid";
+import Alert from "@material-ui/lab/Alert";
 import React, { useEffect, useState } from "react";
 
-import { Card } from 'primereact/card';
-import Grid from "@material-ui/core/Grid";
-import { Column, Padding, Row } from '../../styles/style';
-import styles from '../../styles';
-import turmaBlueSvg from "../../assets/images/classroom-blue.svg";
 import { Container } from "@material-ui/core";
+import { createTheme, makeStyles } from "@material-ui/core/styles";
+import { default as styleBase, default as styles } from "../../styles";
 
 import { useHistory } from "react-router-dom";
-import api from '../../services/api';
+import api from "../../services/api";
 
+import {BoxConsultation } from "../../components/Boxes";
+import List from "../../components/List";
 
-//aqui nesses parenteses voce pode definir os parametros que quer receber
-const Consultation = () => {
+const theme = createTheme({
+  palette: {
+    primary: {
+      main: styleBase.colors.colorsBaseProductNormal,
+    },
+  },
+});
 
-    const history = useHistory();
-    const [consultation, setConsultation] = useState([])
+const useStyles = makeStyles((theme) => styles);
 
-    useEffect(() => {
-        const callFunction = async () => {
-            try {
-              const result = await api.get('https://us-central1-br-ipti-visao.cloudfunctions.net/consultationReport');
-              setConsultation(result.data);
-            } catch (error) {
-              console.error('Error calling function:', error);
-            }
-        };
-        callFunction();
-    }, []) 
+const Consultation = ({ classroom, setIdSchool, idSchool }) => {
+  const history = useHistory();
+  const [consultation, setConsultation] = useState([]);
+  const classes = useStyles();
 
-    return (
-        //todo: listagem de alunos que foram encaminhados para consulta
-        <Container style={{ padding: "8px", cursor: "pointer" }} >
-            <h1>Consultas</h1>
-            <Grid checkMockup={[{}, {}]}>
-                <Card style={{ width: "auto, cursor: pointer", border: "1px solid #4682B4"  }} onClick={() => {history.push("/relatorios/pdfrelatorio")}}>
-                    <Row>
-                        <Column>
-                        <img src={turmaBlueSvg} alt="" style={{ width: "100px", height: "100px" }} />
-                        </Column>
-                        <Column>
-                            <i className='pi pi-file' style={{ fontSize: "2.5rem", color: styles.colors.colorsBaseProductNormal }}> </i>
-                            <Column id="space-between">
-                                <h2>Relatório Geral</h2>                
-                                {/* padding */}
-                                <p style={{ color: styles.colors.grayClear, fontSize: "14px" }}>Relatório referente ao preenchimento de formulários por escola</p>
-                            </Column>
-                        </Column>
-                    </Row>
-                </Card>
-                <Padding> </Padding>
-            </Grid>
-          </Container>
+  console.log(consultation);
+  useEffect(() => {
+    const callFunction = async () => {
+      try {
+        const result = await api.get(
 
-          
-    )
-}
+          //todo: endpoint para buscar alunos encaminhados para consulta no deploy nao esta retornando nada
+          "https://us-central1-br-ipti-visao.cloudfunctions.net/consultationReport"
+          // "http://127.0.0.1:5001/br-ipti-visao/us-central1/fowardedForConsultation"
+        );
+        setConsultation(result.data);
+      } catch (error) {
+        console.error("Error calling function:", error);
+      }
+    };
+    callFunction();
+  }, []);
+
+  //console.log(result)
+  const renderCard = (card, index) => {
+    return consultation?.map((item, index) => {
+      console.log(item);
+      return (
+        <BoxConsultation
+          link={`/turmas/${item?.classroom_id}/matricula/${item?.student_id}`}
+          key={index}
+          name={item?.student_name}
+          // sex={consultation?.sex}
+          id={item?.student_id}
+          points={item?.points}
+          turma={item?.classroom}
+          birthday={item?.birthday}
+          // triagem={
+          //   consultation.object.testCover ||
+          //   consultation.object.testManchaBranca ||
+          //   consultation.object.testMovimentoOcular
+          // }
+          md={4}
+          sm={4}
+          // unavailable={consultation?.unavailable}
+        />
+      );
+    });
+  };
+
+  return (
+    //todo: listagem de alunos que foram encaminhados para consulta
+    <Container style={{ padding: "8px", cursor: "pointer" }}>
+      <h1>Consultas</h1>
+      <Grid container direction="row" spacing={3}>
+        <List items={renderCard()}>
+          <Grid item xs={12}>
+            <Alert variant="outlined" severity="warning">
+              Nenhuma aluno encaminhado
+            </Alert>
+          </Grid>
+        </List>
+      </Grid>
+    </Container>
+  );
+};
 
 export default Consultation;

@@ -5,8 +5,10 @@ import { fetchStudentData, StudentData } from '../student/fetchStudent';
 
 interface StudentReport {
     school: string | undefined;
+    classroom_id: string | undefined;
     classroom: string | undefined;
     student_name: string;
+    student_id: string;
     birthday: string;
     points: number;
 }
@@ -29,7 +31,9 @@ const getStudent = async (schools: SchoolData[], classrooms: ClassroomData[], st
 
     const studentReport: StudentReport = {
         school: school?.object.name,
+        classroom_id: classroom?.id,
         classroom: classroom?.object.name,
+        student_id: student.id,
         student_name: student.object.name, 
         birthday: student.object.birthday,
         points: student.object.points,
