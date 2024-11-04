@@ -6,6 +6,8 @@ import { generateForConsultationReport } from "./controller/report/fetchForConsu
 
 import { deleteClassroom } from "./controller/classroom/deleteClassroom";
 
+import { forConsultation } from "./controller/consultation/forwardedForConsultation";
+
 import { listUsers } from "./controller/users/listUsers";
 import { deleteUserData } from "./controller/users/deleteUser";
 import { createUserData } from "./controller/users/createUser";
@@ -29,12 +31,16 @@ export const consultationReport = generateForConsultationReport(corsMiddleware);
 
 export const classroomDelete = deleteClassroom(corsMiddleware);
 
+export const fowardedForConsultation = forConsultation(corsMiddleware);
+
 export const usersList = listUsers(corsMiddleware);
 export const userDelete = deleteUserData(corsMiddleware);
 export const userCreate = createUserData(corsMiddleware);
 export const userUpdate = updateUserData(corsMiddleware);
 
 export const addPointsStud = addPointsStudent(corsMiddleware);
+
+//export const fowardedGet 
 
 
 export const helloWorld = functions.https.onRequest((request, response) => {

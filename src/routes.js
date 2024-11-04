@@ -15,6 +15,7 @@ import CreateUserScreen from "./screens/Users/CreateUser";
 import PrivateRouterProvider from "./context/PrivateRouter/context";
 import CreateRegistration from "./screens/Classroom/CreateRegistration";
 import {Report} from "./containers/Report"
+import {Consultation} from "./containers/Consultation"
 
 
 // PDFs
@@ -73,8 +74,10 @@ const Routes = () => (
       <PrivateRoute exact path="/escolas/:id" component={SchoolClassrooms} />
       <PrivateRoute exact path="/criar/escolas" component={SchoolCreate} />
       <PrivateRoute exact path="/turmas" component={Classroom} />
-      <PrivateRoute exact path="/relatorios" component={Report} />
 
+      <PrivateRoute exact path="/consultas" component={Consultation} />
+
+      <PrivateRoute exact path="/relatorios" component={Report} />
       <PrivateRoute exact path="/relatorios/pdfrelatorio" component={PdfRelatorioGeral} />
       <PrivateRoute exact path="/relatorios/pdfestudantesparaconsulta" component={PdfForConsultation} />
 

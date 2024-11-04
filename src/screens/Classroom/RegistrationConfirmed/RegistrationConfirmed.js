@@ -101,11 +101,9 @@ const Home = (props) => {
     receitaEsfericoOlhoDireito: Yup.string().required("Campo obrigatório"),
     receitaCilindricoOlhoDireito: Yup.string().required("Campo obrigatório"),
     receitaEixoOlhoDireito: Yup.string().required("Campo obrigatório"),
-    receitaDpOlhoDireito: Yup.string().required("Campo obrigatório"),
     receitaEsfericoOlhoEsquerdo: Yup.string().required("Campo obrigatório"),
     receitaCilindricoOlhoEsquerdo: Yup.string().required("Campo obrigatório"),
     receitaEixoOlhoEsquerdo: Yup.string().required("Campo obrigatório"),
-    receitaDpOlhoEsquerdo: Yup.string().required("Campo obrigatório"),
   });
 
   const validationSchemaOculos = Yup.object().shape({
