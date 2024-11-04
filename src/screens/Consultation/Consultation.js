@@ -1,16 +1,19 @@
+// Imports de bibliotecas externas
+import React, { useEffect, useState } from "react";
+import { Container, useMediaQuery } from "@material-ui/core";
+import { createTheme, makeStyles } from "@material-ui/core/styles";
 import Grid from "@material-ui/core/Grid";
 import Alert from "@material-ui/lab/Alert";
-import React, { useEffect, useState } from "react";
-
-import { Container } from "@material-ui/core";
-import { createTheme, makeStyles } from "@material-ui/core/styles";
-import { default as styleBase, default as styles } from "../../styles";
-
+import Select from "react-select";
 import { useHistory } from "react-router-dom";
-import api from "../../services/api";
 
-import {BoxConsultation } from "../../components/Boxes";
+// Imports de arquivos locais
+import api from "../../services/api";
+import { getIdSchool, idSchoolLocal } from "../../services/auth";
+import { BoxConsultation } from "../../components/Boxes";
 import List from "../../components/List";
+import { default as styleBase, default as styles } from "../../styles";
+import { Padding } from "../../styles/style";
 
 const theme = createTheme({
   palette: {
@@ -24,7 +27,13 @@ const useStyles = makeStyles((theme) => styles);
 
 const Consultation = ({ classroom, setIdSchool, idSchool }) => {
   const history = useHistory();
+
   const [consultation, setConsultation] = useState([]);
+  const [school, setSchool] = useState([]);
+  const [schoolOne, setSchoolOne] = useState();
+
+  const matches = useMediaQuery("(max-width:600px)");
+
   const classes = useStyles();
 
   console.log(consultation);
@@ -66,7 +75,7 @@ const Consultation = ({ classroom, setIdSchool, idSchool }) => {
           // }
           md={4}
           sm={4}
-          // unavailable={consultation?.unavailable}
+        // unavailable={consultation?.unavailable}
         />
       );
     });
@@ -76,6 +85,29 @@ const Consultation = ({ classroom, setIdSchool, idSchool }) => {
     //todo: listagem de alunos que foram encaminhados para consulta
     <Container style={{ padding: "8px", cursor: "pointer" }}>
       <h1>Consultas</h1>
+
+      <h2>{schoolOne?.object?.name}</h2>
+      <div className={`${classes.spaceBetween}`}>
+        <div style={{ width: matches ? "80%" : "50%" }}>
+          <label>Escolha uma escola</label>
+          <Padding />
+          <Select
+            className="basic-single"
+            classNamePrefix="select"
+            placeholder="Digite uma escola"
+            options={school}
+            value={idSchool}
+            defaultValue={idSchool}
+            onChange={(selectedOption) => {
+              setIdSchool(selectedOption.id);
+              idSchoolLocal(selectedOption.id);
+            }}
+            getOptionValue={(opt) => opt.id}
+            getOptionLabel={(opt) => opt.object.name}
+          />
+        </div>
+      </div>
+
       <Grid container direction="row" spacing={3}>
         <List items={renderCard()}>
           <Grid item xs={12}>
