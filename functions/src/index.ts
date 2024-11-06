@@ -17,6 +17,7 @@ import { updateUserData } from "./controller/users/updateUser";
 import { addPointsStudent } from "./controller/addPointsStudents/addPointsStudents";
 
 import { getProjetos } from "./controller/migrationMeuBen/getProjetos";
+import { postProjetos } from "./controller/migrationMeuBen/postProjetos";
 
 // import { fetchUsersData } from "./controller/users/fetchUsers";
 // admin.initializeApp();
@@ -43,6 +44,7 @@ export const userUpdate = updateUserData(corsMiddleware);
 export const addPointsStud = addPointsStudent(corsMiddleware);
 
 export const getProjetosMigration = getProjetos(corsMiddleware);
+export const postProjetosMigration = postProjetos(corsMiddleware);
 
 
 

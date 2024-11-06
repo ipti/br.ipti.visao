@@ -5,14 +5,16 @@ import axios from "axios";
 // corsMiddleware = cors({ origin: true });
 
 
-export const getProjetos = (cors: any) => functions.https.onRequest((request, response) => {
+export const postProjetos = (cors: any) => functions.https.onRequest((request, response) => {
     cors(request, response, async () => { //adicionado async do corsMiddleware
         try {
             const token = "UP4nqVhNNbnJjxKnnwv24QFl17f2WzVM";
             const url = `https://br-ipti-beneficiarios.azurewebsites.net/aviste-bff?token=${token}`;
 
+            const body = request.body;
+
             // Requisição GET para a API usando Axios
-            const result = await axios.get(url);
+            const result = await axios.post(url , body);
             const data = result.data;
 
             response.send(data);
