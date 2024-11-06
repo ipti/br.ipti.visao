@@ -8,7 +8,7 @@ import axios from "axios";
 export const postProjetos = (cors: any) => functions.https.onRequest((request, response) => {
     cors(request, response, async () => { //adicionado async do corsMiddleware
         try {
-            const token = "UP4nqVhNNbnJjxKnnwv24QFl17f2WzVM";
+            const token = "";
             const url = `https://br-ipti-beneficiarios.azurewebsites.net/aviste-bff?token=${token}`;
 
             const body = request.body;
@@ -19,7 +19,7 @@ export const postProjetos = (cors: any) => functions.https.onRequest((request, r
 
             response.send(data);
         } catch (error) {
-            console.error("Erro ao buscar dados:", error);
+            console.error("Erro ao enviar dados:", error);
             response.status(500).send("Erro ao buscar dados.");
         }
     });
