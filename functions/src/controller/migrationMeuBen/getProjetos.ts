@@ -1,15 +1,12 @@
 import * as functions from "firebase-functions";
-//import * as cors from "cors";
 import axios from "axios";
-
-// corsMiddleware = cors({ origin: true });
 
 
 export const getProjetos = (cors: any) => functions.https.onRequest((request, response) => {
-    cors(request, response, async () => { //adicionado async do corsMiddleware
+    cors(request, response, async () => { 
         try {
-            const token = "";
-            const url = `https://br-ipti-beneficiarios.azurewebsites.net/aviste-bff?token=${token}`;
+            
+            const url = `https://br-ipti-beneficiarios.azurewebsites.net/aviste-bff?token=${process.env.TOKEN}`;
 
             // Requisição GET para a API usando Axios
             const result = await axios.get(url);

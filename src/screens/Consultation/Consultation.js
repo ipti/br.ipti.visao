@@ -3,29 +3,17 @@ import Alert from "@material-ui/lab/Alert";
 import React, { useEffect, useState } from "react";
 
 import { Container } from "@material-ui/core";
-import { createTheme, makeStyles } from "@material-ui/core/styles";
-import { default as styleBase, default as styles } from "../../styles";
 
-import { useHistory } from "react-router-dom";
 import api from "../../services/api";
 
 import {BoxConsultation } from "../../components/Boxes";
 import List from "../../components/List";
 
-const theme = createTheme({
-  palette: {
-    primary: {
-      main: styleBase.colors.colorsBaseProductNormal,
-    },
-  },
-});
-
-const useStyles = makeStyles((theme) => styles);
 
 const Consultation = ({ classroom, setIdSchool, idSchool }) => {
-  const history = useHistory();
+  
   const [consultation, setConsultation] = useState([]);
-  const classes = useStyles();
+ 
 
   console.log(consultation);
   useEffect(() => {

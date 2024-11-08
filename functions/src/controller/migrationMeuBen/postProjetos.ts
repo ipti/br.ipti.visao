@@ -1,15 +1,10 @@
 import * as functions from "firebase-functions";
-//import * as cors from "cors";
 import axios from "axios";
-
-// corsMiddleware = cors({ origin: true });
-
 
 export const postProjetos = (cors: any) => functions.https.onRequest((request, response) => {
     cors(request, response, async () => { //adicionado async do corsMiddleware
         try {
-            const token = "";
-            const url = `https://br-ipti-beneficiarios.azurewebsites.net/aviste-bff?token=${token}`;
+            const url = `https://br-ipti-beneficiarios.azurewebsites.net/aviste-bff?token=${process.env.TOKEN}`;
 
             const body = request.body;
 
@@ -20,7 +15,7 @@ export const postProjetos = (cors: any) => functions.https.onRequest((request, r
             response.send(data);
         } catch (error) {
             console.error("Erro ao enviar dados:", error);
-            response.status(500).send("Erro ao buscar dados.");
+            response.status(500).send("Erro ao enviar dados.");
         }
     });
 });
