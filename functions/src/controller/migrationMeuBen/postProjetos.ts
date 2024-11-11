@@ -6,19 +6,34 @@ interface StudentData {
   name: string;
   birthday: string;
   cpf: string;
-  sex: number;
+  sex: number | undefined;
   color_race: number | undefined;
   deficiency: boolean | undefined;
-  zone: string | undefined;
+  zone: number | undefined;
 }
 
 interface BodyMigrationData {
-    id: string;
     project: number | undefined;
     name: string | undefined;
     year: number | undefined;
     registration: StudentData[];
   }
+
+  export function converterData(data: string) {
+    // Divide a string pelo separador "/"
+    const partes = data.split('/');
+   
+    // As partes serão: partes[0] = dia, partes[1] = mês, partes[2] = ano
+    const dia = partes[0];
+    const mes = partes[1];
+    const ano = partes[2];
+   
+    // Reorganiza no formato YYYY-MM-DD
+    const dataFormatada = `${ano}-${mes}-${dia}`;
+   
+    return dataFormatada;
+  }
+
 
 const getStudentData = async (id: string, student:StudentData) => {
      // pegar os dados do estudante no banco de dados caso classroom_fk seja igual ao id
@@ -28,12 +43,12 @@ const getStudentData = async (id: string, student:StudentData) => {
     const studentMigrationData = studentData.map((student) => {
         return {
             name: student.object.name,
-            birthday: student.object.birthday,
-            cpf: student.object.cpf,
-            sex: student.object.sex,
-            color_race: student.object.colorRace,
-            deficiency: student.object.deficiency,
-            zone: student.object.zone,
+            birthday: converterData(student.object.birthday),
+            cpf: (student.object.cpf).replace(/[^a-zA-Z0-9]/g, ''), //remover . e - do cpf
+            sex: parseInt(student.object.sex) ?? undefined,
+            color_race:parseInt( student.object.colorRace) ?? undefined,
+            deficiency: student.object.deficiency ?? false,
+            zone:parseInt( student.object.zone)?? undefined,
         }});
         return studentMigrationData;
     };
@@ -49,7 +64,6 @@ export const postProjetos = (cors: any) =>
 
         const body: BodyMigrationData = 
         {   
-            id: request.body.id,
             project: request.body.project,
             name: request.body.name,
             year: request.body.year,
@@ -57,12 +71,15 @@ export const postProjetos = (cors: any) =>
         }; // Recebendo o body enviado do frontend
 
         console.log("Body recebido:", body);
+
+        console.log(url)
         
         // Requisição POST para a API usando Axios
-        const result = await axios.post(url, body);
-        const data = result.data;
+         await axios.post(url, body).catch((error) => {
+          console.error("Erro ao enviar MIGRATION:", error);})
+        // const data = result.data;
 
-        response.send(data); // Envia a resposta da API externa de volta para o frontend
+        // response.send(data); // Envia a resposta da API externa de volta para o frontend
       } catch (error) {
         console.error("Erro ao enviar dados:", error);
         response.status(500).send("Erro ao enviar dados.");
