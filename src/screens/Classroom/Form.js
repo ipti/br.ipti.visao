@@ -4,9 +4,6 @@ import React, { useEffect, useState } from "react";
 import Grid from "@material-ui/core/Grid";
 import Alert from "@material-ui/lab/Alert";
 
-//Prime react
-import { Dialog } from "primereact/dialog";
-
 // Components
 import { useParams } from "react-router-dom";
 import { BoxRegistration } from "../../components/Boxes";
@@ -23,9 +20,7 @@ import styles from "../../styles";
 import image from "../../assets/images/Atenção-img.png";
 import api from "../../services/api";
 
-import { Dropdown } from "primereact/dropdown";
-import { Calendar } from "primereact/calendar";
-import { InputText } from 'primereact/inputtext';
+import MigrationDialog from "./MigrationDialog";
 
 const Create = (props) => {
   const history = useHistory();
@@ -33,10 +28,9 @@ const Create = (props) => {
   const { data, baseLink, classroom } = props;
   const { id } = useParams();
 
-  const [visible, setVisible] = useState(false);
   const [projects, setProjects] = useState([]);
-  const [selectedProject, setSelectedProject] = useState();
-  const [date, setDate] = useState(null);
+  const [dialogVisible, setDialogVisible] = useState(false);
+  
 
   useEffect(() => {
     const callFunction = async () => {
@@ -274,65 +268,17 @@ const Create = (props) => {
         <Grid item md={2} sm={3}>
           <ButtonPurple
             className="t-button-primary"
-            onClick={() => setVisible(true)} //seta o dialog como visivel
+            onClick={() => setDialogVisible(true)} // Abre o dialog ao clicar
             title={"Migrar turma para MeuBen"}
-            aria-controls={visible ? "dlg" : null}
-            aria-expanded={visible ? true : false}
+            aria-controls={dialogVisible ? "dlg" : null}
+            aria-expanded={dialogVisible ? true : false}
           />
-          <Dialog
-            id="dlg"
-            header="Migração de turma para MeuBen"
-            visible={visible}
-            style={{ width: "50vw" }}
-            onHide={() => {
-              if (!visible) return;
-              setVisible(false);
-            }}
-          >
-            <p className="mb-6">
-              Selecione o projeto para qual deseja migrar a turma:
-            </p>
-            <Grid item md={6} sm={6}>
-              <Dropdown
-                value={selectedProject}
-                onChange={(e) => setSelectedProject(e.value)}
-                options={projects[0]?.project}
-                optionLabel="name"
-                placeholder="Selecione um projeto"
-                className="w-full"
-                style={{ width: "100%" }}
-              />
-            </Grid>
-            <Padding></Padding>
-            <p className="mb-6">Digite o nome para a turma:</p>
-            <Grid item md={6} sm={6}>
-              <InputText 
-                type="text"
-                style={{ width: "100%" }}
-                placeholder="Nome da turma"
-                
-              />
-            </Grid>
-            <Padding></Padding>
-            <p className="mb-6">Selecione o ano da turma:</p>
-            <Grid item md={6} sm={6}>
-              <Calendar
-                value={date}
-                onChange={(e) => setDate(e.value)}
-                view="year"
-                dateFormat="yy"
-                style={{ width: "100%" }}
-                placeholder="Selecione ano da turma"
-              />
-            </Grid>
-            <Padding></Padding>
-            <ButtonPurple
-              className="t-button-primary"
-              // todo: adicionar função para enviar a turma para o MeuBen
-              title={"Enviar"}
-              style={{ width: "200px" }}
-            />
-          </Dialog>
+
+          <MigrationDialog
+            visible={dialogVisible}
+            setVisible={setDialogVisible}
+            projects={projects}
+          />
         </Grid>
       </Grid>
       <Grid container direction="row" spacing={4}>
