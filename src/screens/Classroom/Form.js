@@ -189,7 +189,6 @@ const Create = (props) => {
         return count;
       };
 
-      console.log(registration);
       return (
         <BoxRegistration
           link={`${baseLink}/${registration?.id}`}
@@ -211,7 +210,6 @@ const Create = (props) => {
     });
   };
 
-  console.log(projects);
   return (
     <>
       <ArrowBack

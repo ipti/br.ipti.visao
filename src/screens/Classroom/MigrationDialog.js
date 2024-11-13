@@ -7,21 +7,22 @@ import { Calendar } from "primereact/calendar";
 import { Button } from "primereact/button";
 import { Formik, Form, Field } from "formik";
 import * as Yup from "yup";
-import { id } from "date-fns/locale";
+import axios from "axios";
 
-// Esquema de validação com Yup
+
 const validationSchema = Yup.object({
   selectedProject: Yup.string().required("Selecione um projeto."),
   turmaName: Yup.string().required("Digite o nome da turma."),
   year: Yup.date().required("Selecione o ano da turma."),
 });
 
-const handleSubmit = async (values) => {
+const handleSubmit = async (values, setVisible) => {
+
   try {
     // Enviar para o Firebase Functions
-    const response = await axios.post("http://127.0.0.1:5001/br-ipti-visao/us-central1/postProjetosMigration", {
+    const response = await axios.post("https://us-central1-br-ipti-visao.cloudfunctions.net/postProjetosMigration", {
       id_turma: values.id,
-      project: values.selectedProject,
+      project: values.selectedProject.id,
       name: values.turmaName,
       year: values.year.getFullYear(),
       registration: [] // Array de estudantes, preencha se necessário
@@ -38,6 +39,7 @@ const handleSubmit = async (values) => {
 function MigrationDialog({ visible, setVisible, projects }) {
   const [selectedProject, setSelectedProject] = useState(null);
   const [date, setDate] = useState(null);
+
 
   return (
     <Dialog
@@ -59,7 +61,7 @@ function MigrationDialog({ visible, setVisible, projects }) {
         validationSchema={validationSchema}
         onSubmit={(values) => {
           console.log("Formulário enviado:", values);
-          // TODO: Adicionar função para enviar os dados para o MeuBen
+          handleSubmit(values, setVisible);
           setVisible(false);
         }}
       >
