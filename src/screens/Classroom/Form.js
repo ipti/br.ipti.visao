@@ -258,7 +258,7 @@ const Create = (props) => {
         <Grid item md={2} sm={3}>
           <ButtonPurple
             className="t-button-primary"
-            onClick={() => history.push()}
+            onClick={() => history.push(`/turmas/${id}/criar-aluno`)}
             title={"Adicionar alunos"}
           />
         </Grid>

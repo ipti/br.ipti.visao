@@ -20,24 +20,20 @@ interface BodyMigrationData {
 }
 
 export function converterData(data: string) {
-  // Divide a string pelo separador "/"
   const partes = data.split('/');
 
-  // As partes serão: partes[0] = dia, partes[1] = mês, partes[2] = ano
   const dia = partes[0];
   const mes = partes[1];
   const ano = partes[2];
 
-  // Reorganiza no formato YYYY-MM-DD
   const dataFormatada = `${ano}-${mes}-${dia}`;
   return dataFormatada;
 }
 
 const getStudentData = async (id: string, student: StudentData) => {
-  // pegar os dados do estudante no banco de dados caso classroom_fk seja igual ao id
+  
   const students = await fetchStudentData();
   const studentData = students.filter(student => student.object.classroom_fk === id);
-
 
   const studentMigrationData = studentData.map((student) => {
     return {
@@ -53,13 +49,12 @@ const getStudentData = async (id: string, student: StudentData) => {
   return studentMigrationData;
 };
 
-
 export const postProjetos = (cors: any) =>
   functions.https.onRequest((request, response) => {
     cors(request, response, async () => {
       try {
         const url = `https://br-ipti-beneficiarios.azurewebsites.net/aviste-bff?token=${process.env.TOKEN}`;
-
+        
         const studentData = await getStudentData(request.body.id, request.body.student);
 
         const body: BodyMigrationData = {
@@ -70,12 +65,12 @@ export const postProjetos = (cors: any) =>
         };
 
         let res = await axios.post(url, body).catch((error) => {
-          console.error("Erro ao enviar MIGRATION:", error);
-        })
+          console.error("Erro ao enviar dados:", error);
+          return error.response;
+        });
 
         response.send(res.data);
-      } catch (error) {
-        console.error("Erro ao enviar dados:", error.message);
+      } catch (error:any) {
         response.status(500).send("Erro ao enviar dados.");
       }
     });
