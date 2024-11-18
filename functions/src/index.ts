@@ -1,5 +1,6 @@
 import * as functions from "firebase-functions";
-import * as cors from "cors"
+import * as cors from "cors";
+
 import { generateReport } from "./controller/report/fetchReport";
 import { generateStudentsReport } from "./controller/report/fetchStudents";
 import { generateForConsultationReport } from "./controller/report/fetchForConsultation";
@@ -15,8 +16,10 @@ import { updateUserData } from "./controller/users/updateUser";
 
 import { addPointsStudent } from "./controller/addPointsStudents/addPointsStudents";
 
-// import { fetchUsersData } from "./controller/users/fetchUsers";
+import { getProjetos } from "./controller/migrationMeuBen/getProjetos";
+import { postProjetos } from "./controller/migrationMeuBen/postProjetos";
 
+// import { fetchUsersData } from "./controller/users/fetchUsers";
 // admin.initializeApp();
 
 const corsOptions = {
@@ -40,7 +43,9 @@ export const userUpdate = updateUserData(corsMiddleware);
 
 export const addPointsStud = addPointsStudent(corsMiddleware);
 
-//export const fowardedGet 
+export const getProjetosMigration = getProjetos(corsMiddleware);
+export const postProjetosMigration = postProjetos(corsMiddleware);
+
 
 
 export const helloWorld = functions.https.onRequest((request, response) => {

@@ -4,6 +4,7 @@ import { fetchClassroomData, ClassroomData } from '../classroom/fetchClassroom';
 import { fetchStudentData, StudentData } from '../student/fetchStudent';
 
 interface StudentReport {
+    school_id: string | undefined;
     school: string | undefined;
     classroom_id: string | undefined;
     classroom: string | undefined;
@@ -30,6 +31,7 @@ const getStudent = async (schools: SchoolData[], classrooms: ClassroomData[], st
     }
 
     const studentReport: StudentReport = {
+        school_id: school?.id,
         school: school?.object.name,
         classroom_id: classroom?.id,
         classroom: classroom?.object.name,

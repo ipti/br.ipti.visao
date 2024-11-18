@@ -1,10 +1,8 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 
 // Material UI
 import Grid from "@material-ui/core/Grid";
 import Alert from "@material-ui/lab/Alert";
-
-// Third party
 
 // Components
 import { useParams } from "react-router-dom";
@@ -20,13 +18,33 @@ import { deleteItem } from "../../controller/classroom/deleteClassroom";
 import Swal from "sweetalert2";
 import styles from "../../styles";
 import image from "../../assets/images/Atenção-img.png";
+import api from "../../services/api";
+
+import MigrationDialog from "./MigrationDialog";
 
 const Create = (props) => {
   const history = useHistory();
 
   const { data, baseLink, classroom } = props;
-
   const { id } = useParams();
+
+  const [projects, setProjects] = useState([]);
+  const [dialogVisible, setDialogVisible] = useState(false);
+  
+
+  useEffect(() => {
+    const callFunction = async () => {
+      try {
+        const result = await api.get(
+          "http://127.0.0.1:5001/br-ipti-visao/us-central1/getProjetosMigration"
+        );
+        setProjects(result.data);
+      } catch (error) {
+        console.error("Error calling function:", error);
+      }
+    };
+    callFunction();
+  }, []);
 
   const deletePreRegistration = (e, id) => {
     e.stopPropagation();
@@ -171,7 +189,6 @@ const Create = (props) => {
         return count;
       };
 
-      console.log(registration);
       return (
         <BoxRegistration
           link={`${baseLink}/${registration?.id}`}
@@ -221,7 +238,7 @@ const Create = (props) => {
         direction="row"
         style={{ marginBottom: "16px" }}
       >
-        <Grid item md={3} sm={2}>
+        <Grid item md={2} sm={3}>
           <ButtonPurple
             className="t-button-primary"
             onClick={() => history.push(`/turmas/${id}/pdf`)}
@@ -230,7 +247,7 @@ const Create = (props) => {
         </Grid>
 
         <Padding />
-        <Grid item md={3} sm={2}>
+        <Grid item md={2} sm={3}>
           <ButtonPurple
             className="t-button-primary"
             onClick={() => history.push(`/turmas/${id}/pdfreceita`)}
@@ -238,11 +255,27 @@ const Create = (props) => {
           />
         </Grid>
         <Padding />
-        <Grid item md={3} sm={2}>
+        <Grid item md={2} sm={3}>
           <ButtonPurple
             className="t-button-primary"
             onClick={() => history.push(`/turmas/${id}/criar-aluno`)}
             title={"Adicionar alunos"}
+          />
+        </Grid>
+        <Padding />
+        <Grid item md={2} sm={3}>
+          <ButtonPurple
+            className="t-button-primary"
+            onClick={() => setDialogVisible(true)} // Abre o dialog ao clicar
+            title={"Migrar turma para MeuBen"}
+            aria-controls={dialogVisible ? "dlg" : null}
+            aria-expanded={dialogVisible ? true : false}
+          />
+
+          <MigrationDialog
+            visible={dialogVisible}
+            setVisible={setDialogVisible}
+            projects={projects}
           />
         </Grid>
       </Grid>
