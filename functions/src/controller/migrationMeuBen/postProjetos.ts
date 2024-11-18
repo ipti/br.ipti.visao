@@ -30,7 +30,7 @@ export function converterData(data: string) {
   return dataFormatada;
 }
 
-const getStudentData = async (id: string, student: StudentData) => {
+const getStudentData = async (id: string) => {
   
   const students = await fetchStudentData();
   const studentData = students.filter(student => student.object.classroom_fk === id);
@@ -55,15 +55,15 @@ export const postProjetos = (cors: any) =>
       try {
         const url = `https://br-ipti-beneficiarios.azurewebsites.net/aviste-bff?token=${process.env.TOKEN}`;
         
-        const studentData = await getStudentData(request.body.id, request.body.student);
-
+        const studentData = await getStudentData(request.body.id);
+   
         const body: BodyMigrationData = {
           project: request.body.project,
           name: request.body.name,
           year: request.body.year,
           registration: studentData,
         };
-
+        
         let res = await axios.post(url, body).catch((error) => {
           console.error("Erro ao enviar dados:", error);
           return error.response;

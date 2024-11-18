@@ -22,7 +22,7 @@ const handleSubmit = async (values, setVisible, toast, setIsSubmitting) => {
   setIsSubmitting(true); // Exibe o ProgressBar
   try {
     const response = await api.post("/postProjetosMigration", {
-      id_turma: values.id,
+      id: values.id,
       project: values.selectedProject.id,
       name: values.turmaName,
       year: values.year.getFullYear(),
@@ -58,7 +58,6 @@ function MigrationDialog({ visible, setVisible, projects }) {
 
   return (
     <>
-      {/* Certifique-se de que o Toast está fora do Dialog */}
       <Toast ref={toast} />
       <Dialog
         id="dlg"
