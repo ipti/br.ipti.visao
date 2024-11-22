@@ -26,7 +26,7 @@ const getStudent = async (schools: SchoolData[], classrooms: ClassroomData[], st
     if (classroom) {
         school = schools.find(school => school.id === classroom.object.school_fk);
     }
-    if (student.object.points < 5) {
+    if (student.object.points < 5 || student.object.points === undefined) {
         return null;
     }
 
