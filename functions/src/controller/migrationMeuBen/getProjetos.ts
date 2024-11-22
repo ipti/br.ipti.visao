@@ -6,7 +6,7 @@ export const getProjetos = (cors: any) => functions.https.onRequest((request, re
     cors(request, response, async () => { 
         try {
             
-            const url = `https://br-ipti-beneficiarios.azurewebsites.net/aviste-bff?token=${process.env.TOKEN}`;
+            const url = `https://br-ipti-beneficiarios.azurewebsites.net/migration-bff/aviste?token=${process.env.TOKEN}`;
 
             // Requisição GET para a API usando Axios
             const result = await axios.get(url);

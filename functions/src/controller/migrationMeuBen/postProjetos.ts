@@ -53,7 +53,7 @@ export const postProjetos = (cors: any) =>
   functions.https.onRequest((request, response) => {
     cors(request, response, async () => {
       try {
-        const url = `https://br-ipti-beneficiarios.azurewebsites.net/aviste-bff?token=${process.env.TOKEN}`;
+        const url = `https://br-ipti-beneficiarios.azurewebsites.net/migration-bff?token=${process.env.TOKEN}`;
         
         const studentData = await getStudentData(request.body.id);
    
