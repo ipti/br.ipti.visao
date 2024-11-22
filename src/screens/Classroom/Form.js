@@ -1,10 +1,8 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 
 // Material UI
 import Grid from "@material-ui/core/Grid";
 import Alert from "@material-ui/lab/Alert";
-
-// Third party
 
 // Components
 import { useParams } from "react-router-dom";
@@ -20,20 +18,37 @@ import { deleteItem } from "../../controller/classroom/deleteClassroom";
 import Swal from "sweetalert2";
 import styles from "../../styles";
 import image from "../../assets/images/Atenção-img.png";
+import api from "../../services/api";
 
+import MigrationDialog from "./MigrationDialog";
 
 const Create = (props) => {
   const history = useHistory();
 
   const { data, baseLink, classroom } = props;
-
   const { id } = useParams();
 
+  const [projects, setProjects] = useState([]);
+  const [dialogVisible, setDialogVisible] = useState(false);
+  
+
+  useEffect(() => {
+    const callFunction = async () => {
+      try {
+        const result = await api.get(
+          "https://us-central1-br-ipti-visao.cloudfunctions.net/getProjetosMigration"
+        );
+        setProjects(result.data);
+      } catch (error) {
+        console.error("Error calling function:", error);
+      }
+    };
+    callFunction();
+  }, []);
+
   const deletePreRegistration = (e, id) => {
-    e.stopPropagation()
+    e.stopPropagation();
     if (id) {
-
-
       return Swal.fire({
         title: "Excluir turma?",
         text: "Essa ação é irreversível não pode ser desfeita",
@@ -42,16 +57,16 @@ const Create = (props) => {
         showCancelButton: true,
         confirmButtonColor: styles.colors.colorsBaseProductNormal,
         cancelButtonColor: styles.colors.colorsBaseCloudNormal,
-        confirmButtonText: 'Aceitar',
+        confirmButtonText: "Aceitar",
         reverseButtons: true,
-        cancelButtonText: `<div style="color:black" >Cancelar</div>`
+        cancelButtonText: `<div style="color:black" >Cancelar</div>`,
       }).then((result) => {
         if (result.isConfirmed) {
-          deleteItem(id, history)
+          deleteItem(id, history);
         }
-      })
+      });
     }
-  }
+  };
 
   const registrations = () => {
     const registrationList = data ?? [];
@@ -174,7 +189,6 @@ const Create = (props) => {
         return count;
       };
 
-      console.log(registration)
       return (
         <BoxRegistration
           link={`${baseLink}/${registration?.id}`}
@@ -183,7 +197,11 @@ const Create = (props) => {
           sex={registration?.sex}
           id={registration?.id}
           points={points()}
-          triagem={(registration.object.testCover || registration.object.testManchaBranca || registration.object.testMovimentoOcular)}
+          triagem={
+            registration.object.testCover ||
+            registration.object.testManchaBranca ||
+            registration.object.testMovimentoOcular
+          }
           md={4}
           sm={4}
           unavailable={registration?.unavailable}
@@ -200,11 +218,16 @@ const Create = (props) => {
         }}
         style={{ cursor: "pointer" }}
       />
-      <Row id="space-between" style={{ width: "100%", justifyContent: "space-between" }}>
+      <Row
+        id="space-between"
+        style={{ width: "100%", justifyContent: "space-between" }}
+      >
         <h1>{classroom && classroom?.object?.name}</h1>
         <Column id="center">
-          <Delete style={{ cursor: "pointer" }} onClick={e => deletePreRegistration(e, classroom.id)} />
-
+          <Delete
+            style={{ cursor: "pointer" }}
+            onClick={(e) => deletePreRegistration(e, classroom.id)}
+          />
         </Column>
       </Row>
       <h2>Alunos</h2>
@@ -215,7 +238,7 @@ const Create = (props) => {
         direction="row"
         style={{ marginBottom: "16px" }}
       >
-        <Grid item md={3} sm={2}>
+        <Grid item md={2} sm={3}>
           <ButtonPurple
             className="t-button-primary"
             onClick={() => history.push(`/turmas/${id}/pdf`)}
@@ -224,7 +247,7 @@ const Create = (props) => {
         </Grid>
 
         <Padding />
-        <Grid item md={3} sm={2}>
+        <Grid item md={2} sm={3}>
           <ButtonPurple
             className="t-button-primary"
             onClick={() => history.push(`/turmas/${id}/pdfreceita`)}
@@ -232,11 +255,27 @@ const Create = (props) => {
           />
         </Grid>
         <Padding />
-        <Grid item md={3} sm={2}>
+        <Grid item md={2} sm={3}>
           <ButtonPurple
             className="t-button-primary"
             onClick={() => history.push(`/turmas/${id}/criar-aluno`)}
             title={"Adicionar alunos"}
+          />
+        </Grid>
+        <Padding />
+        <Grid item md={2} sm={3}>
+          <ButtonPurple
+            className="t-button-primary"
+            onClick={() => setDialogVisible(true)} // Abre o dialog ao clicar
+            title={"Migrar turma para MeuBen"}
+            aria-controls={dialogVisible ? "dlg" : null}
+            aria-expanded={dialogVisible ? true : false}
+          />
+
+          <MigrationDialog
+            visible={dialogVisible}
+            setVisible={setDialogVisible}
+            projects={projects}
           />
         </Grid>
       </Grid>

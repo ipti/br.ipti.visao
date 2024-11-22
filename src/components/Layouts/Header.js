@@ -71,9 +71,9 @@ const Header = ({ setIsSidebar, isSidebar }) => {
 
   };
 
-
   return (
     <AppBar classes={{ root: classes.root }} position="static">
+
       <Column>
         <Row>
           {matches ? <Column id="center">
@@ -119,6 +119,7 @@ const Header = ({ setIsSidebar, isSidebar }) => {
                 >
                   <MenuItem value="sair" onClick={handleLogout}>Sair</MenuItem>
                 </Menu>
+                
               </>
             )}
           </>

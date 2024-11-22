@@ -95,6 +95,7 @@ const MyDocument = () => {
                                         <TableHeader style={{ textAlign: "center" }}>Nome da escola</TableHeader>
                                         <TableHeader style={{ textAlign: "center" }}>Turma</TableHeader>
                                         <TableHeader style={{ textAlign: "center" }}>Nome do Estudante</TableHeader>
+                                        <TableHeader style={{ textAlign: "center" }}>Data de Nascimento</TableHeader>
                                         <TableHeader style={{ textAlign: "center" }}>Prioridade</TableHeader>
                                     </tr>
                                 </thead>
@@ -103,6 +104,7 @@ const MyDocument = () => {
                                         // Mostrar Skeleton enquanto os dados estão sendo carregados
                                         <tr>
                                             <TableData><Skeleton height={20} /></TableData>     
+                                            <TableData><Skeleton height={20} /></TableData>
                                             <TableData><Skeleton height={20} /></TableData>
                                             <TableData><Skeleton height={20} /></TableData>
                                             <TableData><Skeleton height={20} /></TableData>
@@ -116,6 +118,7 @@ const MyDocument = () => {
                                                 <TableData style={{ textAlign: "center" }}>{item.school}</TableData>
                                                 <TableData style={{ textAlign: "center" }}>{item.classroom}</TableData>
                                                 <TableData style={{ textAlign: "center" }}>{item.student_name}</TableData>
+                                                <TableData style={{ textAlign: "center" }}>{item.birthday}</TableData>
                                                 <TableData style={{ textAlign: "center" }}>{item.points < 5 ? "Prioridade minima" : (item.points >= 5 && item.points < 9) ? "Prioridade média" : item.points >= 10 ? "Prioridade máxima" : ""}</TableData>                       
                                             </tr>
                                         ))

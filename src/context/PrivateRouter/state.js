@@ -14,5 +14,10 @@ export const PrivateRouterState = () => {
         console.error(err);
       });
   }, []);
-  return { user };
+
+  const isAdmin = user?.role === 1;
+  const isTriador = user?.role === 2;
+  const isMedico = user?.role === 3;
+
+  return { user, isAdmin, isTriador, isMedico };
 };

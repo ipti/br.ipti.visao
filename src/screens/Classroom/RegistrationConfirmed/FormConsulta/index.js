@@ -9,7 +9,7 @@ import {
   TextField,
   TextareaAutosize,
 } from "@mui/material";
-import React from "react";
+import React, { useContext } from "react";
 import MaskDate from "../../../../components/Mask/maskdate";
 import styles from "../../../../styles";
 import { Column, Padding } from "../../../../styles/style";
@@ -18,13 +18,15 @@ import { ButtonPurple } from "../../../../components/Buttons";
 import { useHistory } from "react-router";
 import { useParams } from "react-router-dom";
 import { FormHelperText } from "@material-ui/core";
+import { PrivateRouterContext } from "../../../../context/PrivateRouter/context";
 
 const useStyles = makeStyles(styles);
-const FormConsulta = ({ values, handleChange, errors}) => {
+const FormConsulta = ({ values, handleChange, errors }) => {
   const classes = useStyles();
   const history = useHistory();
   //TODO: Adicionar validação, formik e yup
   const { id, idRegistration } = useParams();
+  const { isAdmin, isMedico } = useContext(PrivateRouterContext);
 
   return (
     <>
@@ -41,6 +43,8 @@ const FormConsulta = ({ values, handleChange, errors}) => {
           type="button"
         />
       </Grid>
+      <Padding padding="16px" />
+      <h2>Consulta Oftalmológica</h2>
 
       <Grid container spacing={2}>
         <Grid item style={{ width: "100%" }} md={6}>
@@ -53,8 +57,11 @@ const FormConsulta = ({ values, handleChange, errors}) => {
               onChange={handleChange}
               error={errors.nomeMedico}
               variant="outlined"
+              disabled={!isAdmin && !isMedico}
             />
-            {errors.nomeMedico && <FormHelperText>{errors.nomeMedico}</FormHelperText> }
+            {errors.nomeMedico && (
+              <FormHelperText>{errors.nomeMedico}</FormHelperText>
+            )}
           </Column>
         </Grid>
         <Grid item style={{ width: "100%" }} md={6}>
@@ -67,8 +74,11 @@ const FormConsulta = ({ values, handleChange, errors}) => {
               onChange={handleChange}
               error={errors.crmMedico}
               variant="outlined"
+              disabled={!isAdmin && !isMedico}
             />
-            {errors.crmMedico && <FormHelperText>{errors.crmMedico}</FormHelperText> }  
+            {errors.crmMedico && (
+              <FormHelperText>{errors.crmMedico}</FormHelperText>
+            )}
           </Column>
         </Grid>
       </Grid>
@@ -89,34 +99,172 @@ const FormConsulta = ({ values, handleChange, errors}) => {
               }}
               value={values.dataConsulta}
               variant="outlined"
+              disabled={!isAdmin && !isMedico}
             />
-            {errors.dataConsulta && <FormHelperText>{errors.dataConsulta}</FormHelperText> }
+            {errors.dataConsulta && (
+              <FormHelperText>{errors.dataConsulta}</FormHelperText>
+            )}
           </Column>
         </Grid>
       </Grid>
 
       <Padding padding="16px" />
-      <h2>
-        {" "}
-        <strong> Histórico de Consulta</strong>{" "}
-      </h2>
 
-      <Grid item style={{ width: "100%" }} md={12}>
-        <p className={classes.label}>
-          Já realizou alguma consulta oftalmológica na vida?
-        </p>
-        <RadioGroup
-          value={values.jaRealizouConsultaAntes}
-          name="jaRealizouConsultaAntes"
-          onChange={handleChange}
+      <div>
+        <h2>
+          {" "}
+          <strong> Histórico de Consulta</strong>{" "}
+        </h2>
+
+        <Grid item style={{ width: "100%" }} md={12}>
+          <p className={classes.label}>
+            Já realizou alguma consulta oftalmológica na vida?
+          </p>
+          <RadioGroup
+            value={values.jaRealizouConsultaAntes}
+            name="jaRealizouConsultaAntes"
+            onChange={handleChange}
             error={errors.jaRealizouConsultaAntes}
-        >
-          <FormControlLabel  error={errors.jaRealizouConsultaAntes} control={<Radio />} value={"Sim"} label="Sim" />
-          <FormControlLabel  error={errors.jaRealizouConsultaAntes} control={<Radio />} value={"Não"} label="Não" />
-        </RadioGroup>
-        {errors.jaRealizouConsultaAntes && <FormHelperText>{errors.jaRealizouConsultaAntes}</FormHelperText> }
-        
-      </Grid>
+          >
+            <FormControlLabel
+              error={errors.jaRealizouConsultaAntes}
+              control={<Radio />}
+              value={"Sim"}
+              label="Sim"
+              disabled={!isAdmin && !isMedico}
+            />
+            <FormControlLabel
+              error={errors.jaRealizouConsultaAntes}
+              control={<Radio />}
+              value={"Não"}
+              label="Não"
+              disabled={!isAdmin && !isMedico}
+            />
+          </RadioGroup>
+          {errors.jaRealizouConsultaAntes && (
+            <FormHelperText>{errors.jaRealizouConsultaAntes}</FormHelperText>
+          )}
+        </Grid>
+
+        {values.filhoOculos === "1" && (
+          <div>
+            <h2>Receita do óculos anterior</h2>
+            <h3>Olho direito</h3>
+            <Grid container spacing={2}>
+              <Grid item md={3}>
+                <p className={classes.label}>Esférico</p>
+                <Column>
+                  <TextField
+                    className={classes.inputStudent}
+                    name="receitaAntigaEsfericoOlhoDireito"
+                    value={values.receitaAntigaEsfericoOlhoDireito}
+                    onChange={handleChange}
+                    variant="outlined"
+                    disabled={!isAdmin && !isMedico}
+                  />
+                </Column>
+              </Grid>
+              <Grid item md={3}>
+                <p className={classes.label}>Cilíndrico</p>
+                <Column>
+                  <TextField
+                    className={classes.inputStudent}
+                    name="receitaAntigaCilindricoOlhoDireito"
+                    value={values.receitaAntigaCilindricoOlhoDireito}
+                    onChange={handleChange}
+                    variant="outlined"
+                    disabled={!isAdmin && !isMedico}
+                  />
+                </Column>
+              </Grid>
+              <Grid item md={3}>
+                <p className={classes.label}>Eixo</p>
+                <Column>
+                  <TextField
+                    className={classes.inputStudent}
+                    name="receitaAntigaEixoOlhoDireito"
+                    value={values.receitaAntigaEixoOlhoDireito}
+                    onChange={handleChange}
+                    variant="outlined"
+                    disabled={!isAdmin && !isMedico}
+                  />
+                </Column>
+              </Grid>
+              <Grid item md={3}>
+                <p className={classes.label}>DP</p>
+                <Column>
+                  <TextField
+                    className={classes.inputStudent}
+                    name="receitaAntigaDpOlhoDireito"
+                    value={values.receitaAntigaDpOlhoDireito}
+                    onChange={handleChange}
+                    variant="outlined"
+                    disabled={!isAdmin && !isMedico}
+                  />
+                </Column>
+              </Grid>
+            </Grid>
+
+            <Padding />
+
+            <h3>Olho esquerdo</h3>
+            <Grid container spacing={2}>
+              <Grid item md={3}>
+                <p className={classes.label}>Esférico</p>
+                <Column>
+                  <TextField
+                    className={classes.inputStudent}
+                    name="receitaAntigaEsfericoOlhoDireito"
+                    value={values.receitaAntigaEsfericoOlhoDireito}
+                    onChange={handleChange}
+                    variant="outlined"
+                    disabled={!isAdmin && !isMedico}
+                  />
+                </Column>
+              </Grid>
+              <Grid item md={3}>
+                <p className={classes.label}>Cilíndrico</p>
+                <Column>
+                  <TextField
+                    className={classes.inputStudent}
+                    name="receitaAntigaCilindricoOlhoDireito"
+                    value={values.receitaAntigaCilindricoOlhoDireito}
+                    onChange={handleChange}
+                    variant="outlined"
+                    disabled={!isAdmin && !isMedico}
+                  />
+                </Column>
+              </Grid>
+              <Grid item md={3}>
+                <p className={classes.label}>Eixo</p>
+                <Column>
+                  <TextField
+                    className={classes.inputStudent}
+                    name="receitaAntigaEixoOlhoDireito"
+                    value={values.receitaAntigaEixoOlhoDireito}
+                    onChange={handleChange}
+                    variant="outlined"
+                    disabled={!isAdmin && !isMedico}
+                  />
+                </Column>
+              </Grid>
+              <Grid item md={3}>
+                <p className={classes.label}>DP</p>
+                <Column>
+                  <TextField
+                    className={classes.inputStudent}
+                    name="receitaAntigaDpOlhoDireito"
+                    value={values.receitaAntigaDpOlhoDireito}
+                    onChange={handleChange}
+                    variant="outlined"
+                    disabled={!isAdmin && !isMedico}
+                  />
+                </Column>
+              </Grid>
+            </Grid>
+          </div>
+        )}
+      </div>
 
       <Padding padding="16px" />
       <h2>Escaneamento Visual pelo Spot Vision</h2>
@@ -132,8 +280,13 @@ const FormConsulta = ({ values, handleChange, errors}) => {
               onChange={handleChange}
               error={errors.refracaoEsfericoOlhoDireito}
               variant="outlined"
+              disabled={!isAdmin && !isMedico}
             />
-            {errors.refracaoEsfericoOlhoDireito && <FormHelperText>{errors.refracaoEsfericoOlhoDireito}</FormHelperText> }
+            {errors.refracaoEsfericoOlhoDireito && (
+              <FormHelperText>
+                {errors.refracaoEsfericoOlhoDireito}
+              </FormHelperText>
+            )}
           </Column>
         </Grid>
         <Grid item style={{ width: "100%" }} md={4}>
@@ -146,8 +299,13 @@ const FormConsulta = ({ values, handleChange, errors}) => {
               onChange={handleChange}
               error={errors.refracaoCilindricoOlhoDireito}
               variant="outlined"
+              disabled={!isAdmin && !isMedico}
             />
-            {errors.refracaoCilindricoOlhoDireito && <FormHelperText>{errors.refracaoCilindricoOlhoDireito}</FormHelperText> }
+            {errors.refracaoCilindricoOlhoDireito && (
+              <FormHelperText>
+                {errors.refracaoCilindricoOlhoDireito}
+              </FormHelperText>
+            )}
           </Column>
         </Grid>
         <Grid item style={{ width: "100%" }} md={4}>
@@ -160,8 +318,11 @@ const FormConsulta = ({ values, handleChange, errors}) => {
               onChange={handleChange}
               error={errors.refracaoEixoOlhoDireito}
               variant="outlined"
+              disabled={!isAdmin && !isMedico}
             />
-            {errors.refracaoEixoOlhoDireito && <FormHelperText>{errors.refracaoEixoOlhoDireito}</FormHelperText> }
+            {errors.refracaoEixoOlhoDireito && (
+              <FormHelperText>{errors.refracaoEixoOlhoDireito}</FormHelperText>
+            )}
           </Column>
         </Grid>
       </Grid>
@@ -176,8 +337,13 @@ const FormConsulta = ({ values, handleChange, errors}) => {
               onChange={handleChange}
               error={errors.refracaoEquivalenteEsfericoOlhoDireito}
               variant="outlined"
+              disabled={!isAdmin && !isMedico}
             />
-            {errors.refracaoEquivalenteEsfericoOlhoDireito && <FormHelperText>{errors.refracaoEquivalenteEsfericoOlhoDireito}</FormHelperText> }
+            {errors.refracaoEquivalenteEsfericoOlhoDireito && (
+              <FormHelperText>
+                {errors.refracaoEquivalenteEsfericoOlhoDireito}
+              </FormHelperText>
+            )}
           </Column>
         </Grid>
         <Grid item style={{ width: "100%" }} md={4}>
@@ -190,8 +356,11 @@ const FormConsulta = ({ values, handleChange, errors}) => {
               onChange={handleChange}
               error={errors.refracaoDpOlhoDireito}
               variant="outlined"
+              disabled={!isAdmin && !isMedico}
             />
-            {errors.refracaoDpOlhoDireito && <FormHelperText>{errors.refracaoDpOlhoDireito}</FormHelperText> }
+            {errors.refracaoDpOlhoDireito && (
+              <FormHelperText>{errors.refracaoDpOlhoDireito}</FormHelperText>
+            )}
           </Column>
         </Grid>
       </Grid>
@@ -207,8 +376,13 @@ const FormConsulta = ({ values, handleChange, errors}) => {
               onChange={handleChange}
               error={errors.refracaoEsfericoOlhoEsquerdo}
               variant="outlined"
+              disabled={!isAdmin && !isMedico}
             />
-            {errors.refracaoEsfericoOlhoEsquerdo && <FormHelperText>{errors.refracaoEsfericoOlhoEsquerdo}</FormHelperText> }
+            {errors.refracaoEsfericoOlhoEsquerdo && (
+              <FormHelperText>
+                {errors.refracaoEsfericoOlhoEsquerdo}
+              </FormHelperText>
+            )}
           </Column>
         </Grid>
 
@@ -222,8 +396,13 @@ const FormConsulta = ({ values, handleChange, errors}) => {
               onChange={handleChange}
               error={errors.refracaoCilindricoOlhoEsquerdo}
               variant="outlined"
+              disabled={!isAdmin && !isMedico}
             />
-            {errors.refracaoCilindricoOlhoEsquerdo && <FormHelperText>{errors.refracaoCilindricoOlhoEsquerdo}</FormHelperText> }
+            {errors.refracaoCilindricoOlhoEsquerdo && (
+              <FormHelperText>
+                {errors.refracaoCilindricoOlhoEsquerdo}
+              </FormHelperText>
+            )}
           </Column>
         </Grid>
 
@@ -237,8 +416,11 @@ const FormConsulta = ({ values, handleChange, errors}) => {
               onChange={handleChange}
               error={errors.refracaoEixoOlhoEsquerdo}
               variant="outlined"
+              disabled={!isAdmin && !isMedico}
             />
-            {errors.refracaoEixoOlhoEsquerdo && <FormHelperText>{errors.refracaoEixoOlhoEsquerdo}</FormHelperText> }
+            {errors.refracaoEixoOlhoEsquerdo && (
+              <FormHelperText>{errors.refracaoEixoOlhoEsquerdo}</FormHelperText>
+            )}
           </Column>
         </Grid>
       </Grid>
@@ -253,8 +435,13 @@ const FormConsulta = ({ values, handleChange, errors}) => {
               onChange={handleChange}
               error={errors.refracaoEquivalenteEsfericoOlhoEsquerdo}
               variant="outlined"
+              disabled={!isAdmin && !isMedico}
             />
-            {errors.refracaoEquivalenteEsfericoOlhoEsquerdo && <FormHelperText>{errors.refracaoEquivalenteEsfericoOlhoEsquerdo}</FormHelperText> }
+            {errors.refracaoEquivalenteEsfericoOlhoEsquerdo && (
+              <FormHelperText>
+                {errors.refracaoEquivalenteEsfericoOlhoEsquerdo}
+              </FormHelperText>
+            )}
           </Column>
         </Grid>
         <Grid item style={{ width: "100%" }} md={4}>
@@ -267,8 +454,11 @@ const FormConsulta = ({ values, handleChange, errors}) => {
               onChange={handleChange}
               error={errors.refracaoDpOlhoEsquerdo}
               variant="outlined"
+              disabled={!isAdmin && !isMedico}
             />
-            {errors.refracaoDpOlhoEsquerdo && <FormHelperText>{errors.refracaoDpOlhoEsquerdo}</FormHelperText> }
+            {errors.refracaoDpOlhoEsquerdo && (
+              <FormHelperText>{errors.refracaoDpOlhoEsquerdo}</FormHelperText>
+            )}
           </Column>
         </Grid>
       </Grid>
@@ -288,6 +478,7 @@ const FormConsulta = ({ values, handleChange, errors}) => {
               />
             }
             label="Miopia OD"
+            disabled={!isAdmin && !isMedico}
           />
           <FormControlLabel
             control={
@@ -299,6 +490,7 @@ const FormConsulta = ({ values, handleChange, errors}) => {
               />
             }
             label="Miopia OE "
+            disabled={!isAdmin && !isMedico}
           />
           <FormControlLabel
             control={
@@ -310,6 +502,7 @@ const FormConsulta = ({ values, handleChange, errors}) => {
               />
             }
             label="Astigmatismo OD"
+            disabled={!isAdmin && !isMedico}
           />
           <FormControlLabel
             control={
@@ -321,6 +514,7 @@ const FormConsulta = ({ values, handleChange, errors}) => {
               />
             }
             label="Astigmatismo OE"
+            disabled={!isAdmin && !isMedico}
           />
           <FormControlLabel
             control={
@@ -332,6 +526,7 @@ const FormConsulta = ({ values, handleChange, errors}) => {
               />
             }
             label="Hipermetropia OD"
+            disabled={!isAdmin && !isMedico}
           />
           <FormControlLabel
             control={
@@ -343,6 +538,7 @@ const FormConsulta = ({ values, handleChange, errors}) => {
               />
             }
             label="Hipermetropia OE "
+            disabled={!isAdmin && !isMedico}
           />
           <FormControlLabel
             control={
@@ -354,6 +550,7 @@ const FormConsulta = ({ values, handleChange, errors}) => {
               />
             }
             label="Estrabismo OD"
+            disabled={!isAdmin && !isMedico}
           />
           <FormControlLabel
             control={
@@ -365,6 +562,7 @@ const FormConsulta = ({ values, handleChange, errors}) => {
               />
             }
             label=" Estrabismo OE"
+            disabled={!isAdmin && !isMedico}
           />
           <FormControlLabel
             control={
@@ -376,6 +574,7 @@ const FormConsulta = ({ values, handleChange, errors}) => {
               />
             }
             label="Anisometropia"
+            disabled={!isAdmin && !isMedico}
           />
           <FormControlLabel
             control={
@@ -387,6 +586,7 @@ const FormConsulta = ({ values, handleChange, errors}) => {
               />
             }
             label="Anisocoria"
+            disabled={!isAdmin && !isMedico}
           />
         </FormGroup>
       </Grid>
@@ -401,6 +601,7 @@ const FormConsulta = ({ values, handleChange, errors}) => {
             onChange={handleChange}
             value={values.anamnese}
             variant="outlined"
+            disabled={!isAdmin && !isMedico}
           />
         </Column>
       </Grid>
@@ -418,8 +619,13 @@ const FormConsulta = ({ values, handleChange, errors}) => {
               onChange={handleChange}
               error={errors.refracaoEstaticaEsfericoOlhoDireito}
               variant="outlined"
+              disabled={!isAdmin && !isMedico}
             />
-            {errors.refracaoEstaticaEsfericoOlhoDireito && <FormHelperText>{errors.refracaoEstaticaEsfericoOlhoDireito}</FormHelperText> }
+            {errors.refracaoEstaticaEsfericoOlhoDireito && (
+              <FormHelperText>
+                {errors.refracaoEstaticaEsfericoOlhoDireito}
+              </FormHelperText>
+            )}
           </Column>
         </Grid>
         <Grid item style={{ width: "100%" }} md={4}>
@@ -432,8 +638,13 @@ const FormConsulta = ({ values, handleChange, errors}) => {
               onChange={handleChange}
               error={errors.refracaoEstaticaCilindricoOlhoDireito}
               variant="outlined"
+              disabled={!isAdmin && !isMedico}
             />
-            {errors.refracaoEstaticaCilindricoOlhoDireito && <FormHelperText>{errors.refracaoEstaticaCilindricoOlhoDireito}</FormHelperText> }
+            {errors.refracaoEstaticaCilindricoOlhoDireito && (
+              <FormHelperText>
+                {errors.refracaoEstaticaCilindricoOlhoDireito}
+              </FormHelperText>
+            )}
           </Column>
         </Grid>
         <Grid item style={{ width: "100%" }} md={4}>
@@ -446,8 +657,13 @@ const FormConsulta = ({ values, handleChange, errors}) => {
               onChange={handleChange}
               error={errors.refracaoEstaticaEixoOlhoDireito}
               variant="outlined"
+              disabled={!isAdmin && !isMedico}
             />
-            {errors.refracaoEstaticaEixoOlhoDireito && <FormHelperText>{errors.refracaoEstaticaEixoOlhoDireito}</FormHelperText> }
+            {errors.refracaoEstaticaEixoOlhoDireito && (
+              <FormHelperText>
+                {errors.refracaoEstaticaEixoOlhoDireito}
+              </FormHelperText>
+            )}
           </Column>
         </Grid>
       </Grid>
@@ -462,8 +678,13 @@ const FormConsulta = ({ values, handleChange, errors}) => {
               onChange={handleChange}
               error={errors.refracaoEstaticaAcuidadeVisualOlhoDireito}
               variant="outlined"
+              disabled={!isAdmin && !isMedico}
             />
-            {errors.refracaoEstaticaAcuidadeVisualOlhoDireito && <FormHelperText>{errors.refracaoEstaticaAcuidadeVisualOlhoDireito}</FormHelperText> }
+            {errors.refracaoEstaticaAcuidadeVisualOlhoDireito && (
+              <FormHelperText>
+                {errors.refracaoEstaticaAcuidadeVisualOlhoDireito}
+              </FormHelperText>
+            )}
           </Column>
         </Grid>
       </Grid>
@@ -479,8 +700,13 @@ const FormConsulta = ({ values, handleChange, errors}) => {
               onChange={handleChange}
               error={errors.refracaoEstaticaEsfericoOlhoEsquerdo}
               variant="outlined"
+              disabled={!isAdmin && !isMedico}
             />
-            {errors.refracaoEstaticaEsfericoOlhoEsquerdo && <FormHelperText>{errors.refracaoEstaticaEsfericoOlhoEsquerdo}</FormHelperText> }
+            {errors.refracaoEstaticaEsfericoOlhoEsquerdo && (
+              <FormHelperText>
+                {errors.refracaoEstaticaEsfericoOlhoEsquerdo}
+              </FormHelperText>
+            )}
           </Column>
         </Grid>
         <Grid item style={{ width: "100%" }} md={4}>
@@ -493,8 +719,13 @@ const FormConsulta = ({ values, handleChange, errors}) => {
               onChange={handleChange}
               error={errors.refracaoEstaticaCilindricoOlhoEsquerdo}
               variant="outlined"
+              disabled={!isAdmin && !isMedico}
             />
-            {errors.refracaoEstaticaCilindricoOlhoEsquerdo && <FormHelperText>{errors.refracaoEstaticaCilindricoOlhoEsquerdo}</FormHelperText> }
+            {errors.refracaoEstaticaCilindricoOlhoEsquerdo && (
+              <FormHelperText>
+                {errors.refracaoEstaticaCilindricoOlhoEsquerdo}
+              </FormHelperText>
+            )}
           </Column>
         </Grid>
         <Grid item style={{ width: "100%" }} md={4}>
@@ -507,8 +738,13 @@ const FormConsulta = ({ values, handleChange, errors}) => {
               onChange={handleChange}
               error={errors.refracaoEstaticaEixoOlhoEsquerdo}
               variant="outlined"
+              disabled={!isAdmin && !isMedico}
             />
-            {errors.refracaoEstaticaEixoOlhoEsquerdo && <FormHelperText>{errors.refracaoEstaticaEixoOlhoEsquerdo}</FormHelperText> }
+            {errors.refracaoEstaticaEixoOlhoEsquerdo && (
+              <FormHelperText>
+                {errors.refracaoEstaticaEixoOlhoEsquerdo}
+              </FormHelperText>
+            )}
           </Column>
         </Grid>
       </Grid>
@@ -523,8 +759,13 @@ const FormConsulta = ({ values, handleChange, errors}) => {
               onChange={handleChange}
               error={errors.refracaoEstaticaAcuidadeVisualOlhoEsquerdo}
               variant="outlined"
+              disabled={!isAdmin && !isMedico}
             />
-            {errors.refracaoEstaticaAcuidadeVisualOlhoEsquerdo && <FormHelperText>{errors.refracaoEstaticaAcuidadeVisualOlhoEsquerdo}</FormHelperText> }
+            {errors.refracaoEstaticaAcuidadeVisualOlhoEsquerdo && (
+              <FormHelperText>
+                {errors.refracaoEstaticaAcuidadeVisualOlhoEsquerdo}
+              </FormHelperText>
+            )}
           </Column>
         </Grid>
       </Grid>
@@ -542,8 +783,11 @@ const FormConsulta = ({ values, handleChange, errors}) => {
               onChange={handleChange}
               error={errors.biomicroscopiaOd}
               variant="outlined"
+              disabled={!isAdmin && !isMedico}
             />
-            {errors.biomicroscopiaOd && <FormHelperText>{errors.biomicroscopiaOd}</FormHelperText> }
+            {errors.biomicroscopiaOd && (
+              <FormHelperText>{errors.biomicroscopiaOd}</FormHelperText>
+            )}
           </Column>
         </Grid>
         <Grid item style={{ width: "100%" }} md={6}>
@@ -556,8 +800,11 @@ const FormConsulta = ({ values, handleChange, errors}) => {
               onChange={handleChange}
               error={errors.biomicroscopiaOs}
               variant="outlined"
+              disabled={!isAdmin && !isMedico}
             />
-            {errors.biomicroscopiaOs && <FormHelperText>{errors.biomicroscopiaOs}</FormHelperText> }
+            {errors.biomicroscopiaOs && (
+              <FormHelperText>{errors.biomicroscopiaOs}</FormHelperText>
+            )}
           </Column>
         </Grid>
       </Grid>
@@ -575,8 +822,11 @@ const FormConsulta = ({ values, handleChange, errors}) => {
               onChange={handleChange}
               error={errors.fundoscopiaOd}
               variant="outlined"
+              disabled={!isAdmin && !isMedico}
             />
-            {errors.fundoscopiaOd && <FormHelperText>{errors.fundoscopiaOd}</FormHelperText> }
+            {errors.fundoscopiaOd && (
+              <FormHelperText>{errors.fundoscopiaOd}</FormHelperText>
+            )}
           </Column>
         </Grid>
         <Grid item style={{ width: "100%" }} md={6}>
@@ -589,8 +839,11 @@ const FormConsulta = ({ values, handleChange, errors}) => {
               onChange={handleChange}
               error={errors.fundoscopiaOs}
               variant="outlined"
+              disabled={!isAdmin && !isMedico}
             />
-            {errors.fundoscopiaOs && <FormHelperText>{errors.fundoscopiaOs}</FormHelperText> }
+            {errors.fundoscopiaOs && (
+              <FormHelperText>{errors.fundoscopiaOs}</FormHelperText>
+            )}
           </Column>
         </Grid>
       </Grid>
@@ -605,8 +858,11 @@ const FormConsulta = ({ values, handleChange, errors}) => {
             onChange={handleChange}
             error={errors.motilidadeOcular}
             variant="outlined"
+            disabled={!isAdmin && !isMedico}
           />
-          {errors.motilidadeOcular && <FormHelperText>{errors.motilidadeOcular}</FormHelperText> }
+          {errors.motilidadeOcular && (
+            <FormHelperText>{errors.motilidadeOcular}</FormHelperText>
+          )}
         </Column>
       </Grid>
       <Padding padding="16px" />
@@ -621,8 +877,11 @@ const FormConsulta = ({ values, handleChange, errors}) => {
             onChange={handleChange}
             error={errors.diagnostico}
             variant="outlined"
+            disabled={!isAdmin && !isMedico}
           />
-          {errors.diagnostico && <FormHelperText>{errors.diagnostico}</FormHelperText> }
+          {errors.diagnostico && (
+            <FormHelperText>{errors.diagnostico}</FormHelperText>
+          )}
         </Column>
       </Grid>
       <Padding padding="16px" />
@@ -637,8 +896,9 @@ const FormConsulta = ({ values, handleChange, errors}) => {
             onChange={handleChange}
             error={errors.conduta}
             variant="outlined"
+            disabled={!isAdmin && !isMedico}
           />
-          {errors.conduta && <FormHelperText>{errors.conduta}</FormHelperText> }
+          {errors.conduta && <FormHelperText>{errors.conduta}</FormHelperText>}
         </Column>
       </Grid>
       <Padding padding="16px" />
@@ -651,10 +911,24 @@ const FormConsulta = ({ values, handleChange, errors}) => {
           onChange={handleChange}
           error={errors.precisaOculos}
         >
-          <FormControlLabel  error={errors.precisaOculos} control={<Radio />} value={"Sim"} label="Sim" />
-          <FormControlLabel  error={errors.precisaOculos} control={<Radio />} value={"Não"} label="Não" />
+          <FormControlLabel
+            error={errors.precisaOculos}
+            control={<Radio />}
+            value={"Sim"}
+            label="Sim"
+            disabled={!isAdmin && !isMedico}
+          />
+          <FormControlLabel
+            error={errors.precisaOculos}
+            control={<Radio />}
+            value={"Não"}
+            label="Não"
+            disabled={!isAdmin && !isMedico}
+          />
         </RadioGroup>
-        {errors.precisaOculos && <FormHelperText>{errors.precisaOculos}</FormHelperText> }
+        {errors.precisaOculos && (
+          <FormHelperText>{errors.precisaOculos}</FormHelperText>
+        )}
       </Grid>
       <Padding padding="16px" />
 
@@ -673,6 +947,7 @@ const FormConsulta = ({ values, handleChange, errors}) => {
               />
             }
             label="Ambliopia"
+            disabled={!isAdmin && !isMedico}
           />
           <FormControlLabel
             control={
@@ -683,7 +958,8 @@ const FormConsulta = ({ values, handleChange, errors}) => {
                 value={values.acompanhamento?.retinoblastoma}
               />
             }
-            label="Retinoblastoma "
+            label="Retinoblastoma"
+            disabled={!isAdmin && !isMedico}
           />
           <FormControlLabel
             control={
@@ -695,6 +971,7 @@ const FormConsulta = ({ values, handleChange, errors}) => {
               />
             }
             label="Catarata Congênita"
+            disabled={!isAdmin && !isMedico}
           />
           <FormControlLabel
             control={
@@ -706,6 +983,7 @@ const FormConsulta = ({ values, handleChange, errors}) => {
               />
             }
             label="Obstrução de Vias Lacrimais"
+            disabled={!isAdmin && !isMedico}
           />
           <FormControlLabel
             control={
@@ -717,6 +995,7 @@ const FormConsulta = ({ values, handleChange, errors}) => {
               />
             }
             label="Estrabismo"
+            disabled={!isAdmin && !isMedico}
           />
           <FormControlLabel
             control={
@@ -728,6 +1007,7 @@ const FormConsulta = ({ values, handleChange, errors}) => {
               />
             }
             label="Glaucoma congênito"
+            disabled={!isAdmin && !isMedico}
           />
           <FormControlLabel
             control={
@@ -739,6 +1019,7 @@ const FormConsulta = ({ values, handleChange, errors}) => {
               />
             }
             label="Uveítes"
+            disabled={!isAdmin && !isMedico}
           />
           <FormControlLabel
             control={
@@ -750,6 +1031,7 @@ const FormConsulta = ({ values, handleChange, errors}) => {
               />
             }
             label="Nistagmo"
+            disabled={!isAdmin && !isMedico}
           />
           <FormControlLabel
             control={
@@ -761,6 +1043,7 @@ const FormConsulta = ({ values, handleChange, errors}) => {
               />
             }
             label="Miopia progressiva"
+            disabled={!isAdmin && !isMedico}
           />
           <FormControlLabel
             control={
@@ -771,7 +1054,8 @@ const FormConsulta = ({ values, handleChange, errors}) => {
                 value={values.acompanhamento?.ectasiasCornea}
               />
             }
-            label="Ectasias de córnea "
+            label="Ectasias de córnea"
+            disabled={!isAdmin && !isMedico}
           />
           <FormControlLabel
             control={
@@ -785,6 +1069,7 @@ const FormConsulta = ({ values, handleChange, errors}) => {
               />
             }
             label="Alergias/Conjuntivites/Calázio"
+            disabled={!isAdmin && !isMedico}
           />
           <FormControlLabel
             control={
@@ -796,6 +1081,7 @@ const FormConsulta = ({ values, handleChange, errors}) => {
               />
             }
             label="Baixa visão Central"
+            disabled={!isAdmin && !isMedico}
           />
         </FormGroup>
       </Grid>
@@ -813,8 +1099,11 @@ const FormConsulta = ({ values, handleChange, errors}) => {
             onChange={handleChange}
             error={errors.proximaConsulta}
             variant="outlined"
+            disabled={!isAdmin && !isMedico}
           />
-            {errors.proximaConsulta && <FormHelperText>{errors.proximaConsulta}</FormHelperText> }
+          {errors.proximaConsulta && (
+            <FormHelperText>{errors.proximaConsulta}</FormHelperText>
+          )}
         </Column>
       </Grid>
 
@@ -831,6 +1120,7 @@ const FormConsulta = ({ values, handleChange, errors}) => {
               onChange={handleChange}
               value={values.observationConsulta}
               variant="outlined"
+              disabled={!isAdmin && !isMedico}
             />
           </Column>
         </Grid>
@@ -848,6 +1138,7 @@ const FormConsulta = ({ values, handleChange, errors}) => {
                 defaultChecked={values.consultaCompleted}
                 onChange={handleChange}
                 value={values.consultaCompleted}
+                disabled={!isAdmin && !isMedico}
               />
             }
             label="Considerar consulta como concluída"

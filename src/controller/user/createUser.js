@@ -27,17 +27,16 @@ export const CreateUserRequest = async (body) => {
   })
 }
 
-
 export async function createUser(data) {
   try {
     const userData = {
       name: data.name,
       role: data.role,
       email: data.email,
+      password: data.password,
     };
 
     CreateUserRequest(userData)
-
 
     console.log("Usuário criado com sucesso");
   } catch (err) {

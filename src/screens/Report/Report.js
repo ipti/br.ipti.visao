@@ -10,14 +10,7 @@ import { Container } from "@material-ui/core";
 import { useHistory } from "react-router-dom";
 
 
-//aqui nesses parenteses voce pode definir os parametros que quer receber
 const ReportPage = () => {
-
-    // const [report, setReport] = useState([])
-    // const pdfUrl = "http://www.africau.edu/images/default/sample.pdf"; //definir aqui depois o modelo o PDF
-    // const abrirPDF = () => {
-    //     window.open(pdfUrl);
-    // };
 
     const history = useHistory();
 
