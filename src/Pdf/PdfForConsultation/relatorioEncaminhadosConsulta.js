@@ -1,6 +1,6 @@
 import { SaveAlt } from "@material-ui/icons";
-import html2canvas from "html2canvas";
-import jsPDF from "jspdf";
+// import html2canvas from "html2canvas";
+// import jsPDF from "jspdf";
 import React, { useEffect, useRef, useState } from "react";
 import logo from "../../assets/images/logo.svg";
 
@@ -10,61 +10,77 @@ import { Table, TableData, TableHeader, TableWrapper } from "../style";
 import Skeleton from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
 import api from "../../services/api";
+import { Pagination, Typography } from "@mui/material"; 
 
-// Create Document Component
+import pdfMake from "pdfmake/build/pdfmake";
+import pdfFonts from "pdfmake/build/vfs_fonts";
+pdfMake.vfs = pdfFonts.pdfMake.vfs;
+
 const MyDocument = () => {
   const contentRef = useRef(null);
 
   const [report, setReport] = useState([]);
   const [isFetching, setIsFetching] = useState(true);
+  const [currentPage, setCurrentPage] = useState(1);
+  const itemsPerPage = 10; // Quantidade de itens por página
 
   const generatePDF = () => {
-    if (!contentRef.current) return;
-
-    const elementToCapture = contentRef.current;
-
-    html2canvas(elementToCapture).then((canvas) => {
-        const pdf = new jsPDF('p', 'mm', 'a4');
-        const imgData = canvas.toDataURL('image/png');
-
-        // Configuração para o tamanho do PDF
-        const pdfWidth = 210; 
-        const pdfHeight = 297; 
-        const imgWidth = pdfWidth;
-        const imgHeight = (canvas.height * imgWidth) / canvas.width;
-
-        let heightLeft = imgHeight;
-        let position = 0;
-        let page = 1;
-
-        // Função para desenhar cabeçalho
-        const drawHeader = (pageNumber) => {
-            pdf.setFontSize(12);
-            pdf.text('Relatório: Estudantes para Consulta', 10, 10); // Título no cabeçalho
-            pdf.setFontSize(10);
-            pdf.text(`Página ${pageNumber}`, 200, 10, { align: 'right' }); // Número da página
-            pdf.line(10, 15, 200, 15); // Linha separadora
-        };
-
-        // Adiciona a primeira página (sem cabeçalho)
-        pdf.addImage(imgData, 'PNG', 0, position, imgWidth, imgHeight);
-        heightLeft -= pdfHeight;
-
-        // Adiciona páginas adicionais com cabeçalho, se necessário
-        while (heightLeft > 0) {
-            position -= pdfHeight; // Move para a próxima página
-            pdf.addPage();
-            page++; // Incrementa número da página
-
-            drawHeader(page); // Adiciona cabeçalho apenas a partir da segunda página
-            pdf.addImage(imgData, 'PNG', 0, position, imgWidth, imgHeight);
-            heightLeft -= pdfHeight;
-        }
-
-        pdf.save('RelatorioEncaminhadosParaConsulta-Lupa.pdf');
-    });
-};
-
+    // Cabeçalho da tabela
+    const tableHeaders = [
+      "Nº",
+      "Nome da escola",
+      "Turma",
+      "Nome do Estudante",
+      "Data de Nascimento",
+      "Prioridade",
+    ];
+  
+    // Dados da tabela
+    const tableBody = report.map((item, index) => [
+      index + 1,
+      item.school,
+      item.classroom,
+      item.student_name,
+      item.birthday,
+      item.points < 5
+        ? "Prioridade mínima"
+        : item.points < 9
+        ? "Prioridade média"
+        : "Prioridade máxima",
+    ]);
+  
+    // Document Definition do PDF
+    const documentDefinition = {
+      content: [
+        { text: "Relatório de Estudantes para Consulta - Lupa", style: "header" },
+        {
+          table: {
+            headerRows: 1, // Define que a primeira linha é o cabeçalho
+            widths: ["auto", "*", "auto", "*", "auto", "auto"], // Larguras das colunas
+            body: [tableHeaders, ...tableBody], // Corpo da tabela
+          },
+          layout: "lightHorizontalLines", // Estilo da tabela
+        },
+      ],
+      styles: {
+        header: {
+          fontSize: 18,
+          bold: true,
+          marginBottom: 10,
+          alignment: "center",
+        },
+        tableHeader: {
+          bold: true,
+          fontSize: 12,
+          color: "black",
+        },
+      },
+    };
+  
+    // Gera o PDF com base no documentDefinition
+    pdfMake.createPdf(documentDefinition).download("RelatorioEncaminhadosParaConsulta-Lupa.pdf");
+  };
+  
 
   useEffect(() => {
     const callFunction = async () => {
@@ -80,12 +96,24 @@ const MyDocument = () => {
     callFunction();
   }, []);
 
+
+  const totalPages = Math.ceil(report.length / itemsPerPage);
+
+  // Itens exibidos na página atual
+  const indexOfLastItem = currentPage * itemsPerPage;
+  const indexOfFirstItem = indexOfLastItem - itemsPerPage;
+  const currentItems = report.slice(indexOfFirstItem, indexOfLastItem);
+
+  const handleChangePage = (event, value) => {
+    setCurrentPage(value);
+  };
+
   return (
     <div style={{ width: "100%" }}>
       <Padding padding="32px 16px">
         <button
           style={{ padding: "8px", cursor: "pointer" }}
-          onClick={generatePDF}
+          onClick={() => generatePDF()}
         >
           <Row>
             <SaveAlt />{" "}
@@ -105,6 +133,7 @@ const MyDocument = () => {
                 </h1>
                 <Padding />
               </Column>
+
               <Column id="center">
                 <Row id="center">
                   <img
@@ -124,6 +153,7 @@ const MyDocument = () => {
               <h1 style={{ padding: "0px" }}>
                 Relatório Estudantes Encaminhados para Consulta - Lupa{" "}
               </h1>
+
             </Row>
           </Column>
           <div>
@@ -153,33 +183,19 @@ const MyDocument = () => {
                 </thead>
                 <tbody>
                   {isFetching ? (
-                    // Mostrar Skeleton enquanto os dados estão sendo carregados
                     <tr>
-                      <TableData>
-                        <Skeleton height={20} />
-                      </TableData>
-                      <TableData>
-                        <Skeleton height={20} />
-                      </TableData>
-                      <TableData>
-                        <Skeleton height={20} />
-                      </TableData>
-                      <TableData>
-                        <Skeleton height={20} />
-                      </TableData>
-                      <TableData>
-                        <Skeleton height={20} />
-                      </TableData>
-                      <TableData>
-                        <Skeleton height={20} />
-                      </TableData>
+                      <TableData><Skeleton height={20} /></TableData>
+                      <TableData><Skeleton height={20} /></TableData>
+                      <TableData><Skeleton height={20} /></TableData>
+                      <TableData><Skeleton height={20} /></TableData>
+                      <TableData><Skeleton height={20} /></TableData>
+                      <TableData><Skeleton height={20} /></TableData>
                     </tr>
                   ) : (
-                    // Renderizar os dados do relatório
-                    report.map((item, index) => (
+                    currentItems.map((item, index) => (
                       <tr key={index}>
                         <TableData style={{ textAlign: "center" }}>
-                          {index + 1}
+                          {indexOfFirstItem + index + 1}
                         </TableData>
                         <TableData style={{ textAlign: "center" }}>
                           {item.school}
@@ -197,10 +213,10 @@ const MyDocument = () => {
                           {item.points < 5
                             ? "Prioridade minima"
                             : item.points >= 5 && item.points < 9
-                            ? "Prioridade média"
-                            : item.points >= 10
-                            ? "Prioridade máxima"
-                            : ""}
+                              ? "Prioridade média"
+                              : item.points >= 10
+                                ? "Prioridade máxima"
+                                : ""}
                         </TableData>
                       </tr>
                     ))
@@ -208,10 +224,30 @@ const MyDocument = () => {
                 </tbody>
               </Table>
             </TableWrapper>
+            <Row
+              id="center"
+              style={{
+                marginTop: "16px",
+                display: "flex",
+                flexDirection: "column",
+                alignItems: "center",
+                justifyContent: "center",
+              }}
+            >
+              <Typography style={{ marginBottom: "8px" }}>Página: {currentPage}</Typography>
+              <Pagination
+                count={totalPages}
+                shape="rounded"
+                page={currentPage}
+                onChange={handleChangePage}
+              />
+            </Row>
+
           </div>
         </Padding>
       </div>
     </div>
   );
 };
+
 export default MyDocument;
