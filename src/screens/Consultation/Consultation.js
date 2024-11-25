@@ -5,7 +5,7 @@ import React, { useEffect, useState } from "react";
 import { Container, useMediaQuery } from "@material-ui/core";
 import Select from "react-select";
 
-import axios from "axios";
+import api from "../../services/api";
 
 import { BoxConsultation } from "../../components/Boxes";
 import List from "../../components/List";
@@ -21,8 +21,8 @@ const Consultation = ({ setIdSchool, idSchool }) => {
   useEffect(() => {
     const callFunction = async () => {
       try {
-        const result = await axios.get(
-          "http://127.0.0.1:5001/br-ipti-visao/us-central1/fowardedForConsultation"
+        const result = await api.get(
+          "/fowardedForConsultation"
         );
         setConsultation(result.data);
         setFilteredConsultation(result.data); // Default: show all consultations
