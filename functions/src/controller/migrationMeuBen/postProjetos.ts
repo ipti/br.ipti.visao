@@ -40,10 +40,10 @@ const getStudentData = async (id: string) => {
       name: student.object.name,
       birthday: converterData(student.object.birthday),
       cpf: (student.object.cpf).replace(/[^a-zA-Z0-9]/g, ''),
-      sex: parseInt(student.object.sex) ?? undefined,
-      color_race: parseInt(student.object.colorRace) ?? undefined,
+      sex: student.object.sex ? parseInt(student.object.sex) : undefined,
+      color_race: student.object.colorRace ? parseInt(student.object.colorRace) : undefined, // vERIFICAR SE O NUMERO ESTÁ CORRETO
       deficiency: student.object.deficiency ?? false,
-      zone: parseInt(student.object.zone) ?? undefined,
+      zone: student.object.zone ? parseInt(student.object.zone) : undefined,
     }
   });
   return studentMigrationData;
