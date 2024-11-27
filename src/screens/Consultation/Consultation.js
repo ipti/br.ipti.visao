@@ -1,5 +1,6 @@
 import Grid from "@material-ui/core/Grid";
 import Alert from "@material-ui/lab/Alert";
+import CircularProgress from "@material-ui/core/CircularProgress";
 import React, { useEffect, useState } from "react";
 
 import { Container, useMediaQuery } from "@material-ui/core";
@@ -15,19 +16,18 @@ const Consultation = ({ setIdSchool, idSchool }) => {
   const [consultation, setConsultation] = useState([]);
   const [schoolOptions, setSchoolOptions] = useState([]);
   const [filteredConsultation, setFilteredConsultation] = useState([]);
+  const [loading, setLoading] = useState(true); // Estado para o loading
 
   const matches = useMediaQuery("(max-width:600px)");
+
   // Fetch consultations data
   useEffect(() => {
     const callFunction = async () => {
       try {
-        const result = await api.get(
-          "/fowardedForConsultation"
-        );
+        const result = await api.get("/fowardedForConsultation");
         setConsultation(result.data);
-        setFilteredConsultation(result.data); // Default: show all consultations
+        setFilteredConsultation(result.data); 
 
-        // Extract unique schools for the Select options
         const uniqueSchools = Array.from(
           new Map(
             result.data.map((item) => [item.school_id, { id: item.school_id, name: item.school }])
@@ -36,12 +36,13 @@ const Consultation = ({ setIdSchool, idSchool }) => {
         setSchoolOptions(uniqueSchools);
       } catch (error) {
         console.error("Error calling function:", error);
+      } finally {
+        setTimeout(() => setLoading(false), 2000);
       }
     };
     callFunction();
   }, []);
 
-  // Handle school selection for filtering
   const handleSchoolChange = (selectedOption) => {
     setIdSchool(selectedOption.id);
     const filtered = consultation.filter(
@@ -50,7 +51,6 @@ const Consultation = ({ setIdSchool, idSchool }) => {
     setFilteredConsultation(filtered);
   };
 
-  // Render cards based on filtered consultations
   const renderCard = () => {
     return filteredConsultation.map((item, index) => (
       <BoxConsultation
@@ -70,32 +70,48 @@ const Consultation = ({ setIdSchool, idSchool }) => {
   return (
     <Container style={{ padding: "8px", cursor: "pointer" }}>
       <h1>Consultas</h1>
-      <div style={{ width: matches ? "80%" : "50%" }}>
-        <label>Escolha uma escola</label>
-        <Padding padding="10px"/>
-        <Select
-          className="basic-single"
-          classNamePrefix="select"
-          placeholder="Digite uma escola"
-          options={schoolOptions}
-          value={schoolOptions.find((s) => s.id === idSchool)}
-          onChange={handleSchoolChange}
-          getOptionValue={(opt) => opt.id}
-          getOptionLabel={(opt) => opt.name}
-        />
-      </div>
-      <Padding padding="10px" />
-      <Grid container direction="row" spacing={3}>
-        {filteredConsultation.length > 0 ? (
-          <List items={renderCard()} />
-        ) : (
-          <Grid item xs={12}>
-            <Alert variant="outlined" severity="warning">
-              Nenhum aluno encaminhado
-            </Alert>
+      {loading ? (
+        <Grid
+          container
+          direction="column"
+          justifyContent="center"
+          alignItems="center"
+          style={{ minHeight: "50vh" }} 
+        >
+          <CircularProgress />
+          <Padding padding="10px" />
+          <span>Carregando...</span>
+        </Grid>
+      ) : (
+        <>
+          <div style={{ width: matches ? "80%" : "50%" }}>
+            <label>Escolha uma escola</label>
+            <Padding padding="10px" />
+            <Select
+              className="basic-single"
+              classNamePrefix="select"
+              placeholder="Digite uma escola"
+              options={schoolOptions}
+              value={schoolOptions.find((s) => s.id === idSchool)}
+              onChange={handleSchoolChange}
+              getOptionValue={(opt) => opt.id}
+              getOptionLabel={(opt) => opt.name}
+            />
+          </div>
+          <Padding padding="10px" />
+          <Grid container direction="row" spacing={3}>
+            {filteredConsultation.length > 0 ? (
+              <List items={renderCard()} />
+            ) : (
+              <Grid item xs={12}>
+                <Alert variant="outlined" severity="warning">
+                  Nenhum aluno encaminhado
+                </Alert>
+              </Grid>
+            )}
           </Grid>
-        )}
-      </Grid>
+        </>
+      )}
     </Container>
   );
 };

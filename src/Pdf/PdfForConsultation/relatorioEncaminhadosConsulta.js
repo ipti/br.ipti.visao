@@ -1,6 +1,4 @@
 import { SaveAlt } from "@material-ui/icons";
-// import html2canvas from "html2canvas";
-// import jsPDF from "jspdf";
 import React, { useEffect, useRef, useState } from "react";
 import logo from "../../assets/images/logo.svg";
 
@@ -10,10 +8,11 @@ import { Table, TableData, TableHeader, TableWrapper } from "../style";
 import Skeleton from "react-loading-skeleton";
 import "react-loading-skeleton/dist/skeleton.css";
 import api from "../../services/api";
-import { Pagination, Typography } from "@mui/material"; 
+import { Pagination, Typography } from "@mui/material";
 
 import pdfMake from "pdfmake/build/pdfmake";
 import pdfFonts from "pdfmake/build/vfs_fonts";
+
 pdfMake.vfs = pdfFonts.pdfMake.vfs;
 
 const MyDocument = () => {
@@ -22,65 +21,84 @@ const MyDocument = () => {
   const [report, setReport] = useState([]);
   const [isFetching, setIsFetching] = useState(true);
   const [currentPage, setCurrentPage] = useState(1);
-  const itemsPerPage = 10; // Quantidade de itens por página
+  const itemsPerPage = 10;
 
   const generatePDF = () => {
-    // Cabeçalho da tabela
     const tableHeaders = [
-      "Nº",
-      "Nome da escola",
-      "Turma",
-      "Nome do Estudante",
-      "Data de Nascimento",
-      "Prioridade",
+      { text: "Nº", style: "tableHeader" },
+      { text: "Nome da escola", style: "tableHeader" },
+      { text: "Turma", style: "tableHeader" },
+      { text: "Nome do Estudante", style: "tableHeader" },
+      { text: "Data de Nascimento", style: "tableHeader" },
+      { text: "Prioridade", style: "tableHeader" },
     ];
-  
-    // Dados da tabela
+
     const tableBody = report.map((item, index) => [
-      index + 1,
-      item.school,
-      item.classroom,
-      item.student_name,
-      item.birthday,
-      item.points < 5
-        ? "Prioridade mínima"
-        : item.points < 9
-        ? "Prioridade média"
-        : "Prioridade máxima",
+      { text: index + 1, style: "tableRow" },
+      { text: item.school, style: "tableRow" },
+      { text: item.classroom, style: "tableRow" },
+      { text: item.student_name, style: "tableRow" },
+      { text: item.birthday, style: "tableRow" },
+      {
+        text: item.points < 5 ? "Mínima" : item.points < 9 ? "Média" : "Máxima",
+        style: "tableRow",
+      },
     ]);
-  
-    // Document Definition do PDF
+
     const documentDefinition = {
       content: [
-        { text: "Relatório de Estudantes para Consulta - Lupa", style: "header" },
+        {
+          text: "Relatório de Estudantes para Consulta - Lupa",
+          style: "header",
+        },
         {
           table: {
-            headerRows: 1, // Define que a primeira linha é o cabeçalho
-            widths: ["auto", "*", "auto", "*", "auto", "auto"], // Larguras das colunas
-            body: [tableHeaders, ...tableBody], // Corpo da tabela
+            headerRows: 1,
+            widths: ["auto", "*", "auto", "*", "auto", "auto"],
+            body: [tableHeaders, ...tableBody],
           },
-          layout: "lightHorizontalLines", // Estilo da tabela
+          layout: {
+            fillColor: (rowIndex) =>
+              rowIndex === 0 ? null : rowIndex % 2 === 0 ? "#F0F0F0" : null,
+            hLineWidth: () => 0.5,
+            vLineWidth: () => 0.5,
+            hLineColor: () => "#CCCCCC",
+            vLineColor: () => "#CCCCCC",
+          },
         },
       ],
       styles: {
         header: {
           fontSize: 18,
           bold: true,
-          marginBottom: 10,
+          marginBottom: 20,
           alignment: "center",
         },
         tableHeader: {
           bold: true,
           fontSize: 12,
+          color: "white",
+          fillColor: "#0077B6",
+          alignment: "center",
+          margin: 5,
+        },
+        tableRow: {
           color: "black",
+          fontSize: 10,
         },
       },
+      footer: (currentPage, pageCount) => ({
+        text: `Página ${currentPage} de ${pageCount}`,
+        alignment: "center",
+        fontSize: 10,
+        margin: [0, 10, 0, 0],
+      }),
     };
-  
-    // Gera o PDF com base no documentDefinition
-    pdfMake.createPdf(documentDefinition).download("RelatorioEncaminhadosParaConsulta-Lupa.pdf");
+
+    pdfMake
+      .createPdf(documentDefinition)
+      .download("RelatorioEncaminhadosParaConsulta-Lupa.pdf");
   };
-  
 
   useEffect(() => {
     const callFunction = async () => {
@@ -96,10 +114,8 @@ const MyDocument = () => {
     callFunction();
   }, []);
 
-
   const totalPages = Math.ceil(report.length / itemsPerPage);
 
-  // Itens exibidos na página atual
   const indexOfLastItem = currentPage * itemsPerPage;
   const indexOfFirstItem = indexOfLastItem - itemsPerPage;
   const currentItems = report.slice(indexOfFirstItem, indexOfLastItem);
@@ -153,7 +169,6 @@ const MyDocument = () => {
               <h1 style={{ padding: "0px" }}>
                 Relatório Estudantes Encaminhados para Consulta - Lupa{" "}
               </h1>
-
             </Row>
           </Column>
           <div>
@@ -184,12 +199,24 @@ const MyDocument = () => {
                 <tbody>
                   {isFetching ? (
                     <tr>
-                      <TableData><Skeleton height={20} /></TableData>
-                      <TableData><Skeleton height={20} /></TableData>
-                      <TableData><Skeleton height={20} /></TableData>
-                      <TableData><Skeleton height={20} /></TableData>
-                      <TableData><Skeleton height={20} /></TableData>
-                      <TableData><Skeleton height={20} /></TableData>
+                      <TableData>
+                        <Skeleton height={20} />
+                      </TableData>
+                      <TableData>
+                        <Skeleton height={20} />
+                      </TableData>
+                      <TableData>
+                        <Skeleton height={20} />
+                      </TableData>
+                      <TableData>
+                        <Skeleton height={20} />
+                      </TableData>
+                      <TableData>
+                        <Skeleton height={20} />
+                      </TableData>
+                      <TableData>
+                        <Skeleton height={20} />
+                      </TableData>
                     </tr>
                   ) : (
                     currentItems.map((item, index) => (
@@ -213,10 +240,10 @@ const MyDocument = () => {
                           {item.points < 5
                             ? "Prioridade minima"
                             : item.points >= 5 && item.points < 9
-                              ? "Prioridade média"
-                              : item.points >= 10
-                                ? "Prioridade máxima"
-                                : ""}
+                            ? "Prioridade média"
+                            : item.points >= 10
+                            ? "Prioridade máxima"
+                            : ""}
                         </TableData>
                       </tr>
                     ))
@@ -234,7 +261,9 @@ const MyDocument = () => {
                 justifyContent: "center",
               }}
             >
-              <Typography style={{ marginBottom: "8px" }}>Página: {currentPage}</Typography>
+              <Typography style={{ marginBottom: "8px" }}>
+                Página: {currentPage}
+              </Typography>
               <Pagination
                 count={totalPages}
                 shape="rounded"
@@ -242,7 +271,6 @@ const MyDocument = () => {
                 onChange={handleChangePage}
               />
             </Row>
-
           </div>
         </Padding>
       </div>
