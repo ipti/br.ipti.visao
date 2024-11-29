@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 
 import { useMediaQuery } from "@material-ui/core";
 import AppBar from "@material-ui/core/AppBar";
@@ -12,6 +12,7 @@ import logo from "../../assets/images/logo.svg";
 import { isAuthenticated } from "../../services/auth";
 import styleBase from "../../styles";
 import { Column, Row } from "../../styles/style";
+import api from "../../services/api";
 
 const useStyles = makeStyles({
   root: {
@@ -45,10 +46,13 @@ const useStyles = makeStyles({
   },
 });
 
+
+
 const Header = ({ setIsSidebar, isSidebar }) => {
   const classes = useStyles();
   let history = useHistory();
   const [anchorEl, setAnchorEl] = React.useState(null);
+  const [user, setUser] = React.useState(null);
   const open = Boolean(anchorEl);
   const matches = useMediaQuery("(max-width:600px)");
 
@@ -65,6 +69,19 @@ const Header = ({ setIsSidebar, isSidebar }) => {
     history.push("/login");
     window.location.reload();
   };
+
+  useEffect(() => {
+    const callFunction = async () => {
+      try {
+        const result = await api.get("/findOneUser");
+        setUser(result.data);
+
+      } catch (error) {
+        console.error("Error calling function:", error);
+      }
+    };
+    callFunction();
+  }, []);
 
   return (
     <AppBar classes={{ root: classes.root }} position="static">
@@ -111,7 +128,8 @@ const Header = ({ setIsSidebar, isSidebar }) => {
                     fontWeight: "bold",
                   }}
                 >
-                  Nome do Usuário
+                  {user?.name} 
+                  {/* nome do usuário */}
                 </span>
 
                 {/* Ícone da Conta */}

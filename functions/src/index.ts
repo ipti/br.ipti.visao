@@ -13,6 +13,8 @@ import { listUsers } from "./controller/users/listUsers";
 import { deleteUserData } from "./controller/users/deleteUser";
 import { createUserData } from "./controller/users/createUser";
 import { updateUserData } from "./controller/users/updateUser";
+import { oneUser } from "./controller/users/findOneUser";
+
 
 import { addPointsStudent } from "./controller/addPointsStudents/addPointsStudents";
 
@@ -40,6 +42,7 @@ export const usersList = listUsers(corsMiddleware);
 export const userDelete = deleteUserData(corsMiddleware);
 export const userCreate = createUserData(corsMiddleware);
 export const userUpdate = updateUserData(corsMiddleware);
+export const findOneUser = oneUser(corsMiddleware);
 
 export const addPointsStud = addPointsStudent(corsMiddleware);
 
