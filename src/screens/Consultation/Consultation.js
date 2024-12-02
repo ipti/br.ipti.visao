@@ -1,32 +1,32 @@
-import Grid from "@material-ui/core/Grid";
-import Alert from "@material-ui/lab/Alert";
-import CircularProgress from "@material-ui/core/CircularProgress";
 import React, { useEffect, useState } from "react";
-
-import { Container, useMediaQuery } from "@material-ui/core";
+import { Container, Grid, useMediaQuery, CircularProgress } from "@material-ui/core";
 import Select from "react-select";
+import Alert from "@material-ui/lab/Alert";
+import { Pagination } from "@mui/material";
 
 import api from "../../services/api";
-
 import { BoxConsultation } from "../../components/Boxes";
 import List from "../../components/List";
 import { Padding } from "../../styles/style";
+
+const ITEMS_PER_PAGE = 9; // Número de itens por página
 
 const Consultation = ({ setIdSchool, idSchool }) => {
   const [consultation, setConsultation] = useState([]);
   const [schoolOptions, setSchoolOptions] = useState([]);
   const [filteredConsultation, setFilteredConsultation] = useState([]);
-  const [loading, setLoading] = useState(true); // Estado para o loading
+  const [loading, setLoading] = useState(true);
+  const [currentPage, setCurrentPage] = useState(1);
 
   const matches = useMediaQuery("(max-width:600px)");
 
-  // Fetch consultations data
   useEffect(() => {
     const callFunction = async () => {
+      setLoading(true);
       try {
         const result = await api.get("/fowardedForConsultation");
         setConsultation(result.data);
-        setFilteredConsultation(result.data); 
+        setFilteredConsultation(result.data);
 
         const uniqueSchools = Array.from(
           new Map(
@@ -34,10 +34,10 @@ const Consultation = ({ setIdSchool, idSchool }) => {
           ).values()
         );
         setSchoolOptions(uniqueSchools);
+        setLoading(false);
       } catch (error) {
         console.error("Error calling function:", error);
-      } finally {
-        setTimeout(() => setLoading(false), 2000);
+        setLoading(false);
       }
     };
     callFunction();
@@ -49,10 +49,19 @@ const Consultation = ({ setIdSchool, idSchool }) => {
       (item) => item.school_id === selectedOption.id
     );
     setFilteredConsultation(filtered);
+    setCurrentPage(1);
   };
 
+  const handlePageChange = (event, value) => {
+    setCurrentPage(value);
+  };
+
+  const startIndex = (currentPage - 1) * ITEMS_PER_PAGE;
+  const endIndex = startIndex + ITEMS_PER_PAGE;
+  const currentItems = filteredConsultation.slice(startIndex, endIndex);
+
   const renderCard = () => {
-    return filteredConsultation.map((item, index) => (
+    return currentItems.map((item, index) => (
       <BoxConsultation
         link={`/turmas/${item?.classroom_id}/matricula/${item?.student_id}`}
         key={index}
@@ -68,7 +77,7 @@ const Consultation = ({ setIdSchool, idSchool }) => {
   };
 
   return (
-    <Container style={{ padding: "8px", cursor: "pointer" }}>
+    <Container style={{ cursor: "pointer" }}>
       <h1>Consultas</h1>
       {loading ? (
         <Grid
@@ -76,7 +85,7 @@ const Consultation = ({ setIdSchool, idSchool }) => {
           direction="column"
           justifyContent="center"
           alignItems="center"
-          style={{ minHeight: "50vh" }} 
+          style={{ minHeight: "50vh" }}
         >
           <CircularProgress />
           <Padding padding="10px" />
@@ -84,6 +93,11 @@ const Consultation = ({ setIdSchool, idSchool }) => {
         </Grid>
       ) : (
         <>
+          {idSchool && (
+            <h2 style={{ textAlign: "left", marginTop: "20px" }}>
+              {schoolOptions.find((school) => school.id === idSchool)?.name}
+            </h2>
+          )}
           <div style={{ width: matches ? "80%" : "50%" }}>
             <label>Escolha uma escola</label>
             <Padding padding="10px" />
@@ -101,7 +115,18 @@ const Consultation = ({ setIdSchool, idSchool }) => {
           <Padding padding="10px" />
           <Grid container direction="row" spacing={3}>
             {filteredConsultation.length > 0 ? (
-              <List items={renderCard()} />
+              <>
+                <List items={renderCard()} />
+                <Grid item xs={12}>
+                  <Pagination
+                    count={Math.ceil(filteredConsultation.length / ITEMS_PER_PAGE)} // Total de páginas
+                    page={currentPage}
+                    onChange={handlePageChange}
+                    color="primary"
+                    style={{ marginTop: "20px", display: "flex", justifyContent: "center" }}
+                  />
+                </Grid>
+              </>
             ) : (
               <Grid item xs={12}>
                 <Alert variant="outlined" severity="warning">

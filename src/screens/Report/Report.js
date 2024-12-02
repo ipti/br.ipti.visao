@@ -16,7 +16,7 @@ const ReportPage = () => {
 
     return (
 
-        <Container style={{ padding: "8px", cursor: "pointer" }} >
+        <Container style={{ cursor: "pointer" }} >
             <h1>Relatórios</h1>
             <Grid checkMockup={[{}, {}]}>
                 <Card style={{ width: "auto, cursor: pointer", border: "1px solid #4682B4"  }} onClick={() => {history.push("/relatorios/pdfrelatorio")}}>

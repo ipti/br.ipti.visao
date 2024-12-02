@@ -1,7 +1,7 @@
 import * as functions from 'firebase-functions';
 import { fetchSchoolsData, SchoolData } from '../school/fetchSchool';
 import { fetchClassroomData, ClassroomData } from '../classroom/fetchClassroom';
-import { fetchStudentData, StudentData } from '../student/fetchStudent';
+import { fetchStudenByPoints, StudentData } from '../student/fetchStudent';
 
 interface StudentReport {
     school_id: string | undefined;
@@ -15,19 +15,16 @@ interface StudentReport {
 }
 
 //todo: fazer offset limit para firebase
-
 // buscar alunos por escola e com pontos > 5
 
-const getStudent = async (schools: SchoolData[], classrooms: ClassroomData[], student: StudentData): Promise<StudentReport | null> => {
+const getStudent = (schools: SchoolData[], classrooms: ClassroomData[], student: StudentData): StudentReport | null => {
 
     const classroom = classrooms.find(classroom => classroom.id === student.object.classroom_fk);
+
 
     let school: SchoolData | undefined;
     if (classroom) {
         school = schools.find(school => school.id === classroom.object.school_fk);
-    }
-    if (student.object.points < 5 || student.object.points === undefined) {
-        return null;
     }
 
     const studentReport: StudentReport = {
@@ -36,7 +33,7 @@ const getStudent = async (schools: SchoolData[], classrooms: ClassroomData[], st
         classroom_id: classroom?.id,
         classroom: classroom?.object.name,
         student_id: student.id,
-        student_name: student.object.name, 
+        student_name: student.object.name,
         birthday: student.object.birthday,
         points: student.object.points,
     };
@@ -47,19 +44,11 @@ const getStudent = async (schools: SchoolData[], classrooms: ClassroomData[], st
 export const forConsultation = (cors: any) => functions.https.onRequest(async (req, res) => {
     cors(req, res, async () => {
         try {
-            
-            const [schools, classrooms, students] = await Promise.all([fetchSchoolsData(), fetchClassroomData(), fetchStudentData()]);
+            const [schools, classrooms, students] = await Promise.all([fetchSchoolsData(), fetchClassroomData(), fetchStudenByPoints()]);
 
-            // Gerar relatórios apenas para estudantes com pontos > 5
-            const totalForwardedPromises = students.map((student: StudentData) =>
-                getStudent(schools, classrooms, student)
-            );
+            const totalForwardedPromises = students.map((student: StudentData) => getStudent(schools, classrooms, student));
 
-            const totalForwarded = await Promise.all(totalForwardedPromises);
-            const filteredTotalForwarded = totalForwarded.filter(report => report !== null);
-
-
-            res.status(200).send(filteredTotalForwarded);
+            res.status(200).send(totalForwardedPromises);
         } catch (err: any) {
             res.status(500).send(err.message);
         }

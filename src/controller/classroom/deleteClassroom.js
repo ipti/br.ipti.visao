@@ -1,11 +1,8 @@
-// import { collection, deleteDoc, doc } from "@firebase/firestore";
-// import { firestore } from "../../config/firebase";
-import axios from 'axios';
-
+import api from '../../services/api';
 
 export const deleteItem = async (id, history) => {
     try {
-        await axios.delete(`https://us-central1-br-ipti-visao.cloudfunctions.net/classroomDelete/${id}`);
+        await api.delete(`/classroomDelete/${id}`);
         history.push("/turmas")
         console.log("Item deletado com sucesso");
     } catch (err) {
@@ -14,15 +11,3 @@ export const deleteItem = async (id, history) => {
     }
 }
 
-// export const deleteItem = async (id, history) => {
-//     const itemRef = doc(collection(firestore, "classroom"), id);
-
-//     try {
-//         await deleteDoc(itemRef);
-//         history.push("/turmas")
-//         console.log("Item deleted successfully");
-//     } catch (err) {
-//         console.error("Error deleting item:", err);
-//         throw err;
-//     }
-// }

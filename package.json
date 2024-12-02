@@ -29,7 +29,7 @@
     "html2canvas": "^1.4.1",
     "jspdf": "^2.5.1",
     "moment": "^2.24.0",
-    "pdfmake": "^0.2.14",
+    "pdfmake": "^0.2.15",
     "primereact": "^9.6.2",
     "rc-time-picker": "^3.7.3",
     "react": "^18.3.1",

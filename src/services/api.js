@@ -6,6 +6,7 @@ import { getToken } from "./auth";
 
 
 const api = axios.create({
+  //   baseURL: "http://127.0.0.1:5001/br-ipti-visao/us-central1/"
     baseURL: "https://us-central1-br-ipti-visao.cloudfunctions.net/"
 });
 

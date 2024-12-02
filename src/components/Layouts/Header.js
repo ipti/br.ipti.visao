@@ -1,5 +1,4 @@
-import React from "react";
-
+import React, { useEffect } from "react";
 
 import { useMediaQuery } from "@material-ui/core";
 import AppBar from "@material-ui/core/AppBar";
@@ -13,50 +12,51 @@ import logo from "../../assets/images/logo.svg";
 import { isAuthenticated } from "../../services/auth";
 import styleBase from "../../styles";
 import { Column, Row } from "../../styles/style";
-
-
-
+import api from "../../services/api";
 
 const useStyles = makeStyles({
   root: {
     flexGrow: 1,
     boxShadow:
       "0px 0px 0px -1px rgba(0,0,0,0.2), 0px -1px 5px 0px rgba(0,0,0,0.14), 0px 1px 6px 0px rgba(0,0,0,0.12)",
-    backgroundColor: styleBase.colors.white
+    backgroundColor: styleBase.colors.white,
   },
   tooBar: {
-    minHeight: "unset"
+    minHeight: "unset",
   },
   menuButton: {
     marginRight: 15,
-    display: "none"
+    display: "none",
   },
   title: {
-    margin: '8px 15px',
+    margin: "8px 15px",
     flexGrow: 1,
     color: styleBase.colors.colorsBaseProductDarkHover,
     fontFamily: styleBase.typography.types.inter,
-    fontSize: styleBase.typography.font.medium
+    fontSize: styleBase.typography.font.medium,
   },
   accountButton: {
     color: styleBase.colors.colorsBaseProductNormal,
-    marginLeft: "10px"
+    marginLeft: "10px",
   },
   "@media(max-width: 600px)": {
     menuButton: {
-      display: "block"
-    }
-  }
+      display: "block",
+    },
+  },
 });
+
+
 
 const Header = ({ setIsSidebar, isSidebar }) => {
   const classes = useStyles();
   let history = useHistory();
   const [anchorEl, setAnchorEl] = React.useState(null);
+  const [user, setUser] = React.useState(null);
   const open = Boolean(anchorEl);
-  const matches = useMediaQuery('(max-width:600px)')
+  const matches = useMediaQuery("(max-width:600px)");
 
-  const handleMenu = event => {
+  const handleMenu = (event) => {
     setAnchorEl(event.currentTarget);
   };
 
@@ -66,63 +66,107 @@ const Header = ({ setIsSidebar, isSidebar }) => {
 
   const handleLogout = () => {
     localStorage.clear();
-    history.push("/login");
-    window.location.reload()
-
+    setUser(null);
+    history.push('/login');
   };
+  
 
+  useEffect(() => {
+    const cachedUser = localStorage.getItem('user');
+    if (cachedUser) {
+      setUser(JSON.parse(cachedUser));
+    } else {
+      const callFunction = async () => {
+        try {
+          const result = await api.get('/findOneUser');
+          setUser(result.data);
+          localStorage.setItem('user', JSON.stringify(result.data));
+        } catch (error) {
+          console.error('Error calling function:', error);
+        }
+      };
+      callFunction();
+    }
+  }, []);
+  
   return (
     <AppBar classes={{ root: classes.root }} position="static">
-
       <Column>
         <Row>
-          {matches ? <Column id="center">
-            <MenuTwoTone onClick={
-              () => {
-                if (isSidebar) {
-                  setIsSidebar(false)
-                } else {
-                  setIsSidebar(true)
-                }
-              }
-            }
-              style={{ color: 'black', marginLeft: '10px' }} /></Column> : null}
-          <Column id="center">
-            <img style={{ width: matches ? "128px" : "168px", padding: "8px 16px" }} alt="" src={logo} />
-          </Column>
-          <>
-            {isAuthenticated() && (
-              <>
-                <Column
-                  id="center"
+          {matches ? (
+            <Column id="center">
+              <MenuTwoTone
+                onClick={() => setIsSidebar(!isSidebar)}
+                style={{ color: "black", marginLeft: "10px" }}
+              />
+            </Column>
+          ) : null}
 
-                  onClick={handleMenu}
-                  style={{ marginLeft: "auto" }}
-                  className={classes.accountButton}
-                >
-                  <AccountCircle style={{ fontSize: "2.5rem", marginRight: "10px", cursor: "pointer" }} />
-                </Column>
-                <Menu
-                  id="menu-appbar"
-                  anchorEl={anchorEl}
-                  anchorOrigin={{
-                    vertical: "top",
-                    horizontal: "left"
+          <Column id="center">
+            <img
+              style={{
+                width: matches ? "128px" : "168px",
+                padding: "8px 16px",
+              }}
+              alt=""
+              src={logo}
+            />
+          </Column>
+
+          {isAuthenticated() && (
+            <>
+              <div
+                style={{
+                  display: "flex",
+                  alignItems: "center",
+                  marginLeft: "auto",
+                  marginRight: "10px", // Margem à direita de 10px
+                  cursor: "pointer",
+                }}
+                className={classes.accountButton}
+                onClick={handleMenu}
+              >
+                <span
+                  style={{
+                    marginRight: "10px",
+                    fontSize: "1rem",
+                    fontWeight: "bold",
                   }}
-                  keepMounted
-                  transformOrigin={{
-                    vertical: "top",
-                    horizontal: "left"
-                  }}
-                  open={open}
-                  onClose={handleClose}
                 >
-                  <MenuItem value="sair" onClick={handleLogout}>Sair</MenuItem>
-                </Menu>
-                
-              </>
-            )}
-          </>
+                  {user ? (
+                    <span style={{ marginRight: '10px', fontSize: '1rem', fontWeight: 'bold' }}>
+                      {user?.name}
+                    </span>
+                  ) : (
+                    <span style={{ color: 'red', marginRight: '10px' }}>Erro ao carregar nome</span>
+                  )}
+                </span>
+
+                {/* Ícone da Conta */}
+                <AccountCircle style={{ fontSize: "2.5rem" }} />
+              </div>
+
+              <Menu
+                id="menu-appbar"
+                anchorEl={anchorEl}
+                anchorOrigin={{
+                  vertical: "top",
+                  horizontal: "left",
+                }}
+                keepMounted
+                transformOrigin={{
+                  vertical: "top",
+                  horizontal: "left",
+                }}
+                open={open}
+                onClose={handleClose}
+              >
+                <MenuItem value="sair" onClick={handleLogout}>
+                  Sair
+                </MenuItem>
+              </Menu>
+            </>
+          )}
         </Row>
       </Column>
     </AppBar>

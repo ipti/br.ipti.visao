@@ -1,8 +1,8 @@
-import axios from 'axios';
+import api from '../../services/api';
 
 export const deleteUser = async (id, history) => {
     try {
-        await axios.delete(`https://us-central1-br-ipti-visao.cloudfunctions.net/userDelete/${id}`);
+        await api.delete(`/userDelete/${id}`);
         history.push("/usuarios")
         console.log("Item deletado com sucesso");
     } catch (err) {
