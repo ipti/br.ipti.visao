@@ -36,7 +36,7 @@ const Create = (props) => {
     const callFunction = async () => {
       try {
         const result = await api.get(
-          "https://us-central1-br-ipti-visao.cloudfunctions.net/getProjetosMigration"
+          "/getProjetosMigration"
         );
         setProjects(result.data);
       } catch (error) {

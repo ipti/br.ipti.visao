@@ -10,7 +10,6 @@ import { ProgressBar } from "primereact/progressbar";
 import { Formik, Form, Field } from "formik";
 import * as Yup from "yup";
 import { useParams } from "react-router-dom";
-//import axios from "axios";
 import api from "../../services/api";
 
 const validationSchema = Yup.object({

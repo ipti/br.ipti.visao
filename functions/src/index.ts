@@ -15,14 +15,12 @@ import { createUserData } from "./controller/users/createUser";
 import { updateUserData } from "./controller/users/updateUser";
 import { oneUser } from "./controller/users/findOneUser";
 
-
 import { addPointsStudent } from "./controller/addPointsStudents/addPointsStudents";
 
 import { getProjetos } from "./controller/migrationMeuBen/getProjetos";
 import { postProjetos } from "./controller/migrationMeuBen/postProjetos";
 
-// import { fetchUsersData } from "./controller/users/fetchUsers";
-// admin.initializeApp();
+
 
 const corsOptions = {
   origin: true, // Substitua pelo seu frontend

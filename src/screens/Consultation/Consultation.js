@@ -20,9 +20,10 @@ const Consultation = ({ setIdSchool, idSchool }) => {
 
   const matches = useMediaQuery("(max-width:600px)");
 
-  // Fetch consultations data
   useEffect(() => {
+
     const callFunction = async () => {
+      setLoading(true);
       try {
         const result = await api.get("/fowardedForConsultation");
         setConsultation(result.data);
@@ -33,12 +34,11 @@ const Consultation = ({ setIdSchool, idSchool }) => {
             result.data.map((item) => [item.school_id, { id: item.school_id, name: item.school }])
           ).values()
         );
+        setLoading(false);
         setSchoolOptions(uniqueSchools);
       } catch (error) {
         console.error("Error calling function:", error);
-      } finally {
-        setTimeout(() => setLoading(false), 2000);
-      }
+      } 
     };
     callFunction();
   }, []);
