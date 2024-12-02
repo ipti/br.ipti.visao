@@ -11,9 +11,7 @@ import api from "../../services/api";
 import { Pagination, Typography } from "@mui/material";
 
 import pdfMake from "pdfmake/build/pdfmake";
-import pdfFonts from "pdfmake/build/vfs_fonts";
-
-pdfMake.vfs = pdfFonts.pdfMake.vfs;
+import "pdfmake/build/vfs_fonts";
 
 const MyDocument = () => {
   const contentRef = useRef(null);
@@ -164,13 +162,7 @@ const MyDocument = () => {
 
           <Padding padding="8px" />
           <div style={{ backgroundColor: "black", height: "1px" }}></div>
-          <Column>
-            <Row id="center">
-              <h1 style={{ padding: "0px" }}>
-                Relatório Estudantes Encaminhados para Consulta - Lupa{" "}
-              </h1>
-            </Row>
-          </Column>
+          
           <div>
             <TableWrapper>
               <Table>

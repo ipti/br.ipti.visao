@@ -66,23 +66,29 @@ const Header = ({ setIsSidebar, isSidebar }) => {
 
   const handleLogout = () => {
     localStorage.clear();
-    history.push("/login");
-    window.location.reload();
+    setUser(null);
+    history.push('/login');
   };
+  
 
   useEffect(() => {
-    const callFunction = async () => {
-      try {
-        const result = await api.get("/findOneUser");
-        setUser(result.data);
-
-      } catch (error) {
-        console.error("Error calling function:", error);
-      }
-    };
-    callFunction();
+    const cachedUser = localStorage.getItem('user');
+    if (cachedUser) {
+      setUser(JSON.parse(cachedUser));
+    } else {
+      const callFunction = async () => {
+        try {
+          const result = await api.get('/findOneUser');
+          setUser(result.data);
+          localStorage.setItem('user', JSON.stringify(result.data));
+        } catch (error) {
+          console.error('Error calling function:', error);
+        }
+      };
+      callFunction();
+    }
   }, []);
-
+  
   return (
     <AppBar classes={{ root: classes.root }} position="static">
       <Column>
@@ -120,7 +126,6 @@ const Header = ({ setIsSidebar, isSidebar }) => {
                 className={classes.accountButton}
                 onClick={handleMenu}
               >
-                {/* Nome do Usuário */}
                 <span
                   style={{
                     marginRight: "10px",
@@ -128,8 +133,13 @@ const Header = ({ setIsSidebar, isSidebar }) => {
                     fontWeight: "bold",
                   }}
                 >
-                  {user?.name} 
-                  {/* nome do usuário */}
+                  {user ? (
+                    <span style={{ marginRight: '10px', fontSize: '1rem', fontWeight: 'bold' }}>
+                      {user?.name}
+                    </span>
+                  ) : (
+                    <span style={{ color: 'red', marginRight: '10px' }}>Erro ao carregar nome</span>
+                  )}
                 </span>
 
                 {/* Ícone da Conta */}

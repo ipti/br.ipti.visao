@@ -78,11 +78,7 @@ const MyDocument = () => {
 
                     <Padding padding="8px" />
                     <div style={{ backgroundColor: "black", height: "1px" }}></div>
-                    <Column>
-                        <Row id='center'>
-                            <h1 style={{ padding: "0px" }}>Relatório Geral - Lupa </h1>
-                        </Row>
-                    </Column>
+                
                     <div>
                         <TableWrapper>
                             <Table>
